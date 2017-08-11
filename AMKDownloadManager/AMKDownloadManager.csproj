@@ -56,6 +56,9 @@
       <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="Mono.Posix" />
+    <Reference Include="libstetic">
+      <HintPath>..\..\..\..\..\..\usr\lib\monodevelop\AddIns\MonoDevelop.GtkCore\libstetic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -67,9 +70,11 @@
     <Compile Include="MainWindow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AddDownloadLinkDialog.cs" />
-    <Compile Include="gtk-gui\AMKDownloadManager.AddDownloadLinkDialog.cs" />
     <Compile Include="gtk-gui\AMKDownloadManager.MainWindow.cs" />
+    <Compile Include="Dialogs\DownloadProgressDialog.cs" />
+    <Compile Include="gtk-gui\Dialogs.DownloadProgressDialog.cs" />
+    <Compile Include="Dialogs\AddDownloadLinkDialog.cs" />
+    <Compile Include="gtk-gui\Dialogs.AddDownloadLinkDialog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

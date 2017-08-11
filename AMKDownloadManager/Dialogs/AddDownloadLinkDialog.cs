@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AMKDownloadManager
+namespace Dialogs
 {
 	public partial class AddDownloadLinkDialog : Gtk.Dialog
 	{

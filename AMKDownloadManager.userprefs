@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="AMKDownloadManager/AMKDownloadManager.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AMKDownloadManager/MainWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AMKDownloadManager/Dialogs/AddDownloadLinkDialog.cs">
     <Files>
-      <File FileName="AMKDownloadManager/MainWindow.cs" Line="6" Column="2" />
-      <File FileName="AMKDownloadManager.Net/MyClass.cs" Line="8" Column="4" />
-      <File FileName="AMKDownloadManager/Program.cs" Line="8" Column="16" />
+      <File FileName="AMKDownloadManager/MainWindow.cs" Line="13" Column="3" />
+      <File FileName="AMKDownloadManager/Dialogs/DownloadProgressDialog.cs" Line="6" Column="3" />
+      <File FileName="AMKDownloadManager/Dialogs/AddDownloadLinkDialog.cs" Line="2" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

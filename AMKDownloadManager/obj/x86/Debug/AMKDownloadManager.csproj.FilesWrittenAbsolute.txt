@@ -4,3 +4,4 @@
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/bin/Debug/AMKDownloadManager.exe
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.exe
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.pdb
+/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/bin/Debug/libstetic.dll
