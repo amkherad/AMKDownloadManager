@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager", "AMKDownloadManager\AMKDownloadManager.csproj", "{D2C946CC-8767-459C-BC0E-76035FE11AAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.Net", "AMKDownloadManager.Net\AMKDownloadManager.Net.csproj", "{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,5 +15,9 @@ Global
 		{D2C946CC-8767-459C-BC0E-76035FE11AAD}.Debug|x86.Build.0 = Debug|x86
 		{D2C946CC-8767-459C-BC0E-76035FE11AAD}.Release|x86.ActiveCfg = Release|x86
 		{D2C946CC-8767-459C-BC0E-76035FE11AAD}.Release|x86.Build.0 = Release|x86
+		{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}.Debug|x86.Build.0 = Debug|Any CPU
+		{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

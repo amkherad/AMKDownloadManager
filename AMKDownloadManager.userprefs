@@ -1,1 +1,15 @@
-﻿<Properties StartupItem="AMKDownloadManager/AMKDownloadManager.csproj" />
+﻿<Properties StartupItem="AMKDownloadManager/AMKDownloadManager.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AMKDownloadManager/MainWindow.cs">
+    <Files>
+      <File FileName="AMKDownloadManager/MainWindow.cs" Line="6" Column="2" />
+      <File FileName="AMKDownloadManager.Net/MyClass.cs" Line="8" Column="4" />
+      <File FileName="AMKDownloadManager/Program.cs" Line="8" Column="16" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <AuthorInfo Name="Ali Mousavi Kherad" Email="alimousavikherad@gmail.com" Copyright="Ali Mousavi Kherad" Company="" Trademark="" />
+</Properties>
