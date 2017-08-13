@@ -29,6 +29,8 @@ namespace Test.Console.Tests
 
             var downloadManager = app.GetFeature<IDownloadManager>();
             var state = downloadManager.Schedule(job);
+
+
         }
     }
 }
