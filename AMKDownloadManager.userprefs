@@ -1,10 +1,24 @@
-﻿<Properties StartupItem="AMKDownloadManager/AMKDownloadManager.csproj">
+﻿<Properties StartupItem="Test.Console/Test.Console.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AMKDownloadManager/Dialogs/AddDownloadLinkDialog.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Test.Console/Program.cs">
     <Files>
-      <File FileName="AMKDownloadManager/MainWindow.cs" Line="13" Column="3" />
-      <File FileName="AMKDownloadManager/Dialogs/DownloadProgressDialog.cs" Line="6" Column="3" />
-      <File FileName="AMKDownloadManager/Dialogs/AddDownloadLinkDialog.cs" Line="2" Column="1" />
+      <File FileName="AMKDownloadManager/MainWindow.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager/Dialogs/DownloadProgressDialog.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager/Dialogs/AddDownloadLinkDialog.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Net/Http/HttpDownloader.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Net/Downloader/IContentDownloader.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Net/Downloader/DownloadItem.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Net/Downloader/IAuthenticationInfo.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager/Program.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Core/ApplicationHost.cs" Line="43" Column="13" />
+      <File FileName="AMKDownloadManager.Core/Api/IFeature.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Core/Extensions/IComponent.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Core/FileSystem/IFileChunk.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Core/FileSystem/IFileProvider.cs" Line="1" Column="1" />
+      <File FileName="AMKDownloadManager.Core/Api/IRequestModifier.cs" Line="10" Column="2" />
+      <File FileName="AMKDownloadManager.Core/Api/IHttpRequest.cs" Line="1" Column="1" />
+      <File FileName="Test.Console/Program.cs" Line="31" Column="32" />
+      <File FileName="Test.Console/Tests/SimpleHttpDownloadTest.cs" Line="17" Column="69" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

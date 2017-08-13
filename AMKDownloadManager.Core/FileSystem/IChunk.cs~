@@ -1,0 +1,10 @@
+﻿using System;
+
+namespace FileSystem
+{
+	public interface IChunk
+	{
+		int Size { get; }
+		int Offset { get; }
+	}
+}

@@ -31,6 +31,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Http\HttpDownloader.cs" />
+    <Compile Include="Downloader\IContentDownloader.cs" />
+    <Compile Include="Downloader\DownloadItem.cs" />
+    <Compile Include="Downloader\IAuthenticationInfo.cs" />
+    <Compile Include="Downloader\IRequest.cs" />
+    <Compile Include="Downloader\DownloadManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Downloader\" />
+    <Folder Include="Http\" />
+    <Folder Include="Ftp\" />
+    <Folder Include="Torrent\" />
+  </ItemGroup>
 </Project>

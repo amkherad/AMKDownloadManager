@@ -225,7 +225,6 @@
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Start Now</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -279,7 +278,6 @@
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Multi Part</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -759,18 +757,6 @@
               <placeholder />
             </child>
             <child>
-              <widget class="Gtk.Label" id="label21">
-                <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">Torrent</property>
-              </widget>
-              <packing>
-                <property name="type">tab</property>
-              </packing>
-            </child>
-            <child>
-              <placeholder />
-            </child>
-            <child>
               <widget class="Gtk.Label" id="label22">
                 <property name="MemberName" />
                 <property name="LabelProp" translatable="yes">Download</property>
@@ -845,7 +831,7 @@
   <widget class="Gtk.Dialog" id="Dialogs.DownloadProgressDialog" design-size="795 529">
     <property name="MemberName" />
     <property name="WindowPosition">CenterOnParent</property>
-    <property name="Buttons">2</property>
+    <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
       <widget class="Gtk.VBox" id="dialog1_VBox">
@@ -857,32 +843,23 @@
             <property name="CanFocus">True</property>
             <property name="CurrentPage">0</property>
             <child>
-              <widget class="Gtk.Table" id="table4">
+              <widget class="Gtk.VBox" id="vbox2">
                 <property name="MemberName" />
-                <property name="NRows">3</property>
-                <property name="NColumns">3</property>
-                <property name="RowSpacing">6</property>
-                <property name="ColumnSpacing">6</property>
+                <property name="Spacing">6</property>
                 <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
+                  <widget class="Gtk.Entry" id="entry1">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Text" translatable="yes">http://cdn01.google.com/androidstudio/download.php?downloadfile=androidstudio&amp;cookieInfo=342608ysdjgk34;o8hjsd908h4tlskjdhfp93278hf.sdjhf287gfdslkjfhlwi43ugrp9374gflsdkjfhlskjeg</property>
+                    <property name="IsEditable">False</property>
+                    <property name="InvisibleChar">•</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
                 </child>
                 <child>
                   <placeholder />
@@ -1010,37 +987,19 @@
         <property name="MemberName" />
         <property name="Spacing">10</property>
         <property name="BorderWidth">5</property>
-        <property name="Size">2</property>
+        <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
-        <child>
-          <widget class="Gtk.Button" id="buttonCancel">
-            <property name="MemberName" />
-            <property name="CanDefault">True</property>
-            <property name="CanFocus">True</property>
-            <property name="UseStock">True</property>
-            <property name="Type">StockItem</property>
-            <property name="StockId">gtk-cancel</property>
-            <property name="ResponseId">-6</property>
-            <property name="label">gtk-cancel</property>
-          </widget>
-          <packing>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
         <child>
           <widget class="Gtk.Button" id="buttonOk">
             <property name="MemberName" />
             <property name="CanDefault">True</property>
             <property name="CanFocus">True</property>
-            <property name="UseStock">True</property>
-            <property name="Type">StockItem</property>
-            <property name="StockId">gtk-ok</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">Hide</property>
+            <property name="UseUnderline">True</property>
             <property name="ResponseId">-5</property>
-            <property name="label">gtk-ok</property>
           </widget>
           <packing>
-            <property name="Position">1</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
           </packing>

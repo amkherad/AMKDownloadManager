@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{3EA4EFB2-8392-4D39-A10F-4F4BCA4618B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AMKDownloadManager.Core</RootNamespace>
+    <AssemblyName>AMKDownloadManager.Core</AssemblyName>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\output\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\output\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FileSystem\IFileChunk.cs" />
+    <Compile Include="FileSystem\IFileProvider.cs" />
+    <Compile Include="ApplicationHost.cs" />
+    <Compile Include="Extensions\IComponent.cs" />
+    <Compile Include="Api\IFeature.cs" />
+    <Compile Include="Api\Modifiers\IAuthenticationMethod.cs" />
+    <Compile Include="Api\Modifiers\IRequestModifier.cs" />
+    <Compile Include="Api\Barriers\DownloadItem.cs" />
+    <Compile Include="Api\Barriers\IRequest.cs" />
+    <Compile Include="Api\Binders\DownloadBuilder.cs" />
+    <Compile Include="Api\Binders\IHttpProtocolProvider.cs" />
+    <Compile Include="Api\Binders\IProtocolProvider.cs" />
+    <Compile Include="Api\Binders\IDownloadBindListener.cs" />
+    <Compile Include="Api\IAppContext.cs" />
+    <Compile Include="Api\AppContextExtensions.cs" />
+    <Compile Include="AppContext.cs" />
+    <Compile Include="Api\DownloadManagement\IJob.cs" />
+    <Compile Include="Api\DownloadManagement\JobParameters.cs" />
+    <Compile Include="Api\DownloadManagement\IJobChunk.cs" />
+    <Compile Include="Impl\DefaultDownloadManager.cs" />
+    <Compile Include="Api\DownloadManagement\IDownloadManager.cs" />
+    <Compile Include="Api\IConfigProvider.cs" />
+    <Compile Include="Impl\DefaultConfigProvider.cs" />
+    <Compile Include="Api\DownloadManagement\IDownloadManagerHandle.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Formatters\" />
+    <Folder Include="FileSystem\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Api\" />
+    <Folder Include="Api\Modifiers\" />
+    <Folder Include="Api\Barriers\" />
+    <Folder Include="Api\Binders\" />
+    <Folder Include="Api\DownloadManagement\" />
+    <Folder Include="Impl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Gear.Architecture">
+      <HintPath>..\..\..\bin\gear.net\Gear.Architecture.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core">
+      <HintPath>..\..\..\bin\gear.net\Gear.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

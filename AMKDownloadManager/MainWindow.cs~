@@ -21,6 +21,9 @@ namespace AMKDownloadManager
 		{
 			var addDownloadDialog = new AddDownloadLinkDialog ();
 			addDownloadDialog.Show ();
+
+			var downloadProgressDialog = new DownloadProgressDialog ();
+			downloadProgressDialog.Show ();
 		}
 	}
 }

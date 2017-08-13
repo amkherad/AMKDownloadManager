@@ -6,7 +6,9 @@ namespace Dialogs
 	{
 		private global::Gtk.Notebook notebook2;
 		
-		private global::Gtk.Table table4;
+		private global::Gtk.VBox vbox2;
+		
+		private global::Gtk.Entry entry1;
 		
 		private global::Gtk.Label label15;
 		
@@ -21,8 +23,6 @@ namespace Dialogs
 		private global::Gtk.Table table3;
 		
 		private global::Gtk.Label label16;
-		
-		private global::Gtk.Button buttonCancel;
 		
 		private global::Gtk.Button buttonOk;
 
@@ -42,52 +42,63 @@ namespace Dialogs
 			this.notebook2.Name = "notebook2";
 			this.notebook2.CurrentPage = 0;
 			// Container child notebook2.Gtk.Notebook+NotebookChild
-			this.table4 = new global::Gtk.Table (((uint)(3)), ((uint)(3)), false);
-			this.table4.Name = "table4";
-			this.table4.RowSpacing = ((uint)(6));
-			this.table4.ColumnSpacing = ((uint)(6));
-			this.notebook2.Add (this.table4);
+			this.vbox2 = new global::Gtk.VBox ();
+			this.vbox2.Name = "vbox2";
+			this.vbox2.Spacing = 6;
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.entry1 = new global::Gtk.Entry ();
+			this.entry1.CanFocus = true;
+			this.entry1.Name = "entry1";
+			this.entry1.Text = global::Mono.Unix.Catalog.GetString ("http://cdn01.google.com/androidstudio/download.php?downloadfile=androidstudio&cookieInfo=342608ysdjgk34;o8hjsd908h4tlskjdhfp93278hf.sdjhf287gfdslkjfhlwi43ugrp9374gflsdkjfhlskjeg");
+			this.entry1.IsEditable = false;
+			this.entry1.InvisibleChar = '•';
+			this.vbox2.Add (this.entry1);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.entry1]));
+			w2.Position = 0;
+			w2.Expand = false;
+			w2.Fill = false;
+			this.notebook2.Add (this.vbox2);
 			// Notebook tab
 			this.label15 = new global::Gtk.Label ();
 			this.label15.Name = "label15";
 			this.label15.LabelProp = global::Mono.Unix.Catalog.GetString ("Download");
-			this.notebook2.SetTabLabel (this.table4, this.label15);
+			this.notebook2.SetTabLabel (this.vbox2, this.label15);
 			this.label15.ShowAll ();
-			// Notebook tab
-			global::Gtk.Label w3 = new global::Gtk.Label ();
-			w3.Visible = true;
-			this.notebook2.Add (w3);
-			this.label17 = new global::Gtk.Label ();
-			this.label17.Name = "label17";
-			this.label17.LabelProp = global::Mono.Unix.Catalog.GetString ("Description");
-			this.notebook2.SetTabLabel (w3, this.label17);
-			this.label17.ShowAll ();
 			// Notebook tab
 			global::Gtk.Label w4 = new global::Gtk.Label ();
 			w4.Visible = true;
 			this.notebook2.Add (w4);
-			this.label19 = new global::Gtk.Label ();
-			this.label19.Name = "label19";
-			this.label19.LabelProp = global::Mono.Unix.Catalog.GetString ("Network");
-			this.notebook2.SetTabLabel (w4, this.label19);
-			this.label19.ShowAll ();
+			this.label17 = new global::Gtk.Label ();
+			this.label17.Name = "label17";
+			this.label17.LabelProp = global::Mono.Unix.Catalog.GetString ("Description");
+			this.notebook2.SetTabLabel (w4, this.label17);
+			this.label17.ShowAll ();
 			// Notebook tab
 			global::Gtk.Label w5 = new global::Gtk.Label ();
 			w5.Visible = true;
 			this.notebook2.Add (w5);
-			this.label18 = new global::Gtk.Label ();
-			this.label18.Name = "label18";
-			this.label18.LabelProp = global::Mono.Unix.Catalog.GetString ("Graph");
-			this.notebook2.SetTabLabel (w5, this.label18);
-			this.label18.ShowAll ();
+			this.label19 = new global::Gtk.Label ();
+			this.label19.Name = "label19";
+			this.label19.LabelProp = global::Mono.Unix.Catalog.GetString ("Network");
+			this.notebook2.SetTabLabel (w5, this.label19);
+			this.label19.ShowAll ();
 			// Notebook tab
 			global::Gtk.Label w6 = new global::Gtk.Label ();
 			w6.Visible = true;
 			this.notebook2.Add (w6);
+			this.label18 = new global::Gtk.Label ();
+			this.label18.Name = "label18";
+			this.label18.LabelProp = global::Mono.Unix.Catalog.GetString ("Graph");
+			this.notebook2.SetTabLabel (w6, this.label18);
+			this.label18.ShowAll ();
+			// Notebook tab
+			global::Gtk.Label w7 = new global::Gtk.Label ();
+			w7.Visible = true;
+			this.notebook2.Add (w7);
 			this.label20 = new global::Gtk.Label ();
 			this.label20.Name = "label20";
 			this.label20.LabelProp = global::Mono.Unix.Catalog.GetString ("Preview");
-			this.notebook2.SetTabLabel (w6, this.label20);
+			this.notebook2.SetTabLabel (w7, this.label20);
 			this.label20.ShowAll ();
 			// Container child notebook2.Gtk.Notebook+NotebookChild
 			this.table3 = new global::Gtk.Table (((uint)(3)), ((uint)(3)), false);
@@ -95,8 +106,8 @@ namespace Dialogs
 			this.table3.RowSpacing = ((uint)(6));
 			this.table3.ColumnSpacing = ((uint)(6));
 			this.notebook2.Add (this.table3);
-			global::Gtk.Notebook.NotebookChild w7 = ((global::Gtk.Notebook.NotebookChild)(this.notebook2 [this.table3]));
-			w7.Position = 5;
+			global::Gtk.Notebook.NotebookChild w8 = ((global::Gtk.Notebook.NotebookChild)(this.notebook2 [this.table3]));
+			w8.Position = 5;
 			// Notebook tab
 			this.label16 = new global::Gtk.Label ();
 			this.label16.Name = "label16";
@@ -104,37 +115,23 @@ namespace Dialogs
 			this.notebook2.SetTabLabel (this.table3, this.label16);
 			this.label16.ShowAll ();
 			w1.Add (this.notebook2);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook2]));
-			w8.Position = 0;
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook2]));
+			w9.Position = 0;
 			// Internal child Dialogs.DownloadProgressDialog.ActionArea
-			global::Gtk.HButtonBox w9 = this.ActionArea;
-			w9.Name = "dialog1_ActionArea";
-			w9.Spacing = 10;
-			w9.BorderWidth = ((uint)(5));
-			w9.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
-			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-			this.buttonCancel = new global::Gtk.Button ();
-			this.buttonCancel.CanDefault = true;
-			this.buttonCancel.CanFocus = true;
-			this.buttonCancel.Name = "buttonCancel";
-			this.buttonCancel.UseStock = true;
-			this.buttonCancel.UseUnderline = true;
-			this.buttonCancel.Label = "gtk-cancel";
-			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w10 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w9 [this.buttonCancel]));
-			w10.Expand = false;
-			w10.Fill = false;
+			global::Gtk.HButtonBox w10 = this.ActionArea;
+			w10.Name = "dialog1_ActionArea";
+			w10.Spacing = 10;
+			w10.BorderWidth = ((uint)(5));
+			w10.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
 			this.buttonOk.CanFocus = true;
 			this.buttonOk.Name = "buttonOk";
-			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
-			this.buttonOk.Label = "gtk-ok";
+			this.buttonOk.Label = global::Mono.Unix.Catalog.GetString ("Hide");
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w9 [this.buttonOk]));
-			w11.Position = 1;
+			global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.buttonOk]));
 			w11.Expand = false;
 			w11.Fill = false;
 			if ((this.Child != null)) {

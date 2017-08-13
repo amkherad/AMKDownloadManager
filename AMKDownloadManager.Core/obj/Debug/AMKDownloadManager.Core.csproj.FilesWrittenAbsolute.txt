@@ -1,0 +1,5 @@
+/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
+/home/amk/dev/Applications/AMKDownloadManager/output/Debug/AMKDownloadManager.Core.pdb
+/home/amk/dev/Applications/AMKDownloadManager/output/Debug/AMKDownloadManager.Core.dll
+/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.dll
+/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.pdb

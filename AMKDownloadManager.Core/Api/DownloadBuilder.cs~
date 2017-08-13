@@ -1,0 +1,17 @@
+﻿using System;
+
+namespace AMKDownloadManager.Core.Api
+{
+    public static class DownloadBuilder
+    {
+        public static DownloadItem FromUri(Uri uri)
+        {
+            var downloadItem = new DownloadItem
+            {
+                Uri = uri
+            };
+
+            return downloadItem;
+        }
+    }
+}

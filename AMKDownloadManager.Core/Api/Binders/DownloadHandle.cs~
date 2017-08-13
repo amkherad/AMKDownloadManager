@@ -1,0 +1,31 @@
+﻿using System;
+using AMKDownloadManager.Core.Api.Barriers;
+
+namespace AMKDownloadManager.Core.Api.Binders
+{
+    public class DownloadHandle
+    {
+        public DownloadItem DownloadItem { get; }
+
+        public DownloadHandle(DownloadItem downloadItem)
+        {
+            if (downloadItem == null) throw new ArgumentNullException(nameof(downloadItem));
+
+            DownloadItem = downloadItem;
+        }
+
+        public void Start()
+        {
+
+        }
+        public void Pause()
+        {
+
+        }
+        public void Clean()
+        {
+
+        }
+    }
+}
+

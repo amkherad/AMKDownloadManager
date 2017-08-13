@@ -82,8 +82,6 @@ namespace Dialogs
 		
 		private global::Gtk.Label label13;
 		
-		private global::Gtk.Label label21;
-		
 		private global::Gtk.Label label22;
 		
 		private global::Gtk.Label label23;
@@ -339,6 +337,7 @@ namespace Dialogs
 			w21.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child dividerTable.Gtk.Table+TableChild
 			this.label7 = new global::Gtk.Label ();
+			this.label7.Name = "label7";
 			this.label7.LabelProp = global::Mono.Unix.Catalog.GetString ("Location:");
 			this.dividerTable.Add (this.label7);
 			global::Gtk.Table.TableChild w22 = ((global::Gtk.Table.TableChild)(this.dividerTable [this.label7]));
@@ -514,38 +513,29 @@ namespace Dialogs
 			global::Gtk.Label w38 = new global::Gtk.Label ();
 			w38.Visible = true;
 			this.notebook1.Add (w38);
-			this.label21 = new global::Gtk.Label ();
-			this.label21.Name = "label21";
-			this.label21.LabelProp = global::Mono.Unix.Catalog.GetString ("Torrent");
-			this.notebook1.SetTabLabel (w38, this.label21);
-			this.label21.ShowAll ();
+			this.label22 = new global::Gtk.Label ();
+			this.label22.Name = "label22";
+			this.label22.LabelProp = global::Mono.Unix.Catalog.GetString ("Download");
+			this.notebook1.SetTabLabel (w38, this.label22);
+			this.label22.ShowAll ();
 			// Notebook tab
 			global::Gtk.Label w39 = new global::Gtk.Label ();
 			w39.Visible = true;
 			this.notebook1.Add (w39);
-			this.label22 = new global::Gtk.Label ();
-			this.label22.Name = "label22";
-			this.label22.LabelProp = global::Mono.Unix.Catalog.GetString ("Download");
-			this.notebook1.SetTabLabel (w39, this.label22);
-			this.label22.ShowAll ();
-			// Notebook tab
-			global::Gtk.Label w40 = new global::Gtk.Label ();
-			w40.Visible = true;
-			this.notebook1.Add (w40);
 			this.label23 = new global::Gtk.Label ();
 			this.label23.Name = "label23";
 			this.label23.LabelProp = global::Mono.Unix.Catalog.GetString ("Completion");
-			this.notebook1.SetTabLabel (w40, this.label23);
+			this.notebook1.SetTabLabel (w39, this.label23);
 			this.label23.ShowAll ();
 			w1.Add (this.notebook1);
-			global::Gtk.Box.BoxChild w41 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook1]));
-			w41.Position = 0;
+			global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook1]));
+			w40.Position = 0;
 			// Internal child Dialogs.AddDownloadLinkDialog.ActionArea
-			global::Gtk.HButtonBox w42 = this.ActionArea;
-			w42.Name = "dialog1_ActionArea";
-			w42.Spacing = 10;
-			w42.BorderWidth = ((uint)(5));
-			w42.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w41 = this.ActionArea;
+			w41.Name = "dialog1_ActionArea";
+			w41.Spacing = 10;
+			w41.BorderWidth = ((uint)(5));
+			w41.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -555,9 +545,9 @@ namespace Dialogs
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w43 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w42 [this.buttonCancel]));
-			w43.Expand = false;
-			w43.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w42 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w41 [this.buttonCancel]));
+			w42.Expand = false;
+			w42.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -567,10 +557,10 @@ namespace Dialogs
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w44 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w42 [this.buttonOk]));
-			w44.Position = 1;
-			w44.Expand = false;
-			w44.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w43 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w41 [this.buttonOk]));
+			w43.Position = 1;
+			w43.Expand = false;
+			w43.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

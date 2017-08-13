@@ -1,0 +1,9 @@
+﻿using System;
+
+namespace AMKDownloadManager.Core.Api
+{
+    public interface IJob : IFeature
+    {
+        
+    }
+}
