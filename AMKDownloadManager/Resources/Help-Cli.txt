@@ -1,0 +1,12 @@
+﻿AMKDownloadManager [VERSION] by Ali Mousavi Kherad
+----------------------------------------
+
+--cli				Enables cli commands.
+--help 				Prints this message.
+--uri				Download uri.
+--method			
+--limit				
+--output			
+--components
+--queue
+--schedule

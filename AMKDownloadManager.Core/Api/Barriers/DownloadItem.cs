@@ -7,21 +7,34 @@ using AMKDownloadManager.Core.Api.Binders;
 
 namespace AMKDownloadManager.Core.Api.Barriers
 {
+    /// <summary>
+    /// EventHandler for DownloadItem protocol selection signal.
+    /// </summary>
     public delegate void DownloadItemProtocolSelected(
         DownloadItem di,
         IProtocolProvider protocolProvider
     );
 
+    /// <summary>
+    /// EventHandler for DownloadItem request created signal.
+    /// </summary>
     public delegate void DownloadItemRequestCreated(
         DownloadItem di,
         IRequest request
     );
 
+    /// <summary>
+    /// DownloadItem stores information about downloading resource.
+    /// </summary>
     public class DownloadItem : ViewModelBase
     {
         public event DownloadItemProtocolSelected ProtocolSelected;
         public event DownloadItemRequestCreated RequestCreated;
 
+        /// <summary>
+        /// Stores all download resource properties as key-value pairs.
+        /// </summary>
+        /// <value>The properties.</value>
         public PropertyBag Properties { get; }
 
         public DownloadItem()
@@ -29,13 +42,26 @@ namespace AMKDownloadManager.Core.Api.Barriers
             Properties = new PropertyBag();
         }
 
-        public void OnProtocolSelected(DownloadItem di, IProtocolProvider protocolProvider)
-            => ProtocolSelected?.Invoke(di, protocolProvider);
+        /// <summary>
+        /// Raises the protocol selected event.
+        /// </summary>
+        /// <param name="downloadItem">Download item.</param>
+        /// <param name="protocolProvider">Protocol provider.</param>
+        public void OnProtocolSelected(DownloadItem downloadItem, IProtocolProvider protocolProvider)
+            => ProtocolSelected?.Invoke(downloadItem, protocolProvider);
 
-        public void OnRequestCreated(DownloadItem di, IRequest request)
-            => RequestCreated?.Invoke(di, request);
+        /// <summary>
+        /// Raises the request created event.
+        /// </summary>
+        /// <param name="downloadItem">Download item.</param>
+        /// <param name="request">Request.</param>
+        public void OnRequestCreated(DownloadItem downloadItem, IRequest request)
+            => RequestCreated?.Invoke(downloadItem, request);
 
-
+        /// <summary>
+        /// Gets or sets the URI of the dowonload resource.
+        /// </summary>
+        /// <value>The URI.</value>
         public Uri Uri
         {
             get
@@ -49,6 +75,10 @@ namespace AMKDownloadManager.Core.Api.Barriers
             }
         }
 
+        /// <summary>
+        /// Gets or sets the list of download mirrors.
+        /// </summary>
+        /// <value>The mirrors.</value>
         public IEnumerable<Uri> Mirrors
         {
             get
@@ -62,6 +92,10 @@ namespace AMKDownloadManager.Core.Api.Barriers
             }
         }
 
+        /// <summary>
+        /// Gets or sets the name of the local file on file system.
+        /// </summary>
+        /// <value>The name of the local file.</value>
         public string LocalFileName
         {
             get
@@ -75,7 +109,9 @@ namespace AMKDownloadManager.Core.Api.Barriers
             }
         }
 
-
+        /// <summary>
+        /// DownloadItem known properties.
+        /// </summary>
         public class KnownProperties
         {
             public const string Uri = "Uri";

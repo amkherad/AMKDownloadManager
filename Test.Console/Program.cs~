@@ -4,6 +4,7 @@ using System.Reflection;
 using ir.amkdp.gear.arch.Trace.Annotations;
 using System.Diagnostics;
 using AMKDownloadManager.Core;
+using AMKDownloadManager.Threading;
 
 namespace Test.Console
 {
@@ -13,7 +14,7 @@ namespace Test.Console
         {
             Trace.Listeners.Add(new ConsoleTraceListener());
 
-            ApplicationHost.Instance.Initialize();
+            ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
 
             var classes = Assembly.GetExecutingAssembly().DefinedTypes
                 .Where(x => x.IsClass &&

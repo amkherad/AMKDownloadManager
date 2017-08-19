@@ -23,14 +23,14 @@ namespace Test.Console.Tests
             var di = DownloadBuilder.FromUri(new Uri("http://google.com/"));
 
             var app = ApplicationHost.Instance.Pool;
+            var downloadManager = app.GetFeature<IDownloadManager>();
 
             var protocol = DownloadBuilder.Bind(di, app);
             var job = protocol.CreateJob(di, app, null);
 
-            var downloadManager = app.GetFeature<IDownloadManager>();
             var state = downloadManager.Schedule(job);
 
-
+            //state.
         }
     }
 }

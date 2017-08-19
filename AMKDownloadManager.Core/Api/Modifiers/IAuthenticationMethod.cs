@@ -2,8 +2,10 @@
 
 namespace AMKDownloadManager.Core.Api.Modifiers
 {
-    public interface IAuthenticationMethod
+    /// <summary>
+    /// Provides authentication method.
+    /// </summary>
+    public interface IAuthenticationMethod : IFeature
     {
     }
 }
-

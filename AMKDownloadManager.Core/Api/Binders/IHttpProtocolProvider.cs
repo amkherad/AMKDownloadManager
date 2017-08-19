@@ -2,7 +2,7 @@
 
 namespace AMKDownloadManager.Core.Api.Binders
 {
-    public interface IHttpDownloader : IProtocolProvider
+    public interface IHttpProtocolProvider : IProtocolProvider
     {
         
     }

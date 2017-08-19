@@ -55,6 +55,15 @@
     <Compile Include="Api\IConfigProvider.cs" />
     <Compile Include="Impl\DefaultConfigProvider.cs" />
     <Compile Include="Api\DownloadManagement\IDownloadManagerHandle.cs" />
+    <Compile Include="Api\Network\INetworkMonitor.cs" />
+    <Compile Include="Impl\DefaultNetworkMonitor.cs" />
+    <Compile Include="Api\Threading\IThread.cs" />
+    <Compile Include="Api\KnownConfigs.cs" />
+    <Compile Include="Api\DownloadManagement\IScheduler.cs" />
+    <Compile Include="Api\DownloadManagement\JobChunkDescriptor.cs" />
+    <Compile Include="Impl\DefaultJobScheduler.cs" />
+    <Compile Include="Api\Threading\IThreadFactory.cs" />
+    <Compile Include="Api\DownloadManagement\IJobDivider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -67,6 +76,8 @@
     <Folder Include="Api\Binders\" />
     <Folder Include="Api\DownloadManagement\" />
     <Folder Include="Impl\" />
+    <Folder Include="Api\Network\" />
+    <Folder Include="Api\Threading\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gear.Architecture">

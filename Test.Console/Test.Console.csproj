@@ -52,5 +52,9 @@
       <Project>{3EA4EFB2-8392-4D39-A10F-4F4BCA4618B3}</Project>
       <Name>AMKDownloadManager.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AMKDownloadManager\AMKDownloadManager.csproj">
+      <Project>{D2C946CC-8767-459C-BC0E-76035FE11AAD}</Project>
+      <Name>AMKDownloadManager</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
