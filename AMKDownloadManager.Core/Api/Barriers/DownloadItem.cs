@@ -115,6 +115,7 @@ namespace AMKDownloadManager.Core.Api.Barriers
         public class KnownProperties
         {
             public const string Uri = "Uri";
+            public const string Method = "Method";
             public const string Mirrors = "Mirrors";
             public const string LocalFileName = "LocalFileName";
         }

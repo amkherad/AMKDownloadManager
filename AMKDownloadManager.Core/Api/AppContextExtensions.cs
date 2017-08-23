@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using ir.amkdp.gear.core.Patterns.AppModel;
 using ir.amkdp.gear.core.Automation.IoC;
 using System.Runtime.CompilerServices;
+using ir.amkdp.gear.core.Collections;
 
 namespace AMKDownloadManager.Core.Api
 {
@@ -18,6 +20,13 @@ namespace AMKDownloadManager.Core.Api
             return app.GetTypeResolver().Resolve<T>();
         }
 
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+        public static IEnumerable<T> SignalFeatures<T>(this IAppContext app, Action<T> signalHandler) where T : IFeature
+        {
+            var features = app.GetFeatures<T>();
+            features?.ForEach(signalHandler);
+            return features;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<T> GetFeatures<T>(this IAppContext app) where T : IFeature
@@ -29,8 +38,8 @@ namespace AMKDownloadManager.Core.Api
         public static T GetFeature<T>(this IAppContext app) where T : class, IFeature
         {
             return
-                app.GetValues<T>()?.OrderByDescending(x => x.Order).FirstOrDefault() ??
-                app.GetTypeResolver().Resolve<T>();
+                app.GetValues<T>()?.OrderByDescending(x => x.Order).FirstOrDefault() /*??
+                app.GetTypeResolver().Resolve<T>()*/;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -48,7 +57,7 @@ namespace AMKDownloadManager.Core.Api
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<T> AddFeature<T>(this IAppContext app, T feature) where T : IFeature
         {
-            return app.AddValues<T>(new [] { feature });
+            return app.AddValues<T>(new[] {feature});
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -60,7 +69,7 @@ namespace AMKDownloadManager.Core.Api
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<T> RemoveFeature<T>(this IAppContext app, T feature) where T : IFeature
         {
-            return app.RemoveValues<T>(new [] { feature });
+            return app.RemoveValues<T>(new[] {feature});
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

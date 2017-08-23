@@ -14,15 +14,17 @@ namespace AMKDownloadManager.Core.Api.Binders
         /// </summary>
         /// <returns><c>true</c> if this instance can handle the specified downloadItem; otherwise, <c>false</c>.</returns>
         /// <param name="downloadItem">Download item.</param>
-        bool CanHandle(DownloadItem downloadItem);
+        bool CanHandle(IAppContext appContext, DownloadItem downloadItem);
 
+        IRequest CreateRequest(IAppContext appContext, DownloadItem downloadItem);
+        
         /// <summary>
         /// Creates the download job.
         /// </summary>
         /// <returns>The job.</returns>
-        /// <param name="downloadItem">Download item.</param>
         /// <param name="app">App.</param>
+        /// <param name="downloadItem">Download item.</param>
         /// <param name="jobParameters">Job parameters.</param>
-        IJob CreateJob(DownloadItem downloadItem, IAppContext app, JobParameters jobParameters);
+        IJob CreateJob(IAppContext app, DownloadItem downloadItem, JobParameters jobParameters);
     }
 }

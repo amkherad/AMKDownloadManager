@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,6 +30,18 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Api\Barriers\IHttpRequestBarrier.cs" />
+    <Compile Include="Api\Barriers\IHttpRequestSerializer.cs" />
+    <Compile Include="Api\Barriers\IRequestBarrier.cs" />
+    <Compile Include="Api\Barriers\IResponse.cs" />
+    <Compile Include="Api\Barriers\ITcpBarrier.cs" />
+    <Compile Include="Api\Listeners\IBarrierListenerFeature.cs" />
+    <Compile Include="Api\Listeners\IDownloadBindListener.cs" />
+    <Compile Include="Api\Listeners\IListenerFeature.cs" />
+    <Compile Include="Api\Listeners\IProtocolProviderListener.cs" />
+    <Compile Include="Api\Network\HttpHelpers.cs" />
+    <Compile Include="Api\Network\INetworkInterface.cs" />
+    <Compile Include="Api\Network\INetworkInterfaceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileSystem\IFileChunk.cs" />
     <Compile Include="FileSystem\IFileProvider.cs" />
@@ -43,7 +55,6 @@
     <Compile Include="Api\Binders\DownloadBuilder.cs" />
     <Compile Include="Api\Binders\IHttpProtocolProvider.cs" />
     <Compile Include="Api\Binders\IProtocolProvider.cs" />
-    <Compile Include="Api\Binders\IDownloadBindListener.cs" />
     <Compile Include="Api\IAppContext.cs" />
     <Compile Include="Api\AppContextExtensions.cs" />
     <Compile Include="AppContext.cs" />
@@ -67,6 +78,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
+    <Folder Include="Api\Binders\Exceptions" />
     <Folder Include="Formatters\" />
     <Folder Include="FileSystem\" />
     <Folder Include="Extensions\" />
@@ -85,6 +97,9 @@
     </Reference>
     <Reference Include="Gear.Core">
       <HintPath>..\..\..\bin\gear.net\Gear.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.WebCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\bin\gear.net\Gear.WebCore.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

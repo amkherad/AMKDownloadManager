@@ -1,0 +1,26 @@
+﻿using System;
+using ir.amkdp.gear.core.Collections;
+
+namespace AMKDownloadManager.Core.Api.Barriers
+{
+    public class HeaderCollection : NameValueCollection
+    {
+        public HeaderCollection()
+        {
+        }
+
+        public DateTime Date
+        {
+            get
+            { 
+                var dateStr = this["Date"];
+                return DateTime.Parse(dateStr);
+            }
+            set
+            {
+                this["Date"] = value.ToString("F");
+            }
+        }
+    }
+}
+

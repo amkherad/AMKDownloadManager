@@ -2,6 +2,7 @@
 using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Barriers;
+using AMKDownloadManager.Core.Api.Listeners;
 using ir.amkdp.gear.arch.Patterns;
 using ir.amkdp.gear.core.Patterns.AppModel;
 using ir.amkdp.gear.core.Collections;
@@ -39,7 +40,7 @@ namespace AMKDownloadManager.Core.Api.Binders
             bindListeners?.ForEach(x => x.NotifyBind(downloadItem));
 
             var protocolProvider = app.GetFeatures<IProtocolProvider>()?
-                .FirstOrDefault(p => p.CanHandle(downloadItem));
+                .FirstOrDefault(p => p.CanHandle(app, downloadItem));
 
             return protocolProvider;
         }

@@ -3,7 +3,9 @@ using AMKDownloadManager.Core.Extensions;
 using System.Composition;
 using AMKDownloadManager.Core.Api;
 using System.Reflection;
+using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
+using ir.amkdp.gear.core.Trace;
 
 namespace AMKDownloadManager.HttpDownloader.AddIn
 {
@@ -29,10 +31,6 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
         }
 
 
-        public Component()
-        {
-            
-        }
 
         #region IComponent implementation
 
@@ -59,7 +57,8 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
 
         public void Initialize(IAppContext app)
         {
-            app.AddFeature(new HttpProtocolProvider());
+            Logger.Write("HttpProtocolProvider.Initialize");
+            app.AddFeature<IProtocolProvider>(new HttpProtocolProvider());
         }
 
         public void Unload(IAppContext app)

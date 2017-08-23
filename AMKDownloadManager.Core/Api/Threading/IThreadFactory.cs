@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AMKDownloadManager.Core.Api.Threading
 {
@@ -17,5 +18,8 @@ namespace AMKDownloadManager.Core.Api.Threading
         /// </summary>
         /// <param name="action">Action.</param>
         IThread Create(Action<object> action);
+
+        void WaitAll(IEnumerable<IThread> threads);
+        void WhenAll(IEnumerable<IThread> threads);
     }
 }

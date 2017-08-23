@@ -2,10 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61ff7d2c-f4cc-4883-a4de-bd4654bc5f71" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/.idea/contentModel.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/riderModule.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IHttpRequestBarrier.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IHttpRequestSerializer.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequestBarrier.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IResponse.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/ITcpBarrier.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IBarrierListenerFeature.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IListenerFeature.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IProtocolProviderListener.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/HttpHelpers.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/INetworkInterface.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/INetworkInterfaceProvider.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager/ComponentImporter.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager/Network/DefaultHttpRequestBarrier.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceProvider.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceWrapper.cs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/IDownloadBindListener.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IDownloadBindListener.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.dll" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.dll" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.pdb" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.pdb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.exe" afterPath="$PROJECT_DIR$/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.exe" />
@@ -17,16 +29,34 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/Debug/Gear.Core.dll" afterPath="$PROJECT_DIR$/output/Debug/Gear.Core.dll" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/Debug/Test.Console.exe" afterPath="$PROJECT_DIR$/output/Debug/Test.Console.exe" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/Debug/Test.Console.pdb" afterPath="$PROJECT_DIR$/output/Debug/Test.Console.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/riderModule.iml" afterPath="$PROJECT_DIR$/.idea/.idea.AMKDownloadManager/riderModule.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/AMKDownloadManager.Core.csproj" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/AMKDownloadManager.Core.csproj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/AppContextExtensions.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/AppContextExtensions.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/DownloadItem.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/DownloadItem.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequest.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequest.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/DownloadBuilder.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/DownloadBuilder.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/IProtocolProvider.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/IProtocolProvider.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/IDownloadManager.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/IDownloadManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/KnownConfigs.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/KnownConfigs.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Threading/IThreadFactory.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Threading/IThreadFactory.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/ApplicationHost.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/ApplicationHost.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Net/Downloader/IAuthenticationInfo.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Net/Downloader/IAuthenticationInfo.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultConfigProvider.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultConfigProvider.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultDownloadManager.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultDownloadManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AMKDownloadManager.HttpDownloader.csproj" afterPath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AMKDownloadManager.HttpDownloader.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AddIn/Component.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AddIn/Component.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJob.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJob.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJobChunk.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJobChunk.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpRequest.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpRequest.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/ProtocolProvider/HttpProtocolProvider.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/ProtocolProvider/HttpProtocolProvider.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.Net/Downloader/DownloadManager.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager.Net/Downloader/DownloadManager.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager.userprefs" afterPath="$PROJECT_DIR$/AMKDownloadManager.userprefs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.csproj.FilesWrittenAbsolute.txt" afterPath="$PROJECT_DIR$/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.csproj.FilesWrittenAbsolute.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.gtk-gui.gui.stetic" afterPath="$PROJECT_DIR$/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.gtk-gui.gui.stetic" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager/AMKDownloadManager.csproj" afterPath="$PROJECT_DIR$/AMKDownloadManager/AMKDownloadManager.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager/Program.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager/Program.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager/Threading/AbstractThreadFactory.cs" afterPath="$PROJECT_DIR$/AMKDownloadManager/Threading/AbstractThreadFactory.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AMKDownloadManager/packages.config" afterPath="$PROJECT_DIR$/AMKDownloadManager/packages.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test.Console/Program.cs" afterPath="$PROJECT_DIR$/Test.Console/Program.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test.Console/Tests/SimpleHttpDownloadTest.cs" afterPath="$PROJECT_DIR$/Test.Console/Tests/SimpleHttpDownloadTest.cs" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,19 +67,22 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Program.cs" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Program.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test.Console/Program.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="26" column="34" lean-forward="true" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+            <state relative-caret-position="387">
+              <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
               <folding>
-                <marker date="1502577708210" expanded="false" signature="6:158" ph="..." />
-                <marker date="1502577708210" expanded="true" signature="182:1324" ph="{...}" />
-                <marker date="1502577708210" expanded="true" signature="204:1322" ph="{...}" />
-                <marker date="1502577708210" expanded="true" signature="257:1316" ph="{...}" />
-                <marker date="1502577708210" expanded="true" signature="627:1219" ph="{...}" />
-                <marker date="1502577708210" expanded="true" signature="914:1205" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="6:272" ph="..." />
+                <marker date="1503460763297" expanded="true" signature="296:2027" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="318:2025" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="371:2019" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="520:620" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="1091:1922" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="1378:1908" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="1452:1551" ph="{...}" />
+                <marker date="1503460763297" expanded="true" signature="1592:1718" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -58,16 +91,227 @@
       <file leaf-file-name="DownloadBuilder.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/DownloadBuilder.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="73" lean-forward="true" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+            <state relative-caret-position="205">
+              <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
               <folding>
-                <marker date="1502636239938" expanded="false" signature="6:228" ph="..." />
-                <marker date="1502636239938" expanded="true" signature="275:1215" ph="{...}" />
-                <marker date="1502636239938" expanded="true" signature="317:1213" ph="{...}" />
-                <marker date="1502636239938" expanded="true" signature="375:532" ph="{...}" />
-                <marker date="1502636239938" expanded="true" signature="446:487" ph="{...}" />
-                <marker date="1502636239938" expanded="true" signature="622:962" ph="{...}" />
-                <marker date="1502636239938" expanded="true" signature="1041:1207" ph="{...}" />
+                <marker date="1503448146331" expanded="false" signature="6:273" ph="..." />
+                <marker date="1503448146331" expanded="true" signature="320:2088" ph="{...}" />
+                <marker date="1503448146331" expanded="true" signature="327:435" ph="/// Makes download workflow from application services and DownloadItem. ... " />
+                <marker date="1503448146331" expanded="true" signature="475:2086" ph="{...}" />
+                <marker date="1503448146331" expanded="true" signature="490:689" ph="/// Creates a new instance of DownloadItem from the given Uri. ... " />
+                <marker date="1503448146331" expanded="true" signature="741:898" ph="{...}" />
+                <marker date="1503448146331" expanded="true" signature="812:853" ph="{...}" />
+                <marker date="1503448146331" expanded="true" signature="908:1146" ph="/// Binds the specified application services to DownloadItem and find the best protocol. ... " />
+                <marker date="1503448146331" expanded="true" signature="1235:1580" ph="{...}" />
+                <marker date="1503448146331" expanded="true" signature="1590:1836" ph="/// Unbinds the specified application services fom DownloadItem and releases any used resources. ... " />
+                <marker date="1503448146331" expanded="true" signature="1914:2080" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Component.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AddIn/Component.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+              <folding>
+                <marker date="1503454676807" expanded="true" signature="6:274" ph="..." />
+                <marker date="1503454676807" expanded="true" signature="325:2052" ph="{...}" />
+                <marker date="1503454676807" expanded="true" signature="400:2050" ph="{...}" />
+                <marker date="1503454676807" expanded="true" signature="695:949" ph="{...}" />
+                <marker date="1503454676807" expanded="true" signature="721:939" ph="{...}" />
+                <marker date="1503454676807" expanded="true" signature="961:2044" ph="IComponent implementation" />
+                <marker date="1503454676807" expanded="true" signature="1040:1577" ph="{...}" />
+                <marker date="1503454676807" expanded="true" signature="1625:1694" ph="{...}" />
+                <marker date="1503454676807" expanded="true" signature="1743:1899" ph="{...}" />
+                <marker date="1503454676807" expanded="true" signature="1944:2023" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleHttpDownloadTest.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test.Console/Tests/SimpleHttpDownloadTest.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <marker date="1503448187665" expanded="false" signature="6:246" ph="..." />
+                <marker date="1503448187665" expanded="true" signature="276:1000" ph="{...}" />
+                <marker date="1503448187665" expanded="true" signature="334:998" ph="{...}" />
+                <marker date="1503448187665" expanded="true" signature="380:400" ph="{...}" />
+                <marker date="1503448187665" expanded="true" signature="470:992" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultDownloadManager.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultDownloadManager.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="732">
+              <caret line="160" column="22" lean-forward="false" selection-start-line="160" selection-start-column="22" selection-end-line="160" selection-end-column="22" />
+              <folding>
+                <marker date="1503461224652" expanded="false" signature="6:232" ph="..." />
+                <marker date="1503461224652" expanded="true" signature="272:8704" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="279:357" ph="/// Default application download manager. ... " />
+                <marker date="1503461224652" expanded="true" signature="416:8702" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="431:865" ph="Events" />
+                <marker date="1503461224652" expanded="true" signature="1511:2134" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="2144:5419" ph="IDownloadManager implementation" />
+                <marker date="1503461224652" expanded="true" signature="3010:3364" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="3134:3191" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="3394:3768" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="3446:3562" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="3809:4702" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="3951:4692" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="4296:4647" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="4741:4762" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="4790:5055" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="4912:4964" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="5088:5226" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="5254:5399" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="5310:5389" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="5429:5512" ph="IFeature implementation" />
+                <marker date="1503461224652" expanded="true" signature="5592:8696" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="6387:6631" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="6645:8686" ph="IDownloadManagerHandle implementation" />
+                <marker date="1503461224652" expanded="true" signature="6723:6880" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="6920:7688" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="7042:7674" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="7162:7656" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="7257:7511" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="7540:7634" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="7741:8161" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="8194:8275" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="8309:8390" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="8423:8504" ph="{...}" />
+                <marker date="1503461224652" expanded="true" signature="8582:8663" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IThreadFactory.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Threading/IThreadFactory.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+              <folding>
+                <marker date="1503461230456" expanded="true" signature="6:47" ph="..." />
+                <marker date="1503461230456" expanded="true" signature="96:740" ph="{...}" />
+                <marker date="1503461230456" expanded="true" signature="103:176" ph="/// Abstraction layer for threading. ... " />
+                <marker date="1503461230456" expanded="true" signature="223:738" ph="{...}" />
+                <marker date="1503461230456" expanded="true" signature="238:385" ph="/// Creates a new thread instance using given action. ... " />
+                <marker date="1503461230456" expanded="true" signature="433:580" ph="/// Creates a new thread instance using given action. ... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractThreadFactory.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AMKDownloadManager/Threading/AbstractThreadFactory.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding>
+                <marker date="1503461419763" expanded="false" signature="6:116" ph="..." />
+                <marker date="1503461419763" expanded="true" signature="156:930" ph="{...}" />
+                <marker date="1503461419763" expanded="true" signature="214:928" ph="{...}" />
+                <marker date="1503461419763" expanded="true" signature="259:292" ph="{...}" />
+                <marker date="1503461419763" expanded="true" signature="302:922" ph="IThreadFactory implementation" />
+                <marker date="1503461419763" expanded="true" signature="385:481" ph="{...}" />
+                <marker date="1503461419763" expanded="true" signature="535:644" ph="{...}" />
+                <marker date="1503461419763" expanded="true" signature="703:742" ph="{...}" />
+                <marker date="1503461419763" expanded="true" signature="801:870" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultConfigProvider.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultConfigProvider.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding>
+                <marker date="1503461049392" expanded="false" signature="6:48" ph="..." />
+                <marker date="1503461049392" expanded="true" signature="88:3244" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="95:178" ph="/// Default application configuration manager. ... " />
+                <marker date="1503461049392" expanded="true" signature="235:3242" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="280:300" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="310:3143" ph="IConfigProvider implementation" />
+                <marker date="1503461049392" expanded="true" signature="416:485" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="550:608" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="676:745" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="816:885" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="959:1028" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="1101:1170" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="1223:1292" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="1373:1442" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="1526:1595" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="1682:1751" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="1841:1910" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="2000:2069" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="2148:2217" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="2324:2393" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="2503:2572" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="2685:2754" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="2870:2939" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="3055:3124" ph="{...}" />
+                <marker date="1503461049392" expanded="true" signature="3153:3236" ph="IFeature implementation" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationHost.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/ApplicationHost.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding>
+                <marker date="1503460941865" expanded="false" signature="6:387" ph="..." />
+                <marker date="1503460941865" expanded="true" signature="422:3153" ph="{...}" />
+                <marker date="1503460941865" expanded="true" signature="429:492" ph="/// Main application root. ... " />
+                <marker date="1503460941865" expanded="true" signature="522:3151" ph="{...}" />
+                <marker date="1503460941865" expanded="true" signature="528:794" ph="Singleton" />
+                <marker date="1503460941865" expanded="true" signature="555:692" ph="/// Gets the singleton instance of ApplicationHost. ... " />
+                <marker date="1503460941865" expanded="true" signature="804:952" ph="/// Gets the application main inversion of control container. ... " />
+                <marker date="1503460941865" expanded="true" signature="1013:1133" ph="/// Gets the application service pool. ... " />
+                <marker date="1503460941865" expanded="true" signature="1233:1355" ph="/// Initialize this instance of ApplicationHost. only first call has effects. ... " />
+                <marker date="1503460941865" expanded="true" signature="1424:2135" ph="{...}" />
+                <marker date="1503460941865" expanded="true" signature="1560:1617" ph="{...}" />
+                <marker date="1503460941865" expanded="true" signature="1822:1877" ph="/* MainWindow win = new MainWindow (); ... */" />
+                <marker date="1503460941865" expanded="true" signature="2145:2280" ph="/// Unload's this instance of ApplicationHost. this leads to unloading entire application. ... " />
+                <marker date="1503460941865" expanded="true" signature="2309:2330" ph="{...}" />
+                <marker date="1503460941865" expanded="true" signature="2341:2483" ph="/// Injects all services to IoC container. ... " />
+                <marker date="1503460941865" expanded="true" signature="2541:2583" ph="{...}" />
+                <marker date="1503460941865" expanded="true" signature="2593:2726" ph="/// Injects default services to service pool. ... " />
+                <marker date="1503460941865" expanded="true" signature="2779:3148" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HttpProtocolProvider.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/ProtocolProvider/HttpProtocolProvider.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="62" column="40" lean-forward="false" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+              <folding>
+                <marker date="1503448156937" expanded="false" signature="6:313" ph="..." />
+                <marker date="1503448156937" expanded="true" signature="375:2350" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="435:2348" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="509:560" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="600:620" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="630:2342" ph="IProtocolProvider implementation" />
+                <marker date="1503448156937" expanded="true" signature="752:1236" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="941:999" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="1142:1199" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="1326:1773" ph="{...}" />
+                <marker date="1503448156937" expanded="true" signature="1884:2290" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -79,15 +323,120 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultNetworkMonitor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Test.Console/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Net/Downloader/DownloadManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D2C057D9-D34D-4E02-9E58-0897BD60340C/ed/bb266a6f/WebRequest.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/03-Web/WebCore/Http/CookieCollection.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/204F7700-36D4-41BB-8DFD-3DABA3550E83/45/cd437099/WindowsIdentity.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/03-Web/WebCore/Http/HeaderCollection.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/ApplicationHost.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/204F7700-36D4-41BB-8DFD-3DABA3550E83/49/5bc809f0/WindowsImpersonationContext.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/00-Core/Core/Collections/KeyValuesCollection.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C94E225B-5E62-4BED-9FA9-965FD5455414/3b/3441de83/CancelEventArgs.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/00-Core/Core/Utils/CancelEventArgs.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/KnownConfigs.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/IAppContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IListenerFeature.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/AppContextExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IProtocolProviderListener.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IBarrierListenerFeature.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/ComponentImporter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C601D28F-1175-43DB-9B5C-A8CC58E4C68E/3c/e36823cc/ImportManyAttribute.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15758278-32E0-48F4-B1DD-6D490B34F3E1/d8/8de9057d/HttpWebRequest.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D2C057D9-D34D-4E02-9E58-0897BD60340C/ae/8f87a803/IComponent.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IDownloadBindListener.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/IProtocolProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IHttpRequestBarrier.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/DownloadBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/HttpHelpers.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/Network/DefaultHttpRequestBarrier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IResponse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequestBarrier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/ITcpBarrier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IHttpRequestSerializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceWrapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/DownloadItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Test.Console/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/INetworkInterfaceProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/INetworkInterface.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/IDownloadManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/JobParameters.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/IJob.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/03-Web/WebCore/Http/HeaderCookieCollection.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Test.Console/Tests/SimpleHttpDownloadTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/00-Core/Core/Collections/NameValuesCollection.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/MainWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultNetworkMonitor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultDownloadManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultConfigProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Threading/IThreadFactory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/Threading/AbstractThreadFactory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AddIn/Component.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/ProtocolProvider/HttpProtocolProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJob.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/Dialogs.DownloadProgressDialog.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/Dialogs.AddDownloadLinkDialog.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/AMKDownloadManager.MainWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJobChunk.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/generated.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultNetworkMonitor.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IHttpRequestSerializer.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceWrapper.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/Network/DefaultRequestBarrier.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/Network/HttpHelpers.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IHttpRequestBarrier.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15758278-32E0-48F4-B1DD-6D490B34F3E1/d8/8de9057d/HttpWebRequest.cs" />
+        <option value="$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/03-Web/WebCore/Http/HeaderCollection.cs" />
+        <option value="$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/00-Core/Core/Collections/NameValuesCollection.cs" />
+        <option value="$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/00-Core/Core/Collections/KeyValuesCollection.cs" />
+        <option value="$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/03-Web/WebCore/Http/HeaderCookieCollection.cs" />
+        <option value="$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/03-Web/WebCore/Http/CookieCollection.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IListener.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IBarrierListener.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IListenerFeature.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IDownloadBindListener.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequest.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D2C057D9-D34D-4E02-9E58-0897BD60340C/ed/bb266a6f/WebRequest.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/204F7700-36D4-41BB-8DFD-3DABA3550E83/45/cd437099/WindowsIdentity.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/204F7700-36D4-41BB-8DFD-3DABA3550E83/49/5bc809f0/WindowsImpersonationContext.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IBarrierListenerFeature.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C94E225B-5E62-4BED-9FA9-965FD5455414/3b/3441de83/CancelEventArgs.cs" />
+        <option value="$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/00-Core/Core/Utils/CancelEventArgs.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequestBarrier.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/HttpHelpers.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/Network/DefaultHttpRequestBarrier.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJobChunk.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/DownloadItem.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/KnownConfigs.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpRequest.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/IProtocolProvider.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IProtocolProviderListener.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IResponse.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJob.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/ProtocolProvider/HttpProtocolProvider.cs" />
+        <option value="$PROJECT_DIR$/Test.Console/Tests/SimpleHttpDownloadTest.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/INetworkInterfaceProvider.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceProvider.cs" />
         <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/DownloadBuilder.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AddIn/Component.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C601D28F-1175-43DB-9B5C-A8CC58E4C68E/3c/e36823cc/ImportManyAttribute.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D2C057D9-D34D-4E02-9E58-0897BD60340C/ae/8f87a803/IComponent.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/ComponentImporter.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/Program.cs" />
+        <option value="$PROJECT_DIR$/Test.Console/Program.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/AppContextExtensions.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/ApplicationHost.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultConfigProvider.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/IDownloadManager.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultDownloadManager.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager.Core/Api/Threading/IThreadFactory.cs" />
+        <option value="$PROJECT_DIR$/AMKDownloadManager/Threading/AbstractThreadFactory.cs" />
       </list>
     </option>
   </component>
@@ -102,6 +451,9 @@
     <option name="y" value="-4" />
     <option name="width" value="2495" />
     <option name="height" value="1444" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator currentView="SolutionExplorer" proportions="" version="1">
@@ -118,6 +470,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <PATH>
@@ -129,18 +482,8 @@
               <option name="myItemId" value="AMKDownloadManager (5 projects)" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" />
-              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
-              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemId" value="Test.Console" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
           </PATH>
@@ -151,14 +494,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AMKDownloadManager (5 projects)" />
-              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AMKDownloadManager.Core" />
-              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Api" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
           </PATH>
@@ -172,15 +507,7 @@
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AMKDownloadManager.Core" />
-              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Api" />
-              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modifiers" />
+              <option name="myItemId" value="AMKDownloadManager.HttpDownloader" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
           </PATH>
@@ -194,15 +521,163 @@
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemId" value="AMKDownloadManager.HttpDownloader" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Api" />
+              <option name="myItemId" value="ProtocolProvider" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.HttpDownloader" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="DownloadManagement" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.HttpDownloader" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AddIn" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Impl" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Threading" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Listeners" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
           </PATH>
@@ -238,7 +713,65 @@
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager.Core" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Api" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Barriers" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="AMKDownloadManager" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Threading" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager (5 projects)" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AMKDownloadManager" />
+              <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network" />
               <option name="myItemType" value="com.jetbrains.rider.projectView.solutionExplorer.SolutionExplorerNodeRider" />
             </PATH_ELEMENT>
           </PATH>
@@ -246,11 +779,13 @@
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bin/gear.net/Gear.WebCore.dll" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -309,6 +844,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -364,11 +905,12 @@
       <option name="presentableId" value="Default" />
       <updated>1502635888936</updated>
       <workItem from="1502635892171" duration="422000" />
+      <workItem from="1503375773144" duration="30501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="422000" />
+    <option name="totallyTimeSpent" value="30923000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -381,27 +923,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1985" y="-4" width="2495" height="1444" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960477" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960477" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960477" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960477" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2496994" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960477" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960477" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997017" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3997017" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -412,52 +955,818 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJob.cs</url>
+          <line>61</line>
+          <properties startOffset="2121" endOffset="2341" documentPath="$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJob.cs" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="17" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultNetworkMonitor.cs">
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/ITcpBarrier.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+        <state relative-caret-position="92">
+          <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
           <folding>
-            <marker date="1502635995455" expanded="false" signature="6:56" ph="..." />
-            <marker date="1502635995455" expanded="true" signature="96:547" ph="{...}" />
-            <marker date="1502635995455" expanded="true" signature="155:545" ph="{...}" />
-            <marker date="1502635995455" expanded="true" signature="200:233" ph="{...}" />
-            <marker date="1502635995455" expanded="true" signature="352:421" ph="{...}" />
-            <marker date="1502635995455" expanded="true" signature="470:539" ph="{...}" />
+            <marker date="1503424474795" expanded="true" signature="46:104" ph="{...}" />
+            <marker date="1503424474795" expanded="true" signature="81:102" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/INetworkInterface.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+          <folding>
+            <marker date="1503424425464" expanded="true" signature="81:212" ph="{...}" />
+            <marker date="1503424425464" expanded="true" signature="133:210" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IListenerFeature.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="37" />
+          <folding>
+            <marker date="1503435570995" expanded="true" signature="47:121" ph="{...}" />
+            <marker date="1503435570995" expanded="true" signature="98:119" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/204F7700-36D4-41BB-8DFD-3DABA3550E83/49/5bc809f0/WindowsImpersonationContext.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/204F7700-36D4-41BB-8DFD-3DABA3550E83/45/cd437099/WindowsIdentity.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="251" column="31" lean-forward="false" selection-start-line="251" selection-start-column="31" selection-end-line="251" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D2C057D9-D34D-4E02-9E58-0897BD60340C/ed/bb266a6f/WebRequest.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="507" column="0" lean-forward="true" selection-start-line="507" selection-start-column="0" selection-end-line="507" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/JobParameters.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <marker date="1502637184160" expanded="true" signature="71:197" ph="{...}" />
+            <marker date="1502637184160" expanded="true" signature="78:143" ph="/// Job creation parameters. ... " />
+            <marker date="1502637184160" expanded="true" signature="174:195" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Frameworks/AMKs-Gear.portable.net/00-Core/Core/Utils/CancelEventArgs.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C94E225B-5E62-4BED-9FA9-965FD5455414/3b/3441de83/CancelEventArgs.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+          <folding>
+            <marker date="1503443818533" expanded="true" signature="0:351" ph="/* Decompiled with JetBrains decompiler ... */" />
+            <marker date="1503443818533" expanded="true" signature="384:643" ph="{...}" />
+            <marker date="1503443818533" expanded="true" signature="429:641" ph="{...}" />
+            <marker date="1503443818533" expanded="true" signature="456:542" ph="{...}" />
+            <marker date="1503443818533" expanded="true" signature="472:510" ph="{...}" />
+            <marker date="1503443818533" expanded="true" signature="520:536" ph="{...}" />
+            <marker date="1503443818533" expanded="true" signature="572:584" ph="{...}" />
+            <marker date="1503443818533" expanded="true" signature="625:637" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequestBarrier.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="47" lean-forward="false" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
+          <folding>
+            <marker date="1503444125561" expanded="true" signature="77:298" ph="{...}" />
+            <marker date="1503444125561" expanded="true" signature="127:296" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IHttpRequestBarrier.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
+          <folding>
+            <marker date="1503429129465" expanded="true" signature="46:130" ph="{...}" />
+            <marker date="1503429129465" expanded="true" signature="107:128" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceWrapper.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+          <folding>
+            <marker date="1503428902694" expanded="true" signature="6:79" ph="..." />
+            <marker date="1503428902694" expanded="true" signature="117:600" ph="{...}" />
+            <marker date="1503428902694" expanded="true" signature="180:598" ph="{...}" />
+            <marker date="1503428902694" expanded="true" signature="327:396" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/HttpHelpers.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+          <folding>
+            <marker date="1503444395478" expanded="false" signature="6:112" ph="..." />
+            <marker date="1503444395478" expanded="true" signature="159:1233" ph="{...}" />
+            <marker date="1503444395478" expanded="true" signature="197:1231" ph="{...}" />
+            <marker date="1503444395478" expanded="true" signature="290:1068" ph="{...}" />
+            <marker date="1503444395478" expanded="true" signature="478:562" ph="{...}" />
+            <marker date="1503444395478" expanded="true" signature="858:1021" ph="{...}" />
+            <marker date="1503444395478" expanded="true" signature="1180:1225" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/Network/DefaultHttpRequestBarrier.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="635">
+          <caret line="72" column="21" lean-forward="false" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+          <folding>
+            <marker date="1503444442068" expanded="true" signature="6:264" ph="..." />
+            <marker date="1503444442068" expanded="true" signature="302:4492" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="369:4490" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="454:605" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="702:3873" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="1139:1462" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="1249:1355" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="1584:3077" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="1695:3063" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="1758:2965" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="1833:2447" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="1940:2421" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="2476:2943" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="3114:3863" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="3170:3826" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="3267:3808" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="3421:3786" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="3529:3760" ph="{...}" />
+            <marker date="1503444442068" expanded="true" signature="3875:4453" ph="/* foreach (var ip in Dns.GetHostAddresses (Dns.GetHostName ())) ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/IJob.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding>
+            <marker date="1503115434048" expanded="false" signature="6:43" ph="..." />
+            <marker date="1503115434048" expanded="true" signature="101:1845" ph="{...}" />
+            <marker date="1503115434048" expanded="true" signature="351:405" ph="/// Download job. ... " />
+            <marker date="1503115434048" expanded="true" signature="442:1275" ph="{...}" />
+            <marker date="1503115434048" expanded="true" signature="457:527" ph="/// Occurs when finished. ... " />
+            <marker date="1503115434048" expanded="true" signature="576:644" ph="/// Occurs when paused. ... " />
+            <marker date="1503115434048" expanded="true" signature="691:760" ph="/// Occurs when started. ... " />
+            <marker date="1503115434048" expanded="true" signature="808:899" ph="/// Occurs when any download progress happens. ... " />
+            <marker date="1503115434048" expanded="true" signature="957:1035" ph="/// Occurs when priority changed. ... " />
+            <marker date="1503115434048" expanded="true" signature="1302:1843" ph="{...}" />
+            <marker date="1503115434048" expanded="true" signature="1317:1462" ph="/// Gets the size of the download if available. ... " />
+            <marker date="1503115434048" expanded="true" signature="1514:1788" ph="/// Gets a value indicating whether this &lt;see cref=&quot;AMKDownloadManager.Core.Api.DownloadManagement.IJob&quot;/&gt; ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJobChunk.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <marker date="1503444545293" expanded="false" signature="6:189" ph="..." />
+            <marker date="1503444545293" expanded="true" signature="253:988" ph="{...}" />
+            <marker date="1503444545293" expanded="true" signature="305:986" ph="{...}" />
+            <marker date="1503444545293" expanded="true" signature="561:722" ph="{...}" />
+            <marker date="1503444545293" expanded="true" signature="732:980" ph="IJobChunk implementation" />
+            <marker date="1503444545293" expanded="true" signature="802:862" ph="{...}" />
+            <marker date="1503444545293" expanded="true" signature="891:960" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IDownloadBindListener.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding>
+            <marker date="1503435570919" expanded="true" signature="92:695" ph="{...}" />
+            <marker date="1503435570919" expanded="true" signature="99:179" ph="/// Callback listener for download binding. ... " />
+            <marker date="1503435570919" expanded="true" signature="241:693" ph="{...}" />
+            <marker date="1503435570919" expanded="true" signature="256:412" ph="/// Calls when a binding on DownloadItem occures. ... " />
+            <marker date="1503435570919" expanded="true" signature="474:633" ph="/// Calls when an unbinding on DownloadItem occures. ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IBarrierListenerFeature.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <folding>
+            <marker date="1503443496439" expanded="false" signature="6:78" ph="..." />
+            <marker date="1503443496439" expanded="true" signature="127:1201" ph="{...}" />
+            <marker date="1503443496439" expanded="true" signature="193:1199" ph="{...}" />
+            <marker date="1503443496439" expanded="true" signature="525:717" ph="/* void HttpWebRequestCreated( ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/IAppContext.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding>
+            <marker date="1502637208152" expanded="false" signature="6:48" ph="..." />
+            <marker date="1502637208152" expanded="true" signature="87:239" ph="{...}" />
+            <marker date="1502637208152" expanded="true" signature="94:160" ph="/// Application service pool. ... " />
+            <marker date="1502637208152" expanded="true" signature="216:237" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Listeners/IProtocolProviderListener.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding>
+            <marker date="1503447447975" expanded="false" signature="6:140" ph="..." />
+            <marker date="1503447447975" expanded="true" signature="189:675" ph="{...}" />
+            <marker date="1503447447975" expanded="true" signature="257:673" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IRequest.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="40" />
+          <folding>
+            <marker date="1503435999762" expanded="false" signature="6:98" ph="..." />
+            <marker date="1503435999762" expanded="true" signature="146:563" ph="{...}" />
+            <marker date="1503435999762" expanded="true" signature="153:204" ph="/// I request. ... " />
+            <marker date="1503435999762" expanded="true" signature="231:561" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/IResponse.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding>
+            <marker date="1503448008275" expanded="true" signature="6:64" ph="..." />
+            <marker date="1503448008275" expanded="true" signature="112:349" ph="{...}" />
+            <marker date="1503448008275" expanded="true" signature="145:347" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpRequest.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <marker date="1503444927774" expanded="true" signature="6:177" ph="..." />
+            <marker date="1503444927774" expanded="true" signature="241:1710" ph="{...}" />
+            <marker date="1503444927774" expanded="true" signature="283:1708" ph="{...}" />
+            <marker date="1503444927774" expanded="true" signature="450:511" ph="{...}" />
+            <marker date="1503444927774" expanded="true" signature="1101:1702" ph="{...}" />
+            <marker date="1503444927774" expanded="true" signature="1176:1230" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/KnownConfigs.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <marker date="1503444886995" expanded="true" signature="52:983" ph="{...}" />
+            <marker date="1503444886995" expanded="true" signature="91:981" ph="{...}" />
+            <marker date="1503444886995" expanded="true" signature="141:975" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Barriers/DownloadItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="116" column="44" lean-forward="false" selection-start-line="116" selection-start-column="44" selection-end-line="116" selection-end-column="44" />
+          <folding>
+            <marker date="1503444805419" expanded="false" signature="6:197" ph="..." />
+            <marker date="1503444805419" expanded="true" signature="245:3861" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="252:349" ph="/// EventHandler for DownloadItem protocol selection signal. ... " />
+            <marker date="1503444805419" expanded="true" signature="485:579" ph="/// EventHandler for DownloadItem request created signal. ... " />
+            <marker date="1503444805419" expanded="true" signature="695:795" ph="/// DownloadItem stores information about downloading resource. ... " />
+            <marker date="1503444805419" expanded="true" signature="841:3859" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="989:1140" ph="/// Stores all download resource properties as key-value pairs. ... " />
+            <marker date="1503444805419" expanded="true" signature="1218:1282" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="1292:1508" ph="/// Raises the protocol selected event. ... " />
+            <marker date="1503444805419" expanded="true" signature="1693:1888" ph="/// Raises the request created event. ... " />
+            <marker date="1503444805419" expanded="true" signature="2042:2174" ph="/// Gets or sets the URI of the dowonload resource. ... " />
+            <marker date="1503444805419" expanded="true" signature="2197:2481" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="2223:2314" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="2330:2471" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="2491:2622" ph="/// Gets or sets the list of download mirrors. ... " />
+            <marker date="1503444805419" expanded="true" signature="2662:2971" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="2688:2796" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="2812:2961" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="2981:3140" ph="/// Gets or sets the name of the local file on file system. ... " />
+            <marker date="1503444805419" expanded="true" signature="3176:3493" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="3202:3306" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="3322:3483" ph="{...}" />
+            <marker date="1503444805419" expanded="true" signature="3503:3582" ph="/// DownloadItem known properties. ... " />
+            <marker date="1503444805419" expanded="true" signature="3619:3853" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/DownloadManagement/HttpDownloadJob.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <marker date="1503448080604" expanded="true" signature="6:252" ph="..." />
+            <marker date="1503448080604" expanded="true" signature="316:2945" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="358:2943" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="895:1106" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="1116:2844" ph="IJob implementation" />
+            <marker date="1503448080604" expanded="true" signature="1765:2392" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="1808:1908" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="2166:2341" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="2270:2327" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="2450:2519" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="2559:2628" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="2657:2726" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="2755:2824" ph="{...}" />
+            <marker date="1503448080604" expanded="true" signature="2854:2937" ph="IFeature implementation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Network/INetworkInterfaceProvider.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="45" lean-forward="true" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
+          <folding>
+            <marker date="1503448435352" expanded="true" signature="80:217" ph="{...}" />
+            <marker date="1503448435352" expanded="true" signature="140:215" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/Network/NetworkInterfaceProvider.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1503448555266" expanded="false" signature="6:132" ph="..." />
+            <marker date="1503448555266" expanded="true" signature="170:661" ph="{...}" />
+            <marker date="1503448555266" expanded="true" signature="242:659" ph="{...}" />
+            <marker date="1503448555266" expanded="true" signature="317:621" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/MainWindow.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1502546819228" expanded="false" signature="6:39" ph="..." />
+            <marker date="1502546819228" expanded="true" signature="69:588" ph="{...}" />
+            <marker date="1502546819228" expanded="true" signature="116:586" ph="{...}" />
+            <marker date="1502546819228" expanded="true" signature="175:196" ph="{...}" />
+            <marker date="1502546819228" expanded="true" signature="263:315" ph="{...}" />
+            <marker date="1502546819228" expanded="true" signature="389:583" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/generated.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <marker date="1503117917183" expanded="true" signature="85:561" ph="{...}" />
+            <marker date="1503117917183" expanded="true" signature="107:301" ph="{...}" />
+            <marker date="1503117917183" expanded="true" signature="206:298" ph="{...}" />
+            <marker date="1503117917183" expanded="true" signature="253:294" ph="{...}" />
+            <marker date="1503117917183" expanded="true" signature="331:559" ph="{...}" />
+            <marker date="1503117917183" expanded="true" signature="400:470" ph="{...}" />
+            <marker date="1503117917183" expanded="true" signature="532:556" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/AMKDownloadManager.MainWindow.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="54" lean-forward="false" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
+          <folding>
+            <marker date="1502546819272" expanded="true" signature="97:1861" ph="{...}" />
+            <marker date="1502546819272" expanded="true" signature="132:1859" ph="{...}" />
+            <marker date="1502546819272" expanded="true" signature="304:1856" ph="{...}" />
+            <marker date="1502546819272" expanded="true" signature="1559:1592" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/Dialogs.AddDownloadLinkDialog.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C601D28F-1175-43DB-9B5C-A8CC58E4C68E/3c/e36823cc/ImportManyAttribute.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D2C057D9-D34D-4E02-9E58-0897BD60340C/ae/8f87a803/IComponent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AMKDownloadManager.HttpDownloader.csproj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/gtk-gui/Dialogs.DownloadProgressDialog.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1502529338328" expanded="true" signature="86:5442" ph="{...}" />
+            <marker date="1502529338328" expanded="true" signature="133:5440" ph="{...}" />
+            <marker date="1502529338328" expanded="true" signature="610:5437" ph="{...}" />
+            <marker date="1502529338328" expanded="true" signature="5326:5359" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/Program.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="42" column="38" lean-forward="false" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
+          <folding>
+            <marker date="1503460291667" expanded="true" signature="6:402" ph="..." />
+            <marker date="1503460291667" expanded="true" signature="432:1876" ph="{...}" />
+            <marker date="1503460291667" expanded="true" signature="461:1874" ph="{...}" />
+            <marker date="1503460291667" expanded="true" signature="514:1157" ph="{...}" />
+            <marker date="1503460291667" expanded="true" signature="792:911" ph="{...}" />
+            <marker date="1503460291667" expanded="true" signature="928:1147" ph="{...}" />
+            <marker date="1503460291667" expanded="true" signature="1224:1505" ph="{...}" />
+            <marker date="1503460291667" expanded="true" signature="1580:1868" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/ComponentImporter.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="44" lean-forward="true" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+          <folding>
+            <marker date="1503460282951" expanded="true" signature="6:277" ph="..." />
+            <marker date="1503460282951" expanded="true" signature="307:1520" ph="{...}" />
+            <marker date="1503460282951" expanded="true" signature="344:1518" ph="{...}" />
+            <marker date="1503460282951" expanded="true" signature="483:1115" ph="{...}" />
+            <marker date="1503460282951" expanded="true" signature="1012:1105" ph="{...}" />
+            <marker date="1503460282951" expanded="true" signature="1245:1512" ph="{...}" />
+            <marker date="1503460282951" expanded="true" signature="1291:1502" ph="{...}" />
+            <marker date="1503460282951" expanded="true" signature="1353:1488" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/IProtocolProvider.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding>
+            <marker date="1503444988124" expanded="false" signature="6:111" ph="..." />
+            <marker date="1503444988124" expanded="true" signature="158:1196" ph="{...}" />
+            <marker date="1503444988124" expanded="true" signature="165:260" ph="/// Service to create download workflow from DownloadItem. ... " />
+            <marker date="1503444988124" expanded="true" signature="310:1194" ph="{...}" />
+            <marker date="1503444988124" expanded="true" signature="325:631" ph="/// Determines whether this instance can handle the specified downloadItem. ... " />
+            <marker date="1503444988124" expanded="true" signature="808:1091" ph="/// Creates the download job. ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/AppContextExtensions.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="24" column="9" lean-forward="false" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+          <folding>
+            <marker date="1503460806767" expanded="false" signature="6:267" ph="..." />
+            <marker date="1503460806767" expanded="true" signature="306:3004" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="313:379" ph="/// Extensions to AppContext. ... " />
+            <marker date="1503460806767" expanded="true" signature="424:3002" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="549:624" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="816:960" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="1113:1205" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="1351:1534" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="1466:1523" ph="/* ?? ... */" />
+            <marker date="1503460806767" expanded="true" signature="1708:1775" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="1953:2020" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="2183:2257" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="2435:2502" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="2668:2745" ph="{...}" />
+            <marker date="1503460806767" expanded="true" signature="2926:2996" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Binders/DownloadBuilder.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="73" lean-forward="true" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+        <state relative-caret-position="205">
+          <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
           <folding>
-            <marker date="1502636239938" expanded="false" signature="6:228" ph="..." />
-            <marker date="1502636239938" expanded="true" signature="275:1215" ph="{...}" />
-            <marker date="1502636239938" expanded="true" signature="317:1213" ph="{...}" />
-            <marker date="1502636239938" expanded="true" signature="375:532" ph="{...}" />
-            <marker date="1502636239938" expanded="true" signature="446:487" ph="{...}" />
-            <marker date="1502636239938" expanded="true" signature="622:962" ph="{...}" />
-            <marker date="1502636239938" expanded="true" signature="1041:1207" ph="{...}" />
+            <marker date="1503448146331" expanded="false" signature="6:273" ph="..." />
+            <marker date="1503448146331" expanded="true" signature="320:2088" ph="{...}" />
+            <marker date="1503448146331" expanded="true" signature="327:435" ph="/// Makes download workflow from application services and DownloadItem. ... " />
+            <marker date="1503448146331" expanded="true" signature="475:2086" ph="{...}" />
+            <marker date="1503448146331" expanded="true" signature="490:689" ph="/// Creates a new instance of DownloadItem from the given Uri. ... " />
+            <marker date="1503448146331" expanded="true" signature="741:898" ph="{...}" />
+            <marker date="1503448146331" expanded="true" signature="812:853" ph="{...}" />
+            <marker date="1503448146331" expanded="true" signature="908:1146" ph="/// Binds the specified application services to DownloadItem and find the best protocol. ... " />
+            <marker date="1503448146331" expanded="true" signature="1235:1580" ph="{...}" />
+            <marker date="1503448146331" expanded="true" signature="1590:1836" ph="/// Unbinds the specified application services fom DownloadItem and releases any used resources. ... " />
+            <marker date="1503448146331" expanded="true" signature="1914:2080" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/AddIn/Component.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="7" column="31" lean-forward="false" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <folding>
+            <marker date="1503454676807" expanded="true" signature="6:274" ph="..." />
+            <marker date="1503454676807" expanded="true" signature="325:2052" ph="{...}" />
+            <marker date="1503454676807" expanded="true" signature="400:2050" ph="{...}" />
+            <marker date="1503454676807" expanded="true" signature="695:949" ph="{...}" />
+            <marker date="1503454676807" expanded="true" signature="721:939" ph="{...}" />
+            <marker date="1503454676807" expanded="true" signature="961:2044" ph="IComponent implementation" />
+            <marker date="1503454676807" expanded="true" signature="1040:1577" ph="{...}" />
+            <marker date="1503454676807" expanded="true" signature="1625:1694" ph="{...}" />
+            <marker date="1503454676807" expanded="true" signature="1743:1899" ph="{...}" />
+            <marker date="1503454676807" expanded="true" signature="1944:2023" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/ApplicationHost.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding>
+            <marker date="1503460941865" expanded="false" signature="6:387" ph="..." />
+            <marker date="1503460941865" expanded="true" signature="422:3153" ph="{...}" />
+            <marker date="1503460941865" expanded="true" signature="429:492" ph="/// Main application root. ... " />
+            <marker date="1503460941865" expanded="true" signature="522:3151" ph="{...}" />
+            <marker date="1503460941865" expanded="true" signature="528:794" ph="Singleton" />
+            <marker date="1503460941865" expanded="true" signature="555:692" ph="/// Gets the singleton instance of ApplicationHost. ... " />
+            <marker date="1503460941865" expanded="true" signature="804:952" ph="/// Gets the application main inversion of control container. ... " />
+            <marker date="1503460941865" expanded="true" signature="1013:1133" ph="/// Gets the application service pool. ... " />
+            <marker date="1503460941865" expanded="true" signature="1233:1355" ph="/// Initialize this instance of ApplicationHost. only first call has effects. ... " />
+            <marker date="1503460941865" expanded="true" signature="1424:2135" ph="{...}" />
+            <marker date="1503460941865" expanded="true" signature="1560:1617" ph="{...}" />
+            <marker date="1503460941865" expanded="true" signature="1822:1877" ph="/* MainWindow win = new MainWindow (); ... */" />
+            <marker date="1503460941865" expanded="true" signature="2145:2280" ph="/// Unload's this instance of ApplicationHost. this leads to unloading entire application. ... " />
+            <marker date="1503460941865" expanded="true" signature="2309:2330" ph="{...}" />
+            <marker date="1503460941865" expanded="true" signature="2341:2483" ph="/// Injects all services to IoC container. ... " />
+            <marker date="1503460941865" expanded="true" signature="2541:2583" ph="{...}" />
+            <marker date="1503460941865" expanded="true" signature="2593:2726" ph="/// Injects default services to service pool. ... " />
+            <marker date="1503460941865" expanded="true" signature="2779:3148" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Test.Console/Program.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="26" column="34" lean-forward="true" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+        <state relative-caret-position="387">
+          <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
           <folding>
-            <marker date="1502577708210" expanded="false" signature="6:158" ph="..." />
-            <marker date="1502577708210" expanded="true" signature="182:1324" ph="{...}" />
-            <marker date="1502577708210" expanded="true" signature="204:1322" ph="{...}" />
-            <marker date="1502577708210" expanded="true" signature="257:1316" ph="{...}" />
-            <marker date="1502577708210" expanded="true" signature="627:1219" ph="{...}" />
-            <marker date="1502577708210" expanded="true" signature="914:1205" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="6:272" ph="..." />
+            <marker date="1503460763297" expanded="true" signature="296:2027" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="318:2025" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="371:2019" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="520:620" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="1091:1922" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="1378:1908" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="1452:1551" ph="{...}" />
+            <marker date="1503460763297" expanded="true" signature="1592:1718" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.HttpDownloader/ProtocolProvider/HttpProtocolProvider.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="62" column="40" lean-forward="false" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+          <folding>
+            <marker date="1503448156937" expanded="false" signature="6:313" ph="..." />
+            <marker date="1503448156937" expanded="true" signature="375:2350" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="435:2348" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="509:560" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="600:620" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="630:2342" ph="IProtocolProvider implementation" />
+            <marker date="1503448156937" expanded="true" signature="752:1236" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="941:999" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="1142:1199" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="1326:1773" ph="{...}" />
+            <marker date="1503448156937" expanded="true" signature="1884:2290" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultConfigProvider.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <marker date="1503461049392" expanded="false" signature="6:48" ph="..." />
+            <marker date="1503461049392" expanded="true" signature="88:3244" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="95:178" ph="/// Default application configuration manager. ... " />
+            <marker date="1503461049392" expanded="true" signature="235:3242" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="280:300" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="310:3143" ph="IConfigProvider implementation" />
+            <marker date="1503461049392" expanded="true" signature="416:485" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="550:608" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="676:745" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="816:885" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="959:1028" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="1101:1170" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="1223:1292" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="1373:1442" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="1526:1595" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="1682:1751" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="1841:1910" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="2000:2069" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="2148:2217" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="2324:2393" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="2503:2572" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="2685:2754" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="2870:2939" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="3055:3124" ph="{...}" />
+            <marker date="1503461049392" expanded="true" signature="3153:3236" ph="IFeature implementation" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/DownloadManagement/IDownloadManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <marker date="1503461105081" expanded="false" signature="6:75" ph="..." />
+            <marker date="1503461105081" expanded="true" signature="133:1814" ph="{...}" />
+            <marker date="1503461105081" expanded="true" signature="456:522" ph="/// Download manager service. ... " />
+            <marker date="1503461105081" expanded="true" signature="571:1812" ph="{...}" />
+            <marker date="1503461105081" expanded="true" signature="939:1053" ph="/// Begins a download job. ... " />
+            <marker date="1503461105081" expanded="true" signature="1114:1374" ph="/// Begins a download job and call the source when the download job finishes. ... " />
+            <marker date="1503461105081" expanded="true" signature="1459:1537" ph="/// Starts download manager jobs. ... " />
+            <marker date="1503461105081" expanded="true" signature="1569:1646" ph="/// Stops download manager jobs. ... " />
+            <marker date="1503461105081" expanded="true" signature="1676:1758" ph="/// Force stop download manager jobs. ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.Console/Tests/SimpleHttpDownloadTest.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1503448187665" expanded="false" signature="6:246" ph="..." />
+            <marker date="1503448187665" expanded="true" signature="276:1000" ph="{...}" />
+            <marker date="1503448187665" expanded="true" signature="334:998" ph="{...}" />
+            <marker date="1503448187665" expanded="true" signature="380:400" ph="{...}" />
+            <marker date="1503448187665" expanded="true" signature="470:992" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Impl/DefaultDownloadManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="732">
+          <caret line="160" column="22" lean-forward="false" selection-start-line="160" selection-start-column="22" selection-end-line="160" selection-end-column="22" />
+          <folding>
+            <marker date="1503461224652" expanded="false" signature="6:232" ph="..." />
+            <marker date="1503461224652" expanded="true" signature="272:8704" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="279:357" ph="/// Default application download manager. ... " />
+            <marker date="1503461224652" expanded="true" signature="416:8702" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="431:865" ph="Events" />
+            <marker date="1503461224652" expanded="true" signature="1511:2134" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="2144:5419" ph="IDownloadManager implementation" />
+            <marker date="1503461224652" expanded="true" signature="3010:3364" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="3134:3191" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="3394:3768" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="3446:3562" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="3809:4702" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="3951:4692" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="4296:4647" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="4741:4762" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="4790:5055" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="4912:4964" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="5088:5226" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="5254:5399" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="5310:5389" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="5429:5512" ph="IFeature implementation" />
+            <marker date="1503461224652" expanded="true" signature="5592:8696" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="6387:6631" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="6645:8686" ph="IDownloadManagerHandle implementation" />
+            <marker date="1503461224652" expanded="true" signature="6723:6880" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="6920:7688" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="7042:7674" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="7162:7656" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="7257:7511" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="7540:7634" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="7741:8161" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="8194:8275" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="8309:8390" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="8423:8504" ph="{...}" />
+            <marker date="1503461224652" expanded="true" signature="8582:8663" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager.Core/Api/Threading/IThreadFactory.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+          <folding>
+            <marker date="1503461230456" expanded="true" signature="6:47" ph="..." />
+            <marker date="1503461230456" expanded="true" signature="96:740" ph="{...}" />
+            <marker date="1503461230456" expanded="true" signature="103:176" ph="/// Abstraction layer for threading. ... " />
+            <marker date="1503461230456" expanded="true" signature="223:738" ph="{...}" />
+            <marker date="1503461230456" expanded="true" signature="238:385" ph="/// Creates a new thread instance using given action. ... " />
+            <marker date="1503461230456" expanded="true" signature="433:580" ph="/// Creates a new thread instance using given action. ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AMKDownloadManager/Threading/AbstractThreadFactory.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <marker date="1503461419763" expanded="false" signature="6:116" ph="..." />
+            <marker date="1503461419763" expanded="true" signature="156:930" ph="{...}" />
+            <marker date="1503461419763" expanded="true" signature="214:928" ph="{...}" />
+            <marker date="1503461419763" expanded="true" signature="259:292" ph="{...}" />
+            <marker date="1503461419763" expanded="true" signature="302:922" ph="IThreadFactory implementation" />
+            <marker date="1503461419763" expanded="true" signature="385:481" ph="{...}" />
+            <marker date="1503461419763" expanded="true" signature="535:644" ph="{...}" />
+            <marker date="1503461419763" expanded="true" signature="703:742" ph="{...}" />
+            <marker date="1503461419763" expanded="true" signature="801:870" ph="{...}" />
           </folding>
         </state>
       </provider>

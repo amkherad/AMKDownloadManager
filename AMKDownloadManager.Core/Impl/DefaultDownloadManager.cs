@@ -153,6 +153,16 @@ namespace AMKDownloadManager.Core.Impl
             _schedulerThread.Abort();
             _schedulerThread = null;
         }
+
+        public void Join()
+        {
+            foreach (var job in _runningJobs)
+            {
+                Thread
+                job.Threads
+            }
+        }
+
         #endregion
 
         #region IFeature implementation

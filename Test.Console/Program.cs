@@ -5,6 +5,8 @@ using ir.amkdp.gear.arch.Trace.Annotations;
 using System.Diagnostics;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Threading;
+using ir.amkdp.gear.core.Trace;
+using ir.amkdp.gear.core.Trace.LoggerEngines;
 
 namespace Test.Console
 {
@@ -13,8 +15,14 @@ namespace Test.Console
         public static void Main(string[] args)
         {
             Trace.Listeners.Add(new ConsoleTraceListener());
+            Logger.RegisterLogger(new MethodLogger(System.Console.Write, f =>
+            {
+                for (var i = 0; i < f; i++) System.Console.WriteLine();
+            }));
 
-            ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
+            var app = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
+            AMKDownloadManager.MainClass.InjectTopLayerFeatures(app);
+            AMKDownloadManager.MainClass.LoadComponents(app);
 
             var classes = Assembly.GetExecutingAssembly().DefinedTypes
                 .Where(x => x.IsClass &&
@@ -30,7 +38,14 @@ namespace Test.Console
                 foreach (var method in methods)
                 {
                     sw.Start();
-                    method.Invoke(instance, null);
+                    try
+                    {
+                        method.Invoke(instance, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine($"Method {method.Name} Exception: {ex}");
+                    }
                     sw.Stop();
 
                     Trace.WriteLine($"Method {method.Name} of class {cls.Name} took {sw.ElapsedMilliseconds}ms ({sw.ElapsedTicks} ticks)");

@@ -26,10 +26,11 @@ namespace Test.Console.Tests
             var downloadManager = app.GetFeature<IDownloadManager>();
 
             var protocol = DownloadBuilder.Bind(di, app);
-            var job = protocol.CreateJob(di, app, null);
+            var job = protocol.CreateJob(app, di, null);
 
             var state = downloadManager.Schedule(job);
 
+            downloadManager.Start();
             //state.
         }
     }

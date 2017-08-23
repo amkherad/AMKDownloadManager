@@ -21,7 +21,7 @@ namespace AMKDownloadManager.Core.Impl
 
         public int GetInt(string fqn, int? defaultValue = null)
         {
-            throw new NotImplementedException();
+            return defaultValue ?? 3;
         }
 
         public long GetLong(string fqn, long? defaultValue = null)

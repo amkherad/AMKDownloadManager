@@ -1,3 +1,5 @@
+.idea
+.vs
 
-output
-packages
+output/
+packages/

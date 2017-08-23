@@ -1,12 +1,11 @@
-﻿using System;
-using AMKDownloadManager.Core.Api.Barriers;
+﻿using AMKDownloadManager.Core.Api.Barriers;
 
-namespace AMKDownloadManager.Core.Api.Binders
+namespace AMKDownloadManager.Core.Api.Listeners
 {
     /// <summary>
     /// Callback listener for download binding.
     /// </summary>
-    public interface IDownloadBindListener : IFeature
+    public interface IDownloadBindListener : IListenerFeature
     {
         /// <summary>
         /// Calls when a binding on DownloadItem occures.

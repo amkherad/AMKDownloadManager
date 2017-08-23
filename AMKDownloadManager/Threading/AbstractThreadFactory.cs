@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AMKDownloadManager.Core.Api.Threading;
 using System.Threading;
 
@@ -21,6 +22,16 @@ namespace AMKDownloadManager.Threading
         public IThread Create(Action<object> action)
         {
             return new AbstractThread(new Thread(new ParameterizedThreadStart(action)));
+        }
+
+        public void WaitAll(IEnumerable<IThread> threads)
+        {
+            Thread
+        }
+
+        public void WhenAll(IEnumerable<IThread> threads)
+        {
+            throw new NotImplementedException();
         }
 
         public int Order => 0;

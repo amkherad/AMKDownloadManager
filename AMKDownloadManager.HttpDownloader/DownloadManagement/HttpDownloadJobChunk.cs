@@ -27,7 +27,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public JobChunkState Cycle()
         {
-            
+            return JobChunkState.Error;
         }
 
         public void Yield()

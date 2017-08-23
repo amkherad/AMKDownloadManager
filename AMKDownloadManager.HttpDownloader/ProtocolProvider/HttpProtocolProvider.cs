@@ -4,6 +4,8 @@ using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.DownloadManagement;
+using AMKDownloadManager.Core.Api.Listeners;
+using AMKDownloadManager.HttpDownloader.DownloadManagement;
 
 namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 {
@@ -21,7 +23,7 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 
         #region IProtocolProvider implementation
 
-        public bool CanHandle(DownloadItem downloadItem)
+        public bool CanHandle(IAppContext appContext, DownloadItem downloadItem)
         {
             if (downloadItem == null)
                 throw new ArgumentNullException(nameof(downloadItem));
@@ -33,16 +35,47 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
             }
 
             var scheme = uri.Scheme;
-            if (String.IsNullOrWhiteSpace(scheme) || SupportedProtocols.Any(p => p == scheme.ToLower()))
+            if (string.IsNullOrWhiteSpace(scheme) || SupportedProtocols.Any(p => p == scheme.ToLower()))
             {
                 return true;
             }
+
+            return false;
         }
 
-        public IJob CreateJob(DownloadItem downloadItem, IAppContext app, JobParameters jobParameters)
+        public IRequest CreateRequest(IAppContext appContext, DownloadItem downloadItem)
         {
+            var request = HttpRequest.FromDownloadItem(
+                appContext,
+                appContext.GetFeature<IConfigProvider>(),
+                downloadItem);
+
+            appContext.SignalFeatures<IProtocolProviderListener>(x => x.RequestCreated(
+                appContext,
+                downloadItem,
+                request,
+                this
+                ));
             
+            return request;
         }
+
+        public IJob CreateJob(IAppContext appContext, DownloadItem downloadItem, JobParameters jobParameters)
+        {
+            var httpDownload = new HttpDownloadJob(appContext, this, downloadItem, jobParameters);
+
+            appContext.SignalFeatures<IProtocolProviderListener>(x => x.JobCreated(
+                appContext,
+                downloadItem,
+                httpDownload,
+                jobParameters,
+                this
+            ));
+            
+            return httpDownload;
+        }
+
+        public int Order => 0;
 
         #endregion
     }

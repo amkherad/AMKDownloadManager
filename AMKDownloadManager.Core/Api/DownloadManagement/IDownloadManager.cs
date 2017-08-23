@@ -49,5 +49,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// Force stop download manager jobs.
         /// </summary>
         void ForceStop();
+
+        void Join();
     }
 }

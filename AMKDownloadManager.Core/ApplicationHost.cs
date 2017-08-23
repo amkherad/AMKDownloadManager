@@ -5,6 +5,8 @@ using ir.amkdp.gear.arch.Patterns;
 using ir.amkdp.gear.core.Patterns.AppModel;
 using AMKDownloadManager.Core.Impl;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.DownloadManagement;
+using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Threading;
 
 namespace AMKDownloadManager.Core
@@ -64,9 +66,9 @@ namespace AMKDownloadManager.Core
             TypeResolver.SetWideResolver (container);
             pool.SetTypeResolver (container);
 
+	        pool.AddFeature<IThreadFactory>(threadFactory);
+	        
             _buildDefaults(Pool);
-
-            pool.AddFeature(threadFactory);
 
             return pool;
 		}
@@ -95,13 +97,13 @@ namespace AMKDownloadManager.Core
         /// <param name="app">App.</param>
         private void _buildDefaults(IAppContext app)
         {
-            app.AddFeature(new DefaultConfigProvider());
-            app.AddFeature(new DefaultNetworkMonitor());
+            app.AddFeature<IConfigProvider>(new DefaultConfigProvider());
+            app.AddFeature<INetworkMonitor>(new DefaultNetworkMonitor());
 
             var scheduler = new DefaultJobScheduler(app);
 
-            app.AddFeature(scheduler);
-            app.AddFeature(new DefaultDownloadManager(app, scheduler));
+            app.AddFeature<IScheduler>(scheduler);
+            app.AddFeature<IDownloadManager>(new DefaultDownloadManager(app, scheduler));
         }
 	}
 }

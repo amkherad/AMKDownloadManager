@@ -8,10 +8,10 @@ namespace AMKDownloadManager.Core.Api.Barriers
     /// </summary>
 	public interface IRequest
 	{
-        NameValueCollection Headers { get; }
+        HeaderCollection Headers { get; }
         NameValueCollection Cookies { get; }
         NameValueCollection FormData { get; }
         NameValueCollection QueryString { get; }
-        NameValueCollection QueryString { get; }
+        string RequestBody { get; set; }
 	}
 }

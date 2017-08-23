@@ -17,6 +17,9 @@ namespace AMKDownloadManager.Core.Api
 
             public const string RetryDelay = "DownloadManager.Download.RetryDelay";
             public const int RetryDelay_DefaultValue = 500;
+
+            public const string RequestMethod = "DownloadManager.Download.DefaultRequestMethod";
+            public const string RequestMethod_DefaultValue = "GET";
         }
     }
 }
