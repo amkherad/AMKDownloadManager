@@ -129,9 +129,21 @@ namespace AMKDownloadManager.Core.Impl
                 loop.Count();
             }
         }
-        private void _runJob(IJob job)
+        private void _setJobAsRunning(DefaultDownloadManagerJobContext jobContext)
         {
-
+            lock (_jobs)
+            {
+                _pendingJobs.Remove(jobContext);
+                _runningJobs.Add(jobContext);
+            }
+        }
+        private void _setJobAsFree(DefaultDownloadManagerJobContext jobContext)
+        {
+            lock (_jobs)
+            {
+                _runningJobs.Remove(jobContext);
+                _pendingJobs.Add(jobContext);
+            }
         }
 
         public void Stop()
@@ -158,9 +170,27 @@ namespace AMKDownloadManager.Core.Impl
         {
             foreach (var job in _runningJobs)
             {
-                Thread
-                job.Threads
+                foreach (var thread in job.Threads)
+                {
+                    thread.Join();
+                }
             }
+        }
+
+        public void Join(IJob job)
+        {
+            var threads = FindJob(job)?.Threads;
+            if (threads == null) throw new InvalidOperationException();
+            
+            foreach (var thread in threads)
+            {
+                thread.Join();
+            }
+        }
+
+        protected DefaultDownloadManagerJobContext FindJob(IJob job)
+        {
+            return _jobs.FirstOrDefault(x => x.Job == job);
         }
 
         #endregion
@@ -210,6 +240,8 @@ namespace AMKDownloadManager.Core.Impl
             {
                 DispatcherThread = DownloadManager.ThreadFactory.Create(_dispatcher);
 
+                DownloadManager._setJobAsRunning(this);
+                
                 DispatcherThread.Start();
             }
 

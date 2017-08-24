@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Composition;
 using System.Composition.Hosting;
 using System.IO;
@@ -9,7 +8,7 @@ using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Extensions;
 using ir.amkdp.gear.core.Trace;
 
-namespace AMKDownloadManager
+namespace AMKDownloadManager.Defaults
 {
     public class ComponentImporter
     {

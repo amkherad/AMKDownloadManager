@@ -30,6 +30,8 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Api\Barriers\HttpRequest.cs" />
+    <Compile Include="Api\Barriers\HttpResponse.cs" />
     <Compile Include="Api\Barriers\IHttpRequestBarrier.cs" />
     <Compile Include="Api\Barriers\IHttpRequestSerializer.cs" />
     <Compile Include="Api\Barriers\IRequestBarrier.cs" />
@@ -37,6 +39,7 @@
     <Compile Include="Api\Barriers\ITcpBarrier.cs" />
     <Compile Include="Api\Listeners\IBarrierListenerFeature.cs" />
     <Compile Include="Api\Listeners\IDownloadBindListener.cs" />
+    <Compile Include="Api\Listeners\IDownloadProgressListener.cs" />
     <Compile Include="Api\Listeners\IListenerFeature.cs" />
     <Compile Include="Api\Listeners\IProtocolProviderListener.cs" />
     <Compile Include="Api\Network\HttpHelpers.cs" />

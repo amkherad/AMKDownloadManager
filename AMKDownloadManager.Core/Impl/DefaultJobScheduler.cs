@@ -48,7 +48,7 @@ namespace AMKDownloadManager.Core.Impl
 
         public IJob SelectJob(IDownloadManager downloadManager, IEnumerable<IJob> freeJobs, IEnumerable<IJob> runningJobs)
         {
-            throw new NotImplementedException();
+            return freeJobs.FirstOrDefault();
         }
 
         #endregion

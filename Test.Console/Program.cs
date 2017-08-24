@@ -4,7 +4,9 @@ using System.Reflection;
 using ir.amkdp.gear.arch.Trace.Annotations;
 using System.Diagnostics;
 using AMKDownloadManager.Core;
-using AMKDownloadManager.Threading;
+using AMKDownloadManager.Defaults;
+using AMKDownloadManager.Defaults.Threading;
+using AMKDownloadManager.HttpDownloader.AddIn;
 using ir.amkdp.gear.core.Trace;
 using ir.amkdp.gear.core.Trace.LoggerEngines;
 
@@ -21,8 +23,10 @@ namespace Test.Console
             }));
 
             var app = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
-            AMKDownloadManager.MainClass.InjectTopLayerFeatures(app);
-            AMKDownloadManager.MainClass.LoadComponents(app);
+            AppHelpers.InjectTopLayerFeatures(app);
+            //AppHelpers.LoadComponents(app);
+            var component = new Component();
+            component.Initialize(app);
 
             var classes = Assembly.GetExecutingAssembly().DefinedTypes
                 .Where(x => x.IsClass &&

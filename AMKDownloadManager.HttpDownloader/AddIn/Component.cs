@@ -14,6 +14,8 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
     {
         public const string ComponentGUID = "fa443c67-0faa-4555-8347-55068ae5993f";
 
+        private static bool _isLoaded = false;
+        
         public string Name => "HttpDownloader";
 
         public string Description => "Download files over http(s)";
@@ -57,6 +59,10 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
 
         public void Initialize(IAppContext app)
         {
+            if (_isLoaded)
+            {
+                return;
+            }
             Logger.Write("HttpProtocolProvider.Initialize");
             app.AddFeature<IProtocolProvider>(new HttpProtocolProvider());
         }

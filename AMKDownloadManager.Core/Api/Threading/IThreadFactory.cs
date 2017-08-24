@@ -19,7 +19,6 @@ namespace AMKDownloadManager.Core.Api.Threading
         /// <param name="action">Action.</param>
         IThread Create(Action<object> action);
 
-        void WaitAll(IEnumerable<IThread> threads);
-        void WhenAll(IEnumerable<IThread> threads);
+        void JoinAll(IEnumerable<IThread> threads);
     }
 }

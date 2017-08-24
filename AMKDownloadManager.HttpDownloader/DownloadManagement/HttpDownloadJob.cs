@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
 
 namespace AMKDownloadManager.HttpDownloader.DownloadManagement
@@ -41,14 +42,20 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         public event JobEventHandler Started;
         public event JobProgressEventHandler Progress;
         public event JobPriorityChangedEventHandler PriorityChanged;
+        public event JobStateChangedEventHandler StateChanged;
 
-        protected void OnFinished(EventArgs e) => Finished?.Invoke(this, e);
-        protected void OnProgress(int progress) => Progress?.Invoke(this, progress);
-        protected void OnPaused(EventArgs e) => Paused?.Invoke(this, e);
-        protected void OnStarted(EventArgs e) => Started?.Invoke(this, e);
+        public void OnFinished(EventArgs e) => Finished?.Invoke(this, e);
+        public void OnProgress(int progress) => Progress?.Invoke(this, progress);
+        public void OnPaused(EventArgs e) => Paused?.Invoke(this, e);
+        public void OnStarted(EventArgs e) => Started?.Invoke(this, e);
+        public void OnPriorityChanged(SchedulerPriority priority) => PriorityChanged?.Invoke(this, priority);
+        public void OnStateChanged(JobState state) => StateChanged?.Invoke(this, state);
 
 
-        public JobInfo TriggerJobAndGetInfo()
+        public JobState State { get; protected internal set; }
+
+        
+        public JobInfo TriggerJobAndGetInfo(IDownloadProgressListener downloadProgressListener)
         {
             if (Barrier == null)
             {
@@ -57,7 +64,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             var jobInfo = new JobInfo();
 
             var request = HttpProtocolProvider.CreateRequest(AppContext, DownloadItem);
-            var response = Barrier.SendRequest(AppContext, request);
+            var response = Barrier.SendRequest(AppContext, request, downloadProgressListener, false);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -71,12 +78,12 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             return jobInfo;
         }
 
-        public Task<JobInfo> TriggerJobAndGetInfoAsync()
+        public Task<JobInfo> TriggerJobAndGetInfoAsync(IDownloadProgressListener downloadProgressListener)
         {
             throw new NotImplementedException();
         }
 
-        public IJobChunk GetJobChunk()
+        public IJobChunk GetJobChunk(IDownloadProgressListener downloadProgressListener)
         {
             throw new NotImplementedException();
         }

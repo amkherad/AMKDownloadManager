@@ -24,17 +24,26 @@ namespace AMKDownloadManager.Core.Api.Network
             var contentType = request.Headers.ContentType;
             if (contentType != null) req.ContentType = contentType;
 
-            foreach (var cookie in request.Cookies)
-            {
-                req.CookieContainer.Add(cookie.Uri ?? request.Uri, new Cookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain));
-            }
+            //foreach (var cookie in request.Cookies)
+            //{
+            //    req.CookieContainer.Add(cookie.Uri ?? request.Uri, new Cookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain));
+            //}
             
             return req;
         }
 
-        public static IResponse CreateResponseFromHttpResponse(HttpWebResponse response, Stream stream = null)
+        public static void FillResponseFromHttpResponse(HttpResponse res, HttpWebResponse response, Stream stream = null)
         {
-            return null;
+            if (stream != null)
+            {
+                res.ResponseStream = stream;
+            }
+            
+            foreach (var header in response.Headers)
+            {
+                res.Headers.Add("", "");                
+            }
+            
         }
     }
 }

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.HttpDown
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Console", "Test.Console\Test.Console.csproj", "{59B248A9-4725-44B9-B82F-ABD19E2F9F5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.Defaults", "AMKDownloadManager.Defaults\AMKDownloadManager.Defaults.csproj", "{389A475C-C6A3-44BF-84A4-B1C45651E782}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -37,5 +39,9 @@ Global
 		{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}.Debug|x86.Build.0 = Debug|Any CPU
 		{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}.Release|x86.ActiveCfg = Release|Any CPU
 		{E592E6DC-77AD-4AA9-81CB-FED4264E33D8}.Release|x86.Build.0 = Release|Any CPU
+		{389A475C-C6A3-44BF-84A4-B1C45651E782}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{389A475C-C6A3-44BF-84A4-B1C45651E782}.Debug|x86.Build.0 = Debug|Any CPU
+		{389A475C-C6A3-44BF-84A4-B1C45651E782}.Release|x86.ActiveCfg = Release|Any CPU
+		{389A475C-C6A3-44BF-84A4-B1C45651E782}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

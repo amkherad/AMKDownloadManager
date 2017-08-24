@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,9 +52,13 @@
       <Project>{3EA4EFB2-8392-4D39-A10F-4F4BCA4618B3}</Project>
       <Name>AMKDownloadManager.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AMKDownloadManager\AMKDownloadManager.csproj">
-      <Project>{D2C946CC-8767-459C-BC0E-76035FE11AAD}</Project>
-      <Name>AMKDownloadManager</Name>
+    <ProjectReference Include="..\AMKDownloadManager.Defaults\AMKDownloadManager.Defaults.csproj">
+      <Project>{389A475C-C6A3-44BF-84A4-B1C45651E782}</Project>
+      <Name>AMKDownloadManager.Defaults</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AMKDownloadManager.HttpDownloader\AMKDownloadManager.HttpDownloader.csproj">
+      <Project>{ca897a0b-cc03-4dd1-9d0f-d6b9324cc2ad}</Project>
+      <Name>AMKDownloadManager.HttpDownloader</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

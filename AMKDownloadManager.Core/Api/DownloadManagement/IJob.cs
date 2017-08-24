@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AMKDownloadManager.Core.Api.Listeners;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
     public delegate void JobEventHandler(IJob job, EventArgs eventArgs);
     public delegate void JobProgressEventHandler(IJob job, int progress);
     public delegate void JobPriorityChangedEventHandler(IJob job, SchedulerPriority priority);
+    public delegate void JobStateChangedEventHandler(IJob job, JobState state);
 
+    public enum JobState
+    {
+        Stopped,
+        Paused,
+        Preparing,
+        GettingJobInfo,
+        Downloading,
+        Finished
+    }
+    
     /// <summary>
     /// Download job.
     /// </summary>
@@ -34,11 +46,16 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// </summary>
         event JobPriorityChangedEventHandler PriorityChanged;
 
+        event JobStateChangedEventHandler StateChanged;
+        
+        
+        JobState State { get; }
+        
 
-        JobInfo TriggerJobAndGetInfo();
-        Task<JobInfo> TriggerJobAndGetInfoAsync();
+        JobInfo TriggerJobAndGetInfo(IDownloadProgressListener downloadProgressListener);
+        Task<JobInfo> TriggerJobAndGetInfoAsync(IDownloadProgressListener downloadProgressListener);
 
-        IJobChunk GetJobChunk();
+        IJobChunk GetJobChunk(IDownloadProgressListener downloadProgressListener);
 
         void Clean();
         void Reset();

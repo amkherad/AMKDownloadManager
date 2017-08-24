@@ -1,9 +1,9 @@
 ﻿using System;
-using AMKDownloadManager.Core.Api.Threading;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using AMKDownloadManager.Core.Api.Threading;
 
-namespace AMKDownloadManager.Threading
+namespace AMKDownloadManager.Defaults.Threading
 {
     public class AbstractThread : IThread
     {

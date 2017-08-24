@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using AMKDownloadManager.Core.Api.Threading;
 using System.Threading;
+using AMKDownloadManager.Core.Api.Threading;
 
-namespace AMKDownloadManager.Threading
+namespace AMKDownloadManager.Defaults.Threading
 {
     public class AbstractThreadFactory : IThreadFactory
     {
@@ -24,14 +24,12 @@ namespace AMKDownloadManager.Threading
             return new AbstractThread(new Thread(new ParameterizedThreadStart(action)));
         }
 
-        public void WaitAll(IEnumerable<IThread> threads)
+        public void JoinAll(IEnumerable<IThread> threads)
         {
-            Thread
-        }
-
-        public void WhenAll(IEnumerable<IThread> threads)
-        {
-            throw new NotImplementedException();
+            foreach (var thread in threads)
+            {
+                thread.Join();
+            }
         }
 
         public int Order => 0;

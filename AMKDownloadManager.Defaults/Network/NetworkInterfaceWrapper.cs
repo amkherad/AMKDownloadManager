@@ -1,7 +1,7 @@
 ﻿using System.Net.NetworkInformation;
 using AMKDownloadManager.Core.Api.Network;
 
-namespace AMKDownloadManager.Network
+namespace AMKDownloadManager.Defaults.Network
 {
     public class NetworkInterfaceWrapper : INetworkInterface
     {

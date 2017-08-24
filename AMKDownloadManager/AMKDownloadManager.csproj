@@ -94,12 +94,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComponentImporter.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MainWindow.cs" />
-    <Compile Include="Network\DefaultHttpRequestBarrier.cs" />
-    <Compile Include="Network\NetworkInterfaceProvider.cs" />
-    <Compile Include="Network\NetworkInterfaceWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="gtk-gui\AMKDownloadManager.MainWindow.cs" />
@@ -107,15 +103,12 @@
     <Compile Include="gtk-gui\Dialogs.DownloadProgressDialog.cs" />
     <Compile Include="Dialogs\AddDownloadLinkDialog.cs" />
     <Compile Include="gtk-gui\Dialogs.AddDownloadLinkDialog.cs" />
-    <Compile Include="Threading\AbstractThread.cs" />
-    <Compile Include="Threading\AbstractThreadFactory.cs" />
     <Compile Include="Shell\ShellHost.cs" />
     <Compile Include="Shell\ShellCommands.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Dialogs\" />
-    <Folder Include="Threading\" />
     <Folder Include="Windows\" />
     <Folder Include="Shell\" />
     <Folder Include="Resources\" />
@@ -124,6 +117,14 @@
     <ProjectReference Include="..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj">
       <Project>{3EA4EFB2-8392-4D39-A10F-4F4BCA4618B3}</Project>
       <Name>AMKDownloadManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AMKDownloadManager.Defaults\AMKDownloadManager.Defaults.csproj">
+      <Project>{389A475C-C6A3-44BF-84A4-B1C45651E782}</Project>
+      <Name>AMKDownloadManager.Defaults</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AMKDownloadManager.HttpDownloader\AMKDownloadManager.HttpDownloader.csproj">
+      <Project>{ca897a0b-cc03-4dd1-9d0f-d6b9324cc2ad}</Project>
+      <Name>AMKDownloadManager.HttpDownloader</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,7 @@ namespace AMKDownloadManager.Core.Impl
 
         public string GetString(string fqn, string defaultValue = null)
         {
-            throw new NotImplementedException();
+            return defaultValue;
         }
 
         public void SetBool(string fqn, bool value)

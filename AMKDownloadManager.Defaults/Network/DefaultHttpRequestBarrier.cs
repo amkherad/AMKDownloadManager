@@ -1,71 +1,78 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
+using ir.amkdp.gear.core.Trace;
 
-namespace AMKDownloadManager.Network
+namespace AMKDownloadManager.Defaults.Network
 {
     public class DefaultHttpRequestBarrier : IHttpRequestBarrier
     {
         public IResponse SendRequest(IAppContext appContext, IRequest request)
         {
-            var task = SendRequestAsync(appContext, request);
-            task.RunSynchronously();
-            return task.Result;
-        }
-
-        public async Task<IResponse> SendRequestAsync(IAppContext appContext, IRequest request)
-        {
-            var listeners = appContext.GetFeatures<IBarrierListenerFeature>().ToList();
-            listeners.ForEach(l => l.BeforeSendRequest(appContext, this, request));
+            appContext.SignalFeatures<IBarrierListenerFeature>(
+                l => l.BeforeSendRequest(appContext, this, request));
 
             var webRequest = HttpHelpers.CreateHttpWebRequestFromRequest(request);
-            listeners.ForEach(l => l.WebRequestCreated(appContext, this, request, webRequest));
+            appContext.SignalFeatures<IBarrierListenerFeature>(
+                l => l.WebRequestCreated(appContext, this, request, webRequest));
 
-            using (var stream = await webRequest.GetRequestStreamAsync())
+            var requestBody = request.RequestBody;
+            var requestBodyWriter = request.RequestBodyWriter;
+            if (!request.IsGetRequest() && (requestBody != null || requestBodyWriter != null))
             {
-                var requestBody = request.RequestBody;
-                if (requestBody != null)
+                using (var stream = webRequest.GetRequestStream())
                 {
-                    stream.Write(requestBody, 0, requestBody.Length);
+                    if (requestBody != null)
+                    {
+                        stream.Write(requestBody, 0, requestBody.Length);
+                    }
+
+                    requestBodyWriter?.Invoke(stream);
+
+                    stream.Close();
                 }
-
-                request.RequestBodyWriter?.Invoke(stream);
-
-                stream.Close();
             }
 
-            listeners.ForEach(l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));
+            appContext.SignalFeatures<IBarrierListenerFeature>(
+                l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));
             try
             {
-                using (var webResponse = await webRequest.GetResponseAsync() as HttpWebResponse)
+                using (var webResponse = webRequest.GetResponse() as HttpWebResponse)
                 {
                     if (webResponse != null)
                     {
                         if (webRequest.HaveResponse)
                         {
-                            using (var stream = webResponse.GetResponseStream())
+                            var stream = webResponse.GetResponseStream();
                             {
-                                var response = HttpHelpers.CreateResponseFromHttpResponse(webResponse, stream);
+                                //webResponse.Close();
+                                //var data = (new BinaryReader(stream)).ReadBytes((int)stream.Length);
+                                //File.WriteAllBytes("out.bin", data);
                                 
-                                listeners.ForEach(l =>
-                                    l.WebResponseAvailable(appContext, this, request, webRequest,
-                                        response, webResponse, stream));
+                                var response = new HttpResponse();
+                                HttpHelpers.FillResponseFromHttpResponse(response, webResponse, stream);
+                                
+                                //appContext.SignalFeatures<IBarrierListenerFeature>(
+                                //    l => l.WebResponseAvailable(appContext, this, request, webRequest,
+                                //        response, webResponse, stream));
 
+                                //return response;
                                 return response;
                             }
                         }
                         else
                         {
-                            var response = HttpHelpers.CreateResponseFromHttpResponse(webResponse);
+                            var response = new HttpResponse();
+                            HttpHelpers.FillResponseFromHttpResponse(response, webResponse);
                             
-                            listeners.ForEach(l =>
-                                l.WebResponseAvailable(appContext, this, request, webRequest,
+                            appContext.SignalFeatures<IBarrierListenerFeature>(
+                                l => l.WebResponseAvailable(appContext, this, request, webRequest,
                                     response, webResponse, null));
                             
                             return response;
@@ -77,6 +84,7 @@ namespace AMKDownloadManager.Network
             }
             catch (WebException wex)
             {
+                Logger.Write(wex);
                 if (wex.Response != null)
                 {
                     using (var errorResponse = (HttpWebResponse) wex.Response)
@@ -94,6 +102,12 @@ namespace AMKDownloadManager.Network
                 }
                 throw;
             }
+        }
+
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+        public async Task<IResponse> SendRequestAsync(IAppContext appContext, IRequest request)
+        {
+            throw new NotImplementedException();
         }
 
 //        foreach (var ip in Dns.GetHostAddresses (Dns.GetHostName ())) 

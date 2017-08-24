@@ -51,5 +51,6 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         void ForceStop();
 
         void Join();
+        void Join(IJob job);
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
-using AMKDownloadManager.Core.Api;
-using AMKDownloadManager.Core.Api.Barriers;
 using ir.amkdp.gear.core.Collections;
 using ir.amkdp.gear.web.Http;
 
-namespace AMKDownloadManager.HttpDownloader.DownloadManagement
+namespace AMKDownloadManager.Core.Api.Barriers
 {
     public class HttpRequest : IRequest
     {
@@ -16,6 +14,11 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         protected HttpRequest(DownloadItem downloadItem)
         {
             DownloadItem = downloadItem;
+            
+            Headers = new HeaderCollection();
+            Cookies = new HeaderCookieCollection(Headers);
+            FormData = new NameObjectCollection();
+            QueryString = new NameStringCollection();
         }
 
 
@@ -46,6 +49,18 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                              KnownConfigs.DownloadManager.RequestMethod_DefaultValue);
             
             return req;
+        }
+    }
+
+    public static class RequestExtensions
+    {
+        public static bool IsGetRequest(this IRequest request)
+        {
+            return request.Method?.ToLower() == "get";
+        }
+        public static bool IsPostRequest(this IRequest request)
+        {
+            return request.Method?.ToLower() == "post";
         }
     }
 }
