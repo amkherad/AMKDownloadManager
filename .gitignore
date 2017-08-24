@@ -1,6 +1,7 @@
 .idea
 
 obj/
+[Oo]utput/
 output/
 packages/
 
