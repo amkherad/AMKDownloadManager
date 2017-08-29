@@ -4,6 +4,8 @@ obj/
 [Oo]utput/
 output/
 packages/
+output/Debug/
+output/Release/
 
 # User-specific files
 *.suo
