@@ -1,12 +1,14 @@
 ﻿using System;
-using AMKDownloadManager.Core.Api.DownloadManagement;
-using AMKDownloadManager.Core.Api.Threading;
 using System.Collections.Generic;
-using AMKDownloadManager.Core.Api;
-using ir.amkdp.gear.core.Utils;
 using System.Linq;
+using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Barriers;
+using AMKDownloadManager.Core.Api.DownloadManagement;
+using AMKDownloadManager.Core.Api.Listeners;
+using AMKDownloadManager.Core.Api.Threading;
+using ir.amkdp.gear.core.Utils;
 
-namespace AMKDownloadManager.Core.Impl
+namespace AMKDownloadManager.Defaults.DownloadManager
 {
     /// <summary>
     /// Default application download manager.
@@ -14,6 +16,7 @@ namespace AMKDownloadManager.Core.Impl
     public class DefaultDownloadManager : IDownloadManager
     {
         #region Events
+
         public event DownloadManagerEvent AllFinished;
         public event DownloadManagerEvent Started;
         public event DownloadManagerEvent Stopped;
@@ -21,12 +24,14 @@ namespace AMKDownloadManager.Core.Impl
         public event DownloadManagerCancellableEvent Stopping;
         public event DownloadManagerJobEvent DownloadStarted;
         public event DownloadManagerJobEvent DownloadFinished;
+
         #endregion
 
         public IAppContext AppContext { get; }
         public IConfigProvider Configuration { get; }
         public IThreadFactory ThreadFactory { get; }
-
+        public IDownloadErrorListener DownloadErrorListener { get; }
+        
         private volatile bool _downloadManagerState = false;
 
         private IScheduler _scheduler;
@@ -48,6 +53,7 @@ namespace AMKDownloadManager.Core.Impl
             AppContext = appContext;
             Configuration = appContext.GetFeature<IConfigProvider>();
             ThreadFactory = appContext.GetFeature<IThreadFactory>();
+            DownloadErrorListener = appContext.GetFeature<IDownloadErrorListener>();
 
             _scheduler = scheduler;
 
@@ -68,9 +74,15 @@ namespace AMKDownloadManager.Core.Impl
 
 
         public IDownloadManagerHandle Schedule(IJob job) => Schedule(job, null);
+
         public IDownloadManagerHandle Schedule(IJob job, Action<IJob> callback)
         {
-            var context = new DefaultDownloadManagerJobContext(this, AppContext, Configuration, job)
+            var context = new DefaultDownloadManagerJobContext(
+                this,
+                AppContext,
+                Configuration,
+                job,
+                DownloadErrorListener)
             {
                 FinishCallback = callback
             };
@@ -102,6 +114,7 @@ namespace AMKDownloadManager.Core.Impl
 
             OnStarted(EventArgs.Empty);
         }
+
         private void _scheduleCallback()
         {
             var config = Configuration;
@@ -109,9 +122,9 @@ namespace AMKDownloadManager.Core.Impl
             var loop = new LoopCountLimiter(10);
             while (_downloadManagerState)
             {
-                _maxSimultaneousJobs = config.GetInt(
-                    KnownConfigs.DownloadManager.MaxSimultaneousJobs,
-                    KnownConfigs.DownloadManager.MaxSimultaneousJobs_DefaultValue
+                _maxSimultaneousJobs = config.GetInt(this,
+                    KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
+                    KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs_DefaultValue
                 );
 
                 if (_pendingJobs.Any() &&
@@ -129,9 +142,23 @@ namespace AMKDownloadManager.Core.Impl
                 loop.Count();
             }
         }
-        private void _runJob(IJob job)
-        {
 
+        private void _setJobAsRunning(DefaultDownloadManagerJobContext jobContext)
+        {
+            lock (_jobs)
+            {
+                _pendingJobs.Remove(jobContext);
+                _runningJobs.Add(jobContext);
+            }
+        }
+
+        private void _setJobAsFree(DefaultDownloadManagerJobContext jobContext)
+        {
+            lock (_jobs)
+            {
+                _runningJobs.Remove(jobContext);
+                _pendingJobs.Add(jobContext);
+            }
         }
 
         public void Stop()
@@ -153,11 +180,43 @@ namespace AMKDownloadManager.Core.Impl
             _schedulerThread.Abort();
             _schedulerThread = null;
         }
+
+        public void Join()
+        {
+            foreach (var job in _runningJobs)
+            {
+                foreach (var thread in job.Threads)
+                {
+                    thread.Join();
+                }
+            }
+        }
+
+        public void Join(IJob job)
+        {
+            var threads = FindJob(job)?.Threads;
+            if (threads == null) throw new InvalidOperationException();
+
+            foreach (var thread in threads)
+            {
+                thread.Join();
+            }
+        }
+
+        protected DefaultDownloadManagerJobContext FindJob(IJob job)
+        {
+            return _jobs.FirstOrDefault(x => x.Job == job);
+        }
+
         #endregion
 
         #region IFeature implementation
 
         public int Order => 0;
+
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        {
+        }
 
         #endregion
 
@@ -167,6 +226,8 @@ namespace AMKDownloadManager.Core.Impl
 
             public IAppContext AppContext { get; }
             public IConfigProvider Configuration { get; }
+
+            public IDownloadErrorListener DownloadErrorListener { get; }
 
             public IJob Job { get; }
             public IThread DispatcherThread { get; private set; }
@@ -183,15 +244,17 @@ namespace AMKDownloadManager.Core.Impl
                 DefaultDownloadManager downloadManager,
                 IAppContext appContext,
                 IConfigProvider configProvider,
-                IJob job)
+                IJob job,
+                IDownloadErrorListener downloadErrorListener)
             {
                 DownloadManager = downloadManager;
 
                 AppContext = appContext;
                 Configuration = configProvider;
-
                 Job = job;
                 Threads = new List<IThread>();
+
+                DownloadErrorListener = downloadErrorListener;
             }
 
             #region IDownloadManagerHandle implementation
@@ -200,44 +263,120 @@ namespace AMKDownloadManager.Core.Impl
             {
                 DispatcherThread = DownloadManager.ThreadFactory.Create(_dispatcher);
 
+                DownloadManager._setJobAsRunning(this);
+                _downloadJobState = true;
+
                 DispatcherThread.Start();
             }
 
             private void _dispatcher()
             {
-                var jobInfo = Job.TriggerJobAndGetInfo();
+                JobInfo jobInfo = null;
 
-                if (jobInfo.SupportsConcurrency)
+                var retry = new RetryHelper(_maxFailureRetries);
+                while (!retry.IsDone())
                 {
-                    var loop = new LoopCountLimiter(5);
-                    while (_downloadJobState)
+                    try
                     {
-                        if (Threads.Count < _maxSimultaneousConnections)
+                        jobInfo = Job.TriggerJobAndGetInfo();
+                        retry.Done();
+                    }
+                    catch (Exception ex)
+                    {
+                        retry.Catch(ex);
+                        DownloadErrorListener.OnGetInfoError(
+                            AppContext,
+                            Job,
+                            DownloadManager,
+                            !retry.IsDone()
+                        );
+                    }
+                }
+
+                if (jobInfo == null)
+                {
+                    DownloadErrorListener.OnDeadError(
+                        AppContext,
+                        Job,
+                        DownloadManager
+                    );
+                    return;
+                }
+
+                if (jobInfo.IsFinished)
+                {
+                }
+                else
+                {
+                    if (jobInfo.SupportsConcurrency)
+                    {
+                        var loop = new LoopCountLimiter(5);
+                        while (_downloadJobState)
                         {
-                            var chunk = Job.GetJobChunk();
-                            var thread = DownloadManager.ThreadFactory.Create(_processChunk);
-                            thread.Start(chunk);
-                        }
-                        else
-                        {
-                            loop.Count();
+                            if (Threads.Count < _maxSimultaneousConnections)
+                            {
+                                var dispathRetry = new RetryHelper(_maxFailureRetries);
+                                while (!dispathRetry.IsDone())
+                                {
+                                    IJobChunk chunk = null;
+                                    try
+                                    {
+                                        chunk = Job.GetJobChunk(jobInfo);
+                                        dispathRetry.Done();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        dispathRetry.Catch(ex);
+                                    }
+
+                                    if (chunk == null)
+                                    {
+                                        dispathRetry.Fail();
+                                    }
+                                    else
+                                    {
+                                        var thread = DownloadManager.ThreadFactory.Create(_processChunk);
+                                        thread.Start(chunk);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                loop.Count();
+                            }
                         }
                     }
                 }
             }
+
             private void _processChunk(object state)
             {
                 var chunk = state as IJobChunk;
+                if (chunk == null) return;
 
-                var tries = 0;
+                var retry = new RetryHelper(_maxFailureRetries);
                 JobChunkState result;
                 do
                 {
-                    result = chunk.Cycle();
-                }
-                while(result == JobChunkState.RequestMoreCycle ||
-                    (result == JobChunkState.ErrorCanTry && (tries < _maxFailureRetries)));
-                
+                    try
+                    {
+                        result = chunk.Cycle();
+                        retry.Done();
+                    }
+                    catch (Exception ex)
+                    {
+                        retry.Catch(ex);
+                        result = JobChunkState.ErrorCanTry;
+                        DownloadErrorListener.OnChunkError(
+                            AppContext,
+                            Job,
+                            chunk,
+                            DownloadManager,
+                            !retry.IsDone()
+                        );
+                    }
+                } while (result == JobChunkState.RequestMoreCycle ||
+                         result == JobChunkState.ErrorCanTry && !retry.IsDone());
             }
 
             public void Pause()
@@ -260,6 +399,7 @@ namespace AMKDownloadManager.Core.Impl
             {
                 throw new NotImplementedException();
             }
+
             #endregion
         }
     }

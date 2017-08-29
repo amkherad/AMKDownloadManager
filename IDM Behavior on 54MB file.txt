@@ -1,0 +1,103 @@
+GET /VBoxGuestAdditions.iso HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko
+Host: 192.168.1.2:8080
+Accept: */*
+Accept-Encoding: identity
+Accept-Language: en-US
+Accept-Charset: *
+Referer: http://192.168.1.2:8080/
+-------------------
+HTTP/1.1 200 OK
+Date: Thu, 24 Aug 2017 08:12:43 GMT
+Server: Apache/2.4.26 (Unix) OpenSSL/1.0.2l PHP/7.1.7 mod_perl/2.0.8-dev Perl/v5.16.3
+Last-Modified: Sat, 12 Aug 2017 12:24:11 GMT
+ETag: "38b1000-5568d81cebb42"
+Accept-Ranges: bytes
+Content-Length: 13814080
+================================
+GET /VBoxGuestAdditions.iso HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko
+Host: 192.168.1.2:8080
+Accept: */*
+Accept-Encoding: identity
+Accept-Language: en-US
+Accept-Charset: *
+Range: bytes=236040-59445247
+Referer: http://192.168.1.2:8080/
+-------------------
+HTTP/1.1 206 Partial Content
+Date: Thu, 24 Aug 2017 08:12:44 GMT
+Server: Apache/2.4.26 (Unix) OpenSSL/1.0.2l PHP/7.1.7 mod_perl/2.0.8-dev Perl/v5.16.3
+Last-Modified: Sat, 12 Aug 2017 12:24:11 GMT
+ETag: "38b1000-5568d81cebb42"
+Accept-Ranges: bytes
+Content-Range: bytes 236040-59445247/59445248
+Content-Length: 34763280
+
+[BLOB]
+================================
+GET /VBoxGuestAdditions.iso HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko
+Host: 192.168.1.2:8080
+Accept: */*
+Accept-Encoding: identity
+Accept-Language: en-US
+Accept-Charset: *
+Range: bytes=29963375-59445247
+Referer: http://192.168.1.2:8080/
+-------------------
+HTTP/1.1 206 Partial Content
+Date: Thu, 24 Aug 2017 08:12:46 GMT
+Server: Apache/2.4.26 (Unix) OpenSSL/1.0.2l PHP/7.1.7 mod_perl/2.0.8-dev Perl/v5.16.3
+Last-Modified: Sat, 12 Aug 2017 12:24:11 GMT
+ETag: "38b1000-5568d81cebb42"
+Accept-Ranges: bytes
+Content-Range: bytes 29963375-59445247/59445248
+Content-Length: 12215098
+
+[BLOB]
+================================
+GET /VBoxGuestAdditions.iso HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko
+Host: 192.168.1.2:8080
+Accept: */*
+Accept-Encoding: identity
+Accept-Language: en-US
+Accept-Charset: *
+Range: bytes=44704311-59445247
+Referer: http://192.168.1.2:8080/
+-------------------
+HTTP/1.1 206 Partial Content
+Date: Thu, 24 Aug 2017 08:12:46 GMT
+Server: Apache/2.4.26 (Unix) OpenSSL/1.0.2l PHP/7.1.7 mod_perl/2.0.8-dev Perl/v5.16.3
+Last-Modified: Sat, 12 Aug 2017 12:24:11 GMT
+ETag: "38b1000-5568d81cebb42"
+Accept-Ranges: bytes
+Content-Range: bytes 44704311-59445247/59445248
+Content-Length: 11597398
+
+[BLOB]
+================================
+GET /VBoxGuestAdditions.iso HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko
+Host: 192.168.1.2:8080
+Accept: */*
+Accept-Encoding: identity
+Accept-Language: en-US
+Accept-Charset: *
+Range: bytes=29963375-59445247
+Referer: http://192.168.1.2:8080/
+-------------------
+HTTP/1.1 206 Partial Content
+Date: Thu, 24 Aug 2017 08:12:46 GMT
+Server: Apache/2.4.26 (Unix) OpenSSL/1.0.2l PHP/7.1.7 mod_perl/2.0.8-dev Perl/v5.16.3
+Last-Modified: Sat, 12 Aug 2017 12:24:11 GMT
+ETag: "38b1000-5568d81cebb42"
+Accept-Ranges: bytes
+Content-Range: bytes 29963375-59445247/59445248
+Content-Length: 4991558
+
+[BLOB]
+================================
+
+

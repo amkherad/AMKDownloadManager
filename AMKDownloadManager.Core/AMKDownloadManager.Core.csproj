@@ -37,17 +37,21 @@
     <Compile Include="Api\Barriers\IRequestBarrier.cs" />
     <Compile Include="Api\Barriers\IResponse.cs" />
     <Compile Include="Api\Barriers\ITcpBarrier.cs" />
+    <Compile Include="Api\DownloadManagement\ChunkDescriptor.cs" />
+    <Compile Include="Api\DownloadManagement\SegmentationContext.cs" />
+    <Compile Include="Api\FileSystem\IDownloadPathProvider.cs" />
+    <Compile Include="Api\FileSystem\IFileManager.cs" />
+    <Compile Include="Api\FileSystem\IFileProvider.cs" />
+    <Compile Include="Api\HttpHelpers.cs" />
     <Compile Include="Api\Listeners\IBarrierListenerFeature.cs" />
     <Compile Include="Api\Listeners\IDownloadBindListener.cs" />
+    <Compile Include="Api\Listeners\IDownloadErrorListener.cs" />
     <Compile Include="Api\Listeners\IDownloadProgressListener.cs" />
     <Compile Include="Api\Listeners\IListenerFeature.cs" />
     <Compile Include="Api\Listeners\IProtocolProviderListener.cs" />
-    <Compile Include="Api\Network\HttpHelpers.cs" />
     <Compile Include="Api\Network\INetworkInterface.cs" />
     <Compile Include="Api\Network\INetworkInterfaceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileSystem\IFileChunk.cs" />
-    <Compile Include="FileSystem\IFileProvider.cs" />
     <Compile Include="ApplicationHost.cs" />
     <Compile Include="Extensions\IComponent.cs" />
     <Compile Include="Api\IFeature.cs" />
@@ -64,18 +68,14 @@
     <Compile Include="Api\DownloadManagement\IJob.cs" />
     <Compile Include="Api\DownloadManagement\JobParameters.cs" />
     <Compile Include="Api\DownloadManagement\IJobChunk.cs" />
-    <Compile Include="Impl\DefaultDownloadManager.cs" />
     <Compile Include="Api\DownloadManagement\IDownloadManager.cs" />
     <Compile Include="Api\IConfigProvider.cs" />
-    <Compile Include="Impl\DefaultConfigProvider.cs" />
     <Compile Include="Api\DownloadManagement\IDownloadManagerHandle.cs" />
     <Compile Include="Api\Network\INetworkMonitor.cs" />
-    <Compile Include="Impl\DefaultNetworkMonitor.cs" />
     <Compile Include="Api\Threading\IThread.cs" />
     <Compile Include="Api\KnownConfigs.cs" />
     <Compile Include="Api\DownloadManagement\IScheduler.cs" />
     <Compile Include="Api\DownloadManagement\JobChunkDescriptor.cs" />
-    <Compile Include="Impl\DefaultJobScheduler.cs" />
     <Compile Include="Api\Threading\IThreadFactory.cs" />
     <Compile Include="Api\DownloadManagement\IJobDivider.cs" />
   </ItemGroup>
@@ -83,26 +83,36 @@
   <ItemGroup>
     <Folder Include="Api\Binders\Exceptions" />
     <Folder Include="Formatters\" />
-    <Folder Include="FileSystem\" />
     <Folder Include="Extensions\" />
     <Folder Include="Api\" />
     <Folder Include="Api\Modifiers\" />
     <Folder Include="Api\Barriers\" />
     <Folder Include="Api\Binders\" />
     <Folder Include="Api\DownloadManagement\" />
-    <Folder Include="Impl\" />
     <Folder Include="Api\Network\" />
     <Folder Include="Api\Threading\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Gear.Architecture">
-      <HintPath>..\..\..\bin\gear.net\Gear.Architecture.dll</HintPath>
+    <Reference Include="Gear.AppLayerCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.AppLayerCore.dll</HintPath>
     </Reference>
-    <Reference Include="Gear.Core">
-      <HintPath>..\..\..\bin\gear.net\Gear.Core.dll</HintPath>
+    <Reference Include="Gear.Architecture, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Architecture.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core.TraceTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.TraceTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.DataCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.DataCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.DesktopCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.DesktopCore.dll</HintPath>
     </Reference>
     <Reference Include="Gear.WebCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\bin\gear.net\Gear.WebCore.dll</HintPath>
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.WebCore.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

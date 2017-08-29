@@ -6,7 +6,7 @@ namespace AMKDownloadManager.Core.Api.Barriers
 {
     public class HttpResponse : IResponse
     {
-        public HttpStatusCode StatusCode { get; }
+        public HttpStatusCode StatusCode { get; set; }
         public HeaderCollection Headers { get; }
         public HeaderCookieCollection Cookies { get; }
         public Stream ResponseStream { get; set; }

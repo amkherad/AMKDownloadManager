@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using AMKDownloadManager.Core.Api.Barriers;
 
-namespace AMKDownloadManager.Core.Api.Network
+namespace AMKDownloadManager.Core.Api
 {
     public static class HttpHelpers
     {
@@ -34,16 +34,17 @@ namespace AMKDownloadManager.Core.Api.Network
 
         public static void FillResponseFromHttpResponse(HttpResponse res, HttpWebResponse response, Stream stream = null)
         {
+            res.StatusCode = response.StatusCode;
+            
             if (stream != null)
             {
                 res.ResponseStream = stream;
             }
             
-            foreach (var header in response.Headers)
+            foreach (string header in response.Headers)
             {
-                res.Headers.Add("", "");                
+                res.Headers.Add(header, response.Headers[header]);                
             }
-            
         }
     }
 }

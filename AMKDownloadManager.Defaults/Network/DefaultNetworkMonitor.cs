@@ -1,7 +1,8 @@
 ﻿using System;
+using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Network;
 
-namespace AMKDownloadManager.Core.Impl
+namespace AMKDownloadManager.Defaults.Network
 {
     public class DefaultNetworkMonitor : INetworkMonitor
     {
@@ -10,7 +11,6 @@ namespace AMKDownloadManager.Core.Impl
             
         }
 
-        
         public event EventHandler NetworkAvailabilityChanged;
         public bool CheckNetworkAvailability()
         {
@@ -28,6 +28,11 @@ namespace AMKDownloadManager.Core.Impl
             {
                 throw new NotImplementedException();
             }
+        }
+
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        {
+            
         }
     }
 }

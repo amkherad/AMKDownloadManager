@@ -8,7 +8,7 @@ using AMKDownloadManager.Core.Api.DownloadManagement;
 
 namespace Test.Console.Tests
 {
-    [TestClass]
+    [TestClass(Order = 10)]
     public class SimpleHttpDownloadTest
     {
         public SimpleHttpDownloadTest()
@@ -21,7 +21,7 @@ namespace Test.Console.Tests
             Trace.WriteLine("SendSimpleRequestToGoogle => Testing");
 
             //var di = DownloadBuilder.FromUri(new Uri("http://localhost:8080/VBoxGuestAdditions.iso")); //index.php
-            var di = DownloadBuilder.FromUri(new Uri("http://cdn.p30download.com/?b=p30dl-console&f=Tom.Clancys.Ghost.Recon.Wildlands.CUSA02902.USA.PSN.PS4_p30download.com.part01.rar")); //index.php
+            var di = DownloadBuilder.FromUri(new Uri("http://localhost:8081/downloads/VBoxGuestAdditions.iso")); //index.php
 
             var app = ApplicationHost.Instance.Pool;
             var downloadManager = app.GetFeature<IDownloadManager>();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Network;
 
 namespace AMKDownloadManager.Defaults.Network
@@ -16,5 +17,9 @@ namespace AMKDownloadManager.Defaults.Network
         }
 
         public int Order => 0;
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        {
+            
+        }
     }
 }

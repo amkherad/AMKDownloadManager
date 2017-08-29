@@ -76,6 +76,10 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
         }
 
         public int Order => 0;
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        {
+            
+        }
 
         #endregion
     }

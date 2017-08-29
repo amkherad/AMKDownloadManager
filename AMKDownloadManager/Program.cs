@@ -17,6 +17,7 @@ namespace AMKDownloadManager
             //AppHelpers.LoadComponents(pool);
             var c = new Component();
             c.Initialize(pool);
+            AppHelpers.ConfigureFeatures(pool);
             
             if (args.Any(x => ShellCommands.ShellActivatorCommand.Contains(x.ToLower())))
             {

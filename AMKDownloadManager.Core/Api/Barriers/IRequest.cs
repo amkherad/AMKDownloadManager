@@ -6,7 +6,7 @@ using ir.amkdp.gear.web.Http;
 namespace AMKDownloadManager.Core.Api.Barriers
 {
     /// <summary>
-    /// I request.
+    /// Request.
     /// </summary>
 	public interface IRequest
 	{
@@ -17,7 +17,7 @@ namespace AMKDownloadManager.Core.Api.Barriers
         NameObjectCollection FormData { get; }
         NameStringCollection QueryString { get; }
         byte[] RequestBody { get; set; }
-		Action<Stream> RequestBodyWriter { get; set; } 
+		Action<Stream> RequestBodyWriter { get; set; }
 		string Method { get; set; }
 	}
 }

@@ -45,8 +45,8 @@ namespace AMKDownloadManager.Core.Api.Barriers
             req.Headers.ContentType = downloadItem.Properties[HeaderCollection.ContentTypeHeaderName] as string;
             req.Method = downloadItem.Properties[DownloadItem.KnownProperties.Method] as string ??
                          configProvider.GetString(
-                             KnownConfigs.DownloadManager.RequestMethod,
-                             KnownConfigs.DownloadManager.RequestMethod_DefaultValue);
+                             KnownConfigs.DownloadManager.Download.RequestMethod,
+                             KnownConfigs.DownloadManager.Download.RequestMethod_DefaultValue);
             
             return req;
         }

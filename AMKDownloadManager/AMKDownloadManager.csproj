@@ -31,6 +31,21 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gear.AppLayerCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.AppLayerCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Architecture, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Architecture.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core.TraceTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.TraceTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.DataCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.DataCore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
@@ -59,12 +74,6 @@
     <Reference Include="Mono.Posix" />
     <Reference Include="libstetic">
       <HintPath>..\..\..\..\..\..\usr\lib\monodevelop\AddIns\MonoDevelop.GtkCore\libstetic.dll</HintPath>
-    </Reference>
-    <Reference Include="Gear.Architecture">
-      <HintPath>..\..\..\bin\gear.net\Gear.Architecture.dll</HintPath>
-    </Reference>
-    <Reference Include="Gear.Core">
-      <HintPath>..\..\..\bin\gear.net\Gear.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>

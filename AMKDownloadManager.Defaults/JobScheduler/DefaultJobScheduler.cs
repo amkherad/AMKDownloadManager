@@ -1,10 +1,10 @@
 ﻿using System;
-using AMKDownloadManager.Core.Api.DownloadManagement;
 using System.Collections.Generic;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.DownloadManagement;
 
-namespace AMKDownloadManager.Core.Impl
+namespace AMKDownloadManager.Defaults.JobScheduler
 {
     //TODO: Implement priority later.
     public class DefaultJobScheduler : IScheduler
@@ -48,7 +48,7 @@ namespace AMKDownloadManager.Core.Impl
 
         public IJob SelectJob(IDownloadManager downloadManager, IEnumerable<IJob> freeJobs, IEnumerable<IJob> runningJobs)
         {
-            throw new NotImplementedException();
+            return freeJobs.FirstOrDefault();
         }
 
         #endregion
@@ -201,5 +201,9 @@ namespace AMKDownloadManager.Core.Impl
         #endregion
         
         public int Order => 0;
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        {
+            
+        }
     }
 }

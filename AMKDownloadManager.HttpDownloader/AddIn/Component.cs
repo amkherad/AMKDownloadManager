@@ -40,15 +40,15 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
         {
             var config = app.GetFeature<IConfigProvider>();
 
-            config.InstallInt(
+            config.InstallInt(this,
                 ComponentGUID,
-                KnownConfigs.DownloadManager.MaxSimultaneousConnections,
-                KnownConfigs.DownloadManager.MaxSimultaneousConnections_DefaultValue
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnections,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnections_DefaultValue
             );
-            config.InstallInt(
+            config.InstallInt(this,
                 ComponentGUID,
-                KnownConfigs.DownloadManager.MaxSimultaneousJobs,
-                KnownConfigs.DownloadManager.MaxSimultaneousJobs_DefaultValue
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs_DefaultValue
             );
         }
 
@@ -63,7 +63,7 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
             {
                 return;
             }
-            Logger.Write("HttpProtocolProvider.Initialize");
+            Logger.WriteLine("HttpProtocolProvider.Initialize");
             app.AddFeature<IProtocolProvider>(new HttpProtocolProvider());
         }
 

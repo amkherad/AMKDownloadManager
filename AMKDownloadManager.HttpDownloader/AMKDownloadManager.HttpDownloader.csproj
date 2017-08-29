@@ -52,14 +52,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Gear.AppLayerCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.AppLayerCore.dll</HintPath>
+    </Reference>
     <Reference Include="Gear.Architecture, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\bin\gear.net\Gear.Architecture.dll</HintPath>
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Architecture.dll</HintPath>
     </Reference>
     <Reference Include="Gear.Core, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\bin\gear.net\Gear.Core.dll</HintPath>
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core.TraceTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.TraceTools.dll</HintPath>
     </Reference>
     <Reference Include="Gear.WebCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\bin\gear.net\Gear.WebCore.dll</HintPath>
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.WebCore.dll</HintPath>
     </Reference>
     <Reference Include="System.Composition.AttributedModel">
       <HintPath>..\packages\System.Composition.AttributedModel.1.0.31\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>

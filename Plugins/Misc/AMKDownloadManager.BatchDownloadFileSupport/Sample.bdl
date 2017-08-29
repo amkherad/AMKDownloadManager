@@ -1,0 +1,27 @@
+{
+    "Protocol": //Optional
+    {
+        
+    },
+    "Info": //Optional
+    {
+        "Source": "Example.Com",
+        "Copyright": "Example(TM)",
+        "Email": "info@example.com",
+    },
+    "DownloadManager": //Optional
+    {
+        "Authorization": "Basic",
+        "Username": "OPTIONAL_USER",
+        "Password": "OPTIONAL_PASS",
+        
+    },
+    "DownloadList":
+    [
+        {
+            "Uri": "http://dl.example.com/file1",
+            "Description": "Test",
+            
+        }
+    ]
+}

@@ -13,7 +13,12 @@ namespace AMKDownloadManager.Defaults.Network
 {
     public class DefaultHttpRequestBarrier : IHttpRequestBarrier
     {
-        public IResponse SendRequest(IAppContext appContext, IRequest request)
+        [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
+        public IResponse SendRequest(
+            IAppContext appContext,
+            IRequest request,
+            IDownloadProgressListener downloadProgressListener,
+            bool unpackStream)
         {
             appContext.SignalFeatures<IBarrierListenerFeature>(
                 l => l.BeforeSendRequest(appContext, this, request));
@@ -104,8 +109,11 @@ namespace AMKDownloadManager.Defaults.Network
             }
         }
 
-        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
-        public async Task<IResponse> SendRequestAsync(IAppContext appContext, IRequest request)
+        public async Task<IResponse> SendRequestAsync(
+            IAppContext appContext,
+            IRequest request,
+            IDownloadProgressListener downloadProgressListener,
+            bool unpackStream)
         {
             throw new NotImplementedException();
         }
@@ -122,5 +130,10 @@ namespace AMKDownloadManager.Defaults.Network
 //            response.Close ();
 //        }
         public int Order => 0;
+
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        {
+            
+        }
     }
 }

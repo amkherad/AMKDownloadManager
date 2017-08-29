@@ -1,9 +1,10 @@
-﻿using System;
-
-namespace AMKDownloadManager.Core.Api.DownloadManagement
+﻿namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
-    public interface IJobDivider
+    public interface IJobDivider : IFeature
     {
-        
+        ChunkDescriptor GetChunk(
+            IAppContext appContext,
+            IJob job, 
+            SegmentationContext segmentationContext);
     }
 }

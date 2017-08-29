@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Threading;
 
 namespace AMKDownloadManager.Defaults.Threading
@@ -33,6 +34,10 @@ namespace AMKDownloadManager.Defaults.Threading
         }
 
         public int Order => 0;
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        {
+            
+        }
 
         #endregion
     }

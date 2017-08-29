@@ -22,25 +22,35 @@ namespace Test.Console
                 for (var i = 0; i < f; i++) System.Console.WriteLine();
             }));
 
-            var app = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
-            AppHelpers.InjectTopLayerFeatures(app);
+            var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
+            AppHelpers.InjectTopLayerFeatures(pool);
             //AppHelpers.LoadComponents(app);
             var component = new Component();
-            component.Initialize(app);
+            component.Initialize(pool);
+            AppHelpers.ConfigureFeatures(pool);
 
-            var classes = Assembly.GetExecutingAssembly().DefinedTypes
-                .Where(x => x.IsClass &&
-                    x.GetCustomAttributes().Any(c => c is TestClassAttribute));
-            
-            foreach (var cls in classes)
+            var instances = Assembly.GetExecutingAssembly().DefinedTypes
+                .Select(x =>
+                    new
+                    {
+                        Class = x,
+                        CustomAttributes = x.GetCustomAttributes().OfType<TestClassAttribute>(),
+                    })
+                .Where(x => x.CustomAttributes.Any())
+                .OrderBy(x => x.CustomAttributes.First().Order)
+                .Select(x => Activator.CreateInstance(x.Class));
+
+            Trace.WriteLine("");
+            foreach (var instance in instances)
             {
-                var instance = Activator.CreateInstance(cls);
+                var cls = instance.GetType();
                 var methods = cls.GetMethods().Where(x => x.GetCustomAttributes().Any(c => c is TestMethodAttribute));
 
                 var sw = new Stopwatch();
 
                 foreach (var method in methods)
                 {
+                    Trace.WriteLine($"[TestMethod: {method.Name}()]");
                     sw.Start();
                     try
                     {
@@ -52,7 +62,10 @@ namespace Test.Console
                     }
                     sw.Stop();
 
-                    Trace.WriteLine($"Method {method.Name} of class {cls.Name} took {sw.ElapsedMilliseconds}ms ({sw.ElapsedTicks} ticks)");
+                    Trace.WriteLine(
+                        "----------------------------" + Environment.NewLine +
+                        $"Method {method.Name} of class {cls.Name} took {sw.ElapsedMilliseconds}ms ({sw.ElapsedTicks} ticks)" + Environment.NewLine +
+                        "================================================================================================================");
                 }
             }
 
