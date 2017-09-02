@@ -41,6 +41,13 @@ namespace AMKDownloadManager.Core.Api.Barriers
         {
             Properties = new PropertyBag();
         }
+        public DownloadItem(Uri uri)
+        {
+            Properties = new PropertyBag();
+
+            Uri = uri;
+            RedirectionStack.Push(uri);
+        }
 
         /// <summary>
         /// Raises the protocol selected event.
@@ -73,6 +80,30 @@ namespace AMKDownloadManager.Core.Api.Barriers
                 Properties[KnownProperties.Uri] = value;
                 OnPropertyChanged(KnownProperties.Uri);
             }
+        }
+        
+        /// <summary>
+        /// Gets or sets the URI of the dowonload resource.
+        /// </summary>
+        /// <value>The URI.</value>
+        public Stack<Uri> RedirectionStack
+        {
+            get
+            {
+                var stack = Properties[KnownProperties.RedirectionStack] as Stack<Uri>;
+                if (stack == null)
+                {
+                    stack = new Stack<Uri>();
+                    Properties[KnownProperties.RedirectionStack] = stack;
+                }
+                return stack;
+            }
+        }
+
+        public void Redirect(Uri uri)
+        {
+            Uri = uri;
+            RedirectionStack.Push(uri);
         }
 
         /// <summary>
@@ -114,7 +145,9 @@ namespace AMKDownloadManager.Core.Api.Barriers
         /// </summary>
         public class KnownProperties
         {
+            public const string OriginalUri = "OriginalUri";
             public const string Uri = "Uri";
+            public const string RedirectionStack = "RedirectionStack";
             public const string Method = "Method";
             public const string Mirrors = "Mirrors";
             public const string LocalFileName = "LocalFileName";

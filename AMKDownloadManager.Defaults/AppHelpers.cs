@@ -3,9 +3,11 @@ using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.DownloadManagement;
+using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Impl;
 using AMKDownloadManager.Defaults.DownloadManager;
+using AMKDownloadManager.Defaults.FileSystem;
 using AMKDownloadManager.Defaults.JobScheduler;
 using AMKDownloadManager.Defaults.Network;
 using AMKDownloadManager.Defaults.Segmentation;
@@ -39,6 +41,8 @@ namespace AMKDownloadManager.Defaults
             app.AddFeature<IDownloadManager>(new DefaultDownloadManager(app, scheduler));
 
             app.AddFeature<IJobDivider>(new DefaultSegmentProvider());
+            app.AddFeature<IFileProvider>(new DefaultFileProvider());
+            app.AddFeature<IDownloadPathProvider>(new DefaultDownloadPathProvider());
         }
 
         public static void InjectTopLayerFeatures(IAppContext appContext)

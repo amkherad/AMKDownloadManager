@@ -10,9 +10,9 @@ using ir.amkdp.gear.core.Trace;
 namespace AMKDownloadManager.HttpDownloader.AddIn
 {
     [Export(typeof(IComponent))]
-    public class Component : IComponent
+    public class HttpDownloaderComponent : IComponent
     {
-        public const string ComponentGUID = "fa443c67-0faa-4555-8347-55068ae5993f";
+        public const string ComponentGuid = "fa443c67-0faa-4555-8347-55068ae5993f";
 
         private static bool _isLoaded = false;
         
@@ -26,7 +26,7 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
         {
             get
             {
-                var assembly = typeof(Component).GetTypeInfo().Assembly;
+                var assembly = typeof(HttpDownloaderComponent).GetTypeInfo().Assembly;
                 var assemblyName = new AssemblyName(assembly.FullName);
                 return assemblyName.Version;
             }
@@ -41,14 +41,14 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
             var config = app.GetFeature<IConfigProvider>();
 
             config.InstallInt(this,
-                ComponentGUID,
+                ComponentGuid,
                 KnownConfigs.DownloadManager.Download.MaxSimultaneousConnections,
-                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnections_DefaultValue
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnectionsDefaultValue
             );
             config.InstallInt(this,
-                ComponentGUID,
+                ComponentGuid,
                 KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
-                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs_DefaultValue
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
             );
         }
 

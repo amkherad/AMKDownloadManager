@@ -7,16 +7,18 @@
       <sourceFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Core.UIServices" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Defaults" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.HttpDownloader" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.NUnit" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Net" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Plugins/AMKDownloadManager.UIServices.Cli" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Plugins/AMKDownloadManager.UIServices.Gui.GdkSharp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Plugins/Misc/AMKDownloadManager.BatchDownloadFileSupport" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../Test.Console" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Core.UIServices/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Core/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Defaults/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Defaults/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.HttpDownloader/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.NUnit/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.NUnit/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Net/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager.Net/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../AMKDownloadManager/obj" />
@@ -26,7 +28,6 @@
       <excludeFolder url="file://$MODULE_DIR$/../../Plugins/AMKDownloadManager.UIServices.Gui.GdkSharp/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../Plugins/Misc/AMKDownloadManager.BatchDownloadFileSupport/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../Plugins/Misc/AMKDownloadManager.BatchDownloadFileSupport/obj" />
-      <excludeFolder url="file://$MODULE_DIR$/../../Test.Console/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../output/Debug" />
       <excludeFolder url="file://$MODULE_DIR$/../../output/Debug/Plugins" />
       <excludeFolder url="file://$MODULE_DIR$/../../packages" />

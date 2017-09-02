@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using ir.amkdp.gear.arch.Trace.Annotations;
-using ir.amkdp.gear.data.Models;
+using NUnit.Framework;
 
-namespace Test.Console.Tests
+namespace AMKDownloadManager.NUnit.Categories.Segmentation
 {
-    //[TestClass(Order = 1)]
+    [TestFixture]
     public class SegmentationContextTest
     {
-        //[TestMethod]
+        [Test]
         public void Test1()
         {
             var sc = new SegmentationContext(1000);
@@ -41,7 +41,7 @@ namespace Test.Console.Tests
             }
         }
         
-        //[TestMethod]
+        [Test]
         public void Test2()
         {
             var sc = new SegmentationContext(1000);
@@ -64,7 +64,7 @@ namespace Test.Console.Tests
             }
         }
         
-        //[TestMethod]
+        [Test]
         public void Test3()
         {
             var sc = new SegmentationContext(1000);
@@ -87,7 +87,7 @@ namespace Test.Console.Tests
             }
         }
         
-        //[TestMethod]
+        [Test]
         public void Test4()
         {
             var sc = new SegmentationContext(1000);
@@ -100,7 +100,7 @@ namespace Test.Console.Tests
             }
         }
         
-        //[TestMethod]
+        [Test]
         public void Test5()
         {
             var sc = new SegmentationContext(1000);
@@ -118,7 +118,7 @@ namespace Test.Console.Tests
             }
         }
         
-        //[TestMethod]
+        [Test]
         public void Test6()
         {
             var sc = new SegmentationContext(1000);
@@ -136,7 +136,7 @@ namespace Test.Console.Tests
             }
         }
         
-        [TestMethod]
+        [Test]
         public void TestClean()
         {
             var sc = new SegmentationContext(1000);

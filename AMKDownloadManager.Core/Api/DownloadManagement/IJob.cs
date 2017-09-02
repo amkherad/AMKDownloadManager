@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.Listeners;
+using ir.amkdp.gear.core.Automation;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
@@ -86,19 +87,12 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// </summary>
         /// <returns></returns>
         IJobChunk GetJobChunk(JobInfo jobInfo/*IDownloadProgressListener downloadProgressListener*/);
-
-        /// <summary>
-        /// Binds a service to this job. Primarily to bind an IFileManager to this job.
-        /// </summary>
-        /// <param name="service"></param>
-        /// <typeparam name="T"></typeparam>
-        void BindService<T>(T service);
         
         void Clean();
         void Reset();
     }
 
-    public class JobInfo 
+    public class JobInfo : IDisposable 
     {
         /// <summary>
         /// Gets the size of the download if available.
@@ -106,6 +100,13 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// <value>The size of the download.</value>
         public long? DownloadSize { get; }
 
+        /// <summary>
+        /// Gets the size of the first request content if available.
+        /// </summary>
+        public long? FirstHttpPacketSize { get; }
+        
+        public Action TriggerJobAndGetInfoLateAction { get; } 
+        
         /// <summary>
         /// Gets a value indicating whether this <see cref="AMKDownloadManager.Core.Api.DownloadManagement.IJob"/>
         /// supports concurrency.
@@ -118,22 +119,42 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// </summary>
         public IResponse Response { get; }
 
+        public IDisposer Disposer { get; }
+        
         /// <summary>
         /// Gets a value indicating whether this job is finished. typically becomes true when job does not support concurrency. (resume capability)
         /// </summary>
-        public bool IsFinished { get; set; }
+        //public bool IsFinished { get; set; }
 
         /// <summary>
         /// JobInfo constructor
         /// </summary>
         /// <param name="downloadSize">Size of download resource, (if available)</param>
+        /// <param name="firstHttpPacketSize">Size of first request's response content</param>
         /// <param name="supportsConcurrency">Determines download resource supports concurrency (resume capability)</param>
         /// <param name="response">IResponse if available</param>
-        public JobInfo(long? downloadSize, bool supportsConcurrency, IResponse response)
+        ///// <param name="isFinished">Determines if download is finished or not</param>
+        public JobInfo(
+            long? downloadSize,
+            long? firstHttpPacketSize,
+            bool supportsConcurrency,
+            IResponse response,
+            //bool isFinished,
+            Action triggerJobAndGetInfoLateAction)
         {
+            Disposer = new Disposer();
+            
             DownloadSize = downloadSize;
+            FirstHttpPacketSize = firstHttpPacketSize;
             SupportsConcurrency = supportsConcurrency;
             Response = response;
+            //IsFinished = isFinished;
+            TriggerJobAndGetInfoLateAction = triggerJobAndGetInfoLateAction;
+        }
+
+        public void Dispose()
+        {
+            Disposer.Dispose();
         }
     }
 }

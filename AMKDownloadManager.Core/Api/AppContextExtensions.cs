@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using ir.amkdp.gear.core.Patterns.AppModel;
 using ir.amkdp.gear.core.Automation.IoC;
 using System.Runtime.CompilerServices;
 using ir.amkdp.gear.core.Collections;
+using ir.amkdp.gear.core.Trace;
 
 namespace AMKDownloadManager.Core.Api
 {
@@ -36,6 +38,20 @@ namespace AMKDownloadManager.Core.Api
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T GetFeature<T>(this IAppContext app) where T : class, IFeature
+        {
+            var result = app.GetValues<T>()?.OrderByDescending(x => x.Order).FirstOrDefault() /*??
+                app.GetTypeResolver().Resolve<T>()*/;
+            if (result == null)
+            {
+                var type = typeof(T);
+                Debug.WriteLine($"Feature of type '{type.FullName}' does not found.");
+                throw new InvalidOperationException();
+            }
+            return result;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T TryGetFeature<T>(this IAppContext app) where T : class, IFeature
         {
             return
                 app.GetValues<T>()?.OrderByDescending(x => x.Order).FirstOrDefault() /*??

@@ -21,10 +21,7 @@ namespace AMKDownloadManager.Core.Api.Binders
         /// <param name="uri">URI.</param>
         public static DownloadItem FromUri(Uri uri)
         {
-            var downloadItem = new DownloadItem
-            {
-                Uri = uri
-            };
+            var downloadItem = new DownloadItem(uri);
 
             return downloadItem;
         }

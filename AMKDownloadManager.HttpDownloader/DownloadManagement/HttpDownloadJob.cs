@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api.DownloadManagement;
@@ -14,39 +13,44 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
     public class HttpDownloadJob : IJob
     {
         public IAppContext AppContext { get; }
-        
+
         public HttpProtocolProvider HttpProtocolProvider { get; }
-        
+
+        //public IRequest Request { get; }
         public DownloadItem DownloadItem { get; }
+
         public JobParameters JobParameters { get; }
 
         public IHttpRequestBarrier Barrier { get; protected set; }
         public IJobDivider SegmentProvider { get; protected set; }
 
         public IFileManager FileManager { get; protected set; }
-        
+
         private readonly ProgressListener _progressListener;
 
 
-        private long? _resourceSize;
-        private SegmentationContext _segmentation;
-        
-        
+        internal long? ResourceSize;
+        internal SegmentationContext Segmentation;
+
+
         public HttpDownloadJob(
             IAppContext appContext,
+            IFileManager fileManager,
             HttpProtocolProvider httpProtocolProvider,
             DownloadItem downloadItem,
             JobParameters jobParameters)
         {
             AppContext = appContext;
             HttpProtocolProvider = httpProtocolProvider;
-            
+
+            FileManager = fileManager;
+
             DownloadItem = downloadItem;
             JobParameters = jobParameters;
 
             Barrier = appContext.GetFeature<IHttpRequestBarrier>();
             SegmentProvider = appContext.GetFeature<IJobDivider>();
-            
+
             _progressListener = new ProgressListener();
         }
 
@@ -68,7 +72,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
 
         public JobState State { get; protected internal set; }
-        
+
         public JobInfo TriggerJobAndGetInfo()
         {
             if (Barrier == null)
@@ -77,27 +81,66 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             }
             bool supportsConcurrency = false;
             long? downloadSize;
+            //bool isFinished = false;
 
-            var request = HttpProtocolProvider.CreateRequest(AppContext, DownloadItem);
-            var response = Barrier.SendRequest(AppContext, request, _progressListener, false);
+            var request = HttpProtocolProvider.CreateRequest(
+                AppContext,
+                DownloadItem,
+                null,
+                null
+            );
+            var response = Barrier.SendRequest(
+                AppContext,
+                DownloadItem,
+                request,
+                _progressListener,
+                false
+            );
 
             downloadSize = response.Headers.ContentLength;
 
             if (downloadSize != null)
             {
-                
+                ResourceSize = downloadSize;
+                Segmentation = new SegmentationContext(downloadSize.Value);
             }
-            
+
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var accept = response.Headers.AcceptRanges;
                 if (accept != null)
                 {
+                    //readStream = false;
                     supportsConcurrency = accept == "bytes";
                 }
             }
+
+            Action lateAction = null;
+            if ((response.Headers.ContentLength ?? 0) > 0)
+            {
+                //isFinished = true;
+                lateAction = () =>
+                {
+                    FileManager.SaveStream(
+                        response.ResponseStream,
+                        0,
+                        0,
+                        response.ResponseStream.Length
+                    );
+                };
+            }
+
+            var jobInfo = new JobInfo(
+                supportsConcurrency ? null : downloadSize,
+                downloadSize,
+                supportsConcurrency,
+                response,
+                //isFinished,
+                lateAction);
+
+            jobInfo.Disposer.Enqueue(response);
             
-            return new JobInfo(downloadSize, supportsConcurrency, response);
+            return jobInfo;
         }
 
         public Task<JobInfo> TriggerJobAndGetInfoAsync()
@@ -107,19 +150,35 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public IJobChunk GetJobChunk(JobInfo jobInfo)
         {
-            
-        }
+            if (Segmentation == null)
+            {
+                throw new InvalidOperationException();
+            }
+            if (FileManager == null)
+            {
+                throw new InvalidOperationException();
+            }
 
-        public void BindService<T>(T service)
-        {
-            if (typeof(T) == typeof(IFileManager))
+            var chunkDescriptor = SegmentProvider.GetChunk(
+                AppContext,
+                this,
+                Segmentation
+            );
+
+            if (chunkDescriptor == null)
             {
-                FileManager = (IFileManager) service;
+                return null;
             }
-            else
-            {
-                throw new InvalidOperationException("Unknown service.");
-            }
+
+            return new HttpDownloadJobChunk(
+                AppContext,
+                HttpProtocolProvider,
+                this,
+                FileManager,
+                Segmentation,
+                chunkDescriptor.Segment,
+                _progressListener
+            );
         }
 
         public void Clean()
@@ -137,9 +196,9 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         #region IFeature implementation
 
         public int Order => 0;
+
         public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
         {
-            
         }
 
         #endregion

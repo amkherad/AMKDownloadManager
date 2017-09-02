@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
+using System.Net.Cache;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Barriers;
@@ -13,9 +14,12 @@ namespace AMKDownloadManager.Defaults.Network
 {
     public class DefaultHttpRequestBarrier : IHttpRequestBarrier
     {
+        private int _maxRedirects = KnownConfigs.DownloadManager.Download.MaximumRedirectsDefaultValue;
+        
         [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
         public IResponse SendRequest(
             IAppContext appContext,
+            DownloadItem downloadItem,
             IRequest request,
             IDownloadProgressListener downloadProgressListener,
             bool unpackStream)
@@ -44,14 +48,26 @@ namespace AMKDownloadManager.Defaults.Network
                 }
             }
 
+            //webRequest.KeepAlive = false;
+            webRequest.AllowAutoRedirect = true;
+            webRequest.MaximumAutomaticRedirections = _maxRedirects;
+            webRequest.AllowReadStreamBuffering = false;
+            
+            webRequest.Headers.Remove("Keep-Alive");
+            
             appContext.SignalFeatures<IBarrierListenerFeature>(
                 l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));
             try
             {
-                using (var webResponse = webRequest.GetResponse() as HttpWebResponse)
+                var webResponse = webRequest.GetResponse() as HttpWebResponse;
                 {
                     if (webResponse != null)
                     {
+                        if (webResponse.ResponseUri != webRequest.RequestUri)
+                        {
+                            downloadItem.Redirect(webResponse.ResponseUri);
+                        }
+                        
                         if (webRequest.HaveResponse)
                         {
                             var stream = webResponse.GetResponseStream();
@@ -62,6 +78,11 @@ namespace AMKDownloadManager.Defaults.Network
                                 
                                 var response = new HttpResponse();
                                 HttpHelpers.FillResponseFromHttpResponse(response, webResponse, stream);
+                                
+                                response.Disposer.Enqueue(
+                                    stream,
+                                    webResponse
+                                );
                                 
                                 //appContext.SignalFeatures<IBarrierListenerFeature>(
                                 //    l => l.WebResponseAvailable(appContext, this, request, webRequest,
@@ -111,6 +132,7 @@ namespace AMKDownloadManager.Defaults.Network
 
         public async Task<IResponse> SendRequestAsync(
             IAppContext appContext,
+            DownloadItem downloadItem,
             IRequest request,
             IDownloadProgressListener downloadProgressListener,
             bool unpackStream)
@@ -133,7 +155,10 @@ namespace AMKDownloadManager.Defaults.Network
 
         public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
         {
-            
+            _maxRedirects = configProvider.GetInt(this,
+                KnownConfigs.DownloadManager.Download.MaximumRedirects,
+                KnownConfigs.DownloadManager.Download.MaximumRedirectsDefaultValue
+            );
         }
     }
 }

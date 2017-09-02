@@ -11,7 +11,10 @@ namespace AMKDownloadManager.Core.Api
         {
             var req = WebRequest.CreateHttp(request.Uri);
 
-            req.Method = request.Method;
+            if (request.Method != null)
+            {
+                req.Method = request.Method;
+            }
 
             foreach (KeyValuePair<string, string> header in request.Headers)
             {

@@ -24,7 +24,7 @@ namespace AMKDownloadManager.Defaults.Segmentation
             
             var maxSimultaneousJobs = config.GetInt(this,
                 KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
-                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs_DefaultValue
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
             );
 
             var optimumSegmentSize = segmentationContext.TotalSize / maxSimultaneousJobs;

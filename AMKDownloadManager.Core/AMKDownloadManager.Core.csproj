@@ -42,6 +42,7 @@
     <Compile Include="Api\FileSystem\IDownloadPathProvider.cs" />
     <Compile Include="Api\FileSystem\IFileManager.cs" />
     <Compile Include="Api\FileSystem\IFileProvider.cs" />
+    <Compile Include="Api\FileSystem\PathInfo.cs" />
     <Compile Include="Api\HttpHelpers.cs" />
     <Compile Include="Api\Listeners\IBarrierListenerFeature.cs" />
     <Compile Include="Api\Listeners\IDownloadBindListener.cs" />

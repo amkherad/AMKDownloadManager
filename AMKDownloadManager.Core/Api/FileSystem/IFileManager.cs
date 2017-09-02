@@ -21,5 +21,11 @@ namespace AMKDownloadManager.Core.Api.FileSystem
 		/// <param name="binaryStart">Start offset of data to begin read</param>
 		/// <param name="length">Length of data to write to file</param>
 		void SaveBinary(byte[] binary, long fileStart, long binaryStart, long length);
+
+		/// <summary>
+		/// Used to move file to a new location.
+		/// </summary>
+		/// <param name="newPath"></param>
+		void Move(string newPath);
 	}
 }

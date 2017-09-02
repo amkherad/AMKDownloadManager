@@ -1,35 +1,34 @@
 ﻿using System;
-using ir.amkdp.gear.arch.Trace.Annotations;
 using System.Diagnostics;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Binders;
-using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api.DownloadManagement;
+using NUnit.Framework;
 
-namespace Test.Console.Tests
+namespace AMKDownloadManager.NUnit.Categories.DownloadManager
 {
-    [TestClass]
+    [TestFixture]
     public class SimpleHttpDownloadTest
     {
-        public SimpleHttpDownloadTest()
-        {
-        }
-
-        [TestMethod]
+        [Test]
         public void SendSimpleRequestToGoogle()
         {
             Trace.WriteLine("SendSimpleRequestToGoogle => Testing");
 
-            var di = DownloadBuilder.FromUri(new Uri("http://google.com/"));
+            //var di = DownloadBuilder.FromUri(new Uri("http://localhost:8080/VBoxGuestAdditions.iso")); //index.php
+            var di = DownloadBuilder.FromUri(new Uri("http://localhost:8081/downloads/VBoxGuestAdditions.iso")); //index.php
 
             var app = ApplicationHost.Instance.Pool;
             var downloadManager = app.GetFeature<IDownloadManager>();
 
             var protocol = DownloadBuilder.Bind(di, app);
-            var job = protocol.CreateJob(di, app, null);
+            var job = protocol.CreateJob(app, di, null);
 
             var state = downloadManager.Schedule(job);
 
+            downloadManager.Start();
+            downloadManager.Join();
             //state.
         }
     }

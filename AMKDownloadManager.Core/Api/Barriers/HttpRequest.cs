@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ir.amkdp.gear.core.Automation;
 using ir.amkdp.gear.core.Collections;
 using ir.amkdp.gear.web.Http;
 
@@ -13,6 +14,8 @@ namespace AMKDownloadManager.Core.Api.Barriers
 
         protected HttpRequest(DownloadItem downloadItem)
         {
+            Disposer = new Disposer();
+            
             DownloadItem = downloadItem;
             
             Headers = new HeaderCollection();
@@ -30,13 +33,15 @@ namespace AMKDownloadManager.Core.Api.Barriers
         public byte[] RequestBody { get; set; }
         public Action<Stream> RequestBodyWriter { get; set; }
         public string Method { get; set; }
+        public IDisposer Disposer { get; }
 
 
         public static HttpRequest FromDownloadItem(
             IAppContext appContext,
-            IConfigProvider configProvider,
             DownloadItem downloadItem)
         {
+            var configProvider = appContext.GetFeature<IConfigProvider>();
+            
             var req = new HttpRequest(downloadItem)
             {
                 Uri = downloadItem.Uri
@@ -46,9 +51,15 @@ namespace AMKDownloadManager.Core.Api.Barriers
             req.Method = downloadItem.Properties[DownloadItem.KnownProperties.Method] as string ??
                          configProvider.GetString(
                              KnownConfigs.DownloadManager.Download.RequestMethod,
-                             KnownConfigs.DownloadManager.Download.RequestMethod_DefaultValue);
+                             KnownConfigs.DownloadManager.Download.RequestMethodDefaultValue);
             
             return req;
+        }
+
+        public void Dispose()
+        {
+            Disposer.Dispose();
+            DownloadItem.Dispose();
         }
     }
 

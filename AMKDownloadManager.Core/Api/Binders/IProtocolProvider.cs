@@ -16,7 +16,12 @@ namespace AMKDownloadManager.Core.Api.Binders
         /// <param name="downloadItem">Download item.</param>
         bool CanHandle(IAppContext appContext, DownloadItem downloadItem);
 
-        IRequest CreateRequest(IAppContext appContext, DownloadItem downloadItem);
+        IRequest CreateRequest(
+            IAppContext appContext,
+            DownloadItem downloadItem,
+            SegmentationContext segmentationContext,
+            Segment segment
+        );
         
         /// <summary>
         /// Creates the download job.

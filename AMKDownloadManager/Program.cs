@@ -15,7 +15,7 @@ namespace AMKDownloadManager
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
             AppHelpers.InjectTopLayerFeatures(pool);
             //AppHelpers.LoadComponents(pool);
-            var c = new Component();
+            var c = new HttpDownloaderComponent();
             c.Initialize(pool);
             AppHelpers.ConfigureFeatures(pool);
             

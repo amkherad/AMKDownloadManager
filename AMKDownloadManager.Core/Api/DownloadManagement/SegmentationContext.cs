@@ -9,12 +9,24 @@ using ir.amkdp.gear.data.Models;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
+    public delegate void SegmentationContextSegmentChangedEvent(SegmentationContext segmentationContext, Segment segment);
+    
     public class Segment : Int64RangeModel
     {
+        public Segment() { }
+        public Segment(long min, long max)
+        {
+            Min = min;
+            Max = max;
+        }
     }
 
     public class SegmentationContext
     {
+        public event SegmentationContextSegmentChangedEvent SegmentAdded;
+        public event SegmentationContextSegmentChangedEvent SegmentRemoved;
+        public event EventHandler TotalSizeChanged;
+        
         public object SyncRoot { get; }
         public long TotalSize { get; }
         public SortedSet<Segment> FilledRanges { get; }

@@ -34,7 +34,7 @@
     <Compile Include="ProtocolProvider\HttpProtocolProvider.cs" />
     <Compile Include="DownloadManagement\HttpDownloadJob.cs" />
     <Compile Include="DownloadManagement\HttpDownloadJobChunk.cs" />
-    <Compile Include="AddIn\Component.cs" />
+    <Compile Include="AddIn\HttpDownloaderComponent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -63,6 +63,9 @@
     </Reference>
     <Reference Include="Gear.Core.TraceTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.TraceTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.DataCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.DataCore.dll</HintPath>
     </Reference>
     <Reference Include="Gear.WebCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.WebCore.dll</HintPath>

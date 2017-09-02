@@ -30,7 +30,6 @@ namespace AMKDownloadManager.Defaults.DownloadManager
         public IAppContext AppContext { get; }
         public IConfigProvider Configuration { get; }
         public IThreadFactory ThreadFactory { get; }
-        public IDownloadErrorListener DownloadErrorListener { get; }
         
         private volatile bool _downloadManagerState = false;
 
@@ -53,7 +52,6 @@ namespace AMKDownloadManager.Defaults.DownloadManager
             AppContext = appContext;
             Configuration = appContext.GetFeature<IConfigProvider>();
             ThreadFactory = appContext.GetFeature<IThreadFactory>();
-            DownloadErrorListener = appContext.GetFeature<IDownloadErrorListener>();
 
             _scheduler = scheduler;
 
@@ -81,8 +79,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                 this,
                 AppContext,
                 Configuration,
-                job,
-                DownloadErrorListener)
+                job)
             {
                 FinishCallback = callback
             };
@@ -124,7 +121,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
             {
                 _maxSimultaneousJobs = config.GetInt(this,
                     KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
-                    KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs_DefaultValue
+                    KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
                 );
 
                 if (_pendingJobs.Any() &&
@@ -227,8 +224,6 @@ namespace AMKDownloadManager.Defaults.DownloadManager
             public IAppContext AppContext { get; }
             public IConfigProvider Configuration { get; }
 
-            public IDownloadErrorListener DownloadErrorListener { get; }
-
             public IJob Job { get; }
             public IThread DispatcherThread { get; private set; }
             public List<IThread> Threads { get; }
@@ -244,8 +239,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                 DefaultDownloadManager downloadManager,
                 IAppContext appContext,
                 IConfigProvider configProvider,
-                IJob job,
-                IDownloadErrorListener downloadErrorListener)
+                IJob job)
             {
                 DownloadManager = downloadManager;
 
@@ -253,8 +247,6 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                 Configuration = configProvider;
                 Job = job;
                 Threads = new List<IThread>();
-
-                DownloadErrorListener = downloadErrorListener;
             }
 
             #region IDownloadManagerHandle implementation
@@ -284,29 +276,33 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     catch (Exception ex)
                     {
                         retry.Catch(ex);
-                        DownloadErrorListener.OnGetInfoError(
+                        AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnGetInfoError(
                             AppContext,
                             Job,
                             DownloadManager,
                             !retry.IsDone()
-                        );
+                        ));
                     }
                 }
 
                 if (jobInfo == null)
                 {
-                    DownloadErrorListener.OnDeadError(
+                    AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnDeadError(
                         AppContext,
                         Job,
                         DownloadManager
-                    );
+                    ));
                     return;
                 }
 
-                if (jobInfo.IsFinished)
+                var lateAction = jobInfo.TriggerJobAndGetInfoLateAction;
+                
+                //if (jobInfo.IsFinished)
                 {
+                    //TODO:
+                    #warning Do something
                 }
-                else
+                //else
                 {
                     if (jobInfo.SupportsConcurrency)
                     {
@@ -367,13 +363,13 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     {
                         retry.Catch(ex);
                         result = JobChunkState.ErrorCanTry;
-                        DownloadErrorListener.OnChunkError(
+                        AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnChunkError(
                             AppContext,
                             Job,
                             chunk,
                             DownloadManager,
                             !retry.IsDone()
-                        );
+                        ));
                     }
                 } while (result == JobChunkState.RequestMoreCycle ||
                          result == JobChunkState.ErrorCanTry && !retry.IsDone());
