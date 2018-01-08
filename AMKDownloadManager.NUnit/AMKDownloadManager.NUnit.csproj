@@ -77,8 +77,10 @@
   <ItemGroup>
     <Compile Include="Categories\DownloadManager\SimpleHttpDownloadTest.cs" />
     <Compile Include="Categories\FileSystem\DefaultDownloadPathProviderTests.cs" />
+    <Compile Include="Categories\FileSystem\DefaultFileProviderTests.cs" />
     <Compile Include="Categories\Segmentation\DefaultSegmentProviderTests.cs" />
     <Compile Include="Categories\Segmentation\SegmentationContextTest.cs" />
+    <Compile Include="GeneralTests.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

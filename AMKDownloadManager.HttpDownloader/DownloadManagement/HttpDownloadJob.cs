@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api.DownloadManagement;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Listeners;
+using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
+using ir.amkdp.gear.core.Automation;
 
 namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 {
@@ -21,7 +24,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public JobParameters JobParameters { get; }
 
-        public IHttpRequestBarrier Barrier { get; protected set; }
+        public IHttpRequestTransport Transport { get; protected set; }
         public IJobDivider SegmentProvider { get; protected set; }
 
         public IFileManager FileManager { get; protected set; }
@@ -32,6 +35,9 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         internal long? ResourceSize;
         internal SegmentationContext Segmentation;
 
+        private long _bufferSize;
+        private long _minSegmentSize;
+        private long _maxSegmentSize;
 
         public HttpDownloadJob(
             IAppContext appContext,
@@ -48,10 +54,12 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             DownloadItem = downloadItem;
             JobParameters = jobParameters;
 
-            Barrier = appContext.GetFeature<IHttpRequestBarrier>();
+            Transport = appContext.GetFeature<IHttpRequestTransport>();
             SegmentProvider = appContext.GetFeature<IJobDivider>();
 
             _progressListener = new ProgressListener();
+
+            LoadConfig(appContext, appContext.GetFeature<IConfigProvider>(), null);
         }
 
         #region IJob implementation
@@ -75,9 +83,9 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public JobInfo TriggerJobAndGetInfo()
         {
-            if (Barrier == null)
+            if (Transport == null)
             {
-                Barrier = AppContext.GetFeature<IHttpRequestBarrier>();
+                Transport = AppContext.GetFeature<IHttpRequestTransport>();
             }
             bool supportsConcurrency = false;
             long? downloadSize;
@@ -89,7 +97,8 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 null,
                 null
             );
-            var response = Barrier.SendRequest(
+
+            var response = Transport.SendRequest(
                 AppContext,
                 DownloadItem,
                 request,
@@ -115,19 +124,15 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 }
             }
 
-            Action lateAction = null;
-            if ((response.Headers.ContentLength ?? 0) > 0)
+            IJobChunk mainJobChunk = null;
+            if ((downloadSize ?? 0) > 0)
             {
-                //isFinished = true;
-                lateAction = () =>
-                {
-                    FileManager.SaveStream(
-                        response.ResponseStream,
-                        0,
-                        0,
-                        response.ResponseStream.Length
-                    );
-                };
+                mainJobChunk = new MainJobChunkImpl(
+                    AppContext,
+                    this,
+                    FileManager,
+                    response
+                );
             }
 
             var jobInfo = new JobInfo(
@@ -136,7 +141,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 supportsConcurrency,
                 response,
                 //isFinished,
-                lateAction);
+                mainJobChunk);
 
             jobInfo.Disposer.Enqueue(response);
             
@@ -145,7 +150,68 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public Task<JobInfo> TriggerJobAndGetInfoAsync()
         {
-            throw new NotImplementedException();
+            return Task.Run(() => TriggerJobAndGetInfo());
+        }
+
+        private class MainJobChunkImpl : IJobChunk
+        {
+            public IAppContext AppContext { get; }
+            public HttpDownloadJob Job { get; }
+            public IFileManager FileManager { get; }
+            public IResponse Response { get; }
+
+            private long _limit;
+            private long _bufferSize;
+            
+            public MainJobChunkImpl(
+                IAppContext appContext,
+                HttpDownloadJob job,
+                IFileManager fileManager,
+                IResponse response)
+            {
+                AppContext = appContext;
+                Job = job;
+                FileManager = fileManager;
+                Response = response;
+
+                _limit = job._bufferSize;
+                _bufferSize = job._bufferSize;
+            }
+            
+            public JobChunkState Cycle()
+            {
+                var stream = Response.ResponseStream;
+                
+                var fileSaver = AppContext.GetFeature<IStreamSaver>();
+
+                try
+                {
+                    fileSaver.SaveStream(
+                        stream,
+                        FileManager,
+                        0,
+                        null,
+                        _bufferSize,
+                        _limit
+                    );
+                    
+                    return JobChunkState.Finished;
+                }
+                catch (Exception ex)
+                {
+                    return JobChunkState.ErrorCanRetry;
+                }
+            }
+
+            public void NotifyAbort()
+            {
+                
+            }
+
+            public void Dispose()
+            {
+                Response.Dispose();
+            }
         }
 
         public IJobChunk GetJobChunk(JobInfo jobInfo)
@@ -183,22 +249,49 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public void Clean()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void Dispose()
+        {
+            
         }
 
         #endregion
 
         #region IFeature implementation
 
-        public int Order => 0;
+        //public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        private void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
+            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Download.MaxBufferLength))
+            {
+                _bufferSize = configProvider.GetLong(this,
+                    KnownConfigs.DownloadManager.Download.MaxBufferLength,
+                    KnownConfigs.DownloadManager.Download.MaxBufferLengthDefaultValue
+                );
+            }
+            
+            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Segmentation.MinSegmentSize))
+            {
+                _minSegmentSize = configProvider.GetLong(this,
+                    KnownConfigs.DownloadManager.Segmentation.MinSegmentSize,
+                    KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue
+                );
+            }
+            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Segmentation.MaxSegmentSize))
+            {
+                _maxSegmentSize = configProvider.GetLong(this,
+                    KnownConfigs.DownloadManager.Segmentation.MaxSegmentSize,
+                    KnownConfigs.DownloadManager.Segmentation.MaxSegmentSizeDefaultValue
+                );
+            }
         }
 
         #endregion
@@ -209,7 +302,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 IAppContext appContext,
                 IJob job,
                 DownloadItem downloadItem,
-                IHttpRequestBarrier barrier,
+                IHttpRequestTransport transport,
                 long totalSize,
                 long progress)
             {
@@ -221,7 +314,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 IAppContext appContext,
                 IJob job,
                 DownloadItem downloadItem,
-                IHttpRequestBarrier barrier)
+                IHttpRequestTransport transport)
             {
                 var j = job as HttpDownloadJob;
                 j?.OnFinished(EventArgs.Empty);

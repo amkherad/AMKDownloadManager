@@ -12,6 +12,13 @@ namespace AMKDownloadManager
     {
         public static void Main(string[] args)
         {
+            args = new []
+            {
+                "-cli",
+                "-report=h",
+                //"--help"
+            };
+            
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
             AppHelpers.InjectTopLayerFeatures(pool);
             //AppHelpers.LoadComponents(pool);

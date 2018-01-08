@@ -1,37 +1,37 @@
 ﻿using System.IO;
 using System.Net;
-using AMKDownloadManager.Core.Api.Barriers;
+using AMKDownloadManager.Core.Api.Transport;
 
 namespace AMKDownloadManager.Core.Api.Listeners
 {
-    public interface IBarrierListenerFeature : IListenerFeature
+    public interface ITransportListenerFeature : IListenerFeature
     {
         void BeforeSendRequest(
             IAppContext appContext,
-            IRequestBarrier barrier,
+            IRequestTransport transport,
             IRequest request);
         
         void WebRequestCreated(
             IAppContext appContext,
-            IRequestBarrier barrier,
+            IRequestTransport transport,
             IRequest request,
             WebRequest webRequest);
         
 //        void HttpWebRequestCreated(
 //            IAppContext appContext,
-//            IRequestBarrier barrier,
+//            IRequestTransport transport,
 //            IRequest request,
 //            HttpWebRequest httpWebRequest);
         
         void WebBeforeRequestSubmission(
             IAppContext appContext,
-            IRequestBarrier barrier,
+            IRequestTransport transport,
             IRequest request,
             WebRequest webRequest);
         
         void WebResponseAvailable(
             IAppContext appContext,
-            IRequestBarrier barrier,
+            IRequestTransport transport,
             IRequest request,
             WebRequest webRequest,
             IResponse response,

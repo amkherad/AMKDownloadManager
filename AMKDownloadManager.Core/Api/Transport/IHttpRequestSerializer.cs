@@ -1,6 +1,6 @@
-﻿namespace AMKDownloadManager.Core.Api.Barriers
+﻿namespace AMKDownloadManager.Core.Api.Transport
 {
-    public interface IHttpRequestSerializer : IRequestBarrier
+    public interface IHttpRequestSerializer : IRequestTransport
     {
         string SerializeString(IRequest request);
         byte[] SerializeBinary(IRequest request);

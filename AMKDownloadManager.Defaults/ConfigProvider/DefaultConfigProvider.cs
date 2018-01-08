@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AMKDownloadManager.Core.Api;
 
 namespace AMKDownloadManager.Core.Impl
@@ -16,7 +17,7 @@ namespace AMKDownloadManager.Core.Impl
 
         public bool GetBool(object context, string fqn, bool? defaultValue = null)
         {
-            throw new NotImplementedException();
+            return defaultValue ?? false;
         }
 
         public int GetInt(object context, string fqn, int? defaultValue = null)
@@ -108,9 +109,10 @@ namespace AMKDownloadManager.Core.Impl
         #region IFeature implementation
 
         public int Order => 0;
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
-            
+            //DONT WRITE ANYTHING HERE.
         }
 
         #endregion

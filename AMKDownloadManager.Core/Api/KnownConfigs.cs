@@ -1,5 +1,4 @@
-﻿using System;
-using ir.amkdp.gear.core.Utils;
+﻿using ir.amkdp.gear.core.Utils;
 
 namespace AMKDownloadManager.Core.Api
 {
@@ -27,25 +26,33 @@ namespace AMKDownloadManager.Core.Api
                 public const string MaximumRedirects = "DownloadManager.Download.MaximumRedirects";
                 public const int MaximumRedirectsDefaultValue = 20;
 
-                public const string DownloadLocation = "DownloadManager.Download.DownloadLocation";
-                public const string DownloadLocationDefaultValue = "[Downloads]";
-
-                public const string TempDownloadLocation = "DownloadManager.Download.TempDownloadLocation";
-                public const string TempDownloadLocationDefaultValue = "[Downloads]";
-
-                public const string UseTempLocation = "DownloadManager.Download.UseTempLocation";
-                public const bool UseTempLocationDefaultValue = false;
+                public const string MaxBufferLength = "DownloadManager.Download.MaxBufferLength";
+                public const int MaxBufferLengthDefaultValue = 10 * Helper.KiB;
             }
 
             public static class Segmentation
             {
                 public const string MinSegmentSize = "DownloadManager.Segmentation.MinSegmentSize";
-                public const int MinSegmentSize_DefaultValue = 4 * Helper.KiB;
+                public const int MinSegmentSizeDefaultValue = 4 * Helper.KiB;
                 
                 public const string MaxSegmentSize = "DownloadManager.Segmentation.MaxSegmentSize";
-                public const int MaxSegmentSize_DefaultValue = 10 * Helper.MiB;
+                public const int MaxSegmentSizeDefaultValue = 10 * Helper.MiB;
             }
         }
 
+        public static class FileSystem
+        {
+            public const string DownloadLocation = "FileSystem.DownloadLocation";
+            public const string DownloadLocationDefaultValue = "[Downloads]";
+
+            public const string TempDownloadLocation = "FileSystem.TempDownloadLocation";
+            public const string TempDownloadLocationDefaultValue = "[Downloads]";
+
+            public const string UseTempLocation = "FileSystem.UseTempLocation";
+            public const bool UseTempLocationDefaultValue = false;
+                
+            public const string DuplicityResolvationStart = "FileSystem.DuplicityResolvationStart";
+            public const int DuplicityResolvationStartDefaultValue = 2;
+        }
     }
 }

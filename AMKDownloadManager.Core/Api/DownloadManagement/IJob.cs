@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.Listeners;
+using AMKDownloadManager.Core.Api.Transport;
 using ir.amkdp.gear.core.Automation;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
@@ -27,7 +27,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
     /// <summary>
     /// Download job.
     /// </summary>
-    public interface IJob : IFeature
+    public interface IJob : IDisposable
     {
         /// <summary>
         /// Occurs when finished.
@@ -105,7 +105,10 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// </summary>
         public long? FirstHttpPacketSize { get; }
         
-        public Action TriggerJobAndGetInfoLateAction { get; } 
+        /// <summary>
+        /// Main job chunk to continue job on a diffrent download manager thread.
+        /// </summary>
+        public IJobChunk MainJobChunk { get; } 
         
         /// <summary>
         /// Gets a value indicating whether this <see cref="AMKDownloadManager.Core.Api.DownloadManagement.IJob"/>
@@ -140,7 +143,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             bool supportsConcurrency,
             IResponse response,
             //bool isFinished,
-            Action triggerJobAndGetInfoLateAction)
+            IJobChunk mainJobChunk)
         {
             Disposer = new Disposer();
             
@@ -149,7 +152,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             SupportsConcurrency = supportsConcurrency;
             Response = response;
             //IsFinished = isFinished;
-            TriggerJobAndGetInfoLateAction = triggerJobAndGetInfoLateAction;
+            MainJobChunk = mainJobChunk;
         }
 
         public void Dispose()

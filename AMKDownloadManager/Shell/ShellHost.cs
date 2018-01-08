@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using AMKDownloadManager.Core.Api;
 using System.Linq;
-using System.Reflection;
-using Gtk;
-using System.IO;
+using System.Text.RegularExpressions;
+using AMKDownloadManager.Shell.Commands;
+using ir.amkdp.gear.core.Collections;
 
 namespace AMKDownloadManager.Shell
 {
     public class ShellHost
     {
-        public const string HelpFileResourceName = "Help-Cli.txt";
-
         public IAppContext AppContext { get; }
 
         public ShellHost(IAppContext appContext)
@@ -32,22 +32,47 @@ namespace AMKDownloadManager.Shell
 
         public void _executeCommand(string[] args)
         {
+            var regex = new Regex(
+                "^(?:(?:[, ]+)?(?\'q\'\")?(?\'key\'[^=\"]*?)(?:\\k\'q\'(?\'-q\'))?=(?\'q\'\")?(?\'value\'(?:[^\"]|(?<=\\\\)\")*)(?:\\k\'q\'(?\'-q\'))?)*(?(q)(?!))$",
+                RegexOptions.Compiled);
+
+            var argValues = new PropertyBag<string>();
+            
+            foreach (var arg in args)
+            {
+                var match = regex.Match(arg);
+
+                if (match.Success)
+                {
+                    var keys = match.Groups["key"].Captures;
+                    var values = match.Groups["value"].Captures;
+
+                    for (int i = 0; i < keys.Count; i++)
+                    {
+                        argValues.Add(keys[i].Value, values[i].Value);
+                    }
+                }
+            }
+
+            IShellCommand command = null;
+            
+            if (argValues.ContainsKey(ShellCommands.ReportCommand[0]))
+            {
+                command = new ShellReporter();
+            }
+            
             if (args.Any(x => ShellCommands.HelpCommand.Contains(x.ToLower())))
             {
-                EchoHelp();
+                command = new HelpCommand();
+            }
+
+            if (command != null)
+            {
+                command.Handle(this, args, argValues);
             }
         }
 
-        public void EchoHelp()
-        {
-            using (var file = Assembly.GetExecutingAssembly().GetManifestResourceStream(HelpFileResourceName))
-            {
-                using (var reader = new StreamReader(file))
-                {
-                    Console.Write(reader.ReadToEnd());
-                }
-            }
-        }
+        
 
         public void EchoError(string message)
         {

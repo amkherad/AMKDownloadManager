@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Threading;
@@ -114,16 +113,9 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
         private void _scheduleCallback()
         {
-            var config = Configuration;
-
             var loop = new LoopCountLimiter(10);
-            while (_downloadManagerState)
+            while (_downloadManagerState || _runningJobs.Any())
             {
-                _maxSimultaneousJobs = config.GetInt(this,
-                    KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
-                    KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
-                );
-
                 if (_pendingJobs.Any() &&
                     _maxSimultaneousJobs > _runningJobs.Count)
                 {
@@ -182,11 +174,15 @@ namespace AMKDownloadManager.Defaults.DownloadManager
         {
             foreach (var job in _runningJobs)
             {
+                job.DispatcherThread.Join();
+                
                 foreach (var thread in job.Threads)
                 {
                     thread.Join();
                 }
             }
+            
+            _schedulerThread.Join();
         }
 
         public void Join(IJob job)
@@ -211,8 +207,12 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
         public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
+            _maxSimultaneousJobs = configProvider.GetInt(this,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
+            );
         }
 
         #endregion
@@ -295,7 +295,16 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     return;
                 }
 
-                var lateAction = jobInfo.TriggerJobAndGetInfoLateAction;
+                var mainJobChunk = jobInfo.MainJobChunk;
+                if (mainJobChunk != null)
+                {
+                    var thread = DownloadManager.ThreadFactory.Create(_processChunk);
+                    thread.Start(mainJobChunk);
+                    lock (Threads)
+                    {
+                        Threads.Add(thread);
+                    }
+                }
                 
                 //if (jobInfo.IsFinished)
                 {
@@ -304,7 +313,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                 }
                 //else
                 {
-                    if (jobInfo.SupportsConcurrency)
+                    if (false && jobInfo.SupportsConcurrency)
                     {
                         var loop = new LoopCountLimiter(5);
                         while (_downloadJobState)
@@ -333,6 +342,11 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                                     {
                                         var thread = DownloadManager.ThreadFactory.Create(_processChunk);
                                         thread.Start(chunk);
+                                        lock (Threads)
+                                        {
+                                            Threads.Add(thread);
+
+                                        }
                                     }
                                 }
                             }
@@ -362,7 +376,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     catch (Exception ex)
                     {
                         retry.Catch(ex);
-                        result = JobChunkState.ErrorCanTry;
+                        result = JobChunkState.ErrorCanRetry;
                         AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnChunkError(
                             AppContext,
                             Job,
@@ -372,7 +386,9 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                         ));
                     }
                 } while (result == JobChunkState.RequestMoreCycle ||
-                         result == JobChunkState.ErrorCanTry && !retry.IsDone());
+                         result == JobChunkState.ErrorCanRetry && !retry.IsDone());
+                
+                chunk.Dispose();
             }
 
             public void Pause()

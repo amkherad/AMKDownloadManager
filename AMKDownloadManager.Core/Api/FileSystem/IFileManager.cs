@@ -1,11 +1,17 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace AMKDownloadManager.Core.Api.FileSystem
 {
-	public interface IFileManager
+	public interface IFileManager : IDisposable
 	{
 		/// <summary>
-		/// Allows atomic (flush-on-demand) writing to file. 
+		/// Called on creation of the task.
+		/// </summary>
+		void InitFile();
+		
+		/// <summary>
+		/// Allows atomic (flush-on-demand) writing to file.
 		/// </summary>
 		/// <param name="stream">Data stream to be written</param>
 		/// <param name="fileStart">Start offset of file to begin write</param>
@@ -14,7 +20,7 @@ namespace AMKDownloadManager.Core.Api.FileSystem
 		void SaveStream(Stream stream, long fileStart, long streamStart, long length);
 		
 		/// <summary>
-		/// Allows atomic (flush-on-demand) writing to file. 
+		/// Allows atomic (flush-on-demand) writing to file.
 		/// </summary>
 		/// <param name="binary">Binary data to be written</param>
 		/// <param name="fileStart">Start offset of file to begin write</param>
@@ -27,5 +33,11 @@ namespace AMKDownloadManager.Core.Api.FileSystem
 		/// </summary>
 		/// <param name="newPath"></param>
 		void Move(string newPath);
+
+		/// <summary>
+		/// Check the existence of the file.
+		/// </summary>
+		/// <returns></returns>
+		bool Exists();
 	}
 }

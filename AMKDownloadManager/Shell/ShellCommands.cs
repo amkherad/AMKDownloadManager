@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace AMKDownloadManager.Shell
+﻿namespace AMKDownloadManager.Shell
 {
     public static class ShellCommands
     {
-        public static string[] ShellActivatorCommand = new []
+        public static string[] ShellActivatorCommand =
         {
-            "cli",
             "-cli",
             "--cli",
             "--shell",
@@ -15,10 +12,18 @@ namespace AMKDownloadManager.Shell
         /// <summary>
         /// Shows shell help.
         /// </summary>
-        public static string[] HelpCommand = new []
+        public static string[] HelpCommand =
         {
             "--help",
             "-h"
+        };
+
+        /// <summary>
+        /// Determines report mode.
+        /// </summary>
+        public static string[] ReportCommand =
+        {
+            "-report",
         };
 
         /// <summary>
@@ -31,7 +36,7 @@ namespace AMKDownloadManager.Shell
         /// Default:
         ///     --output=std-output
         /// </remarks>
-        public static string[] OutputFileCommand = new []
+        public static string[] OutputFileCommand =
         {
             "--output",
             "-o"
@@ -46,7 +51,7 @@ namespace AMKDownloadManager.Shell
         /// Default:
         ///     --components=*
         /// </remarks>
-        public static string[] ComponentsCommand = new []
+        public static string[] ComponentsCommand =
         {
             "--components",
             "-plugins"
@@ -63,7 +68,7 @@ namespace AMKDownloadManager.Shell
         /// default:
         ///     --limit=0
         /// </remarks>
-        public static string[] SpeedLimitCommand = new []
+        public static string[] SpeedLimitCommand =
         {
             "--limit"
         };
@@ -78,7 +83,7 @@ namespace AMKDownloadManager.Shell
         /// Validation:
         ///     Using --shcedule=start with --queue=XXX will cause error.
         /// </remarks>
-        public static string[] SchedulerCommand = new []
+        public static string[] SchedulerCommand =
         {
             "--schedule"
         };
@@ -91,7 +96,7 @@ namespace AMKDownloadManager.Shell
         ///     --queue=0 (Main queue)
         ///     --queue="Cli queue"
         /// </remarks>
-        public static string[] QueueCommand = new []
+        public static string[] QueueCommand =
         {
             "--queue"
         };

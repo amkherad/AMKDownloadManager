@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.FileSystem;
@@ -15,16 +16,16 @@ namespace AMKDownloadManager.Defaults.FileSystem
             var config = appContext.GetFeature<IConfigProvider>();
 
             var defaultDownloadLocation = config.GetString(this,
-                KnownConfigs.DownloadManager.Download.DownloadLocation,
-                KnownConfigs.DownloadManager.Download.DownloadLocationDefaultValue);
+                KnownConfigs.FileSystem.DownloadLocation,
+                KnownConfigs.FileSystem.DownloadLocationDefaultValue);
 
             var tempDownloadLocation = config.GetString(this,
-                KnownConfigs.DownloadManager.Download.DownloadLocation,
-                KnownConfigs.DownloadManager.Download.DownloadLocationDefaultValue);
+                KnownConfigs.FileSystem.DownloadLocation,
+                KnownConfigs.FileSystem.DownloadLocationDefaultValue);
 
             var useTempLocation = config.GetBool(this,
-                KnownConfigs.DownloadManager.Download.UseTempLocation,
-                KnownConfigs.DownloadManager.Download.UseTempLocationDefaultValue);
+                KnownConfigs.FileSystem.UseTempLocation,
+                KnownConfigs.FileSystem.UseTempLocationDefaultValue);
 
             if (tempDownloadLocation != null)
             {
@@ -90,7 +91,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
         }
 
         public int Order => 0;
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             
         }

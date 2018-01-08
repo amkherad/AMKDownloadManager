@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Binders;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Listeners;
+using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.HttpDownloader.DownloadManagement;
 
 namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 {
     public class HttpProtocolProvider : IProtocolProvider
     {
-        public static string[] SupportedProtocols = new[]
+        public static string[] SupportedProtocols =
         {
             "http",
             "https"
@@ -74,14 +75,17 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
             return request;
         }
 
-        public IJob CreateJob(IAppContext appContext, DownloadItem downloadItem, JobParameters jobParameters)
+        public IJob CreateJob(
+            IAppContext appContext,
+            DownloadItem downloadItem,
+            IFileProvider fileProvider,
+            JobParameters jobParameters)
         {
-            var fileProvider = appContext.GetFeature<IFileProvider>();
-
             var fileManager = fileProvider.CreateFile(
                 appContext,
                 downloadItem.LocalFileName ??
                 (downloadItem.Uri == null ? null : Path.GetFileName(downloadItem.Uri.AbsolutePath)),
+                null,
                 null,
                 null
             );
@@ -107,7 +111,7 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 
         public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
         }
 

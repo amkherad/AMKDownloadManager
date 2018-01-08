@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AMKDownloadManager.Core.Api
 {
@@ -11,7 +12,8 @@ namespace AMKDownloadManager.Core.Api
 
 		void LoadConfig(
 			IAppContext appContext,
-			IConfigProvider configProvider
+			IConfigProvider configProvider,
+			HashSet<string> changes
 		);
 	}
 }

@@ -10,12 +10,20 @@ using ir.amkdp.gear.core.Trace;
 
 namespace AMKDownloadManager.Defaults
 {
+    /// <summary>
+    /// Generic component loader using <see cref="System.Composition"/>.
+    /// </summary>
     public class ComponentImporter
     {
+        /// <summary>
+        /// All loaded components.
+        /// </summary>
         [ImportMany]
         public IEnumerable<IComponent> Components { get; set; }
         
-        
+        /// <summary>
+        /// Load plugins from './Plugins' directory.
+        /// </summary>
         public void Compose()
         {
             var executableLocation = Assembly.GetEntryAssembly().Location;
@@ -32,8 +40,16 @@ namespace AMKDownloadManager.Defaults
             }
         }
 
-        public int AvailableNumberOfComponents => Components.Count();
+        /// <summary>
+        /// Number of total components loaded.
+        /// </summary>
+        /// <remarks>Equivalent to <see cref="Components.Count()"/></remarks>
+        public int NumberOfAvailableComponents => Components.Count();
 
+        /// <summary>
+        /// Calls <see cref="IComponent.Initialize"/> on all loaded components.
+        /// </summary>
+        /// <param name="appContext"></param>
         public void InitializeAll(IAppContext appContext)
         {
             if (Components != null)

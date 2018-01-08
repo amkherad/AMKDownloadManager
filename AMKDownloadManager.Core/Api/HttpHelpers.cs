@@ -1,23 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using AMKDownloadManager.Core.Api.Barriers;
+using AMKDownloadManager.Core.Api.Transport;
 
 namespace AMKDownloadManager.Core.Api
 {
     public static class HttpHelpers
     {
-        public static HttpWebRequest CreateHttpWebRequestFromRequest(IRequest request)
+        public static HttpWebRequest CreateHttpWebRequestFromRequest(IRequest request, HashSet<string> exclusiveHeaders)
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            if (exclusiveHeaders == null) throw new ArgumentNullException(nameof(exclusiveHeaders));
+            
             var req = WebRequest.CreateHttp(request.Uri);
 
             if (request.Method != null)
             {
                 req.Method = request.Method;
             }
-
+            
             foreach (KeyValuePair<string, string> header in request.Headers)
             {
+                if (exclusiveHeaders.Contains(header.Key))
+                {
+                    continue;
+                }
                 req.Headers[header.Key] = header.Value;
             }
             

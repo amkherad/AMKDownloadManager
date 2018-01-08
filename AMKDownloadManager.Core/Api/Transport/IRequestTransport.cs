@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api.Listeners;
 
-namespace AMKDownloadManager.Core.Api.Barriers
+namespace AMKDownloadManager.Core.Api.Transport
 {
-    public interface IRequestBarrier : IFeature
+    public interface IRequestTransport : IFeature
     {
         IResponse SendRequest(
             IAppContext appContext,

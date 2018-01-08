@@ -3,7 +3,7 @@ using System.Net;
 using ir.amkdp.gear.core.Automation;
 using ir.amkdp.gear.web.Http;
 
-namespace AMKDownloadManager.Core.Api.Barriers
+namespace AMKDownloadManager.Core.Api.Transport
 {
     public class HttpResponse : IResponse
     {

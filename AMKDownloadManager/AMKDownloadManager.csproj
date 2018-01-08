@@ -9,26 +9,24 @@
     <AssemblyName>AMKDownloadManager</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <OutputPath>../output/Release/</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <PlatformTarget>x64</PlatformTarget>
     <Commandlineparameters>--cli --help --uri="http://google.com/"</Commandlineparameters>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\output\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>../output/Debug/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Gear.AppLayerCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
@@ -112,8 +110,11 @@
     <Compile Include="gtk-gui\Dialogs.DownloadProgressDialog.cs" />
     <Compile Include="Dialogs\AddDownloadLinkDialog.cs" />
     <Compile Include="gtk-gui\Dialogs.AddDownloadLinkDialog.cs" />
+    <Compile Include="Shell\Commands\HelpCommand.cs" />
+    <Compile Include="Shell\IShellCommand.cs" />
     <Compile Include="Shell\ShellHost.cs" />
     <Compile Include="Shell\ShellCommands.cs" />
+    <Compile Include="Shell\ShellReporter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

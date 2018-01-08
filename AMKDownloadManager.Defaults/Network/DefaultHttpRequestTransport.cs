@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
+using AMKDownloadManager.Core.Api.Transport;
 using ir.amkdp.gear.core.Trace;
 
 namespace AMKDownloadManager.Defaults.Network
 {
-    public class DefaultHttpRequestBarrier : IHttpRequestBarrier
+    public class DefaultHttpRequestTransport : IHttpRequestTransport
     {
         private int _maxRedirects = KnownConfigs.DownloadManager.Download.MaximumRedirectsDefaultValue;
         
@@ -24,13 +25,25 @@ namespace AMKDownloadManager.Defaults.Network
             IDownloadProgressListener downloadProgressListener,
             bool unpackStream)
         {
-            appContext.SignalFeatures<IBarrierListenerFeature>(
+            appContext.SignalFeatures<ITransportListenerFeature>(
                 l => l.BeforeSendRequest(appContext, this, request));
 
-            var webRequest = HttpHelpers.CreateHttpWebRequestFromRequest(request);
-            appContext.SignalFeatures<IBarrierListenerFeature>(
+            var webRequest = HttpHelpers.CreateHttpWebRequestFromRequest(
+                request,
+                new HashSet<string>
+                {
+                    "Referer",
+                    "User-Agent"
+                });
+            appContext.SignalFeatures<ITransportListenerFeature>(
                 l => l.WebRequestCreated(appContext, this, request, webRequest));
 
+            var referer = request.Headers.Referer;
+            if (referer != null) webRequest.Referer = referer;
+            
+            var userAgent = request.Headers.UserAgent;
+            if (userAgent != null) webRequest.UserAgent = userAgent;
+            
             var requestBody = request.RequestBody;
             var requestBodyWriter = request.RequestBodyWriter;
             if (!request.IsGetRequest() && (requestBody != null || requestBodyWriter != null))
@@ -51,11 +64,10 @@ namespace AMKDownloadManager.Defaults.Network
             //webRequest.KeepAlive = false;
             webRequest.AllowAutoRedirect = true;
             webRequest.MaximumAutomaticRedirections = _maxRedirects;
-            webRequest.AllowReadStreamBuffering = false;
+            //webRequest.all
+            //webRequest.AllowReadStreamBuffering = false;
             
-            webRequest.Headers.Remove("Keep-Alive");
-            
-            appContext.SignalFeatures<IBarrierListenerFeature>(
+            appContext.SignalFeatures<ITransportListenerFeature>(
                 l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));
             try
             {
@@ -84,7 +96,7 @@ namespace AMKDownloadManager.Defaults.Network
                                     webResponse
                                 );
                                 
-                                //appContext.SignalFeatures<IBarrierListenerFeature>(
+                                //appContext.SignalFeatures<ITransportListenerFeature>(
                                 //    l => l.WebResponseAvailable(appContext, this, request, webRequest,
                                 //        response, webResponse, stream));
 
@@ -97,7 +109,7 @@ namespace AMKDownloadManager.Defaults.Network
                             var response = new HttpResponse();
                             HttpHelpers.FillResponseFromHttpResponse(response, webResponse);
                             
-                            appContext.SignalFeatures<IBarrierListenerFeature>(
+                            appContext.SignalFeatures<ITransportListenerFeature>(
                                 l => l.WebResponseAvailable(appContext, this, request, webRequest,
                                     response, webResponse, null));
                             
@@ -153,12 +165,15 @@ namespace AMKDownloadManager.Defaults.Network
 //        }
         public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
-            _maxRedirects = configProvider.GetInt(this,
-                KnownConfigs.DownloadManager.Download.MaximumRedirects,
-                KnownConfigs.DownloadManager.Download.MaximumRedirectsDefaultValue
-            );
+            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Download.MaximumRedirects))
+            {
+                _maxRedirects = configProvider.GetInt(this,
+                    KnownConfigs.DownloadManager.Download.MaximumRedirects,
+                    KnownConfigs.DownloadManager.Download.MaximumRedirectsDefaultValue
+                );
+            }
         }
     }
 }

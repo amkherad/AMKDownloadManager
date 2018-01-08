@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net;
 using AMKDownloadManager.Core.Api.DownloadManagement;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
+using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
 using ir.amkdp.gear.core.Text;
 
@@ -16,7 +16,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         public IAppContext AppContext { get; }
 
         public IJob Job { get; }
-        public IHttpRequestBarrier Barrier { get; protected set; }
+        public IHttpRequestTransport Transport { get; protected set; }
         
         public IFileManager FileManager { get; }
         public DownloadItem DownloadItem { get; }
@@ -58,9 +58,9 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public JobChunkState Cycle()
         {
-            if (Barrier == null)
+            if (Transport == null)
             {
-                Barrier = AppContext.GetFeature<IHttpRequestBarrier>();
+                Transport = AppContext.GetFeature<IHttpRequestTransport>();
             }
             
             var request = ProtocolProvider.CreateRequest(
@@ -69,7 +69,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 _segmentation,
                 _segment
             );
-            var response = Barrier.SendRequest(AppContext, DownloadItem, request, _progressListener, false);
+            var response = Transport.SendRequest(AppContext, DownloadItem, request, _progressListener, false);
             
             if (response.StatusCode == HttpStatusCode.PartialContent)
             {
@@ -91,7 +91,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                         var length = response.ResponseStream.Length;
                         if (length != max - min + 1)
                         {
-                            return JobChunkState.ErrorCanTry;
+                            return JobChunkState.ErrorCanRetry;
                         }
                         
                         FileManager.SaveStream(
@@ -106,7 +106,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 }
                 else
                 {
-                    return JobChunkState.ErrorCanTry;
+                    return JobChunkState.ErrorCanRetry;
                 }
             }
             else if (response.StatusCode == HttpStatusCode.RequestedRangeNotSatisfiable)
@@ -117,15 +117,20 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             }
             else
             {
-                return JobChunkState.ErrorCanTry;
+                return JobChunkState.ErrorCanRetry;
             }
 
-            return JobChunkState.ErrorCanTry;
+            return JobChunkState.ErrorCanRetry;
         }
 
-        public void Yield()
+        public void NotifyAbort()
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void Dispose()
+        {
+            
         }
 
         #endregion

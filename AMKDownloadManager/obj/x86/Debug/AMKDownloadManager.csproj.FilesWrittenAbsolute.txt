@@ -1,12 +1,5 @@
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.gtk-gui.gui.stetic
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/bin/Debug/AMKDownloadManager.pdb
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/bin/Debug/AMKDownloadManager.exe
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.exe
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.pdb
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/bin/Debug/libstetic.dll
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/bin/Debug/Gear.Architecture.dll
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/bin/Debug/Gear.Core.dll
+/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.Resources.Help-Cli.txt
 /home/amk/dev/Applications/AMKDownloadManager/output/Debug/AMKDownloadManager.pdb
 /home/amk/dev/Applications/AMKDownloadManager/output/Debug/AMKDownloadManager.exe
-/home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager/obj/x86/Debug/AMKDownloadManager.Resources.Help-Cli.txt

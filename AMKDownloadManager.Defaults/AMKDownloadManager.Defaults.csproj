@@ -79,8 +79,9 @@
     <Compile Include="FileSystem\DefaultDownloadPathProvider.cs" />
     <Compile Include="FileSystem\DefaultFileManager.cs" />
     <Compile Include="FileSystem\DefaultFileProvider.cs" />
+    <Compile Include="FileSystem\DefaultProgressiveStreamSaver.cs" />
     <Compile Include="JobScheduler\DefaultJobScheduler.cs" />
-    <Compile Include="Network\DefaultHttpRequestBarrier.cs" />
+    <Compile Include="Network\DefaultHttpRequestTransport.cs" />
     <Compile Include="Network\DefaultNetworkMonitor.cs" />
     <Compile Include="Network\NetworkInterfaceProvider.cs" />
     <Compile Include="Network\NetworkInterfaceWrapper.cs" />

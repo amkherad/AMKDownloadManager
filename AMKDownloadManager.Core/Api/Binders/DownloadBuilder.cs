@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.Listeners;
+using AMKDownloadManager.Core.Api.Transport;
 using ir.amkdp.gear.arch.Patterns;
 using ir.amkdp.gear.core.Patterns.AppModel;
 using ir.amkdp.gear.core.Collections;
@@ -33,6 +33,9 @@ namespace AMKDownloadManager.Core.Api.Binders
         /// <param name="app">App.</param>
         public static IProtocolProvider Bind(DownloadItem downloadItem, IAppContext app)
         {
+            if (downloadItem == null) throw new ArgumentNullException(nameof(downloadItem));
+            if (app == null) throw new ArgumentNullException(nameof(app));
+            
             var bindListeners = app.GetFeatures<IDownloadBindListener>();
             bindListeners?.ForEach(x => x.NotifyBind(downloadItem));
 

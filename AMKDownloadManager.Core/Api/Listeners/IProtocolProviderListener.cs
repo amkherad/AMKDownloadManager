@@ -1,6 +1,6 @@
-﻿using AMKDownloadManager.Core.Api.Barriers;
-using AMKDownloadManager.Core.Api.Binders;
+﻿using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.Core.Api.DownloadManagement;
+using AMKDownloadManager.Core.Api.Transport;
 
 namespace AMKDownloadManager.Core.Api.Listeners
 {

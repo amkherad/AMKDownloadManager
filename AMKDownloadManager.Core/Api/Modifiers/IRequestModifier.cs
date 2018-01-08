@@ -1,5 +1,5 @@
 ﻿using System;
-using AMKDownloadManager.Core.Api.Barriers;
+using AMKDownloadManager.Core.Api.Transport;
 
 namespace AMKDownloadManager.Core.Api.Modifiers
 {

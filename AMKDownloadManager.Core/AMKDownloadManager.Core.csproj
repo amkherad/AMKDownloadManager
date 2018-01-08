@@ -30,21 +30,22 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Api\Barriers\HttpRequest.cs" />
-    <Compile Include="Api\Barriers\HttpResponse.cs" />
-    <Compile Include="Api\Barriers\IHttpRequestBarrier.cs" />
-    <Compile Include="Api\Barriers\IHttpRequestSerializer.cs" />
-    <Compile Include="Api\Barriers\IRequestBarrier.cs" />
-    <Compile Include="Api\Barriers\IResponse.cs" />
-    <Compile Include="Api\Barriers\ITcpBarrier.cs" />
+    <Compile Include="Api\Transport\HttpRequest.cs" />
+    <Compile Include="Api\Transport\HttpResponse.cs" />
+    <Compile Include="Api\Transport\IHttpRequestTransport.cs" />
+    <Compile Include="Api\Transport\IHttpRequestSerializer.cs" />
+    <Compile Include="Api\Transport\IRequestTransport.cs" />
+    <Compile Include="Api\Transport\IResponse.cs" />
+    <Compile Include="Api\Transport\ITcpTransport.cs" />
     <Compile Include="Api\DownloadManagement\ChunkDescriptor.cs" />
     <Compile Include="Api\DownloadManagement\SegmentationContext.cs" />
     <Compile Include="Api\FileSystem\IDownloadPathProvider.cs" />
     <Compile Include="Api\FileSystem\IFileManager.cs" />
     <Compile Include="Api\FileSystem\IFileProvider.cs" />
+    <Compile Include="Api\FileSystem\IStreamSaver.cs" />
     <Compile Include="Api\FileSystem\PathInfo.cs" />
     <Compile Include="Api\HttpHelpers.cs" />
-    <Compile Include="Api\Listeners\IBarrierListenerFeature.cs" />
+    <Compile Include="Api\Listeners\ITransportListenerFeature.cs" />
     <Compile Include="Api\Listeners\IDownloadBindListener.cs" />
     <Compile Include="Api\Listeners\IDownloadErrorListener.cs" />
     <Compile Include="Api\Listeners\IDownloadProgressListener.cs" />
@@ -58,8 +59,8 @@
     <Compile Include="Api\IFeature.cs" />
     <Compile Include="Api\Modifiers\IAuthenticationMethod.cs" />
     <Compile Include="Api\Modifiers\IRequestModifier.cs" />
-    <Compile Include="Api\Barriers\DownloadItem.cs" />
-    <Compile Include="Api\Barriers\IRequest.cs" />
+    <Compile Include="Api\Transport\DownloadItem.cs" />
+    <Compile Include="Api\Transport\IRequest.cs" />
     <Compile Include="Api\Binders\DownloadBuilder.cs" />
     <Compile Include="Api\Binders\IHttpProtocolProvider.cs" />
     <Compile Include="Api\Binders\IProtocolProvider.cs" />
@@ -87,7 +88,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="Api\" />
     <Folder Include="Api\Modifiers\" />
-    <Folder Include="Api\Barriers\" />
+    <Folder Include="Api\Transport\" />
     <Folder Include="Api\Binders\" />
     <Folder Include="Api\DownloadManagement\" />
     <Folder Include="Api\Network\" />

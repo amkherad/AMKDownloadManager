@@ -4,7 +4,7 @@ using ir.amkdp.gear.core.Automation;
 using ir.amkdp.gear.core.Collections;
 using ir.amkdp.gear.web.Http;
 
-namespace AMKDownloadManager.Core.Api.Barriers
+namespace AMKDownloadManager.Core.Api.Transport
 {
     public class HttpRequest : IRequest
     {

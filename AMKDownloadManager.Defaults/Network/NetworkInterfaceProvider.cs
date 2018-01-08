@@ -17,7 +17,7 @@ namespace AMKDownloadManager.Defaults.Network
         }
 
         public int Order => 0;
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             
         }

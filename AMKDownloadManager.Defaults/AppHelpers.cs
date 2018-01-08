@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
-using AMKDownloadManager.Core.Api.Barriers;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Network;
+using AMKDownloadManager.Core.Api.Transport;
+using AMKDownloadManager.Core.Extensions;
 using AMKDownloadManager.Core.Impl;
 using AMKDownloadManager.Defaults.DownloadManager;
 using AMKDownloadManager.Defaults.FileSystem;
@@ -15,13 +17,20 @@ using ir.amkdp.gear.core.Collections;
 
 namespace AMKDownloadManager.Defaults
 {
+    /// <summary>
+    /// Shared layer helpers.
+    /// </summary>
     public class AppHelpers
     {
+        /// <summary>
+        /// Load components for <see cref="IAppContext"/>.
+        /// </summary>
+        /// <param name="appContext">The context which components are loaded for.</param>
         public static void LoadComponents(IAppContext appContext)
         {
             var importer = new ComponentImporter();
             importer.Compose();
-            Console.WriteLine("{0} component(s) are imported successfully.", importer.AvailableNumberOfComponents);
+            Console.WriteLine("{0} component(s) are imported successfully.", importer.NumberOfAvailableComponents);
             
             importer.InitializeAll(appContext);
         }
@@ -29,10 +38,12 @@ namespace AMKDownloadManager.Defaults
         /// <summary>
         /// Injects default services to service pool.
         /// </summary>
-        /// <param name="app">App.</param>
+        /// <param name="app">The <see cref="IAppContext"/> which services will being injected to.</param>
         private static void _buildDefaults(IAppContext app)
         {
-            app.AddFeature<IConfigProvider>(new DefaultConfigProvider());
+            var configProvider = new DefaultConfigProvider();
+            
+            app.AddFeature<IConfigProvider>(configProvider);
             app.AddFeature<INetworkMonitor>(new DefaultNetworkMonitor());
 
             var scheduler = new DefaultJobScheduler(app);
@@ -41,26 +52,42 @@ namespace AMKDownloadManager.Defaults
             app.AddFeature<IDownloadManager>(new DefaultDownloadManager(app, scheduler));
 
             app.AddFeature<IJobDivider>(new DefaultSegmentProvider());
-            app.AddFeature<IFileProvider>(new DefaultFileProvider());
+            app.AddFeature<IFileProvider>(new DefaultFileProvider(
+                configProvider.GetInt(
+                    app,
+                    KnownConfigs.FileSystem.DuplicityResolvationStart,
+                    KnownConfigs.FileSystem.DuplicityResolvationStartDefaultValue
+                    )
+                ));
             app.AddFeature<IDownloadPathProvider>(new DefaultDownloadPathProvider());
+            
+            app.AddFeature<IStreamSaver>(new DefaultProgressiveStreamSaver());
         }
 
+        /// <summary>
+        /// Injects default services to service pool.
+        /// </summary>
+        /// <param name="appContext">The <see cref="IAppContext"/> which services will be injected to.</param>
         public static void InjectTopLayerFeatures(IAppContext appContext)
         {
             _buildDefaults(appContext);
 
-            var httpBarrier = new DefaultHttpRequestBarrier();
-            appContext.AddFeature<IRequestBarrier>(httpBarrier);
-            appContext.AddFeature<IHttpRequestBarrier>(httpBarrier);
+            var httpTransport = new DefaultHttpRequestTransport();
+            appContext.AddFeature<IRequestTransport>(httpTransport);
+            appContext.AddFeature<IHttpRequestTransport>(httpTransport);
             appContext.AddFeature<INetworkInterfaceProvider>(new NetworkInterfaceProvider());
         }
 
+        /// <summary>
+        /// Calls <see cref="IFeature.LoadConfig"/> on all features of <see cref="IAppContext"/>
+        /// </summary>
+        /// <param name="appContext">The <see cref="IAppContext"/> which features will be configured.</param>
         public static void ConfigureFeatures(IAppContext appContext)
         {
             var configProvider = appContext.GetFeature<IConfigProvider>();
 
             var features = appContext.GetTypedValues().OfType<IFeature>();
-            features.ForEach(x => x.LoadConfig(appContext, configProvider));
+            features.ForEach(x => x.LoadConfig(appContext, configProvider, null));
         }
     }
 }

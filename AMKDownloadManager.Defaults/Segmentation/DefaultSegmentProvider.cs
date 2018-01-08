@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.DownloadManagement;
@@ -8,8 +9,8 @@ namespace AMKDownloadManager.Defaults.Segmentation
 {
     public class DefaultSegmentProvider : IJobDivider
     {
-        private long _minSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSize_DefaultValue; 
-        private long _maxSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSize_DefaultValue; 
+        private long _minSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
+        private long _maxSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
 
         public ChunkDescriptor GetChunk(
             IAppContext appContext,
@@ -85,17 +86,22 @@ namespace AMKDownloadManager.Defaults.Segmentation
 
         public int Order => 0;
         
-        
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
-            _minSegmentSize = configProvider.GetLong(this,
-                KnownConfigs.DownloadManager.Segmentation.MinSegmentSize,
-                KnownConfigs.DownloadManager.Segmentation.MinSegmentSize_DefaultValue
-            );
-            _maxSegmentSize = configProvider.GetLong(this,
-                KnownConfigs.DownloadManager.Segmentation.MaxSegmentSize,
-                KnownConfigs.DownloadManager.Segmentation.MaxSegmentSize_DefaultValue
-            );
+            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Segmentation.MinSegmentSize))
+            {
+                _minSegmentSize = configProvider.GetLong(this,
+                    KnownConfigs.DownloadManager.Segmentation.MinSegmentSize,
+                    KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue
+                );
+            }
+            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Segmentation.MaxSegmentSize))
+            {
+                _maxSegmentSize = configProvider.GetLong(this,
+                    KnownConfigs.DownloadManager.Segmentation.MaxSegmentSize,
+                    KnownConfigs.DownloadManager.Segmentation.MaxSegmentSizeDefaultValue
+                );
+            }
         }
     }
 }

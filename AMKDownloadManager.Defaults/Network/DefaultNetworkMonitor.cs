@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Network;
 
@@ -30,7 +31,7 @@ namespace AMKDownloadManager.Defaults.Network
             }
         }
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider)
+        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             
         }
