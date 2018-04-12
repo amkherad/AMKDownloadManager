@@ -9,7 +9,7 @@ namespace AMKDownloadManager.Core.Api.FileSystem
             IFileManager fileManager,
             long start,
             long? end,
-            long? chunkSize,
+            long? partSize,
             long? limit);
     }
 }

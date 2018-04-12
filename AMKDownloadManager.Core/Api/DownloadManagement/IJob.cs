@@ -83,10 +83,10 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
 
         // <param name="downloadProgressListener">Listener to listen to progression information.</param>
         /// <summary>
-        /// Gets a new chunk.
+        /// Gets a new part.
         /// </summary>
         /// <returns></returns>
-        IJobChunk GetJobChunk(JobInfo jobInfo/*IDownloadProgressListener downloadProgressListener*/);
+        IJobPart GetJobPart(JobInfo jobInfo/*IDownloadProgressListener downloadProgressListener*/);
         
         void Clean();
         void Reset();

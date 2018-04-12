@@ -1,10 +1,10 @@
 ﻿namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
-    public class ChunkDescriptor
+    public class PartialBlockDescriptor
     {
         public Segment Segment { get; }
         
-        public ChunkDescriptor(Segment segment)
+        public PartialBlockDescriptor(Segment segment)
         {
             Segment = segment;
         }

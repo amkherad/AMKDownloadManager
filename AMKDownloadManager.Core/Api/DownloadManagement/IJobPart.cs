@@ -3,9 +3,9 @@
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
     /// <summary>
-    /// Job chunk state.
+    /// Job part state.
     /// </summary>
-    public enum JobChunkState
+    public enum JobPartState
     {
         RequestMoreCycle,
         ErrorCanRetry,
@@ -14,14 +14,14 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
     }
 
     /// <summary>
-    /// A single chunk of download progress job.
+    /// A single part of download progress job.
     /// </summary>
-    public interface IJobChunk : IDisposable
+    public interface IJobPart : IDisposable
     {
         /// <summary>
-        /// Gives an execution cycle to job chunk to finish it's job. if RequestMoreCycle returned it schedules for one more cycle.
+        /// Gives an execution cycle to job part to finish it's job. if RequestMoreCycle returned it schedules for one more cycle.
         /// </summary>
-        JobChunkState Cycle();
+        JobPartState Cycle();
 
         /// <summary>
         /// Notifies for ThreadAbortException.

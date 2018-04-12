@@ -305,11 +305,11 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     return;
                 }
 
-                var mainJobChunk = jobInfo.MainJobChunk;
-                if (mainJobChunk != null)
+                var mainJobPart = jobInfo.MainJobPart;
+                if (mainJobPart != null)
                 {
-                    var thread = DownloadManager.ThreadFactory.Create(_processChunk);
-                    thread.Start(mainJobChunk);
+                    var thread = DownloadManager.ThreadFactory.Create(_processPart);
+                    thread.Start(mainJobPart);
                     lock (Threads)
                     {
                         Threads.Add(thread);
@@ -333,10 +333,10 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                                 var dispathRetry = new RetryHelper(_maxFailureRetries);
                                 while (!dispathRetry.IsDone())
                                 {
-                                    IJobChunk chunk = null;
+                                    IJobPart part = null;
                                     try
                                     {
-                                        chunk = Job.GetJobChunk(jobInfo);
+                                        part = Job.GetJobPart(jobInfo);
                                         dispathRetry.Done();
                                     }
                                     catch (Exception ex)
@@ -344,14 +344,14 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                                         dispathRetry.Catch(ex);
                                     }
 
-                                    if (chunk == null)
+                                    if (part == null)
                                     {
                                         dispathRetry.Fail();
                                     }
                                     else
                                     {
-                                        var thread = DownloadManager.ThreadFactory.Create(_processChunk);
-                                        thread.Start(chunk);
+                                        var thread = DownloadManager.ThreadFactory.Create(_processPart);
+                                        thread.Start(part);
                                         lock (Threads)
                                         {
                                             Threads.Add(thread);
@@ -369,36 +369,36 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                 }
             }
 
-            private void _processChunk(object state)
+            private void _processPart(object state)
             {
-                var chunk = state as IJobChunk;
-                if (chunk == null) return;
+                var part = state as IJobPart;
+                if (part == null) return;
 
                 var retry = new RetryHelper(_maxFailureRetries);
-                JobChunkState result;
+                JobPartState result;
                 do
                 {
                     try
                     {
-                        result = chunk.Cycle();
+                        result = part.Cycle();
                         retry.Done();
                     }
                     catch (Exception ex)
                     {
                         retry.Catch(ex);
-                        result = JobChunkState.ErrorCanRetry;
-                        AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnChunkError(
+                        result = JobPartState.ErrorCanRetry;
+                        AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnPartError(
                             AppContext,
                             Job,
-                            chunk,
+                            part,
                             DownloadManager,
                             !retry.IsDone()
                         ));
                     }
-                } while (result == JobChunkState.RequestMoreCycle ||
-                         result == JobChunkState.ErrorCanRetry && !retry.IsDone());
+                } while (result == JobPartState.RequestMoreCycle ||
+                         result == JobPartState.ErrorCanRetry && !retry.IsDone());
                 
-                chunk.Dispose();
+                part.Dispose();
             }
 
             public void Pause()

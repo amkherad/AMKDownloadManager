@@ -30,7 +30,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
             string name,
             string mimeType,
             long? size,
-            int? chunks)
+            int? parts)
         {
             var pathProvider = appContext.GetFeature<IDownloadPathProvider>();
 
@@ -70,7 +70,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
             string filePath,
             string mimeType,
             long? size,
-            int? chunks)
+            int? parts)
         {
             if (!File.Exists(filePath))
             {

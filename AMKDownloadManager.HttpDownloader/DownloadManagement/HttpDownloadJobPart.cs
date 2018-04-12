@@ -11,7 +11,7 @@ using ir.amkdp.gear.core.Text;
 
 namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 {
-    public class HttpDownloadJobChunk : IJobChunk
+    public class HttpDownloadJobPart : IJobPart
     {
         public IAppContext AppContext { get; }
 
@@ -31,7 +31,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         private IDownloadProgressListener _progressListener;
         
-        public HttpDownloadJobChunk(
+        public HttpDownloadJobPart(
             IAppContext appContext,
             HttpProtocolProvider protocolProvider,
             IJob job,
@@ -54,9 +54,9 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             _networkMonitor = appContext.GetFeature<INetworkMonitor>();
         }
 
-        #region IJobChunk implementation
+        #region IJobPart implementation
 
-        public JobChunkState Cycle()
+        public JobPartState Cycle()
         {
             if (Transport == null)
             {
@@ -93,7 +93,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                         var length = response.ResponseStream.Length;
                         if (length != max - min + 1)
                         {
-                            return JobChunkState.ErrorCanRetry;
+                            return JobPartState.ErrorCanRetry;
                         }
                         
                         FileManager.SaveStream(
@@ -103,27 +103,27 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                             length
                         );
                         
-                        return JobChunkState.Finished;
+                        return JobPartState.Finished;
                     }
                 }
                 else
                 {
-                    return JobChunkState.ErrorCanRetry;
+                    return JobPartState.ErrorCanRetry;
                 }
             }
             else if (response.StatusCode == HttpStatusCode.RequestedRangeNotSatisfiable)
             {
                 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/416
                 //TODO: MDN: download will be considered as non-resumable or ask for the whole document again.
-                return JobChunkState.Error;
-				//#error {{download will be considered as non-resumable or ask for the whole document again.}} why JobChunkState.Error ??
+                return JobPartState.Error;
+				//#error {{download will be considered as non-resumable or ask for the whole document again.}} why JobPartState.Error ??
             }
             else
             {
-                return JobChunkState.ErrorCanRetry;
+                return JobPartState.ErrorCanRetry;
             }
 
-            return JobChunkState.ErrorCanRetry;
+            return JobPartState.ErrorCanRetry;
         }
 
         public void NotifyAbort()

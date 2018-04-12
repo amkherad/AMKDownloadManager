@@ -17,10 +17,10 @@ namespace AMKDownloadManager.Core.Api.Listeners
             bool retrying
         );
 
-        void OnChunkError(
+        void OnPartError(
             IAppContext appContext,
             IJob job,
-            IJobChunk jobChunk,
+            IJobPart jobPart,
             IDownloadManager downloadManager,
             bool retrying
         );

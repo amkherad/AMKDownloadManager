@@ -21,7 +21,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
 
             foreach (var seg in expectedSegments)
             {
-                var cd = divider.GetChunk(pool, null, context);
+                var cd = divider.GetPart(pool, null, context);
 
                 var minEq = cd.Segment.Min == seg.Min;
                 var maxEq = cd.Segment.Max == seg.Max;
@@ -32,7 +32,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
 
             if (finished)
             {
-                var cd = divider.GetChunk(pool, null, context);
+                var cd = divider.GetPart(pool, null, context);
                 Assert.IsNull(cd, "More segments than expected.");
             }
         }
@@ -42,12 +42,12 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             var pool = AppContext.Context as IAppContext;
             var divider = pool.GetFeature<IJobDivider>();
 
-            ChunkDescriptor cd = divider.GetChunk(pool, null, context);
+            PartialBlockDescriptor cd = divider.GetPart(pool, null, context);
             if (cd == null) return;
             do
             {
-                Trace.WriteLine($"chunk= {cd.Segment.Min}:{cd.Segment.Max}");
-                cd = divider.GetChunk(pool, null, context);
+                Trace.WriteLine($"part= {cd.Segment.Min}:{cd.Segment.Max}");
+                cd = divider.GetPart(pool, null, context);
             } while (cd != null);
         }
         

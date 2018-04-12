@@ -14,21 +14,21 @@ namespace AMKDownloadManager.Defaults.FileSystem
             IFileManager fileManager,
             long start,
             long? end,
-            long? chunkSize,
+            long? partsSize,
             long? limit)
         {
-            if (chunkSize != null)
+            if (partsSize != null)
             {
-                int chunkSizeLng = (int) chunkSize.Value;
+                int partSizeLng = (int) partsSize.Value;
                 var offset = start;
-                var chunk = new byte[chunkSizeLng];
-                long length = stream.Read(chunk, 0, chunkSizeLng);
+                var part = new byte[partSizeLng];
+                long length = stream.Read(part, 0, partSizeLng);
                 long totalRead = 0L;
                 try
                 {
                     while (length > 0)
                     {
-                        fileManager.SaveBinary(chunk, offset, 0, length);
+                        fileManager.SaveBinary(part, offset, 0, length);
                         offset += length;
                         totalRead += length;
 
@@ -37,7 +37,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
                             break;
                         }
 
-                        length = stream.Read(chunk, 0, chunkSizeLng);
+                        length = stream.Read(part, 0, partSizeLng);
                     }
                 }
                 catch(Exception ex)

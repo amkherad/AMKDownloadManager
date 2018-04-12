@@ -2,7 +2,7 @@
 {
     public interface IJobDivider : IFeature
     {
-        ChunkDescriptor GetChunk(
+        PartialBlockDescriptor GetPart(
             IAppContext appContext,
             IJob job, 
             SegmentationContext segmentationContext);

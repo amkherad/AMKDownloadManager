@@ -18,9 +18,9 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         public long? FirstHttpPacketSize { get; }
         
         /// <summary>
-        /// Main job chunk to continue job on a diffrent download manager thread.
+        /// Main job part to continue job on a diffrent download manager thread.
         /// </summary>
-        public IJobChunk MainJobChunk { get; } 
+        public IJobPart MainJobPart { get; } 
         
         /// <summary>
         /// Gets a value indicating whether this <see cref="AMKDownloadManager.Core.Api.DownloadManagement.IJob"/>
@@ -55,7 +55,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             bool supportsConcurrency,
             IResponse response,
             //bool isFinished,
-            IJobChunk mainJobChunk)
+            IJobPart mainJobPart)
         {
             Disposer = new Disposer();
             
@@ -64,7 +64,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             SupportsConcurrency = supportsConcurrency;
             Response = response;
             //IsFinished = isFinished;
-            MainJobChunk = mainJobChunk;
+            MainJobPart = mainJobPart;
         }
 
         public void Dispose()

@@ -9,14 +9,14 @@
 		/// <param name="name">Optional file name</param>
 		/// <param name="mimeType">Optional file mime type</param>
 		/// <param name="size">Download resource size, this may change</param>
-		/// <param name="chunks">Number of probable chunks, this may change</param>
+		/// <param name="parts">Number of probable parts, (value may change after creation)</param>
 		/// <returns></returns>
 		IFileManager CreateFile(
 			IAppContext appContext,
 			string name,
 			string mimeType,
 			long? size,
-			int? chunks
+			int? parts
 		);
 		
 		/// <summary>
@@ -26,14 +26,14 @@
 		/// <param name="filePath">Target file path</param>
 		/// <param name="mimeType">Optional file mime type</param>
 		/// <param name="size">Download resource size, this may change</param>
-		/// <param name="chunks">Number of probable chunks, this may change</param>
+		/// <param name="parts">Number of probable chunks, (value may change after creation)</param>
 		/// <returns></returns>
 		IFileManager ResumeFile(
 			IAppContext appContext,
 			string filePath,
 			string mimeType,
 			long? size,
-			int? chunks
+			int? parts
 		);
 
 		/// <summary>

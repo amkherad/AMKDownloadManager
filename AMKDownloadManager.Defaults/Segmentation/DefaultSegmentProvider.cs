@@ -12,7 +12,7 @@ namespace AMKDownloadManager.Defaults.Segmentation
         private long _minSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
         private long _maxSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
 
-        public ChunkDescriptor GetChunk(
+        public PartialBlockDescriptor GetPart(
             IAppContext appContext,
             IJob job,
             SegmentationContext segmentationContext)
@@ -81,7 +81,7 @@ namespace AMKDownloadManager.Defaults.Segmentation
                 }
                 segmentationContext.ReservedRanges.Add(segment);
 
-                return new ChunkDescriptor(segment);
+                return new PartialBlockDescriptor(segment);
             }
         }
 

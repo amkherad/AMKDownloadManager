@@ -124,10 +124,10 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 }
             }
 
-            IJobChunk mainJobChunk = null;
+            IJobPart mainJobPart = null;
             if ((downloadSize ?? 0) > 0)
             {
-                mainJobChunk = new MainJobChunkImpl(
+                mainJobPart = new MainJobPartImpl(
                     AppContext,
                     this,
                     FileManager,
@@ -141,7 +141,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 supportsConcurrency,
                 response,
                 //isFinished,
-                mainJobChunk);
+                mainJobPart);
 
             jobInfo.Disposer.Enqueue(response);
             
@@ -153,7 +153,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             return Task.Run(() => TriggerJobAndGetInfo());
         }
 
-        private class MainJobChunkImpl : IJobChunk
+        private class MainJobPartImpl : IJobPart
         {
             public IAppContext AppContext { get; }
             public HttpDownloadJob Job { get; }
@@ -163,7 +163,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             private long _limit;
             private long _bufferSize;
             
-            public MainJobChunkImpl(
+            public MainJobPartImpl(
                 IAppContext appContext,
                 HttpDownloadJob job,
                 IFileManager fileManager,
@@ -178,7 +178,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 _bufferSize = job._bufferSize;
             }
             
-            public JobChunkState Cycle()
+            public JobPartState Cycle()
             {
                 var stream = Response.ResponseStream;
                 
@@ -195,11 +195,11 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                         _limit
                     );
                     
-                    return JobChunkState.Finished;
+                    return JobPartState.Finished;
                 }
                 catch (Exception ex)
                 {
-                    return JobChunkState.ErrorCanRetry;
+                    return JobPartState.ErrorCanRetry;
                 }
             }
 
@@ -214,7 +214,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             }
         }
 
-        public IJobChunk GetJobChunk(JobInfo jobInfo)
+        public IJobPart GetJobPart(JobInfo jobInfo)
         {
             if (Segmentation == null)
             {
@@ -225,24 +225,24 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 throw new InvalidOperationException();
             }
 
-            var chunkDescriptor = SegmentProvider.GetChunk(
+            var partDescriptor = SegmentProvider.GetPart(
                 AppContext,
                 this,
                 Segmentation
             );
 
-            if (chunkDescriptor == null)
+            if (partDescriptor == null)
             {
                 return null;
             }
 
-            return new HttpDownloadJobChunk(
+            return new HttpDownloadJobPart(
                 AppContext,
                 HttpProtocolProvider,
                 this,
                 FileManager,
                 Segmentation,
-                chunkDescriptor.Segment,
+                partDescriptor.Segment,
                 _progressListener
             );
         }
