@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using System.Net;
 using AMKDownloadManager.Core.Api.Transport;
+using ir.amkdp.gear.arch.Annotations;
 
 namespace AMKDownloadManager.Core.Api.Listeners
 {
@@ -15,7 +15,7 @@ namespace AMKDownloadManager.Core.Api.Listeners
             IAppContext appContext,
             IRequestTransport transport,
             IRequest request,
-            WebRequest webRequest);
+            [CanBeNull] object webRequest);
         
 //        void HttpWebRequestCreated(
 //            IAppContext appContext,
@@ -27,15 +27,15 @@ namespace AMKDownloadManager.Core.Api.Listeners
             IAppContext appContext,
             IRequestTransport transport,
             IRequest request,
-            WebRequest webRequest);
+            [CanBeNull] object webRequest);
         
         void WebResponseAvailable(
             IAppContext appContext,
             IRequestTransport transport,
             IRequest request,
-            WebRequest webRequest,
+            [CanBeNull] object webRequest,
             IResponse response,
-            WebResponse webResponse,
+            [CanBeNull] object webResponse,
             Stream responseStream);
     }
 }

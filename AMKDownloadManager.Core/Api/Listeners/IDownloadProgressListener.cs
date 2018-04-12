@@ -8,13 +8,13 @@ namespace AMKDownloadManager.Core.Api.Listeners
         void OnProgress(
             IAppContext appContext,
             IJob job, DownloadItem downloadItem,
-            IHttpRequestTransport transport,
+            IHttpTransport transport,
             long totalSize,
             long progress);
         
         void OnFinished(
             IAppContext appContext,
             IJob job, DownloadItem downloadItem,
-            IHttpRequestTransport transport);
+            IHttpTransport transport);
     }
 }

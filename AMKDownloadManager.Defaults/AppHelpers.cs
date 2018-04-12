@@ -72,9 +72,9 @@ namespace AMKDownloadManager.Defaults
         {
             _buildDefaults(appContext);
 
-            var httpTransport = new DefaultHttpRequestTransport();
+            var httpTransport = new DefaultTcpHttpRequestTransport();
             appContext.AddFeature<IRequestTransport>(httpTransport);
-            appContext.AddFeature<IHttpRequestTransport>(httpTransport);
+            appContext.AddFeature<IHttpTransport>(httpTransport);
             appContext.AddFeature<INetworkInterfaceProvider>(new NetworkInterfaceProvider());
         }
 

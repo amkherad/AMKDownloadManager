@@ -30,9 +30,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Api\DownloadManagement\JobInfo.cs" />
     <Compile Include="Api\Transport\HttpRequest.cs" />
     <Compile Include="Api\Transport\HttpResponse.cs" />
-    <Compile Include="Api\Transport\IHttpRequestTransport.cs" />
+    <Compile Include="Api\Transport\IHttpTransport.cs" />
     <Compile Include="Api\Transport\IHttpRequestSerializer.cs" />
     <Compile Include="Api\Transport\IRequestTransport.cs" />
     <Compile Include="Api\Transport\IResponse.cs" />

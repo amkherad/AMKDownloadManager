@@ -3,3 +3,8 @@
 /home/amk/dev/Applications/AMKDownloadManager/output/Debug/AMKDownloadManager.Core.dll
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.dll
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.pdb
+/develop/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
+/develop/Applications/AMKDownloadManager/output/Debug/AMKDownloadManager.Core.pdb
+/develop/Applications/AMKDownloadManager/output/Debug/AMKDownloadManager.Core.dll
+/develop/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.dll
+/develop/Applications/AMKDownloadManager/AMKDownloadManager.Core/obj/Debug/AMKDownloadManager.Core.pdb

@@ -83,6 +83,7 @@
     <Compile Include="JobScheduler\DefaultJobScheduler.cs" />
     <Compile Include="Network\DefaultHttpRequestTransport.cs" />
     <Compile Include="Network\DefaultNetworkMonitor.cs" />
+    <Compile Include="Network\DefaultTcpHttpRequestTransport.cs" />
     <Compile Include="Network\NetworkInterfaceProvider.cs" />
     <Compile Include="Network\NetworkInterfaceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

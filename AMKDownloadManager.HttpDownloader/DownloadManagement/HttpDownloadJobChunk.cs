@@ -16,7 +16,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         public IAppContext AppContext { get; }
 
         public IJob Job { get; }
-        public IHttpRequestTransport Transport { get; protected set; }
+        public IHttpTransport Transport { get; protected set; }
         
         public IFileManager FileManager { get; }
         public DownloadItem DownloadItem { get; }
@@ -60,7 +60,8 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         {
             if (Transport == null)
             {
-                Transport = AppContext.GetFeature<IHttpRequestTransport>();
+                Transport = AppContext.GetFeature<IHttpTransport>();
+				//#error rename all IHttpRequestTransport to IHttpTransport
             }
             
             var request = ProtocolProvider.CreateRequest(
@@ -70,6 +71,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 _segment
             );
             var response = Transport.SendRequest(AppContext, DownloadItem, request, _progressListener, false);
+			//#error error handling for prev. line
             
             if (response.StatusCode == HttpStatusCode.PartialContent)
             {
@@ -114,6 +116,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/416
                 //TODO: MDN: download will be considered as non-resumable or ask for the whole document again.
                 return JobChunkState.Error;
+				//#error {{download will be considered as non-resumable or ask for the whole document again.}} why JobChunkState.Error ??
             }
             else
             {

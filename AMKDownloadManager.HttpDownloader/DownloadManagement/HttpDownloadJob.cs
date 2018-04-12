@@ -24,7 +24,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public JobParameters JobParameters { get; }
 
-        public IHttpRequestTransport Transport { get; protected set; }
+        public IHttpTransport Transport { get; protected set; }
         public IJobDivider SegmentProvider { get; protected set; }
 
         public IFileManager FileManager { get; protected set; }
@@ -54,7 +54,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             DownloadItem = downloadItem;
             JobParameters = jobParameters;
 
-            Transport = appContext.GetFeature<IHttpRequestTransport>();
+            Transport = appContext.GetFeature<IHttpTransport>();
             SegmentProvider = appContext.GetFeature<IJobDivider>();
 
             _progressListener = new ProgressListener();
@@ -85,7 +85,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         {
             if (Transport == null)
             {
-                Transport = AppContext.GetFeature<IHttpRequestTransport>();
+                Transport = AppContext.GetFeature<IHttpTransport>();
             }
             bool supportsConcurrency = false;
             long? downloadSize;
@@ -302,7 +302,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 IAppContext appContext,
                 IJob job,
                 DownloadItem downloadItem,
-                IHttpRequestTransport transport,
+                IHttpTransport transport,
                 long totalSize,
                 long progress)
             {
@@ -314,7 +314,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 IAppContext appContext,
                 IJob job,
                 DownloadItem downloadItem,
-                IHttpRequestTransport transport)
+                IHttpTransport transport)
             {
                 var j = job as HttpDownloadJob;
                 j?.OnFinished(EventArgs.Empty);

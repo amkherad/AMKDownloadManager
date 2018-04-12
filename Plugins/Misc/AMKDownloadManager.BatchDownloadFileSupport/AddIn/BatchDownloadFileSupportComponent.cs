@@ -2,7 +2,7 @@
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Extensions;
 
-namespace AMKDownloadManager.BatchDownloadFileSupport
+namespace AMKDownloadManager.BatchDownloadFileSupport.AddIn
 {
     public class BatchDownloadFileSupportComponent : IComponent
     {

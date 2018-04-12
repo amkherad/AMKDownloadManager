@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
-using System.Net.Cache;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Listeners;
-using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
 using ir.amkdp.gear.core.Trace;
 
 namespace AMKDownloadManager.Defaults.Network
 {
-    public class DefaultHttpRequestTransport : IHttpTransport
+    public class DefaultTcpHttpRequestTransport : IHttpTransport
     {
         private int _maxRedirects = KnownConfigs.DownloadManager.Download.MaximumRedirectsDefaultValue;
         

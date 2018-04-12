@@ -98,6 +98,8 @@ namespace AMKDownloadManager.Defaults.DownloadManager
             if (_schedulerThread != null)
             {
                 _schedulerThread.Abort();
+				_schedulerThread.Join();
+				//#error Check for safety of join after abort...
 
                 //Do not abort the innocent.
             }
@@ -130,6 +132,9 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
                 loop.Count();
             }
+			
+			_downloadManagerState = false;
+			//#error while (_downloadManagerState || {{{{{ _runningJobs.Any() }}}}} ) | _runningJobs.Any() ??? Stop the download manager and signal to all.
         }
 
         private void _setJobAsRunning(DefaultDownloadManagerJobContext jobContext)
@@ -187,9 +192,14 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
         public void Join(IJob job)
         {
-            var threads = FindJob(job)?.Threads;
+            var jobContext = FindJob(job);
+            if (jobContext == null) throw new InvalidOperationException();
+            
+            var threads = jobContext.Threads;
             if (threads == null) throw new InvalidOperationException();
 
+            jobContext.DispatcherThread.Join();
+		    
             foreach (var thread in threads)
             {
                 thread.Join();
@@ -313,7 +323,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                 }
                 //else
                 {
-                    if (false && jobInfo.SupportsConcurrency)
+                    if (jobInfo.SupportsConcurrency)
                     {
                         var loop = new LoopCountLimiter(5);
                         while (_downloadJobState)

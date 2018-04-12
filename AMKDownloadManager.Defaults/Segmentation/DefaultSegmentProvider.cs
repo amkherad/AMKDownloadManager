@@ -7,7 +7,7 @@ using ir.amkdp.gear.core.Collections;
 
 namespace AMKDownloadManager.Defaults.Segmentation
 {
-    public class DefaultSegmentProvider : IJobDivider
+    public class DefaultSegmentProvider : IJobDivider //IDM behavior segment provider.
     {
         private long _minSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
         private long _maxSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
@@ -36,7 +36,7 @@ namespace AMKDownloadManager.Defaults.Segmentation
             
             lock (segmentationContext.SyncRoot)
             {
-                var freeRanges = segmentationContext.Reverse().AsList();
+                var freeRanges = segmentationContext.Reverse().ToList();
                 if (!freeRanges.Any())
                 {
                     return null;
@@ -62,6 +62,7 @@ namespace AMKDownloadManager.Defaults.Segmentation
                             break;
                         }
                     }
+					//#error this is not IDM behavior... its sequential. IDM is binary.
 
                     if (segment == null)
                     {
