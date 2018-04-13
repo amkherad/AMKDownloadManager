@@ -81,15 +81,14 @@
     <Compile Include="FileSystem\DefaultFileProvider.cs" />
     <Compile Include="FileSystem\DefaultProgressiveStreamSaver.cs" />
     <Compile Include="JobScheduler\DefaultJobScheduler.cs" />
-    <Compile Include="Network\DefaultHttpRequestTransport.cs" />
     <Compile Include="Network\DefaultNetworkMonitor.cs" />
-    <Compile Include="Network\DefaultTcpHttpRequestTransport.cs" />
     <Compile Include="Network\NetworkInterfaceProvider.cs" />
-    <Compile Include="Network\NetworkInterfaceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Segmentation\DefaultSegmentProvider.cs" />
+    <Compile Include="Segmentation\LeftBalancingSegmentProvider.cs" />
     <Compile Include="Threading\AbstractThread.cs" />
     <Compile Include="Threading\AbstractThreadFactory.cs" />
+    <Compile Include="Transport\DefaultHttpRequestTransport.cs" />
+    <Compile Include="Transport\DefaultTcpHttpRequestTransport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj">

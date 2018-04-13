@@ -26,6 +26,10 @@ namespace AMKDownloadManager.NUnit
             {
                 for (var i = 0; i < f; i++) System.Console.WriteLine();
             }));
+            Logger.RegisterLogger(new MethodLogger(TestContext.Write, f =>
+            {
+                for (var i = 0; i < f; i++) TestContext.WriteLine();
+            }));
 
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
             AppHelpers.InjectTopLayerFeatures(pool);

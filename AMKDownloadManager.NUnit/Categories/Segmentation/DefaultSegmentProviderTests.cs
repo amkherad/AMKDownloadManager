@@ -17,7 +17,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             bool finished = true)
         {
             var pool = AppContext.Context as IAppContext;
-            var divider = pool.GetFeature<IJobDivider>();
+            var divider = pool.GetFeature<ISegmentDivider>();
 
             foreach (var seg in expectedSegments)
             {
@@ -40,7 +40,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
         private void _divideAndShow(SegmentationContext context)
         {
             var pool = AppContext.Context as IAppContext;
-            var divider = pool.GetFeature<IJobDivider>();
+            var divider = pool.GetFeature<ISegmentDivider>();
 
             PartialBlockDescriptor cd = divider.GetPart(pool, null, context);
             if (cd == null) return;

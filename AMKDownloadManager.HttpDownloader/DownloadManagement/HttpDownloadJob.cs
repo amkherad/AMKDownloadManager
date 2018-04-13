@@ -25,7 +25,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         public JobParameters JobParameters { get; }
 
         public IHttpTransport Transport { get; protected set; }
-        public IJobDivider SegmentProvider { get; protected set; }
+        public ISegmentDivider SegmentProvider { get; protected set; }
 
         public IFileManager FileManager { get; protected set; }
 
@@ -35,7 +35,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         internal long? ResourceSize;
         internal SegmentationContext Segmentation;
 
-        private long _bufferSize;
+        private long _defaultBufferSize;
         private long _minSegmentSize;
         private long _maxSegmentSize;
 
@@ -55,7 +55,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             JobParameters = jobParameters;
 
             Transport = appContext.GetFeature<IHttpTransport>();
-            SegmentProvider = appContext.GetFeature<IJobDivider>();
+            SegmentProvider = appContext.GetFeature<ISegmentDivider>();
 
             _progressListener = new ProgressListener();
 
@@ -161,7 +161,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             public IResponse Response { get; }
 
             private long _limit;
-            private long _bufferSize;
+            private long _defaultBufferSize;
             
             public MainJobPartImpl(
                 IAppContext appContext,
@@ -174,8 +174,8 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 FileManager = fileManager;
                 Response = response;
 
-                _limit = job._bufferSize;
-                _bufferSize = job._bufferSize;
+                _limit = job._defaultBufferSize;
+                _defaultBufferSize = job._defaultBufferSize;
             }
             
             public JobPartState Cycle()
@@ -191,7 +191,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                         FileManager,
                         0,
                         null,
-                        _bufferSize,
+                        _defaultBufferSize,
                         _limit
                     );
                     
@@ -270,11 +270,11 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         private void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
-            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Download.MaxBufferLength))
+            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Download.DefaultReceiveBufferSize))
             {
-                _bufferSize = configProvider.GetLong(this,
-                    KnownConfigs.DownloadManager.Download.MaxBufferLength,
-                    KnownConfigs.DownloadManager.Download.MaxBufferLengthDefaultValue
+                _defaultBufferSize = configProvider.GetLong(this,
+                    KnownConfigs.DownloadManager.Download.DefaultReceiveBufferSize,
+                    KnownConfigs.DownloadManager.Download.DefaultReceiveBufferSizeDefaultValue
                 );
             }
             

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using AMKDownloadManager.Core.Api.Binders;
+using AMKDownloadManager.Core.Api.Network;
 using ir.amkdp.gear.core.Collections;
 using ir.amkdp.gear.core.Patterns.Mvvm;
+// ReSharper disable ExplicitCallerInfoArgument
 
 namespace AMKDownloadManager.Core.Api.Transport
 {
@@ -140,6 +143,40 @@ namespace AMKDownloadManager.Core.Api.Transport
         }
 
         /// <summary>
+        /// Gets or sets the interface used for this item.
+        /// </summary>
+        /// <value>The <see cref="NetworkInterfaceContext"/> provides information about the interface used to download the resource.</value>
+        public NetworkInterfaceContext Interface
+        {
+            get
+            {
+                return Properties[KnownProperties.Interface] as NetworkInterfaceContext;
+            }
+            set
+            {
+                Properties[KnownProperties.Interface] = value;
+                OnPropertyChanged(KnownProperties.Interface);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the http proxy used for this item.
+        /// </summary>
+        /// <value>The <see cref="HttpProxyDescriptor"/> object.</value>
+        public HttpProxyDescriptor HttpProxy
+        {
+            get
+            {
+                return Properties[KnownProperties.HttpProxy] as HttpProxyDescriptor;
+            }
+            set
+            {
+                Properties[KnownProperties.HttpProxy] = value;
+                OnPropertyChanged(KnownProperties.HttpProxy);
+            }
+        }
+
+        /// <summary>
         /// DownloadItem known properties.
         /// </summary>
         public class KnownProperties
@@ -150,6 +187,8 @@ namespace AMKDownloadManager.Core.Api.Transport
             public const string Method = "Method";
             public const string Mirrors = "Mirrors";
             public const string LocalFileName = "LocalFileName";
+            public const string Interface = "Interface";
+            public const string HttpProxy = "HttpProxy";
         }
     }
 }

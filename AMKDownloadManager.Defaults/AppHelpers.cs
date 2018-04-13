@@ -7,12 +7,13 @@ using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.Core.Extensions;
-using AMKDownloadManager.Core.Impl;
+using AMKDownloadManager.Defaults.ConfigProvider;
 using AMKDownloadManager.Defaults.DownloadManager;
 using AMKDownloadManager.Defaults.FileSystem;
 using AMKDownloadManager.Defaults.JobScheduler;
 using AMKDownloadManager.Defaults.Network;
 using AMKDownloadManager.Defaults.Segmentation;
+using AMKDownloadManager.Defaults.Transport;
 using ir.amkdp.gear.core.Collections;
 
 namespace AMKDownloadManager.Defaults
@@ -51,7 +52,7 @@ namespace AMKDownloadManager.Defaults
             app.AddFeature<IScheduler>(scheduler);
             app.AddFeature<IDownloadManager>(new DefaultDownloadManager(app, scheduler));
 
-            app.AddFeature<IJobDivider>(new DefaultSegmentProvider());
+            app.AddFeature<ISegmentDivider>(new LeftBalancingSegmentProvider());
             app.AddFeature<IFileProvider>(new DefaultFileProvider(
                 configProvider.GetInt(
                     app,
@@ -72,7 +73,7 @@ namespace AMKDownloadManager.Defaults
         {
             _buildDefaults(appContext);
 
-            var httpTransport = new DefaultTcpHttpRequestTransport();
+            var httpTransport = new DefaultHttpRequestTransport();
             appContext.AddFeature<IRequestTransport>(httpTransport);
             appContext.AddFeature<IHttpTransport>(httpTransport);
             appContext.AddFeature<INetworkInterfaceProvider>(new NetworkInterfaceProvider());

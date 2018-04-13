@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Transport;
-using ir.amkdp.gear.core.Trace;
+using ir.amkdp.gear.core.Trace;webRequest.
 
-namespace AMKDownloadManager.Defaults.Network
+namespace AMKDownloadManager.Defaults.Transport
 {
     public class DefaultTcpHttpRequestTransport : IHttpTransport
     {

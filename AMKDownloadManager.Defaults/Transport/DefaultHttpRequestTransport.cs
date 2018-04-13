@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Net;
-using System.Net.Cache;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Listeners;
@@ -11,13 +10,31 @@ using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
 using ir.amkdp.gear.core.Trace;
 
-namespace AMKDownloadManager.Defaults.Network
+namespace AMKDownloadManager.Defaults.Transport
 {
     public class DefaultHttpRequestTransport : IHttpTransport
     {
         private int _maxRedirects = KnownConfigs.DownloadManager.Download.MaximumRedirectsDefaultValue;
-        
-        [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
+
+        // ReSharper disable once InconsistentNaming
+        protected virtual IPEndPoint BindIPEndPoint(
+            IAppContext appContext,
+            DownloadItem downloadItem,
+            ServicePoint servicePoint,
+            IPEndPoint remoteEndPoint,
+            int retryCount)
+        {
+            var selector = appContext.GetFeature<INetworkInterfaceSelector>();
+
+            var endPoint = selector.SelectEndPoint(appContext, this, downloadItem) as IPEndPoint;
+            if (endPoint == null)
+            {
+                throw new InvalidOperationException();
+            }
+            return endPoint;
+        }
+
+        //[SuppressMessage("ReSharper", "AccessToDisposedClosure")]
         public IResponse SendRequest(
             IAppContext appContext,
             DownloadItem downloadItem,
@@ -40,10 +57,34 @@ namespace AMKDownloadManager.Defaults.Network
 
             var referer = request.Headers.Referer;
             if (referer != null) webRequest.Referer = referer;
-            
+
             var userAgent = request.Headers.UserAgent;
             if (userAgent != null) webRequest.UserAgent = userAgent;
+
+            #region DownloadItem properties
             
+            var proxy = downloadItem.HttpProxy;
+            if (proxy != null && proxy.Uri != null)
+            {
+                webRequest.Proxy =
+                    proxy.BypassList == null
+                        ? new WebProxy(proxy.Uri, proxy.BypassOnLocal)
+                        : new WebProxy(proxy.Uri, proxy.BypassOnLocal, proxy.BypassList.ToArray());
+            }
+            var iface = downloadItem.Interface;
+            if (iface != null)
+            {
+                webRequest.ServicePoint.BindIPEndPointDelegate = (servicePoint, remoteEndPoint, retryCount)
+                    => BindIPEndPoint(
+                        appContext,
+                        downloadItem,
+                        servicePoint,
+                        remoteEndPoint,
+                        retryCount);
+            }
+
+            #endregion
+
             var requestBody = request.RequestBody;
             var requestBodyWriter = request.RequestBodyWriter;
             if (!request.IsGetRequest() && (requestBody != null || requestBodyWriter != null))
@@ -66,7 +107,9 @@ namespace AMKDownloadManager.Defaults.Network
             webRequest.MaximumAutomaticRedirections = _maxRedirects;
             //webRequest.all
             //webRequest.AllowReadStreamBuffering = false;
-            
+
+            var receiveBufferSize = webRequest.ServicePoint.ReceiveBufferSize;
+
             appContext.SignalFeatures<ITransportListenerFeature>(
                 l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));
             try
@@ -79,7 +122,7 @@ namespace AMKDownloadManager.Defaults.Network
                         {
                             downloadItem.Redirect(webResponse.ResponseUri);
                         }
-                        
+
                         if (webRequest.HaveResponse)
                         {
                             var stream = webResponse.GetResponseStream();
@@ -87,15 +130,15 @@ namespace AMKDownloadManager.Defaults.Network
                                 //webResponse.Close();
                                 //var data = (new BinaryReader(stream)).ReadBytes((int)stream.Length);
                                 //File.WriteAllBytes("out.bin", data);
-                                
+
                                 var response = new HttpResponse();
                                 HttpHelpers.FillResponseFromHttpResponse(response, webResponse, stream);
-                                
+
                                 response.Disposer.Enqueue(
                                     stream,
                                     webResponse
                                 );
-                                
+
                                 //appContext.SignalFeatures<ITransportListenerFeature>(
                                 //    l => l.WebResponseAvailable(appContext, this, request, webRequest,
                                 //        response, webResponse, stream));
@@ -108,15 +151,15 @@ namespace AMKDownloadManager.Defaults.Network
                         {
                             var response = new HttpResponse();
                             HttpHelpers.FillResponseFromHttpResponse(response, webResponse);
-                            
+
                             appContext.SignalFeatures<ITransportListenerFeature>(
                                 l => l.WebResponseAvailable(appContext, this, request, webRequest,
                                     response, webResponse, null));
-                            
+
                             return response;
                         }
                     }
-                    
+
                     throw new InvalidOperationException();
                 }
             }

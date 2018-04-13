@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using AMKDownloadManager.Core.Api;
 
-namespace AMKDownloadManager.Core.Impl
+namespace AMKDownloadManager.Defaults.ConfigProvider
 {
     /// <summary>
     /// Default application configuration manager.

@@ -44,7 +44,7 @@ namespace AMKDownloadManager.Core.Api.Transport
             
             var req = new HttpRequest(downloadItem)
             {
-                Uri = downloadItem.Uri
+                Uri = downloadItem.Uri,
             };
 
             req.Headers.ContentType = downloadItem.Properties[HeaderCollection.ContentTypeHeaderName] as string;

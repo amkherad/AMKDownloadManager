@@ -32,7 +32,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         public SortedSet<Segment> FilledRanges { get; }
         public SortedSet<Segment> ReservedRanges { get; }
 
-        public Segment LastRange { get; set; }
+        //public Segment LastRange { get; set; }
         public PropertyBag Properties { get; } = new PropertyBag();
 
         private readonly MinRangeComparer _comparer;
@@ -167,6 +167,16 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
 
                 return reversed;
             }
+        }
+
+        /// <summary>
+        /// Tracks the maximum growth limit of a segment (i.e. start of another segment)
+        /// </summary>
+        /// <param name="offset">Any random offset inside a segment.</param>
+        /// <returns></returns>
+        public long GetSegmentGrowthRightLimit(long offset)
+        {
+            
         }
     }
 }

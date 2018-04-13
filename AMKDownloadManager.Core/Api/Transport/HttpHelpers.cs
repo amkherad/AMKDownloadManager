@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using AMKDownloadManager.Core.Api.Transport;
 
-namespace AMKDownloadManager.Core.Api
+namespace AMKDownloadManager.Core.Api.Transport
 {
     public static class HttpHelpers
     {

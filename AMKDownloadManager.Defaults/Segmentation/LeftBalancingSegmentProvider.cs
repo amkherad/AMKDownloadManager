@@ -7,7 +7,7 @@ using ir.amkdp.gear.core.Collections;
 
 namespace AMKDownloadManager.Defaults.Segmentation
 {
-    public class DefaultSegmentProvider : IJobDivider //IDM behavior segment provider.
+    public class LeftBalancingSegmentProvider : ISegmentDivider //IDM behavior segment provider.
     {
         private long _minSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
         private long _maxSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
@@ -83,6 +83,12 @@ namespace AMKDownloadManager.Defaults.Segmentation
 
                 return new PartialBlockDescriptor(segment);
             }
+        }
+
+        public PartialBlockDescriptor GetPart(IAppContext appContext, IJob job, SegmentationContext segmentationContext,
+            long contiguousLeftOffset)
+        {
+            throw new NotImplementedException();
         }
 
         public int Order => 0;

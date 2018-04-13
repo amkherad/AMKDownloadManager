@@ -11,6 +11,7 @@ namespace AMKDownloadManager.Core.Api.Transport
             IRequest request,
             IDownloadProgressListener downloadProgressListener,
             bool unpackStream);
+        
         Task<IResponse> SendRequestAsync(
             IAppContext appContext,
             DownloadItem downloadItem,

@@ -31,6 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Api\DownloadManagement\JobInfo.cs" />
+    <Compile Include="Api\Network\INetworkInterfaceSelector.cs" />
+    <Compile Include="Api\Network\NetworkInterfaceInfo.cs" />
+    <Compile Include="Api\Transport\HttpHelpers.cs" />
+    <Compile Include="Api\Transport\HttpProxyDescriptor.cs" />
     <Compile Include="Api\Transport\HttpRequest.cs" />
     <Compile Include="Api\Transport\HttpResponse.cs" />
     <Compile Include="Api\Transport\IHttpTransport.cs" />
@@ -45,15 +49,15 @@
     <Compile Include="Api\FileSystem\IFileProvider.cs" />
     <Compile Include="Api\FileSystem\IStreamSaver.cs" />
     <Compile Include="Api\FileSystem\PathInfo.cs" />
-    <Compile Include="Api\HttpHelpers.cs" />
     <Compile Include="Api\Listeners\ITransportListenerFeature.cs" />
     <Compile Include="Api\Listeners\IDownloadBindListener.cs" />
     <Compile Include="Api\Listeners\IDownloadErrorListener.cs" />
     <Compile Include="Api\Listeners\IDownloadProgressListener.cs" />
     <Compile Include="Api\Listeners\IListenerFeature.cs" />
     <Compile Include="Api\Listeners\IProtocolProviderListener.cs" />
-    <Compile Include="Api\Network\INetworkInterface.cs" />
+    <Compile Include="Api\Network\NetworkInterfaceContext.cs" />
     <Compile Include="Api\Network\INetworkInterfaceProvider.cs" />
+    <Compile Include="Api\Types\DateTimeRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApplicationHost.cs" />
     <Compile Include="Extensions\IComponent.cs" />
@@ -80,7 +84,7 @@
     <Compile Include="Api\DownloadManagement\IScheduler.cs" />
     <Compile Include="Api\DownloadManagement\JobPartDescriptor.cs" />
     <Compile Include="Api\Threading\IThreadFactory.cs" />
-    <Compile Include="Api\DownloadManagement\IJobDivider.cs" />
+    <Compile Include="Api\DownloadManagement\ISegmentDivider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

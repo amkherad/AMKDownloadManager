@@ -26,8 +26,8 @@ namespace AMKDownloadManager.Core.Api
                 public const string MaximumRedirects = "DownloadManager.Download.MaximumRedirects";
                 public const int MaximumRedirectsDefaultValue = 20;
 
-                public const string MaxBufferLength = "DownloadManager.Download.MaxBufferLength";
-                public const int MaxBufferLengthDefaultValue = 10 * Helper.KiB;
+                public const string DefaultReceiveBufferSize = "DownloadManager.Download.DefaultReceiveBufferSize";
+                public const int DefaultReceiveBufferSizeDefaultValue = 4 * Helper.KiB;
             }
 
             public static class Segmentation
