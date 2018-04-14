@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using AMKDownloadManager.Core.Api;
@@ -29,6 +30,13 @@ namespace AMKDownloadManager.Defaults.Network
                 });
         }
 
+        public static NetworkInterface GetNetworkInterfaceByName(string name, StringComparer comparer = null)
+        {
+            if (comparer == null) comparer = StringComparer.CurrentCultureIgnoreCase;
+
+            return NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(x => comparer.Equals(x.Name, name));
+        }
+        
         public int Order => 0;
         public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {

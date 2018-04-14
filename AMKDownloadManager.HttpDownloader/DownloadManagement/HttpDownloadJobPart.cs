@@ -23,16 +23,17 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         
         public HttpProtocolProvider ProtocolProvider { get; }
         
-        private SegmentationContext _segmentation;
+        private readonly SegmentationContext _segmentation;
 
         private INetworkMonitor _networkMonitor;
 
-        private Segment _segment;
+        private readonly Segment _segment;
 
-        private IDownloadProgressListener _progressListener;
+        private readonly IDownloadProgressListener _progressListener;
         
         public HttpDownloadJobPart(
             IAppContext appContext,
+            DownloadItem downloadItem,
             HttpProtocolProvider protocolProvider,
             IJob job,
             IFileManager fileManager,
@@ -44,6 +45,8 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
             FileManager = fileManager;
             ProtocolProvider = protocolProvider;
+
+            DownloadItem = downloadItem;
             
             Job = job;
             _segmentation = segmentationContext;
@@ -80,7 +83,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 {
                     contentRange = contentRange.Trim();
                     //Content-Range: bytes 236040-59445247/59445248
-                    const string Bytes = "bytes ";
+                    const string Bytes = "bytes";
                     if (contentRange.StartsWith(Bytes))
                     {
                         contentRange = contentRange.Substring(Bytes.Length);

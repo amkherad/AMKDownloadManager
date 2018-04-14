@@ -160,7 +160,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             public IFileManager FileManager { get; }
             public IResponse Response { get; }
 
-            private long _limit;
+            private long? _limit;
             private long _defaultBufferSize;
             
             public MainJobPartImpl(
@@ -174,7 +174,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 FileManager = fileManager;
                 Response = response;
 
-                _limit = job._defaultBufferSize;
+                //_limit = job._defaultBufferSize;
                 _defaultBufferSize = job._defaultBufferSize;
             }
             
@@ -238,6 +238,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
             return new HttpDownloadJobPart(
                 AppContext,
+                DownloadItem,
                 HttpProtocolProvider,
                 this,
                 FileManager,

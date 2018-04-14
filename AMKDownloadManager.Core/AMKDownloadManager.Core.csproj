@@ -30,8 +30,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Api\DownloadException.cs" />
     <Compile Include="Api\DownloadManagement\JobInfo.cs" />
     <Compile Include="Api\Network\INetworkInterfaceSelector.cs" />
+    <Compile Include="Api\Network\NetworkInterfaceException.cs" />
     <Compile Include="Api\Network\NetworkInterfaceInfo.cs" />
     <Compile Include="Api\Transport\HttpHelpers.cs" />
     <Compile Include="Api\Transport\HttpProxyDescriptor.cs" />

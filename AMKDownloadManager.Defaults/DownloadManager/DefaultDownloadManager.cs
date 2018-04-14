@@ -337,6 +337,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                                     try
                                     {
                                         part = Job.GetJobPart(jobInfo);
+                                        if ()
                                         dispathRetry.Done();
                                     }
                                     catch (Exception ex)

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Runtime.Serialization.Formatters;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
+using AMKDownloadManager.Defaults.Network;
 using ir.amkdp.gear.core.Trace;
 
 namespace AMKDownloadManager.Defaults.Transport
@@ -26,12 +29,46 @@ namespace AMKDownloadManager.Defaults.Transport
         {
             var selector = appContext.GetFeature<INetworkInterfaceSelector>();
 
-            var endPoint = selector.SelectEndPoint(appContext, this, downloadItem) as IPEndPoint;
+            var endPoint = selector.SelectInterface(appContext, this, downloadItem);
             if (endPoint == null)
             {
-                throw new InvalidOperationException();
+                throw new NetworkInterfaceException();
             }
-            return endPoint;
+
+            if (endPoint is IPEndPoint)
+            {
+                return endPoint as IPEndPoint;
+            }
+            if (endPoint is NetworkInterface)
+            {
+#warning Use all available unicasts if one does not working.
+                var firstAddress = (endPoint as NetworkInterface).GetIPProperties().UnicastAddresses.FirstOrDefault();
+                if (firstAddress == null)
+                {
+                    throw new NetworkInterfaceException();
+                }
+
+                return new IPEndPoint(firstAddress.Address, 0);
+            }
+            if (endPoint is NetworkInterfaceInfo)
+            {
+                var ni = NetworkInterfaceProvider.GetNetworkInterfaceByName((endPoint as NetworkInterfaceInfo).Name);
+                if (ni == null)
+                {
+                    throw new NetworkInterfaceException();
+                }
+
+#warning Use all available unicasts if one does not working.
+                var inAdd = ni.GetIPProperties().UnicastAddresses.FirstOrDefault();
+                if (inAdd == null)
+                {
+                    throw new NetworkInterfaceException();
+                }
+
+                return new IPEndPoint(inAdd.Address, 0);
+            }
+
+            throw new NetworkInterfaceException();
         }
 
         //[SuppressMessage("ReSharper", "AccessToDisposedClosure")]
@@ -62,7 +99,7 @@ namespace AMKDownloadManager.Defaults.Transport
             if (userAgent != null) webRequest.UserAgent = userAgent;
 
             #region DownloadItem properties
-            
+
             var proxy = downloadItem.HttpProxy;
             if (proxy != null && proxy.Uri != null)
             {
@@ -108,7 +145,7 @@ namespace AMKDownloadManager.Defaults.Transport
             //webRequest.all
             //webRequest.AllowReadStreamBuffering = false;
 
-            var receiveBufferSize = webRequest.ServicePoint.ReceiveBufferSize;
+            //var receiveBufferSize = webRequest.ServicePoint.ReceiveBufferSize;
 
             appContext.SignalFeatures<ITransportListenerFeature>(
                 l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));

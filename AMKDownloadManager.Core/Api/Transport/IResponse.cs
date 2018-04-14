@@ -14,7 +14,6 @@ namespace AMKDownloadManager.Core.Api.Transport
         HeaderCookieCollection Cookies { get; }
         
         Stream ResponseStream { get; }
-        long ReceiveBufferSize { get; }
         
         IDisposer Disposer { get; }
     }

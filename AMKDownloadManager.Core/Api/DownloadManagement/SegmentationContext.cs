@@ -13,6 +13,8 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
     
     public class Segment : Int64RangeModel
     {
+        public bool LimitedSegment { get; set; }
+        
         public Segment() { }
         public Segment(long min, long max)
         {
@@ -174,9 +176,9 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// </summary>
         /// <param name="offset">Any random offset inside a segment.</param>
         /// <returns></returns>
-        public long GetSegmentGrowthRightLimit(long offset)
-        {
-            
-        }
+//        public long GetSegmentGrowthRightLimit(long offset)
+//        {
+//            
+//        }
     }
 }
