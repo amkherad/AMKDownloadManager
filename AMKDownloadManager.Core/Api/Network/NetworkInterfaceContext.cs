@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AMKDownloadManager.Core.Api.Types;
 using ir.amkdp.gear.arch.Patterns;
 using ir.amkdp.gear.data.Models;
@@ -33,7 +34,7 @@ namespace AMKDownloadManager.Core.Api.Network
     
     public class NetworkInterfaceLoadContext
     {
-        public string Id { get; set; }
+        public NetworkInterfaceInfo Info { get; set; }
         public Int64RangeModel TrafficBoundaries { get; set; }
         public DateTimeRange TimeLimits { get; set; }
         
