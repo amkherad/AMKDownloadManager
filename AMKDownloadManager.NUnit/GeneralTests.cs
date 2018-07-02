@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using ir.amkdp.gear.core.Trace;
+using AMKsGear.Core.Trace;
 using NUnit.Framework;
 
 namespace AMKDownloadManager.NUnit

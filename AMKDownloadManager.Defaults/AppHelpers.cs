@@ -14,7 +14,7 @@ using AMKDownloadManager.Defaults.JobScheduler;
 using AMKDownloadManager.Defaults.Network;
 using AMKDownloadManager.Defaults.Segmentation;
 using AMKDownloadManager.Defaults.Transport;
-using ir.amkdp.gear.core.Collections;
+using AMKsGear.Core.Collections;
 
 namespace AMKDownloadManager.Defaults
 {
@@ -27,10 +27,13 @@ namespace AMKDownloadManager.Defaults
         /// Load components for <see cref="IAppContext"/>.
         /// </summary>
         /// <param name="appContext">The context which components are loaded for.</param>
-        public static void LoadComponents(IAppContext appContext)
+        /// <param name="appLocalStoragePath">The path to application storage for current user only. (~/.local/share/XXXX | C:\Users\USERNAME\AppData\Local\XXXX)</param>
+        /// <param name="appSharedStoragePath">The path to application storage for all users. (/usr/share | C:\ProgramData)</param>
+        public static void LoadComponents(IAppContext appContext, string appLocalStoragePath, string appSharedStoragePath)
         {
             var importer = new ComponentImporter();
-            importer.Compose();
+            
+            importer.Compose(new [] { appLocalStoragePath, appSharedStoragePath });
             Console.WriteLine("{0} component(s) are imported successfully.", importer.NumberOfAvailableComponents);
             
             importer.InitializeAll(appContext);

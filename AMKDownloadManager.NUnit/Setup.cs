@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
-using System.Net.Configuration;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Defaults;
 using AMKDownloadManager.Defaults.Threading;
 using AMKDownloadManager.HttpDownloader.AddIn;
-using ir.amkdp.gear.core.Trace;
-using ir.amkdp.gear.core.Trace.LoggerEngines;
+using AMKsGear.Core.Trace;
+using AMKsGear.Core.Trace.LoggerEngines;
 using NUnit.Framework;
 
 namespace AMKDownloadManager.NUnit
@@ -21,7 +20,7 @@ namespace AMKDownloadManager.NUnit
             if (_inited) return;
             _inited = true;
             
-            Trace.Listeners.Add(new ConsoleTraceListener());
+            //Trace.Listeners.Add(new ConsoleTraceListener());
             Logger.RegisterLogger(new MethodLogger(System.Console.Write, f =>
             {
                 for (var i = 0; i < f; i++) System.Console.WriteLine();

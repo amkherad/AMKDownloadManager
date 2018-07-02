@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AMKDownloadManager.Core.Api.Types;
-using ir.amkdp.gear.arch.Patterns;
-using ir.amkdp.gear.data.Models;
+using AMKsGear.Architecture.Patterns;
+using AMKsGear.Core.Data.Models;
 
 namespace AMKDownloadManager.Core.Api.Network
 {

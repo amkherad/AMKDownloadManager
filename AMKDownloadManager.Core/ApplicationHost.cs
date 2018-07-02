@@ -1,6 +1,6 @@
 ﻿using System;
-using ir.amkdp.gear.arch.Automation.IoC;
-using ir.amkdp.gear.core.Automation.IoC;
+using AMKsGear.Architecture.Automation.IoC;
+using AMKsGear.Core.Automation.IoC;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Threading;
 

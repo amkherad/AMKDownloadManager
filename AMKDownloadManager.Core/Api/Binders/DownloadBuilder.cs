@@ -3,9 +3,9 @@ using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Transport;
-using ir.amkdp.gear.arch.Patterns;
-using ir.amkdp.gear.core.Patterns.AppModel;
-using ir.amkdp.gear.core.Collections;
+using AMKsGear.Architecture.Patterns;
+using AMKsGear.Core.Patterns.AppModel;
+using AMKsGear.Core.Collections;
 
 namespace AMKDownloadManager.Core.Api.Binders
 {

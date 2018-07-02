@@ -7,7 +7,7 @@ using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
-using ir.amkdp.gear.core.Text;
+using AMKsGear.Core.Text;
 
 namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 {

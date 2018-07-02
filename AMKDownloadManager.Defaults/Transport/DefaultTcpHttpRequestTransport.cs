@@ -7,7 +7,7 @@
 //using AMKDownloadManager.Core.Api;
 //using AMKDownloadManager.Core.Api.Listeners;
 //using AMKDownloadManager.Core.Api.Transport;
-//using ir.amkdp.gear.core.Trace;
+//using AMKsGear.Core.Trace;
 //
 //namespace AMKDownloadManager.Defaults.Transport
 //{

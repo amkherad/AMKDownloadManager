@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using AMKDownloadManager.Core.Api.Transport;
-using ir.amkdp.gear.arch.Annotations;
+using AMKsGear.Architecture.Annotations;
 
 namespace AMKDownloadManager.Core.Api.Listeners
 {

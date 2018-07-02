@@ -7,7 +7,7 @@
     <ProjectGuid>{CA897A0B-CC03-4DD1-9D0F-D6B9324CC2AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>AMKDownloadManager.HttpDownloader</RootNamespace>
-    <AssemblyName>AMKDownloadManager.HttpDownloader</AssemblyName>
+    <AssemblyName>AMKDownloadManager.HttpDownloader.plugin</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>

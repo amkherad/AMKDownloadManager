@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using ir.amkdp.gear.core.Automation;
-using ir.amkdp.gear.web.Http;
+using AMKsGear.Core.Automation;
+using AMKsGear.Web.Core.Http;
 
 namespace AMKDownloadManager.Core.Api.Transport
 {

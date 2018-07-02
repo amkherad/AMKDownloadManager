@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using AMKDownloadManager.Core.Api.DownloadManagement;
-using ir.amkdp.gear.arch.Trace.Annotations;
+using AMKsGear.Architecture.Trace.Annotations;
 using NUnit.Framework;
 
 namespace AMKDownloadManager.NUnit.Categories.Segmentation

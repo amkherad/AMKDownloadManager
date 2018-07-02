@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using ir.amkdp.gear.core.Patterns.AppModel;
-using ir.amkdp.gear.core.Automation.IoC;
+using AMKsGear.Core.Patterns.AppModel;
+using AMKsGear.Core.Automation.IoC;
 using System.Runtime.CompilerServices;
-using ir.amkdp.gear.core.Collections;
-using ir.amkdp.gear.core.Trace;
+using AMKsGear.Core.Collections;
+using AMKsGear.Core.Trace;
 
 namespace AMKDownloadManager.Core.Api
 {

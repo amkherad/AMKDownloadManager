@@ -1,6 +1,6 @@
 ﻿using System;
 using AMKDownloadManager.Core.Api;
-using ir.amkdp.gear.core.Patterns.AppModel;
+using AMKsGear.Core.Patterns.AppModel;
 
 namespace AMKDownloadManager.Core
 {

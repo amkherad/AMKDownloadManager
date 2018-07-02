@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.FileSystem;
-using ir.amkdp.gear.core.Utils;
+using AMKsGear.Core.Utils;
 
 namespace AMKDownloadManager.Defaults.FileSystem
 {

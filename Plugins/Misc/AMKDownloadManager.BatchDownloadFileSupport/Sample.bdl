@@ -14,14 +14,15 @@
         "Authorization": "Basic",
         "Username": "OPTIONAL_USER",
         "Password": "OPTIONAL_PASS",
-        
     },
+    
+    //Additional data.
+    
     "DownloadList":
     [
         {
             "Uri": "http://dl.example.com/file1",
             "Description": "Test",
-            
         }
     ]
 }

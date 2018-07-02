@@ -3,7 +3,7 @@ using System.Diagnostics;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.DownloadManagement;
-using ir.amkdp.gear.core.Utils;
+using AMKsGear.Core.Utils;
 using NUnit.Framework;
 
 namespace AMKDownloadManager.NUnit.Categories.DownloadManager

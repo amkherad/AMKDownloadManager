@@ -11,7 +11,7 @@ using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.Defaults.Network;
-using ir.amkdp.gear.core.Trace;
+using AMKsGear.Core.Trace;
 
 namespace AMKDownloadManager.Defaults.Transport
 {

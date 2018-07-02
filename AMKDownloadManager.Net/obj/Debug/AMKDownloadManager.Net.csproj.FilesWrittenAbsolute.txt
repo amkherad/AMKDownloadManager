@@ -1,3 +1,8 @@
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Net/obj/Debug/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Net/bin/Debug/AMKDownloadManager.Net.pdb
 /home/amk/dev/Applications/AMKDownloadManager/AMKDownloadManager.Net/bin/Debug/AMKDownloadManager.Net.dll
+/home/amk/Projects/Software/AMKDownloadManager/AMKDownloadManager.Net/obj/Debug/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
+/home/amk/Projects/Software/AMKDownloadManager/AMKDownloadManager.Net/bin/Debug/AMKDownloadManager.Net.pdb
+/home/amk/Projects/Software/AMKDownloadManager/AMKDownloadManager.Net/bin/Debug/AMKDownloadManager.Net.dll
+/home/amk/Projects/Software/AMKDownloadManager/AMKDownloadManager.Net/obj/Debug/AMKDownloadManager.Net.dll
+/home/amk/Projects/Software/AMKDownloadManager/AMKDownloadManager.Net/obj/Debug/AMKDownloadManager.Net.pdb

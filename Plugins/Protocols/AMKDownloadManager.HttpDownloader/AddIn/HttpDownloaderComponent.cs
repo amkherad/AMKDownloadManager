@@ -5,7 +5,7 @@ using AMKDownloadManager.Core.Api;
 using System.Reflection;
 using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
-using ir.amkdp.gear.core.Trace;
+using AMKsGear.Core.Trace;
 
 namespace AMKDownloadManager.HttpDownloader.AddIn
 {

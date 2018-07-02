@@ -119,7 +119,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Dialogs\" />
-    <Folder Include="Windows\" />
     <Folder Include="Shell\" />
     <Folder Include="Resources\" />
   </ItemGroup>

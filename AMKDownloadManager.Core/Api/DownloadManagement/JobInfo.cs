@@ -1,6 +1,6 @@
 ﻿using System;
 using AMKDownloadManager.Core.Api.Transport;
-using ir.amkdp.gear.core.Automation;
+using AMKsGear.Core.Automation;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {

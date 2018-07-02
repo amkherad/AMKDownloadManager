@@ -5,7 +5,7 @@ using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Threading;
-using ir.amkdp.gear.core.Utils;
+using AMKsGear.Core.Utils;
 
 namespace AMKDownloadManager.Defaults.DownloadManager
 {
@@ -337,7 +337,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                                     try
                                     {
                                         part = Job.GetJobPart(jobInfo);
-                                        if ()
+                                        //if ()
                                         dispathRetry.Done();
                                     }
                                     catch (Exception ex)
@@ -356,7 +356,6 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                                         lock (Threads)
                                         {
                                             Threads.Add(thread);
-
                                         }
                                     }
                                 }

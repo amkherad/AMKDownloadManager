@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.Core.Api.Network;
-using ir.amkdp.gear.core.Collections;
-using ir.amkdp.gear.core.Patterns.Mvvm;
+using AMKsGear.Core.Collections;
+using AMKsGear.Core.Patterns.Mvvm;
 // ReSharper disable ExplicitCallerInfoArgument
 
 namespace AMKDownloadManager.Core.Api.Transport

@@ -1,4 +1,4 @@
-﻿using ir.amkdp.gear.core.Utils;
+﻿using AMKsGear.Core.Utils;
 
 namespace AMKDownloadManager.Core.Api
 {

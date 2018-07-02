@@ -9,7 +9,7 @@ using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
-using ir.amkdp.gear.core.Automation;
+using AMKsGear.Core.Automation;
 
 namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 {

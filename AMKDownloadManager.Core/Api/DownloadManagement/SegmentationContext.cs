@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ir.amkdp.gear.arch.Modeling.Annotations;
-using ir.amkdp.gear.arch.Parallelism;
-using ir.amkdp.gear.core.Collections;
-using ir.amkdp.gear.core.Parallelism;
-using ir.amkdp.gear.data.Models;
+using AMKsGear.Architecture.Modeling.Annotations;
+using AMKsGear.Architecture.Parallelism;
+using AMKsGear.Core.Collections;
+using AMKsGear.Core.Parallelism;
+using AMKsGear.Core.Data.Models;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {

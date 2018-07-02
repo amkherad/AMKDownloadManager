@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Extensions;
-using ir.amkdp.gear.core.Trace;
+using AMKsGear.Core.Trace;
 
 namespace AMKDownloadManager.Defaults
 {
@@ -15,23 +15,41 @@ namespace AMKDownloadManager.Defaults
     /// </summary>
     public class ComponentImporter
     {
+        public string ProbingPattern { get; set; } = "*.plugin.dll";
+        
         /// <summary>
         /// All loaded components.
         /// </summary>
         [ImportMany]
         public IEnumerable<IComponent> Components { get; set; }
-        
+
         /// <summary>
-        /// Load plugins from './Plugins' directory.
+        /// Load plugins from './Plugins' and given directory.
         /// </summary>
-        public void Compose()
+        public void Compose(string[] paths)
         {
-            var executableLocation = Assembly.GetEntryAssembly().Location;
-            var path = Path.Combine(Path.GetDirectoryName(executableLocation), "Plugins");
-            var assemblies = Directory
-                .GetFiles(path, "*.dll", SearchOption.AllDirectories)
+            var files = Directory
+                .GetFiles(
+                    Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins")
+                    , ProbingPattern, SearchOption.AllDirectories)
+                .ToList();
+
+            foreach (var path in paths)
+            {
+                try
+                {
+                    if (Directory.Exists(path))
+                    {
+                        files.AddRange(Directory.GetFiles(path, ProbingPattern, SearchOption.AllDirectories));
+                    }
+                }
+                catch { }
+            }
+            
+            var assemblies = files
                 .Select(Assembly.LoadFile)
                 .ToList();
+
             var configuration = new ContainerConfiguration()
                 .WithAssemblies(assemblies);
             using (var container = configuration.CreateContainer())

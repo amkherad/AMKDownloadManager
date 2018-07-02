@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{389A475C-C6A3-44BF-84A4-B1C45651E782}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AMKDownloadManager.Defaults</RootNamespace>
+    <AssemblyName>AMKDownloadManager.Defaults</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Gear.AppLayerCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.AppLayerCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Architecture, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Architecture.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.Core.TraceTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.Core.TraceTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.DataCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.DataCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Gear.WebCore, Version=1.0.12.2017, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Frameworks\AMKs-Gear.portable.net\output\Gear.WebCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Composition.AttributedModel, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Composition.AttributedModel.1.0.31\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Convention, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Composition.Convention.1.0.31\lib\portable-net45+win8+wp8+wpa81\System.Composition.Convention.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Hosting, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Composition.Hosting.1.0.31\lib\portable-net45+win8+wp8+wpa81\System.Composition.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Runtime, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Composition.Runtime.1.0.31\lib\portable-net45+win8+wp8+wpa81\System.Composition.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Composition.TypedParts.1.0.31\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppHelpers.cs" />
+    <Compile Include="ComponentImporter.cs" />
+    <Compile Include="ConfigProvider\DefaultConfigProvider.cs" />
+    <Compile Include="DownloadManager\DefaultDownloadManager.cs" />
+    <Compile Include="FileSystem\DefaultDownloadPathProvider.cs" />
+    <Compile Include="FileSystem\DefaultFileManager.cs" />
+    <Compile Include="FileSystem\DefaultFileProvider.cs" />
+    <Compile Include="FileSystem\DefaultProgressiveStreamSaver.cs" />
+    <Compile Include="JobScheduler\DefaultJobScheduler.cs" />
+    <Compile Include="Network\DefaultNetworkMonitor.cs" />
+    <Compile Include="Network\NetworkInterfaceProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Segmentation\LeftBalancingSegmentProvider.cs" />
+    <Compile Include="Threading\AbstractThread.cs" />
+    <Compile Include="Threading\AbstractThreadFactory.cs" />
+    <Compile Include="Transport\DefaultHttpRequestTransport.cs" />
+    <Compile Include="Transport\DefaultTcpHttpRequestTransport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj">
+      <Project>{3EA4EFB2-8392-4D39-A10F-4F4BCA4618B3}</Project>
+      <Name>AMKDownloadManager.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

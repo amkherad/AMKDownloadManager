@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.DownloadManagement;
-using ir.amkdp.gear.core.Collections;
+using AMKsGear.Core.Collections;
 
 namespace AMKDownloadManager.Defaults.Segmentation
 {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Transport;
-using ir.amkdp.gear.core.Automation;
+using AMKsGear.Core.Automation;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
