@@ -6,6 +6,7 @@ using System.Linq;
 using AMKsGear.Core.Patterns.AppModel;
 using AMKsGear.Core.Automation.IoC;
 using System.Runtime.CompilerServices;
+using AMKsGear.Architecture.Trace;
 using AMKsGear.Core.Collections;
 using AMKsGear.Core.Trace;
 
@@ -27,6 +28,34 @@ namespace AMKDownloadManager.Core.Api
         {
             var features = app.GetFeatures<T>();
             features?.ForEach(signalHandler);
+            return features;
+        }
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+        public static IEnumerable<T> SignalFeaturesIgnoreExceptions<T>(this IAppContext app, Action<T> signalHandler) where T : IFeature
+        {
+            var features = app.GetFeatures<T>();
+            try
+            {
+                features?.ForEach(signalHandler);
+            }
+            catch (Exception exception)
+            {
+                Logger.Write(exception);
+            }
+            return features;
+        }
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+        public static IEnumerable<T> SignalFeaturesIgnoreExceptions<T>(this IAppContext app, Action<T> signalHandler, ILoggerEngine logger) where T : IFeature
+        {
+            var features = app.GetFeatures<T>();
+            try
+            {
+                features?.ForEach(signalHandler);
+            }
+            catch (Exception exception)
+            {
+                logger.Write(exception);
+            }
             return features;
         }
 

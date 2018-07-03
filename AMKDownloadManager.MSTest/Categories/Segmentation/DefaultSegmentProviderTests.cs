@@ -4,11 +4,11 @@ using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKsGear.Core.Utils;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AMKDownloadManager.NUnit.Categories.DownloadManager
+namespace AMKDownloadManager.MSTest.Categories.Segmentation
 {
-    [TestFixture]
+    [TestClass]
     public class DefaultSegmentProviderTests
     {
         private void _divideAndAssert(
@@ -51,7 +51,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             } while (cd != null);
         }
         
-        [Test]
+        [TestMethod]
         public void Test1()
         {
             var sc = new SegmentationContext(1000); //1KB
@@ -62,7 +62,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
                 });
         }
         
-        [Test]
+        [TestMethod]
         public void Test2()
         {
             var sc = new SegmentationContext(100000000); //1GB
@@ -81,7 +81,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             });
         }
         
-        [Test]
+        [TestMethod]
         public void Test3()
         {
             var sc = new SegmentationContext(100000000); //1GB
@@ -112,7 +112,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             });
         }
         
-        [Test]
+        [TestMethod]
         public void Test4()
         {
             var sc = new SegmentationContext(1000);
@@ -135,7 +135,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             });
         }
         
-        [Test]
+        [TestMethod]
         public void Test5()
         {
             var sc = new SegmentationContext(50 * Helper.MiB);
@@ -160,7 +160,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             });
         }
         
-        [Test]
+        [TestMethod]
         public void Test6()
         {
             var sc = new SegmentationContext(50 * Helper.MiB);
@@ -180,7 +180,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             });
         }
         
-        [Test]
+        [TestMethod]
         public void Test7()
         {
             var sc = new SegmentationContext(50 * Helper.MiB);
@@ -194,7 +194,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
             _divideAndAssert(sc, new Segment[0]);
         }
         
-        [Test]
+        [TestMethod]
         public void Test8()
         {
             var sc = new SegmentationContext(9 * Helper.KiB);

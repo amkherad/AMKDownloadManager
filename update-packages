@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#!param $1 project path
+#!param $2 package
+function addReference {
+    #if [ "$AMKSGEAR_LOCAL_REPOSITORY" == "" ]; then
+    #    dotnet add $1 package $2
+    #else
+        dotnet add $1 package $2
+    #fi
+}
+
+#!param $1 path
+function updateReferences {
+    dotnet remove "$1" package AMKsGear.AppLayer.Core
+    dotnet remove "$1" package AMKsGear.Web.Core
+    dotnet remove "$1" package AMKsGear.Core.TraceTools
+    dotnet remove "$1" package AMKsGear.Core.Data
+    dotnet remove "$1" package AMKsGear.Core
+    dotnet remove "$1" package AMKsGear.Architecture
+    
+    addReference "$1" "AMKsGear.AppLayer.Core"
+    addReference "$1" "AMKsGear.Web.Core"
+    addReference "$1" "AMKsGear.Core.TraceTools"
+    addReference "$1" "AMKsGear.Core.Data"
+    addReference "$1" "AMKsGear.Core"
+    addReference "$1" "AMKsGear.Architecture"
+}
+
+updateReferences "./AMKDownloadManager.Core/AMKDownloadManager.Core.csproj"
+updateReferences "./AMKDownloadManager.Defaults/AMKDownloadManager.Defaults.csproj"
+
+updateReferences "./AMKDownloadManager.Net/AMKDownloadManager.Net.csproj"
+updateReferences "./AMKDownloadManager.MSTest/AMKDownloadManager.MSTest.csproj"
+
+#updateReferences "./Plugins/Misc/AMKDownloadManager.BatchDownloadFileSupport/AMKDownloadManager.BatchDownloadFileSupport.csproj"
+updateReferences "./Plugins/Protocols/AMKDownloadManager.HttpDownloader/AMKDownloadManager.HttpDownloader.csproj"

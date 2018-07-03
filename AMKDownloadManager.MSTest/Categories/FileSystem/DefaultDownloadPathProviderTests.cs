@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
 using AMKDownloadManager.Defaults.FileSystem;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AMKDownloadManager.NUnit.Categories.FileSystem
+namespace AMKDownloadManager.MSTest.Categories.FileSystem
 {
-    [TestFixture]
+    [TestClass]
     public class DefaultDownloadPathProviderTests
     {
-        [Test]
+        [TestMethod]
         public void Test1()
         {
             var pp = new DefaultDownloadPathProvider();

@@ -3,6 +3,7 @@ using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Threading;
+using AMKsGear.Core.Automation.IoC.TypeBindings;
 
 namespace AMKDownloadManager.Core
 {
@@ -47,7 +48,7 @@ namespace AMKDownloadManager.Core
                 return Pool;
             }
             _initialized = true;
-            
+	        
             var pool = new AppContext();
             Pool = pool;
             AppContext.Context = pool;

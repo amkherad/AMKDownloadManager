@@ -6,11 +6,11 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180701" />
-    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180701" />
-    <PackageReference Include="AMKsGear.Core" Version="1.1.180701" />
-    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180701" />
-    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180701" />
-    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180701" />
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Core" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180703" />
   </ItemGroup>
 </Project>

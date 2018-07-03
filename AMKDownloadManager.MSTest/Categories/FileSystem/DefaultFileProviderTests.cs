@@ -1,12 +1,12 @@
 ﻿using AMKDownloadManager.Defaults.FileSystem;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AMKDownloadManager.NUnit.Categories.FileSystem
+namespace AMKDownloadManager.MSTest.Categories.FileSystem
 {
-    [TestFixture]
+    [TestClass]
     public class DefaultFileProviderTests
     {
-        [Test]
+        [TestMethod]
         public void TryReserveFileNameTest()
         {
             var fileProvider = new DefaultFileProvider(2);

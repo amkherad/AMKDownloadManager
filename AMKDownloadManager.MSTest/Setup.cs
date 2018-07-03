@@ -1,21 +1,20 @@
-﻿using System.Diagnostics;
-using AMKDownloadManager.Core;
+﻿using AMKDownloadManager.Core;
 using AMKDownloadManager.Defaults;
 using AMKDownloadManager.Defaults.Threading;
 using AMKDownloadManager.HttpDownloader.AddIn;
 using AMKsGear.Core.Trace;
 using AMKsGear.Core.Trace.LoggerEngines;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AMKDownloadManager.NUnit
+namespace AMKDownloadManager.MSTest
 {
-    [SetUpFixture]
+    [TestClass]
     public class Setup
     {
         private static bool _inited = false;
 
-        [OneTimeSetUp]  // [SetUp] => [OneTimeSetUp] for NUnit 3.0 and up; see http://bartwullems.blogspot.com/2015/12/upgrading-to-nunit-30-onetimesetup.html
-        public void SetUp()
+        [AssemblyInitialize]
+        public static void SetUp(TestContext context)
         {
             if (_inited) return;
             _inited = true;
@@ -24,10 +23,6 @@ namespace AMKDownloadManager.NUnit
             Logger.RegisterLogger(new MethodLogger(System.Console.Write, f =>
             {
                 for (var i = 0; i < f; i++) System.Console.WriteLine();
-            }));
-            Logger.RegisterLogger(new MethodLogger(TestContext.Write, f =>
-            {
-                for (var i = 0; i < f; i++) TestContext.WriteLine();
             }));
 
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());

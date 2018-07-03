@@ -63,7 +63,6 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
             {
                 return;
             }
-            Logger.WriteLine("HttpProtocolProvider.Initialize");
             app.AddFeature<IProtocolProvider>(new HttpProtocolProvider());
         }
 

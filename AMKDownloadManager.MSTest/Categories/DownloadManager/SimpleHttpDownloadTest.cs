@@ -7,22 +7,21 @@ using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Transport;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AMKDownloadManager.NUnit.Categories.DownloadManager
+namespace AMKDownloadManager.MSTest.Categories.DownloadManager
 {
-    [TestFixture]
+    [TestClass]
     public class SimpleHttpDownloadTest
     {
-        [Test]
+        [TestMethod]
         public void SendSimpleRequestToGoogle()
         {
             try
             {
                 //var di = DownloadBuilder.FromUri(new Uri("http://localhost:8080/VBoxGuestAdditions.iso")); //index.php
                 var di = DownloadBuilder.FromUri(
-                    new Uri(
-                        "http://localhost.:8081/downloads/Metal Gear Solid V - The Phantom Pain ''Nuclear'' Lyrics [HD].mp4")
+                    new Uri(GeneralTests.Uri)
                 ); //index.php
                 
                 di.HttpProxy = new HttpProxyDescriptor(33849)
@@ -40,7 +39,7 @@ namespace AMKDownloadManager.NUnit.Categories.DownloadManager
                 var state = downloadManager.Schedule(job);
 
                 downloadManager.Start();
-                downloadManager.Join();
+                //downloadManager.Join();
             }
             catch (ThreadAbortException e)
             {

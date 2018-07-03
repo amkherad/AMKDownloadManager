@@ -5,23 +5,23 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using AMKsGear.Core.Trace;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AMKDownloadManager.NUnit
+namespace AMKDownloadManager.MSTest
 {
-    [TestFixture]
+    [TestClass]
     public class GeneralTests
     {
-        [Test]
+        public const string Uri = "http://localhost.:8083/com.playstation.U4.apk";
+        
+        [TestMethod]
         public void Exec()
         {
             
         }
-        [Test]
+        [TestMethod]
         public void InspectHttpBehaviorOnHttpWebRequest()
         {
-            const string Uri =
-                "http://localhost.:8081/downloads/Metal Gear Solid V - The Phantom Pain ''Nuclear'' Lyrics [HD].mp4";
             var req = WebRequest.CreateHttp(Uri);
             
             var proxy = new WebProxy(new Uri("http://localhost.:33849/"))
@@ -40,18 +40,18 @@ namespace AMKDownloadManager.NUnit
             Debugger.Break();
         }
         
-        [Test]
+        [TestMethod]
         public void InspectHttpBehaviorOnBareSocket()
         {
             using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP))
             {
                 var payload = new StringBuilder(256);
-                payload.Append("GET /downloads/VBoxGuestAdditions.iso HTTP/1.1\r\n");
+                payload.Append("GET /com.playstation.U4.apk HTTP/1.1\r\n");
                 payload.Append("Host: localhost\r\n");
                 payload.Append("Connection: keep-alive\r\n");
                 payload.Append("\r\n");
 
-                socket.Connect(IPAddress.Loopback, 8081);
+                socket.Connect(IPAddress.Loopback, 8083);
                 socket.Send(Encoding.UTF8.GetBytes(payload.ToString()));
                 
                 using (var stream = new NetworkStream(socket))

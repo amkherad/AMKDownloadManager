@@ -11,7 +11,12 @@
     <ProjectReference Include="..\Plugins\Protocols\AMKDownloadManager.HttpDownloader\AMKDownloadManager.HttpDownloader.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180701" />
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Core" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180703" />
     <PackageReference Include="NUnit" Version="3.10.1" />
   </ItemGroup>
 </Project>
