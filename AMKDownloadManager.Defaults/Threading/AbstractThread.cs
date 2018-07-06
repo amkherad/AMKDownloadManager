@@ -42,13 +42,25 @@ namespace AMKDownloadManager.Defaults.Threading
 
             _thread.Abort();
         }
+
+        public string Name
+        {
+            get => _thread.Name;
+            set => _thread.Name = value;
+        }
+
         #endregion
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         void ThrowIfNull()
         {
             if (_thread == null)
                 throw new InvalidOperationException();
+        }
+
+        public object GetUnderlyingContext()
+        {
+            return _thread;
         }
     }
 }

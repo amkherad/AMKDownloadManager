@@ -7,8 +7,11 @@ using AMKsGear.Core.Automation;
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
     public delegate void JobEventHandler(IJob job, EventArgs eventArgs);
+
     public delegate void JobProgressEventHandler(IJob job, long progress);
+
     public delegate void JobPriorityChangedEventHandler(IJob job, SchedulerPriority priority);
+
     public delegate void JobStateChangedEventHandler(IJob job, JobState state);
 
     /// <summary>
@@ -23,7 +26,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         Downloading,
         Finished
     }
-    
+
     /// <summary>
     /// Download job.
     /// </summary>
@@ -33,14 +36,17 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// Occurs when finished.
         /// </summary>
         event JobEventHandler Finished;
+
         /// <summary>
         /// Occurs when paused.
         /// </summary>
         event JobEventHandler Paused;
+
         /// <summary>
         /// Occurs when started.
         /// </summary>
         event JobEventHandler Started;
+
         /// <summary>
         /// Occurs when any download progress happens.
         /// </summary>
@@ -55,40 +61,45 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// Occurs when job state changed.
         /// </summary>
         event JobStateChangedEventHandler StateChanged;
-        
+
         /// <summary>
         /// Get job state.
         /// </summary>
         JobState State { get; }
-        
+
         /// <summary>
         /// Gets DownloadItem.
         /// </summary>
         DownloadItem DownloadItem { get; }
-        
+
         // <param name="downloadProgressListener">Listener to listen to progression information.</param>
         /// <summary>
         /// Sends a get request to the target, if resource supports ranges returns immediately after response,
         /// if resouse does not support ranges this method will freeze until download progress finishes.
         /// </summary>
         /// <returns></returns>
-        JobInfo TriggerJobAndGetInfo(/*IDownloadProgressListener downloadProgressListener*/);
+        JobInfo TriggerJobAndGetInfo( /*IDownloadProgressListener downloadProgressListener*/);
+
         // <param name="downloadProgressListener">Listener to listen to progression information.</param>
         /// <summary>
         /// Sends a get request to the target, if resource supports ranges returns immediately after response,
         /// if resouse does not support ranges this method will freeze until download progress finishes.
         /// </summary>
         /// <returns></returns>
-        Task<JobInfo> TriggerJobAndGetInfoAsync(/*IDownloadProgressListener downloadProgressListener*/);
+        Task<JobInfo> TriggerJobAndGetInfoAsync( /*IDownloadProgressListener downloadProgressListener*/);
 
         // <param name="downloadProgressListener">Listener to listen to progression information.</param>
         /// <summary>
         /// Gets a new part.
         /// </summary>
         /// <returns></returns>
-        IJobPart GetJobPart(JobInfo jobInfo/*IDownloadProgressListener downloadProgressListener*/);
-        
+        IJobPart GetJobPart(JobInfo jobInfo /*IDownloadProgressListener downloadProgressListener*/);
+
         void Clean();
         void Reset();
+
+#if DEBUG
+        string GetDebugName();
+#endif
     }
 }

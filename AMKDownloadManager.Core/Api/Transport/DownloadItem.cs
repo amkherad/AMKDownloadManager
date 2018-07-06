@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.Core.Api.Network;
 using AMKsGear.Core.Collections;
 using AMKsGear.Core.Patterns.Mvvm;
+
 // ReSharper disable ExplicitCallerInfoArgument
 
 namespace AMKDownloadManager.Core.Api.Transport
@@ -43,6 +46,7 @@ namespace AMKDownloadManager.Core.Api.Transport
         {
             Properties = new PropertyBag();
         }
+
         public DownloadItem(Uri uri)
         {
             Properties = new PropertyBag();
@@ -73,17 +77,14 @@ namespace AMKDownloadManager.Core.Api.Transport
         /// <value>The URI.</value>
         public Uri Uri
         {
-            get
-            {
-                return Properties[KnownProperties.Uri] as Uri;
-            }
+            get { return Properties[KnownProperties.Uri] as Uri; }
             set
             {
                 Properties[KnownProperties.Uri] = value;
                 OnPropertyChanged(KnownProperties.Uri);
             }
         }
-        
+
         /// <summary>
         /// Gets or sets the URI of the dowonload resource.
         /// </summary>
@@ -98,6 +99,7 @@ namespace AMKDownloadManager.Core.Api.Transport
                     stack = new Stack<Uri>();
                     Properties[KnownProperties.RedirectionStack] = stack;
                 }
+
                 return stack;
             }
         }
@@ -114,10 +116,7 @@ namespace AMKDownloadManager.Core.Api.Transport
         /// <value>The mirrors.</value>
         public IEnumerable<Uri> Mirrors
         {
-            get
-            {
-                return Properties[KnownProperties.Mirrors] as IEnumerable<Uri>;
-            }
+            get { return Properties[KnownProperties.Mirrors] as IEnumerable<Uri>; }
             set
             {
                 Properties[KnownProperties.Mirrors] = value;
@@ -131,10 +130,7 @@ namespace AMKDownloadManager.Core.Api.Transport
         /// <value>The name of the local file.</value>
         public string LocalFileName
         {
-            get
-            {
-                return Properties[KnownProperties.LocalFileName] as string;
-            }
+            get { return Properties[KnownProperties.LocalFileName] as string; }
             set
             {
                 Properties[KnownProperties.LocalFileName] = value;
@@ -148,10 +144,7 @@ namespace AMKDownloadManager.Core.Api.Transport
         /// <value>The <see cref="NetworkInterfaceContext"/> provides information about the interface used to download the resource.</value>
         public NetworkInterfaceContext Interface
         {
-            get
-            {
-                return Properties[KnownProperties.Interface] as NetworkInterfaceContext;
-            }
+            get { return Properties[KnownProperties.Interface] as NetworkInterfaceContext; }
             set
             {
                 Properties[KnownProperties.Interface] = value;
@@ -165,16 +158,25 @@ namespace AMKDownloadManager.Core.Api.Transport
         /// <value>The <see cref="HttpProxyDescriptor"/> object.</value>
         public HttpProxyDescriptor HttpProxy
         {
-            get
-            {
-                return Properties[KnownProperties.HttpProxy] as HttpProxyDescriptor;
-            }
+            get { return Properties[KnownProperties.HttpProxy] as HttpProxyDescriptor; }
             set
             {
                 Properties[KnownProperties.HttpProxy] = value;
                 OnPropertyChanged(KnownProperties.HttpProxy);
             }
         }
+
+#if DEBUG
+        public string GetDebugName()
+        {
+            if (Uri == null)
+            {
+                return LocalFileName;
+            }
+
+            return Uri.AbsolutePath;
+        }
+#endif
 
         /// <summary>
         /// DownloadItem known properties.

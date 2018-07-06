@@ -24,10 +24,10 @@ namespace AMKDownloadManager.MSTest.Categories.DownloadManager
                     new Uri(GeneralTests.Uri)
                 ); //index.php
                 
-                di.HttpProxy = new HttpProxyDescriptor(33849)
-                {
-                    BypassOnLocal = false
-                }; //http debugger port
+                //di.HttpProxy = new HttpProxyDescriptor(33849)
+                //{
+                //    BypassOnLocal = false
+                //}; //http debugger port
                 
                 var app = ApplicationHost.Instance.Pool;
                 var downloadManager = app.GetFeature<IDownloadManager>();
@@ -39,7 +39,7 @@ namespace AMKDownloadManager.MSTest.Categories.DownloadManager
                 var state = downloadManager.Schedule(job);
 
                 downloadManager.Start();
-                //downloadManager.Join();
+                downloadManager.Join();
             }
             catch (ThreadAbortException e)
             {

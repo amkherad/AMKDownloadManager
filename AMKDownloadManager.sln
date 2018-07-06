@@ -27,8 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.MSTest",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.AvaloniaUI", "AMKDownloadManager.AvaloniaUI\AMKDownloadManager.AvaloniaUI.csproj", "{13E5F85B-D47E-4814-831D-F2064A584C48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{24F1D3B5-EDD7-459E-9FE9-595CFE692419}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,10 +61,6 @@ Global
 		{13E5F85B-D47E-4814-831D-F2064A584C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13E5F85B-D47E-4814-831D-F2064A584C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13E5F85B-D47E-4814-831D-F2064A584C48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24F1D3B5-EDD7-459E-9FE9-595CFE692419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24F1D3B5-EDD7-459E-9FE9-595CFE692419}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24F1D3B5-EDD7-459E-9FE9-595CFE692419}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24F1D3B5-EDD7-459E-9FE9-595CFE692419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D} = {97F2EF59-0E20-49FB-805D-C545FB633E76}

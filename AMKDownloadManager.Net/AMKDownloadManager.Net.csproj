@@ -5,6 +5,9 @@
     <TargetFrameworks>netcoreapp2.1;netstandard2.0</TargetFrameworks>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj" />
   </ItemGroup>

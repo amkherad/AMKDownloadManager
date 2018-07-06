@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.FileSystem;
 
 namespace AMKDownloadManager.Defaults.FileSystem
@@ -12,6 +13,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
         public void SaveStream(
             Stream stream,
             IFileManager fileManager,
+            SegmentationContext segmentationContext,
             long start,
             long? end,
             long? partsSize,

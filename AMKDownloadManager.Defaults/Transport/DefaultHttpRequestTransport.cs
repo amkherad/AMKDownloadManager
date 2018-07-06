@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -29,6 +30,10 @@ namespace AMKDownloadManager.Defaults.Transport
         {
             var selector = appContext.GetFeature<INetworkInterfaceSelector>();
 
+#if DEBUG
+            Trace.Write($"IPEndPoint BindIPEndPoint(): servicePoint: {servicePoint}, remoteEndPoint: {remoteEndPoint}, retryCount: {retryCount}");
+#endif
+            
             var endPoint = selector.SelectInterface(appContext, this, downloadItem);
             if (endPoint == null)
             {
@@ -81,7 +86,11 @@ namespace AMKDownloadManager.Defaults.Transport
         {
             appContext.SignalFeatures<ITransportListenerFeature>(
                 l => l.BeforeSendRequest(appContext, this, request));
-
+            
+#if DEBUG
+            Trace.Write($"Request to {request.Uri} is creating");
+#endif
+            
             var webRequest = HttpHelpers.CreateHttpWebRequestFromRequest(
                 request,
                 new HashSet<string>
@@ -98,6 +107,10 @@ namespace AMKDownloadManager.Defaults.Transport
             var userAgent = request.Headers.UserAgent;
             if (userAgent != null) webRequest.UserAgent = userAgent;
 
+#if DEBUG
+            Trace.Write($"Referer: {referer}, UserAgent: {userAgent}");
+#endif
+            
             #region DownloadItem properties
 
             var proxy = downloadItem.HttpProxy;
@@ -107,6 +120,10 @@ namespace AMKDownloadManager.Defaults.Transport
                     proxy.BypassList == null
                         ? new WebProxy(proxy.Uri, proxy.BypassOnLocal)
                         : new WebProxy(proxy.Uri, proxy.BypassOnLocal, proxy.BypassList.ToArray());
+                
+#if DEBUG
+                Trace.Write($"HttpProxy: {proxy}");
+#endif
             }
             var iface = downloadItem.Interface;
             if (iface != null)
@@ -189,6 +206,10 @@ namespace AMKDownloadManager.Defaults.Transport
                             var response = new HttpResponse();
                             HttpHelpers.FillResponseFromHttpResponse(response, webResponse);
 
+#if DEBUG
+                            Trace.Write($"DefaultHttpRequestTransport.SendRequest() FillResponseFromHttpResponse");
+#endif
+                            
                             appContext.SignalFeatures<ITransportListenerFeature>(
                                 l => l.WebResponseAvailable(appContext, this, request, webRequest,
                                     response, webResponse, null));

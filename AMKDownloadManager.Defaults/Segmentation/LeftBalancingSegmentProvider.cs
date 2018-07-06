@@ -7,7 +7,7 @@ using AMKsGear.Core.Collections;
 
 namespace AMKDownloadManager.Defaults.Segmentation
 {
-    public class LeftBalancingSegmentProvider : ISegmentDivider //IDM behavior segment provider.
+    public class LeftBalancingSegmentProvider : ISegmentDivider
     {
         private long _minSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
         private long _maxSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue; 
@@ -23,18 +23,18 @@ namespace AMKDownloadManager.Defaults.Segmentation
 
             var config = appContext.GetFeature<IConfigProvider>();
             
-            var maxSimultaneousJobs = config.GetInt(this,
-                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
-                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
+            var maxSimultaneousConnections = config.GetInt(this,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnections,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnectionsDefaultValue
             );
 
-            var optimumSegmentSize = segmentationContext.TotalSize / maxSimultaneousJobs;
+            var optimumSegmentSize = segmentationContext.TotalSize / maxSimultaneousConnections;
             while (optimumSegmentSize < _minSegmentSize)
                 optimumSegmentSize += _minSegmentSize;
             if (optimumSegmentSize > _maxSegmentSize)
                 optimumSegmentSize = _maxSegmentSize;
             
-            lock (segmentationContext.SyncRoot)
+            lock (segmentationContext.SynchronizationLock)
             {
                 var freeRanges = segmentationContext.Reverse().ToList();
                 if (!freeRanges.Any())

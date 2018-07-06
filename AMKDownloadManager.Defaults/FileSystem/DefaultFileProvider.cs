@@ -56,7 +56,6 @@ namespace AMKDownloadManager.Defaults.FileSystem
             var path = TryReserveFileName(
                 Path.Combine(pathInfo.UseTemp ? pathInfo.TempPath : pathInfo.Path, name)
             );
-
             //pathProvider.GetPathForMedia()
 
             var result = new DefaultFileManager(path);

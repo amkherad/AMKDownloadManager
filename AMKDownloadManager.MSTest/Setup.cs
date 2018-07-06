@@ -1,4 +1,6 @@
-﻿using AMKDownloadManager.Core;
+﻿using System;
+using System.Diagnostics;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.Defaults;
 using AMKDownloadManager.Defaults.Threading;
 using AMKDownloadManager.HttpDownloader.AddIn;
@@ -19,7 +21,7 @@ namespace AMKDownloadManager.MSTest
             if (_inited) return;
             _inited = true;
             
-            //Trace.Listeners.Add(new ConsoleTraceListener());
+            Trace.Listeners.Add(new ConsoleTraceListener());
             Logger.RegisterLogger(new MethodLogger(System.Console.Write, f =>
             {
                 for (var i = 0; i < f; i++) System.Console.WriteLine();
@@ -37,6 +39,19 @@ namespace AMKDownloadManager.MSTest
         public void TearDown()
         {
             
+        }
+    }
+
+    public class ConsoleTraceListener : TraceListener
+    {
+        public override void Write(string message)
+        {
+            Console.Write(message);
+        }
+
+        public override void WriteLine(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

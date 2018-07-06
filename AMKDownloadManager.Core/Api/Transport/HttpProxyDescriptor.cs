@@ -29,5 +29,10 @@ namespace AMKDownloadManager.Core.Api.Transport
             Uri = uri;
             Credentials = credentials;
         }
+
+        public override string ToString()
+        {
+            return Uri?.ToString();
+        }
     }
 }

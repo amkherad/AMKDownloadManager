@@ -19,10 +19,42 @@ namespace AMKDownloadManager.Defaults.Threading
         {
             return new AbstractThread(new Thread(new ThreadStart(action)));
         }
-
         public IThread Create(Action<object> action)
         {
             return new AbstractThread(new Thread(new ParameterizedThreadStart(action)));
+        }
+        
+        public IThread Create(Action action, string name)
+        {
+            return new AbstractThread(new Thread(new ThreadStart(action))
+            {
+                Name = name
+            });
+        }
+        public IThread Create(Action<object> action, string name)
+        {
+            return new AbstractThread(new Thread(new ParameterizedThreadStart(action))
+            {
+                Name = name
+            });
+        }
+        
+        
+        public IThread CreateBackground(Action action, string name)
+        {
+            return new AbstractThread(new Thread(new ThreadStart(action))
+            {
+                Name = name,
+                IsBackground = true
+            });
+        }
+        public IThread CreateBackground(Action<object> action, string name)
+        {
+            return new AbstractThread(new Thread(new ParameterizedThreadStart(action))
+            {
+                Name = name,
+                IsBackground = true
+            });
         }
 
         public void JoinAll(IEnumerable<IThread> threads)

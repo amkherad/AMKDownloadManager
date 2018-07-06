@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using AMKDownloadManager.Core.Api.DownloadManagement;
 
 namespace AMKDownloadManager.Core.Api.FileSystem
 {
@@ -7,6 +8,7 @@ namespace AMKDownloadManager.Core.Api.FileSystem
         void SaveStream(
             Stream stream,
             IFileManager fileManager,
+            SegmentationContext segmentationContext,
             long start,
             long? end,
             long? partSize,

@@ -55,7 +55,7 @@ namespace AMKDownloadManager.Defaults
             app.AddFeature<IScheduler>(scheduler);
             app.AddFeature<IDownloadManager>(new DefaultDownloadManager(app, scheduler));
 
-            app.AddFeature<ISegmentDivider>(new LeftBalancingSegmentProvider());
+            app.AddFeature<ISegmentDivider>(new BinarySegmentProvider());
             app.AddFeature<IFileProvider>(new DefaultFileProvider(
                 configProvider.GetInt(
                     app,

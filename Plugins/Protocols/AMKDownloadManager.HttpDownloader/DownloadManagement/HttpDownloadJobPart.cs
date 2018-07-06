@@ -99,12 +99,34 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                             return JobPartState.ErrorCanRetry;
                         }
                         
-                        FileManager.SaveStream(
-                            response.ResponseStream,
-                            min,
-                            0,
-                            length
-                        );
+                        var stream = response.ResponseStream;
+
+                        var fileSaver = AppContext.GetFeature<IStreamSaver>();
+
+//                        FileManager.SaveStream(
+//                            response.ResponseStream,
+//                            min,
+//                            0,
+//                            length
+//                        );
+                        try
+                        {
+                            fileSaver.SaveStream(
+                                stream,
+                                FileManager,
+                                _segmentation,
+                                0,
+                                null,
+                                _defaultBufferSize,
+                                _limit
+                            );
+                    
+                            return JobPartState.Finished;
+                        }
+                        catch (Exception ex)
+                        {
+                            return JobPartState.ErrorCanRetry;
+                        }
                         
                         return JobPartState.Finished;
                     }

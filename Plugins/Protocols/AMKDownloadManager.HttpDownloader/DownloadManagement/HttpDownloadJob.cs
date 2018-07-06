@@ -131,6 +131,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                     AppContext,
                     this,
                     FileManager,
+                    Segmentation,
                     response
                 );
             }
@@ -159,6 +160,8 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             public HttpDownloadJob Job { get; }
             public IFileManager FileManager { get; }
             public IResponse Response { get; }
+            
+            public SegmentationContext SegmentationContext { get; }
 
             private long? _limit;
             private long _defaultBufferSize;
@@ -167,11 +170,13 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 IAppContext appContext,
                 HttpDownloadJob job,
                 IFileManager fileManager,
+                SegmentationContext segmentationContext,
                 IResponse response)
             {
                 AppContext = appContext;
                 Job = job;
                 FileManager = fileManager;
+                SegmentationContext = segmentationContext;
                 Response = response;
 
                 //_limit = job._defaultBufferSize;
@@ -189,6 +194,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                     fileSaver.SaveStream(
                         stream,
                         FileManager,
+                        SegmentationContext,
                         0,
                         null,
                         _defaultBufferSize,
@@ -257,6 +263,13 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         {
             
         }
+        
+        #if DEBUG
+        public string GetDebugName()
+        {
+            return DownloadItem.GetDebugName();
+        }
+        #endif
 
         public void Dispose()
         {
