@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 
 namespace AMKDownloadManager.Core.Api.FileSystem
@@ -9,9 +10,8 @@ namespace AMKDownloadManager.Core.Api.FileSystem
             Stream stream,
             IFileManager fileManager,
             SegmentationContext segmentationContext,
-            long start,
-            long? end,
-            long? partSize,
+            Segment segment,
+            long? bufferSize,
             long? limit);
     }
 }

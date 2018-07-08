@@ -1,4 +1,5 @@
-﻿using AMKsGear.Architecture.Patterns;
+﻿using System.Threading;
+using AMKsGear.Architecture.Patterns;
 
 namespace AMKDownloadManager.Core.Api.Threading
 {
@@ -14,5 +15,8 @@ namespace AMKDownloadManager.Core.Api.Threading
         void Abort();
         
         string Name { get; set; }
+        int ManagedThreadId { get; }
+        
+        ThreadState ThreadState { get; }
     }
 }

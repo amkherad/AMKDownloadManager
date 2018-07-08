@@ -7,29 +7,20 @@ namespace AMKDownloadManager.Defaults.Network
 {
     public class DefaultNetworkMonitor : INetworkMonitor
     {
-        public DefaultNetworkMonitor()
-        {
-            
-        }
-
         public event EventHandler NetworkAvailabilityChanged;
         public bool CheckNetworkAvailability()
         {
-            throw new NotImplementedException();
+
+            return true;
         }
 
         public bool CheckInternetAvailability()
         {
-            throw new NotImplementedException();
+
+            return true;
         }
 
-        public int Order
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int Order => 0;
 
         public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {

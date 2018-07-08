@@ -3,14 +3,15 @@ using AMKDownloadManager.Core.Api.Transport;
 
 namespace AMKDownloadManager.Core.Api.Listeners
 {
-    public interface IDownloadProgressListener
+    public interface IDownloadProgressListener : IListenerFeature
     {
         void OnProgress(
             IAppContext appContext,
-            IJob job, DownloadItem downloadItem,
+            IJobPart job,
+            DownloadItem downloadItem,
             IHttpTransport transport,
-            long totalSize,
-            long progress);
+            ISegmentation segmentation,
+            Segment segment);
         
         void OnFinished(
             IAppContext appContext,

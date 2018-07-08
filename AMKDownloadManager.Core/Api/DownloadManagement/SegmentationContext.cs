@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using AMKsGear.Architecture.Modeling.Annotations;
 using AMKsGear.Architecture.Parallelism;
@@ -31,7 +32,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         }
     }
 
-    public class SegmentationContext
+    public class SegmentationContext : ISegmentation
     {
         public event SegmentationContextSegmentChangedEvent SegmentAdded;
         public event SegmentationContextSegmentChangedEvent SegmentRemoved;
@@ -56,6 +57,9 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// All segments that currently is downloading.
         /// </summary>
         public SortedSet<Segment> ReservedRanges { get; }
+
+        IEnumerable<Segment> ISegmentation.FilledRanges => FilledRanges;
+        IEnumerable<Segment> ISegmentation.ReservedRanges => ReservedRanges;
 
         //public Segment LastRange { get; set; }
 
@@ -302,6 +306,53 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             }
             
             return new Segment(prevSegmentMax, closestValue);
+        }
+
+        /// <summary>
+        /// Checks for all the SegmentationContext is covered with FilledRanges segments.
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIfAllFilled()
+        {
+            var totalSize = TotalSize;
+            var max = -1L;
+            
+            foreach (var segment in FilledRanges) //order guaranteed
+            {
+                var segmentMin = segment.Min;
+                var segmentMax = segment.Max;
+
+                if (segmentMin < max)
+                {
+                    if (max < segmentMax) //handles overlaps.
+                    {
+                        max = segmentMax;
+                    }
+                }
+                else if (Math.Abs(segmentMin - max) <= 1)
+                {
+                    max = segmentMax;
+                }
+
+                if (max >= totalSize - 1)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void MarkReservedAsFilled(Segment segment)
+        {
+            ReservedRanges.Remove(segment);
+            FilledRanges.Add(segment);
+        }
+
+        public void Reset()
+        {
+            FilledRanges.Clear();
+            ReservedRanges.Clear();
         }
     }
 }

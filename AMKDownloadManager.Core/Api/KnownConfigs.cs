@@ -27,13 +27,13 @@ namespace AMKDownloadManager.Core.Api
                 public const int MaximumRedirectsDefaultValue = 20;
 
                 public const string DefaultReceiveBufferSize = "DownloadManager.Download.DefaultReceiveBufferSize";
-                public const int DefaultReceiveBufferSizeDefaultValue = 4 * Helper.KiB;
+                public const int DefaultReceiveBufferSizeDefaultValue = 100 * Helper.KiB;
             }
 
             public static class Segmentation
             {
                 public const string MinSegmentSize = "DownloadManager.Segmentation.MinSegmentSize";
-                public const int MinSegmentSizeDefaultValue = 4 * Helper.KiB;
+                public const int MinSegmentSizeDefaultValue = 100 * Helper.KiB;
                 
                 public const string MaxSegmentSize = "DownloadManager.Segmentation.MaxSegmentSize";
                 public const int MaxSegmentSizeDefaultValue = 10 * Helper.MiB;

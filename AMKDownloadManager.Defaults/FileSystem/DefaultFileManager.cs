@@ -29,6 +29,8 @@ namespace AMKDownloadManager.Defaults.FileSystem
         /// </summary>
         public FileManagerLockMode LockMode { get; set; }
 
+        private object _lock = new object();
+        
         /// <summary>
         /// <see cref="DefaultFileManager"/> constructor.
         /// </summary>
@@ -46,13 +48,16 @@ namespace AMKDownloadManager.Defaults.FileSystem
 
         public void SaveStream(Stream stream, long fileStart, long streamStart, long length)
         {
-            if (stream.CanSeek)
+            if (streamStart > 0)
             {
-                stream.Position = streamStart;
-            }
-            else
-            {
-                throw new NotSupportedException("Unseekable stream does not supported.");
+                if (stream.CanSeek)
+                {
+                    stream.Position = streamStart;
+                }
+                else
+                {
+                    throw new NotSupportedException("Unseekable stream does not supported.");
+                }
             }
 
             using (var f = new FileStream(Path,

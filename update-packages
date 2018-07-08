@@ -34,4 +34,5 @@ updateReferences "./AMKDownloadManager.Net/AMKDownloadManager.Net.csproj"
 updateReferences "./AMKDownloadManager.MSTest/AMKDownloadManager.MSTest.csproj"
 
 #updateReferences "./Plugins/Misc/AMKDownloadManager.BatchDownloadFileSupport/AMKDownloadManager.BatchDownloadFileSupport.csproj"
+#updateReferences "./Plugins/Misc/AMKDownloadManager.DebugMode/AMKDownloadManager.DebugMode.csproj"
 updateReferences "./Plugins/Protocols/AMKDownloadManager.HttpDownloader/AMKDownloadManager.HttpDownloader.csproj"

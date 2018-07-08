@@ -8,7 +8,9 @@ using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Transport;
+using AMKDownloadManager.Core.Api.Types;
 using AMKDownloadManager.HttpDownloader.DownloadManagement;
+using AMKsGear.Architecture.Annotations;
 
 namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 {
@@ -49,18 +51,59 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
         }
 
         public IRequest CreateRequest(
-            IAppContext appContext,
-            DownloadItem downloadItem,
-            SegmentationContext segmentationContext,
-            Segment segment)
+            [NotNull] IAppContext appContext,
+            [NotNull] DownloadItem downloadItem,
+            [CanBeNull] SegmentationContext segmentationContext,
+            [CanBeNull] Segment segment,
+            [CanBeNull] RequestParameters parameters)
         {
             var request = HttpRequest.FromDownloadItem(
                 appContext,
                 downloadItem);
 
-            if (segment != null)
+            var isRangedRequest = false;
+
+            if (segment != null && segmentationContext != null)
             {
-                
+                isRangedRequest = true;
+                if (segment.LimitedSegment)
+                {
+                    request.Headers.Range = $"bytes={segment.Min}-{segment.Max}";
+                }
+                else
+                {
+                    request.Headers.Range = $"bytes={segment.Min}-{segmentationContext.TotalSize}";
+                }
+            }
+
+            if (parameters != null)
+            {
+                if (!parameters.SuppressConsistencyCheck)
+                {
+                    var dateTime = parameters.ConsistencyDateTime;
+                    var eTag = parameters.ConsistencyEntityTag;
+
+                    if (isRangedRequest)
+                    {
+                        if (eTag != null && !string.IsNullOrWhiteSpace(eTag))
+                        {
+                            request.Headers.IfRange = eTag;
+                        }
+                        else if (dateTime != null && !string.IsNullOrWhiteSpace(dateTime))
+                        {
+                            request.Headers.IfRange = dateTime;
+                        }
+                    }
+#warning IfMatch/IfUnmodifiedSince suppressed when Range header is presented.
+                    else if (eTag != null && !string.IsNullOrWhiteSpace(eTag))
+                    {
+                        request.Headers.IfMatch = eTag;
+                    }
+                    else if (dateTime != null && !string.IsNullOrWhiteSpace(dateTime))
+                    {
+                        request.Headers.IfUnmodifiedSince = dateTime;
+                    }
+                }
             }
 
             appContext.SignalFeatures<IProtocolProviderListener>(x => x.RequestCreated(
@@ -89,7 +132,7 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
                 null,
                 null
             );
-            
+
             var httpDownload = new HttpDownloadJob(
                 appContext,
                 fileManager,

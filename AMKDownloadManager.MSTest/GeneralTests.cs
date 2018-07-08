@@ -12,7 +12,8 @@ namespace AMKDownloadManager.MSTest
     [TestClass]
     public class GeneralTests
     {
-        public const string Uri = "http://localhost.:8083/com.playstation.U4.apk";
+        //public const string Uri = "http://localhost.:8083/com.playstation.U4.apk";
+        public const string Uri = "http://localhost.:8084/com.playstation.U4.apk";
         
         [TestMethod]
         public void Exec()

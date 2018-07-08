@@ -75,35 +75,72 @@ namespace AMKDownloadManager.Defaults.ConfigProvider
             throw new NotImplementedException();
         }
 
-        public void InstallBool(object context, string componentGuid, string fqn, bool value)
+        public void InstallBool(object context, string componentGuid, string fqn, bool value,
+            ConfigExistenceStrategy strategy = ConfigExistenceStrategy.UseThis_Backup)
         {
             throw new NotImplementedException();
         }
 
-        public void InstallInt(object context, string componentGuid, string fqn, int value, int[] availableValues = null)
+        public void InstallInt(object context, string componentGuid, string fqn, int value,
+            ConfigExistenceStrategy strategy = ConfigExistenceStrategy.UseThis_Backup, int[] availableValues = null)
         {
             throw new NotImplementedException();
         }
 
-        public void InstallLong(object context, string componentGuid, string fqn, long value, long[] availableValues = null)
+        public void InstallLong(object context, string componentGuid, string fqn, long value,
+            ConfigExistenceStrategy strategy = ConfigExistenceStrategy.UseThis_Backup, long[] availableValues = null)
         {
             throw new NotImplementedException();
         }
 
-        public void InstallFloat(object context, string componentGuid, string fqn, float value, float[] availableValues = null)
+        public void InstallFloat(object context, string componentGuid, string fqn, float value,
+            ConfigExistenceStrategy strategy = ConfigExistenceStrategy.UseThis_Backup, float[] availableValues = null)
         {
             throw new NotImplementedException();
         }
 
-        public void InstallDouble(object context, string componentGuid, string fqn, double value, double[] availableValues = null)
+        public void InstallDouble(object context, string componentGuid, string fqn, double value,
+            ConfigExistenceStrategy strategy = ConfigExistenceStrategy.UseThis_Backup, double[] availableValues = null)
         {
             throw new NotImplementedException();
         }
 
-        public void InstallString(object context, string componentGuid, string fqn, string value, string[] availableValues = null)
+        public void InstallString(object context, string componentGuid, string fqn, string value,
+            ConfigExistenceStrategy strategy = ConfigExistenceStrategy.UseThis_Backup, string[] availableValues = null)
         {
             throw new NotImplementedException();
         }
+
+        public void UnInstallBool(object context, string componentGuid, string fqn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnInstallInt(object context, string componentGuid, string fqn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnInstallLong(object context, string componentGuid, string fqn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnInstallFloat(object context, string componentGuid, string fqn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnInstallDouble(object context, string componentGuid, string fqn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnInstallString(object context, string componentGuid, string fqn)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region IFeature implementation

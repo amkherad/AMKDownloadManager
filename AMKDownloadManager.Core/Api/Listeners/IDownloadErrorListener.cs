@@ -2,7 +2,7 @@
 
 namespace AMKDownloadManager.Core.Api.Listeners
 {
-    public interface IDownloadErrorListener : IFeature
+    public interface IDownloadErrorListener : IListenerFeature
     {
         void OnDeadError(
             IAppContext appContext,

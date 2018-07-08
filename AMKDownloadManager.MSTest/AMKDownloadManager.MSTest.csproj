@@ -4,7 +4,12 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180708" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.1" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />

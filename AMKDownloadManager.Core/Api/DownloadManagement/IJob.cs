@@ -6,14 +6,6 @@ using AMKsGear.Core.Automation;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
-    public delegate void JobEventHandler(IJob job, EventArgs eventArgs);
-
-    public delegate void JobProgressEventHandler(IJob job, long progress);
-
-    public delegate void JobPriorityChangedEventHandler(IJob job, SchedulerPriority priority);
-
-    public delegate void JobStateChangedEventHandler(IJob job, JobState state);
-
     /// <summary>
     /// Job state.
     /// </summary>
@@ -33,36 +25,6 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
     public interface IJob : IDisposable
     {
         /// <summary>
-        /// Occurs when finished.
-        /// </summary>
-        event JobEventHandler Finished;
-
-        /// <summary>
-        /// Occurs when paused.
-        /// </summary>
-        event JobEventHandler Paused;
-
-        /// <summary>
-        /// Occurs when started.
-        /// </summary>
-        event JobEventHandler Started;
-
-        /// <summary>
-        /// Occurs when any download progress happens.
-        /// </summary>
-        event JobProgressEventHandler Progress;
-
-        /// <summary>
-        /// Occurs when priority changed.
-        /// </summary>
-        event JobPriorityChangedEventHandler PriorityChanged;
-
-        /// <summary>
-        /// Occurs when job state changed.
-        /// </summary>
-        event JobStateChangedEventHandler StateChanged;
-
-        /// <summary>
         /// Get job state.
         /// </summary>
         JobState State { get; }
@@ -78,7 +40,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// if resouse does not support ranges this method will freeze until download progress finishes.
         /// </summary>
         /// <returns></returns>
-        JobInfo TriggerJobAndGetInfo( /*IDownloadProgressListener downloadProgressListener*/);
+        JobInfo TriggerJobAndGetInfo(/*IDownloadProgressListener downloadProgressListener*/);
 
         // <param name="downloadProgressListener">Listener to listen to progression information.</param>
         /// <summary>

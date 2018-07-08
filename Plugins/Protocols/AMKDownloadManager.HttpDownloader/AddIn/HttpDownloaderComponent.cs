@@ -54,7 +54,7 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
 
         public void Uninstall(IAppContext app)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Initialize(IAppContext app)
@@ -63,6 +63,7 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
             {
                 return;
             }
+            
             app.AddFeature<IProtocolProvider>(new HttpProtocolProvider());
         }
 

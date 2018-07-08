@@ -218,6 +218,8 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
 
             range = sc.GetSegmentGrowthRightLimit(50, 10);
             Assert.IsNotNull(range, "range is null");
+            Assert.AreSame(range.Min, 51);
+            Assert.AreSame(range.Max, 70);
 
             Trace.WriteLine($"Range= {range.Min}:{range.Max} ({range.Length})");
             
@@ -254,6 +256,84 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
 
             range = sc.GetSegmentGrowthRightLimit(50, 4 * Helper.KiB);
             Assert.IsNull(range, "Range is not null");
+        }
+
+        [TestMethod]
+        public void CheckIfAllFilledTests()
+        {
+            var sc = new SegmentationContext(1000);
+
+            sc.FilledRanges.Add(new Segment(0, 999));
+            
+            Assert.IsTrue(sc.CheckIfAllFilled());
+            
+            sc.Reset();
+            
+            
+            //================================================
+            
+            
+            sc.FilledRanges.Add(new Segment(0, 400));
+            sc.FilledRanges.Add(new Segment(401, 999));
+            
+            Assert.IsTrue(sc.CheckIfAllFilled());
+            
+            sc.Reset();
+            
+            
+            //================================================
+            
+            
+            sc.FilledRanges.Add(new Segment(0, 400));
+            sc.FilledRanges.Add(new Segment(402, 999));
+            
+            Assert.IsFalse(sc.CheckIfAllFilled());
+            
+            sc.Reset();
+            
+            
+            //================================================
+            
+            
+            sc.FilledRanges.Add(new Segment(0, 400));
+            sc.FilledRanges.Add(new Segment(401, 998));
+            
+            Assert.IsFalse(sc.CheckIfAllFilled());
+            
+            sc.Reset();
+            
+            
+            //================================================
+            
+            
+            sc.FilledRanges.Add(new Segment(1, 400));
+            sc.FilledRanges.Add(new Segment(401, 999));
+            
+            Assert.IsFalse(sc.CheckIfAllFilled());
+            
+            sc.Reset();
+            
+            
+            //================================================
+            
+            
+            sc.FilledRanges.Add(new Segment(0, 1));
+            sc.FilledRanges.Add(new Segment(2, 999));
+            
+            Assert.IsTrue(sc.CheckIfAllFilled());
+            
+            sc.Reset();
+            
+            
+            //================================================
+            
+            
+            sc.FilledRanges.Add(new Segment(0, 1));
+            sc.FilledRanges.Add(new Segment(3, 999));
+            
+            Assert.IsFalse(sc.CheckIfAllFilled());
+            
+            sc.Reset();
         }
     }
 }

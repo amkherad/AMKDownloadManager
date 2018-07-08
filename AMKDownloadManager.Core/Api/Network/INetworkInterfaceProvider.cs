@@ -4,6 +4,6 @@ namespace AMKDownloadManager.Core.Api.Network
 {
     public interface INetworkInterfaceProvider : IFeature
     {
-        IEnumerable<NetworkInterfaceInfo> GetNetworkInterfaces();
+        IEnumerable<INetworkInterfaceInfo> GetNetworkInterfaces();
     }
 }

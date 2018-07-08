@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.Serialization.Formatters;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Listeners;
@@ -31,9 +33,10 @@ namespace AMKDownloadManager.Defaults.Transport
             var selector = appContext.GetFeature<INetworkInterfaceSelector>();
 
 #if DEBUG
-            Trace.Write($"IPEndPoint BindIPEndPoint(): servicePoint: {servicePoint}, remoteEndPoint: {remoteEndPoint}, retryCount: {retryCount}");
+            Trace.WriteLine(
+                $"IPEndPoint BindIPEndPoint(): servicePoint: {servicePoint}, remoteEndPoint: {remoteEndPoint}, retryCount: {retryCount}");
 #endif
-            
+
             var endPoint = selector.SelectInterface(appContext, this, downloadItem);
             if (endPoint == null)
             {
@@ -44,6 +47,7 @@ namespace AMKDownloadManager.Defaults.Transport
             {
                 return endPoint as IPEndPoint;
             }
+
             if (endPoint is NetworkInterface)
             {
 #warning Use all available unicasts if one does not working.
@@ -55,6 +59,7 @@ namespace AMKDownloadManager.Defaults.Transport
 
                 return new IPEndPoint(firstAddress.Address, 0);
             }
+
             if (endPoint is NetworkInterfaceInfo)
             {
                 var ni = NetworkInterfaceProvider.GetNetworkInterfaceByName((endPoint as NetworkInterfaceInfo).Name);
@@ -81,16 +86,15 @@ namespace AMKDownloadManager.Defaults.Transport
             IAppContext appContext,
             DownloadItem downloadItem,
             IRequest request,
-            IDownloadProgressListener downloadProgressListener,
             bool unpackStream)
         {
             appContext.SignalFeatures<ITransportListenerFeature>(
                 l => l.BeforeSendRequest(appContext, this, request));
-            
+
 #if DEBUG
-            Trace.Write($"Request to {request.Uri} is creating");
+            Trace.WriteLine($"Request to {request.Uri} is creating");
 #endif
-            
+
             var webRequest = HttpHelpers.CreateHttpWebRequestFromRequest(
                 request,
                 new HashSet<string>
@@ -107,10 +111,7 @@ namespace AMKDownloadManager.Defaults.Transport
             var userAgent = request.Headers.UserAgent;
             if (userAgent != null) webRequest.UserAgent = userAgent;
 
-#if DEBUG
-            Trace.Write($"Referer: {referer}, UserAgent: {userAgent}");
-#endif
-            
+
             #region DownloadItem properties
 
             var proxy = downloadItem.HttpProxy;
@@ -120,11 +121,12 @@ namespace AMKDownloadManager.Defaults.Transport
                     proxy.BypassList == null
                         ? new WebProxy(proxy.Uri, proxy.BypassOnLocal)
                         : new WebProxy(proxy.Uri, proxy.BypassOnLocal, proxy.BypassList.ToArray());
-                
+
 #if DEBUG
-                Trace.Write($"HttpProxy: {proxy}");
+                Trace.WriteLine($"HttpProxy: {proxy}");
 #endif
             }
+
             var iface = downloadItem.Interface;
             if (iface != null)
             {
@@ -138,6 +140,18 @@ namespace AMKDownloadManager.Defaults.Transport
             }
 
             #endregion
+
+#if DEBUG
+            var sb = new StringBuilder();
+            sb.AppendLine("======================================================");
+            sb.AppendLine($"{webRequest.Method} {webRequest.Address} HTTP/{webRequest.ProtocolVersion} := {Thread.CurrentThread.ManagedThreadId}");
+            sb.AppendLine("------------------------------------------------------");
+            foreach (string header in webRequest.Headers)
+            foreach (var value in webRequest.Headers.GetValues(header))
+                sb.AppendLine($"{header}: {value}");
+            sb.AppendLine("======================================================");
+            Trace.WriteLine(sb.ToString());
+#endif
 
             var requestBody = request.RequestBody;
             var requestBodyWriter = request.RequestBodyWriter;
@@ -176,9 +190,21 @@ namespace AMKDownloadManager.Defaults.Transport
                         {
                             downloadItem.Redirect(webResponse.ResponseUri);
                         }
-
+                        
                         if (webRequest.HaveResponse)
                         {
+#if DEBUG
+                            sb = new StringBuilder();
+                            sb.AppendLine("======================================================");
+                            sb.AppendLine($"{(int)webResponse.StatusCode} {webResponse.StatusDescription} ({webResponse.ResponseUri}) := {Thread.CurrentThread.ManagedThreadId}");
+                            sb.AppendLine("------------------------------------------------------");
+                            foreach (string header in webResponse.Headers)
+                            foreach (var value in webResponse.Headers.GetValues(header))
+                                sb.AppendLine($"{header}: {value}");
+                            sb.AppendLine("======================================================");
+                            Trace.WriteLine(sb.ToString());
+#endif
+
                             var stream = webResponse.GetResponseStream();
                             {
                                 //webResponse.Close();
@@ -207,9 +233,10 @@ namespace AMKDownloadManager.Defaults.Transport
                             HttpHelpers.FillResponseFromHttpResponse(response, webResponse);
 
 #if DEBUG
-                            Trace.Write($"DefaultHttpRequestTransport.SendRequest() FillResponseFromHttpResponse");
+                            Trace.WriteLine(
+                                $"DefaultHttpRequestTransport.SendRequest(): {response.StatusCode} !webRequest.HaveResponse");
 #endif
-                            
+
                             appContext.SignalFeatures<ITransportListenerFeature>(
                                 l => l.WebResponseAvailable(appContext, this, request, webRequest,
                                     response, webResponse, null));
@@ -239,6 +266,7 @@ namespace AMKDownloadManager.Defaults.Transport
                         }
                     }
                 }
+
                 throw;
             }
         }
@@ -247,7 +275,6 @@ namespace AMKDownloadManager.Defaults.Transport
             IAppContext appContext,
             DownloadItem downloadItem,
             IRequest request,
-            IDownloadProgressListener downloadProgressListener,
             bool unpackStream)
         {
             throw new NotImplementedException();

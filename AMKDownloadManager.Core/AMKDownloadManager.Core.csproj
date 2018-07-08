@@ -7,13 +7,17 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
+    <OutputPath>../.output/Debug/</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>../.output/Release/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Core" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180708" />
   </ItemGroup>
 </Project>

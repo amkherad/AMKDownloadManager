@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api.DownloadManagement;
@@ -10,6 +11,7 @@ using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
 using AMKsGear.Core.Automation;
+using AMKsGear.Core.Collections;
 
 namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 {
@@ -29,11 +31,10 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         public IFileManager FileManager { get; protected set; }
 
-        private readonly ProgressListener _progressListener;
-
 
         internal long? ResourceSize;
         internal SegmentationContext Segmentation;
+        internal Segment InitialSegment;
 
         private long _defaultBufferSize;
         private long _minSegmentSize;
@@ -57,27 +58,10 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             Transport = appContext.GetFeature<IHttpTransport>();
             SegmentProvider = appContext.GetFeature<ISegmentDivider>();
 
-            _progressListener = new ProgressListener();
-
             LoadConfig(appContext, appContext.GetFeature<IConfigProvider>(), null);
         }
 
         #region IJob implementation
-
-        public event JobEventHandler Finished;
-        public event JobEventHandler Paused;
-        public event JobEventHandler Started;
-        public event JobProgressEventHandler Progress;
-        public event JobPriorityChangedEventHandler PriorityChanged;
-        public event JobStateChangedEventHandler StateChanged;
-
-        public void OnFinished(EventArgs e) => Finished?.Invoke(this, e);
-        public void OnProgress(long progress) => Progress?.Invoke(this, progress);
-        public void OnPaused(EventArgs e) => Paused?.Invoke(this, e);
-        public void OnStarted(EventArgs e) => Started?.Invoke(this, e);
-        public void OnPriorityChanged(SchedulerPriority priority) => PriorityChanged?.Invoke(this, priority);
-        public void OnStateChanged(JobState state) => StateChanged?.Invoke(this, state);
-
 
         public JobState State { get; protected internal set; }
 
@@ -91,27 +75,32 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             long? downloadSize;
             //bool isFinished = false;
 
-            var request = HttpProtocolProvider.CreateRequest(
+            IResponse response;
+            using (var request = HttpProtocolProvider.CreateRequest(
                 AppContext,
                 DownloadItem,
                 null,
+                null,
                 null
-            );
-
-            var response = Transport.SendRequest(
-                AppContext,
-                DownloadItem,
-                request,
-                _progressListener,
-                false
-            );
+            ))
+            {
+                response = Transport.SendRequest(
+                    AppContext,
+                    DownloadItem,
+                    request,
+                    false
+                );
+            }
 
             downloadSize = response.Headers.ContentLength;
 
+            var segment = new Segment(0, _minSegmentSize);
             if (downloadSize != null)
             {
                 ResourceSize = downloadSize;
                 Segmentation = new SegmentationContext(downloadSize.Value);
+                InitialSegment = segment;
+                Segmentation.ReservedRanges.Add(segment);
             }
 
             if (response.StatusCode == HttpStatusCode.OK)
@@ -132,6 +121,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                     this,
                     FileManager,
                     Segmentation,
+                    segment,
                     response
                 );
             }
@@ -142,13 +132,14 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 supportsConcurrency,
                 response,
                 //isFinished,
-                mainJobPart);
+                mainJobPart,
+                Segmentation);
 
             jobInfo.Disposer.Enqueue(response);
             
             return jobInfo;
         }
-
+        
         public Task<JobInfo> TriggerJobAndGetInfoAsync()
         {
             return Task.Run(() => TriggerJobAndGetInfo());
@@ -162,15 +153,19 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             public IResponse Response { get; }
             
             public SegmentationContext SegmentationContext { get; }
+            public Segment Segment { get; }
 
             private long? _limit;
             private long _defaultBufferSize;
+
+            IJob IJobPart.Job => Job; 
             
             public MainJobPartImpl(
                 IAppContext appContext,
                 HttpDownloadJob job,
                 IFileManager fileManager,
                 SegmentationContext segmentationContext,
+                Segment segment,
                 IResponse response)
             {
                 AppContext = appContext;
@@ -179,6 +174,8 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 SegmentationContext = segmentationContext;
                 Response = response;
 
+                Segment = segment;
+                
                 //_limit = job._defaultBufferSize;
                 _defaultBufferSize = job._defaultBufferSize;
             }
@@ -195,8 +192,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                         stream,
                         FileManager,
                         SegmentationContext,
-                        0,
-                        null,
+                        Segment,
                         _defaultBufferSize,
                         _limit
                     );
@@ -218,6 +214,16 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             {
                 Response.Dispose();
             }
+            
+            
+#if DEBUG
+            public string DebugName { get; set; }
+        
+            public string GetDebugName()
+            {
+                return DebugName;
+            }
+#endif
         }
 
         public IJobPart GetJobPart(JobInfo jobInfo)
@@ -230,7 +236,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             {
                 throw new InvalidOperationException();
             }
-
+            
             var partDescriptor = SegmentProvider.GetPart(
                 AppContext,
                 this,
@@ -250,7 +256,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
                 FileManager,
                 Segmentation,
                 partDescriptor.Segment,
-                _progressListener
+                _defaultBufferSize
             );
         }
 
@@ -309,30 +315,5 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         }
 
         #endregion
-
-        private class ProgressListener : IDownloadProgressListener
-        {
-            public void OnProgress(
-                IAppContext appContext,
-                IJob job,
-                DownloadItem downloadItem,
-                IHttpTransport transport,
-                long totalSize,
-                long progress)
-            {
-                var j = job as HttpDownloadJob;
-                j?.OnProgress(progress);
-            }
-
-            public void OnFinished(
-                IAppContext appContext,
-                IJob job,
-                DownloadItem downloadItem,
-                IHttpTransport transport)
-            {
-                var j = job as HttpDownloadJob;
-                j?.OnFinished(EventArgs.Empty);
-            }
-        }
     }
 }

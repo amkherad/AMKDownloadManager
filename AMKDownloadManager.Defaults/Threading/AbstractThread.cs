@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Threading;
 using AMKDownloadManager.Core.Api.Threading;
 
@@ -12,7 +13,7 @@ namespace AMKDownloadManager.Defaults.Threading
         public AbstractThread(Thread thread)
         {
             if (thread == null) throw new ArgumentNullException(nameof(thread));
-
+            
             _thread = thread;
         }
 
@@ -48,6 +49,11 @@ namespace AMKDownloadManager.Defaults.Threading
             get => _thread.Name;
             set => _thread.Name = value;
         }
+
+        
+        public ThreadState ThreadState => _thread.ThreadState;
+
+        public int ManagedThreadId => _thread.ManagedThreadId;
 
         #endregion
 

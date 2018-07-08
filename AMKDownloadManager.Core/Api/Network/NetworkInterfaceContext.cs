@@ -34,7 +34,7 @@ namespace AMKDownloadManager.Core.Api.Network
     
     public class NetworkInterfaceLoadContext
     {
-        public NetworkInterfaceInfo Info { get; set; }
+        public INetworkInterfaceInfo Info { get; set; }
         public Int64RangeModel TrafficBoundaries { get; set; }
         public DateTimeRange TimeLimits { get; set; }
         

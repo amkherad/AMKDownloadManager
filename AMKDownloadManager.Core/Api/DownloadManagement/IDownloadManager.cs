@@ -4,23 +4,11 @@ using AMKsGear.Core.Utils;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
-    public delegate void DownloadManagerEvent(IDownloadManager downloadManager, EventArgs eventArgs);
-    public delegate void DownloadManagerCancellableEvent(IDownloadManager downloadManager, CancelEventArgs eventArgs);
-    public delegate void DownloadManagerJobEvent(IDownloadManager downloadManager, IJob job);
-
     /// <summary>
     /// Download manager service.
     /// </summary>
     public interface IDownloadManager : IFeature
     {
-        event DownloadManagerEvent AllFinished;
-        event DownloadManagerEvent Started;
-        event DownloadManagerEvent Stopped;
-        event DownloadManagerEvent StopCanceled;
-        event DownloadManagerCancellableEvent Stopping;
-        event DownloadManagerJobEvent DownloadStarted;
-        event DownloadManagerJobEvent DownloadFinished;
-
         /// <summary>
         /// Begins a download job.
         /// </summary>
@@ -50,7 +38,10 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// </summary>
         void ForceStop();
 
-        void Join();
-        void Join(IJob job);
+        void WaitToFinish();
+        void WaitToFinish(TimeSpan timeout);
+        
+        void WaitToFinish(IJob job);
+        void WaitToFinish(IJob job, TimeSpan timeout);
     }
 }

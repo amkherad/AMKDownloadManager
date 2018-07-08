@@ -37,9 +37,9 @@ namespace AMKDownloadManager.MSTest.Categories.DownloadManager
                 var job = protocol.CreateJob(app, di, fileProvider, null);
 
                 var state = downloadManager.Schedule(job);
-
+                
                 downloadManager.Start();
-                downloadManager.Join();
+                downloadManager.WaitToFinish();
             }
             catch (ThreadAbortException e)
             {

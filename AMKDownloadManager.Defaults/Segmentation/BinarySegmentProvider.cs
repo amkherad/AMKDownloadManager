@@ -40,7 +40,7 @@ namespace AMKDownloadManager.Defaults.Segmentation
             lock (segmentationContext.SynchronizationLock)
             {
                 Segment segment = null;
-                if (segmentationContext.FilledRanges.All(x => x.Min != 0) || segmentationContext.ReservedRanges.All(x => x.Min != 0))
+                if (segmentationContext.FilledRanges.All(x => x.Min != 0) && segmentationContext.ReservedRanges.All(x => x.Min != 0))
                 {
                     segment = new Segment(0, _minSegmentSize);
                 }
@@ -51,8 +51,8 @@ namespace AMKDownloadManager.Defaults.Segmentation
 
                     if (freeRange.Length > (_minSegmentSize * 2))
                     {
-                        var mid = freeRange.Length / 2;
-                        segment = new Segment(freeRange.Min + mid, _minSegmentSize);
+                        var min = freeRange.Min + (freeRange.Length / 2);
+                        segment = new Segment(min, min + _minSegmentSize - 1);
                     }
                     else if (freeRange.Length > 0)
                     {
@@ -63,13 +63,13 @@ namespace AMKDownloadManager.Defaults.Segmentation
                 if (segment == null)
                 {
 #if DEBUG
-                    Trace.Write("BinarySegmentProvider.GetPart(): segment == null returning null part.");
+                    Trace.WriteLine("BinarySegmentProvider.GetPart(): segment == null returning null part.");
 #endif
                     return null;
                 }
 
 #if DEBUG
-                Trace.Write($"BinarySegmentProvider.GetPart(): segment({segment.Min}, {segment.Max}) part created with length of {segment.Length}");
+                Trace.WriteLine($"BinarySegmentProvider.GetPart(): segment({segment.Min}, {segment.Max}) part created with length of {segment.Length}");
 #endif
 
                 segmentationContext.ReservedRanges.Add(segment);

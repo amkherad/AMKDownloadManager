@@ -2,19 +2,23 @@
   <PropertyGroup>
     <AssemblyName>AMKDownloadManager.HttpDownloader</AssemblyName>
     <RootNamespace>AMKDownloadManager.HttpDownloader</RootNamespace>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>7.2</LangVersion>
     <TargetFrameworks>netcoreapp2.1;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
+    <OutputPath>../../../.output/Plugins/Debug/</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>../../../.output/Plugins/Release/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Core" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180703" />
-    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180703" />
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180708" />
     <PackageReference Include="System.Composition" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>

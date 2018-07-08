@@ -40,6 +40,8 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// Gets a value indicating whether this job is finished. typically becomes true when job does not support concurrency. (resume capability)
         /// </summary>
         //public bool IsFinished { get; set; }
+        
+        public SegmentationContext SegmentationContext { get; }
 
         /// <summary>
         /// JobInfo constructor
@@ -48,14 +50,15 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// <param name="firstHttpPacketSize">Size of first request's response content</param>
         /// <param name="supportsConcurrency">Determines download resource supports concurrency (resume capability)</param>
         /// <param name="response">IResponse if available</param>
-        ///// <param name="isFinished">Determines if download is finished or not</param>
+        /// <param name="mainJobPart"></param>
         public JobInfo(
             long? downloadSize,
             long? firstHttpPacketSize,
             bool supportsConcurrency,
             IResponse response,
             //bool isFinished,
-            IJobPart mainJobPart)
+            IJobPart mainJobPart,
+            SegmentationContext segmentationContext)
         {
             Disposer = new Disposer();
             
@@ -65,6 +68,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             Response = response;
             //IsFinished = isFinished;
             MainJobPart = mainJobPart;
+            SegmentationContext = segmentationContext;
         }
 
         public void Dispose()

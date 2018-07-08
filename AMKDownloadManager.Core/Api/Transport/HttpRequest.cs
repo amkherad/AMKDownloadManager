@@ -3,7 +3,6 @@ using System.IO;
 using AMKsGear.Core.Automation;
 using AMKsGear.Core.Collections;
 using AMKsGear.Web.Core.Http;
-using AMKsGear.Web.Core.Http;
 
 namespace AMKDownloadManager.Core.Api.Transport
 {

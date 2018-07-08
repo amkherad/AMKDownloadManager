@@ -9,25 +9,12 @@ namespace AMKDownloadManager.Defaults.Network
 {
     public class NetworkInterfaceProvider : INetworkInterfaceProvider
     {
-        public IEnumerable<NetworkInterfaceInfo> GetNetworkInterfaces()
+        public IEnumerable<INetworkInterfaceInfo> GetNetworkInterfaces()
         {
             return NetworkInterface.GetAllNetworkInterfaces()
                 .Where(x => x.OperationalStatus == OperationalStatus.Up &&
                             x.NetworkInterfaceType != NetworkInterfaceType.Loopback)
-                .Select(x => new NetworkInterfaceInfo
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Description = x.Description,
-                    
-                    IsReceiveOnly = x.IsReceiveOnly,
-                    InterfaceType = (int) x.NetworkInterfaceType,
-                    Speed = x.Speed,
-                    SupportsMulticast = x.SupportsMulticast,
-                    
-                    SupportsIPv4 = x.Supports(NetworkInterfaceComponent.IPv4),
-                    SupportsIPv6 = x.Supports(NetworkInterfaceComponent.IPv6),
-                });
+                .Select(x => new NetworkInterfaceInfo(x));
         }
 
         public static NetworkInterface GetNetworkInterfaceByName(string name, StringComparer comparer = null)
