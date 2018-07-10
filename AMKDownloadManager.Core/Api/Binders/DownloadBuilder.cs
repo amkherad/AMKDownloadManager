@@ -25,6 +25,20 @@ namespace AMKDownloadManager.Core.Api.Binders
 
             return downloadItem;
         }
+        /// <summary>
+        /// Creates a new instance of DownloadItem from the given Uri.
+        /// </summary>
+        /// <returns>The DownloadItem.</returns>
+        /// <param name="uri">URI.</param>
+        /// <param name="localFileName">Local path to store the file.</param>
+        public static DownloadItem FromUri(Uri uri, string localFileName)
+        {
+            var downloadItem = new DownloadItem(uri)
+            {
+                LocalFileName = localFileName
+            };
+            return downloadItem;
+        }
 
         /// <summary>
         /// Binds the specified application services to DownloadItem and find the best protocol.
@@ -35,12 +49,15 @@ namespace AMKDownloadManager.Core.Api.Binders
         {
             if (downloadItem == null) throw new ArgumentNullException(nameof(downloadItem));
             if (app == null) throw new ArgumentNullException(nameof(app));
-            
-            var bindListeners = app.GetFeatures<IDownloadBindListener>();
-            bindListeners?.ForEach(x => x.NotifyBind(downloadItem));
 
             var protocolProvider = app.GetFeatures<IProtocolProvider>()?
                 .FirstOrDefault(p => p.CanHandle(app, downloadItem));
+
+            if (protocolProvider != null)
+            {
+                var bindListeners = app.GetFeatures<IDownloadBindListener>();
+                bindListeners?.ForEach(x => x.NotifyBind(downloadItem, protocolProvider));
+            }
 
             return protocolProvider;
         }

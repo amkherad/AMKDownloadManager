@@ -25,9 +25,13 @@ EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.MSTest", "AMKDownloadManager.MSTest\AMKDownloadManager.MSTest.csproj", "{9DA0C3BF-0F1E-4528-AEFC-3B3EB1DA2834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.AvaloniaUI", "AMKDownloadManager.AvaloniaUI\AMKDownloadManager.AvaloniaUI.csproj", "{13E5F85B-D47E-4814-831D-F2064A584C48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.AvaloniaUI", "UserInterface\AMKDownloadManager.AvaloniaUI\AMKDownloadManager.AvaloniaUI.csproj", "{13E5F85B-D47E-4814-831D-F2064A584C48}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.DebugMode", "Plugins\Misc\AMKDownloadManager.DebugMode\AMKDownloadManager.DebugMode.csproj", "{443FF5B8-5406-4B28-9E86-EAF94DD461F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.UI.Business", "UserInterface\AMKDownloadManager.UI.Business\AMKDownloadManager.UI.Business.csproj", "{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +71,10 @@ Global
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
@@ -75,5 +83,7 @@ Global
 		{DBB60947-5897-4A68-BD76-1758EB75BE82} = {7FD60AB0-DD83-4415-AB3D-1F2E54D41319}
 		{E6AF8D4F-2CB7-4468-98E7-8F25A9424D22} = {6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D}
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2} = {7FD60AB0-DD83-4415-AB3D-1F2E54D41319}
+		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
+		{13E5F85B-D47E-4814-831D-F2064A584C48} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
 	EndGlobalSection
 EndGlobal

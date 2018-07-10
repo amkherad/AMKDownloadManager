@@ -28,11 +28,13 @@ namespace AMKDownloadManager.Defaults
         /// </summary>
         public void Compose(string[] paths)
         {
-            var files = Directory
-                .GetFiles(
-                    Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins")
-                    , ProbingPattern, SearchOption.AllDirectories)
-                .ToList();
+            var files = new List<string>();
+
+            var cwdPluginsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins");
+            if (Directory.Exists(cwdPluginsPath))
+            {
+                files.AddRange(Directory.GetFiles(cwdPluginsPath, ProbingPattern, SearchOption.AllDirectories));
+            }
 
             foreach (var path in paths)
             {

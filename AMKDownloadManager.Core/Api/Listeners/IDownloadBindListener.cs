@@ -1,4 +1,5 @@
-﻿using AMKDownloadManager.Core.Api.Transport;
+﻿using AMKDownloadManager.Core.Api.Binders;
+using AMKDownloadManager.Core.Api.Transport;
 
 namespace AMKDownloadManager.Core.Api.Listeners
 {
@@ -8,13 +9,14 @@ namespace AMKDownloadManager.Core.Api.Listeners
     public interface IDownloadBindListener : IListenerFeature
     {
         /// <summary>
-        /// Calls when a binding on DownloadItem occures.
+        /// Calls when a binding on DownloadItem occurs.
         /// </summary>
         /// <param name="downloadItem">Download item.</param>
-        void NotifyBind(DownloadItem downloadItem);
+        /// <param name="protocolProvider">The bound protocol.</param>
+        void NotifyBind(DownloadItem downloadItem, IProtocolProvider protocolProvider);
 
         /// <summary>
-        /// Calls when an unbinding on DownloadItem occures.
+        /// Calls when an unbinding on DownloadItem occurs.
         /// </summary>
         /// <param name="downloadItem">Download item.</param>
         void NotifyUnBind(DownloadItem downloadItem);

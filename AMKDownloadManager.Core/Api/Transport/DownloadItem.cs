@@ -167,15 +167,8 @@ namespace AMKDownloadManager.Core.Api.Transport
         }
 
 #if DEBUG
-        public string GetDebugName()
-        {
-            if (Uri == null)
-            {
-                return LocalFileName;
-            }
-
-            return Uri.AbsolutePath;
-        }
+        public string DebugName { get; set; }
+        public string GetDebugName() => DebugName;
 #endif
 
         /// <summary>

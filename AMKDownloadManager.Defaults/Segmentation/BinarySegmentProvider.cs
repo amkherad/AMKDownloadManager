@@ -42,7 +42,7 @@ namespace AMKDownloadManager.Defaults.Segmentation
                 Segment segment = null;
                 if (segmentationContext.FilledRanges.All(x => x.Min != 0) && segmentationContext.ReservedRanges.All(x => x.Min != 0))
                 {
-                    segment = new Segment(0, _minSegmentSize);
+                    segment = new Segment(0, _minSegmentSize - 1);
                 }
                 else
                 {

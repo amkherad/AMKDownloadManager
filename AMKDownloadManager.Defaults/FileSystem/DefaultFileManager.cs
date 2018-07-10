@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using AMKDownloadManager.Core.Api.FileSystem;
 
@@ -30,7 +31,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
         public FileManagerLockMode LockMode { get; set; }
 
         private object _lock = new object();
-        
+
         /// <summary>
         /// <see cref="DefaultFileManager"/> constructor.
         /// </summary>

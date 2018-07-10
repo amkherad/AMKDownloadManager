@@ -18,5 +18,6 @@ namespace AMKDownloadManager.Core.Api.Threading
         int ManagedThreadId { get; }
         
         ThreadState ThreadState { get; }
+        bool IsAlive { get; }
     }
 }

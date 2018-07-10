@@ -94,7 +94,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
             downloadSize = response.Headers.ContentLength;
 
-            var segment = new Segment(0, _minSegmentSize);
+            var segment = new Segment(0, _minSegmentSize - 1);
             if (downloadSize != null)
             {
                 ResourceSize = downloadSize;

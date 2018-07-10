@@ -50,6 +50,8 @@ namespace AMKDownloadManager.Defaults.Threading
             set => _thread.Name = value;
         }
 
+        public bool IsAlive => _thread.IsAlive;
+
         
         public ThreadState ThreadState => _thread.ThreadState;
 

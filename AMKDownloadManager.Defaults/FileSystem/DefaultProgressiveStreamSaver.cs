@@ -43,27 +43,31 @@ namespace AMKDownloadManager.Defaults.FileSystem
 
             var buffer = new byte[bufferSizeFrame];
 
-#if DEBUG
-            var totalBytesWritten = 0L;
-#endif
+//#if DEBUG
+//            var totalBytesWritten = 0L;
+//#endif
 
             for (;;)
             {
                 //reads the stream for partSizeLng bytes.
                 var length = (long) stream.Read(buffer, 0, bufferSize);
-
-#if DEBUG
-                totalBytesWritten += length;
-#endif
-                segmentOffset += length;
-                resourceOffset += length;
-
-#if DEBUG
-                Trace.WriteLine(
-                    $"Writing to file , thread.name: {Thread.CurrentThread.Name}, buffer.length:{length}, resourceOffset: {resourceOffset}");
-#endif
+                if (length == 0)
+                {
+                    break;
+                }
+                
+//#if DEBUG
+//                Trace.WriteLine(
+//                    $"Writing to file , thread.name: {Thread.CurrentThread.Name}, buffer.length:{length}, resourceOffset: {resourceOffset}");
+//#endif
                 //writing buffer to file.
                 fileManager.SaveBinary(buffer, resourceOffset, 0, length);
+
+//#if DEBUG
+//                totalBytesWritten += length;
+//#endif
+                segmentOffset += length;
+                resourceOffset += length;
 
                 if (segmentOffset >= segmentLength)
                 {
@@ -80,7 +84,8 @@ namespace AMKDownloadManager.Defaults.FileSystem
                             break;
                         }
 
-                        segment = segmentationContext.GetSegmentGrowthRightLimit(segment.Max, _defaultBufferSize);
+                        var segmentMax = segment.Max;
+                        segment = segmentationContext.GetSegmentGrowthRightLimit(segmentMax, _defaultBufferSize);
                         //No empty continuous segment reserved.
                         if (segment == null)
                         {
@@ -91,8 +96,9 @@ namespace AMKDownloadManager.Defaults.FileSystem
                     }
 
                     bufferSize = (int) bufferSizeFrame;
+                    segmentOffset = 0;
                 }
-                else if (segmentOffset + bufferSize >= segmentLength)
+                else if (segmentOffset + bufferSize <= segmentLength)
                 {
                     //another buffer can fit into segment.
                 }
@@ -103,10 +109,10 @@ namespace AMKDownloadManager.Defaults.FileSystem
                 }
             }
             
-#if DEBUG
-            Trace.WriteLine(
-                $"TBW-Total bytes written: thread.name: {Thread.CurrentThread.Name}/{Thread.CurrentThread.ManagedThreadId}, totalBytesWritten:{totalBytesWritten}");
-#endif
+//#if DEBUG
+//            Trace.WriteLine(
+//                $"TBW-Total bytes written: thread.name: {Thread.CurrentThread.Name}/{Thread.CurrentThread.ManagedThreadId}, totalBytesWritten:{totalBytesWritten}");
+//#endif
 
             //if (partsSize != null)
             //{

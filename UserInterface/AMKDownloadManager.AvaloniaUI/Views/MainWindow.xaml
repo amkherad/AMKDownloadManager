@@ -2,12 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:AMKDownloadManager.AvaloniaUI.ViewModels;assembly=AMKDownloadManager.AvaloniaUI"
         Icon="resm:AMKDownloadManager.AvaloniaUI.Assets.avalonia-logo.ico"
-        Title="AMKDownloadManager.AvaloniaUI">
+        Title="{Binding HelloWorld}"
+        Background="Black"
+        >
 
   <Design.DataContext>
     <vm:MainWindowViewModel/>
   </Design.DataContext>
   
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>    
+  <TextBlock Text="{Binding HelloWorld}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
   
 </Window>

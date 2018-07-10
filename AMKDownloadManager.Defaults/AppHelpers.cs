@@ -21,7 +21,7 @@ namespace AMKDownloadManager.Defaults
     /// <summary>
     /// Shared layer helpers.
     /// </summary>
-    public class AppHelpers
+    public static class AppHelpers
     {
         /// <summary>
         /// Load components for <see cref="IAppContext"/>.
@@ -29,11 +29,16 @@ namespace AMKDownloadManager.Defaults
         /// <param name="appContext">The context which components are loaded for.</param>
         /// <param name="appLocalStoragePath">The path to application storage for current user only. (~/.local/share/XXXX | C:\Users\USERNAME\AppData\Local\XXXX)</param>
         /// <param name="appSharedStoragePath">The path to application storage for all users. (/usr/share | C:\ProgramData)</param>
-        public static void LoadComponents(IAppContext appContext, string appLocalStoragePath, string appSharedStoragePath)
+        /// <param name="additionalPluginPaths">Additional plugins paths</param>
+        public static void LoadComponents(
+            IAppContext appContext,
+            string appLocalStoragePath,
+            string appSharedStoragePath,
+            string[] additionalPluginPaths)
         {
             var importer = new ComponentImporter();
             
-            importer.Compose(new [] { appLocalStoragePath, appSharedStoragePath });
+            importer.Compose(new [] { appLocalStoragePath, appSharedStoragePath }.Merge(additionalPluginPaths).ToArray());
             Console.WriteLine("{0} component(s) are imported successfully.", importer.NumberOfAvailableComponents);
             
             importer.InitializeAll(appContext);

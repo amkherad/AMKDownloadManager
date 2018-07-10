@@ -132,7 +132,7 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
                 null,
                 null
             );
-
+            
             var httpDownload = new HttpDownloadJob(
                 appContext,
                 fileManager,

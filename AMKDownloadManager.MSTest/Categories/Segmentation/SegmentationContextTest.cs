@@ -196,7 +196,7 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
             });
 
             var range = sc.GetSegmentGrowthRightLimit(50, 4 * Helper.KiB);
-            Assert.IsNull(range, "range is not null");
+            Assert.IsNull(range);
 
             Trace.WriteLine($"Range= (range is null := {range == null}){range?.Min ?? 0}:{range?.Max ?? 0}");
             
@@ -216,10 +216,32 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
                 Max = 100
             });
 
+            range = sc.GetSegmentGrowthRightLimit(50, 1000);
+            Assert.IsNotNull(range);
+            Assert.AreEqual(range.Min, 51);
+            Assert.AreEqual(range.Max, 70);
+
+            
+            
+            //================================================
+            
+            
+            sc = new SegmentationContext(1000);
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 0,
+                Max = 50
+            });
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 71,
+                Max = 100
+            });
+
             range = sc.GetSegmentGrowthRightLimit(50, 10);
-            Assert.IsNotNull(range, "range is null");
-            Assert.AreSame(range.Min, 51);
-            Assert.AreSame(range.Max, 70);
+            Assert.IsNotNull(range);
+            Assert.AreEqual(range.Min, 51);
+            Assert.AreEqual(range.Max, 60);
 
             Trace.WriteLine($"Range= {range.Min}:{range.Max} ({range.Length})");
             
@@ -234,7 +256,7 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
                 Max = 999
             });
             range = sc.GetSegmentGrowthRightLimit(124, 10000);
-            Assert.IsNotNull(range, "range is null");
+            Assert.IsNotNull(range);
 
             Trace.WriteLine($"Range= {range.Min}:{range.Max} ({range.Length})");
             
@@ -255,7 +277,73 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
             });
 
             range = sc.GetSegmentGrowthRightLimit(50, 4 * Helper.KiB);
-            Assert.IsNull(range, "Range is not null");
+            Assert.IsNull(range);
+            
+            
+            //================================================
+            
+            
+            sc = new SegmentationContext(1000);
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 0,
+                Max = 50
+            });
+
+            range = sc.GetSegmentGrowthRightLimit(50, 4 * Helper.KiB);
+            Assert.IsNotNull(range);
+            Assert.AreEqual(range.Min, 51);
+            Assert.AreEqual(range.Max, 999);
+            
+            
+            //================================================
+            
+            
+            sc = new SegmentationContext(1000);
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 0,
+                Max = 50
+            });
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 51,
+                Max = 70
+            });
+
+            range = sc.GetSegmentGrowthRightLimit(70, 1000);
+            Assert.IsNotNull(range);
+            Assert.AreEqual(range.Min, 71);
+            Assert.AreEqual(range.Max, 999);
+            
+            
+            //================================================
+            
+            
+            sc = new SegmentationContext(1000);
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 0,
+                Max = 50
+            });
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 25,
+                Max = 60
+            });
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 70,
+                Max = 90
+            });
+            sc.FilledRanges.Add(new Segment
+            {
+                Min = 100,
+                Max = 300
+            });
+
+            range = sc.GetSegmentGrowthRightLimit(50, 4 * Helper.KiB);
+            Assert.IsNull(range);
         }
 
         [TestMethod]

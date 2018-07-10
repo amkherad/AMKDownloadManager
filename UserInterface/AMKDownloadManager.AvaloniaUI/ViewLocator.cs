@@ -5,13 +5,34 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using AMKDownloadManager.AvaloniaUI.ViewModels;
+using AMKsGear.Architecture.Automation.IoC;
+using AMKsGear.Core.Automation.IoC;
+using AMKsGear.Core.Patterns.AppModel;
+using AppContext = AMKDownloadManager.Core.AppContext;
 
 namespace AMKDownloadManager.AvaloniaUI
 {
     public class ViewLocator : IDataTemplate
     {
         public bool SupportsRecycling => false;
+        
+        public ITypeResolver TypeResolver { get; }
 
+        public ViewLocator()
+        {
+            TypeResolver = AppContext.Context.GetTypeResolver();
+        }
+        public ViewLocator(ITypeResolver typeResolver)
+        {
+            TypeResolver = typeResolver;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks></remarks>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public IControl Build(object data)
         {
             var name = data.GetType().FullName.Replace("ViewModel", "View");
@@ -19,7 +40,7 @@ namespace AMKDownloadManager.AvaloniaUI
 
             if (type != null)
             {
-                return (Control)Activator.CreateInstance(type);
+                return (Control)TypeResolver.Resolve(type);
             }
             else
             {

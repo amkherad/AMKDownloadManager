@@ -39,7 +39,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
         {
             AppContext = appContext ?? throw new ArgumentNullException(nameof(appContext));
             _scheduler = scheduler ?? throw new ArgumentNullException(nameof(scheduler));
-            
+
             Configuration = appContext.GetFeature<IConfigProvider>();
             ThreadFactory = appContext.GetFeature<IThreadFactory>();
 
@@ -53,8 +53,10 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
         #region IDownloadManager implementation
 
+        /// <inheritdoc />
         public IDownloadManagerHandle Schedule(IJob job) => Schedule(job, null);
 
+        /// <inheritdoc />
         public IDownloadManagerHandle Schedule(IJob job, Action<IJob> callback)
         {
             var context = new DefaultDownloadManagerJobContext(
@@ -76,6 +78,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
         }
 
 
+        /// <inheritdoc />
         public void Start()
         {
             if (_schedulerThread != null)
@@ -90,7 +93,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
             _schedulerThread = ThreadFactory.Create(_scheduleCallback, "Download Manager Scheduler Thread");
 
             _downloadManagerState = true;
-            
+
             _schedulerThread.Start();
 
             //OnStarted(EventArgs.Empty);
@@ -140,7 +143,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                 _finishEvent.Set();
 
                 _downloadManagerState = false;
-                
+
                 //#error while (_downloadManagerState || {{{{{ _runningJobs.Any() }}}}} ) | _runningJobs.Any() ??? Stop the download manager and signal to all.
             }
         }
@@ -187,14 +190,15 @@ namespace AMKDownloadManager.Defaults.DownloadManager
         {
             //wait until scheduler finish the job queue.
             _finishEvent.WaitOne();
-            
+
             //wait until scheduler thread exit.
-            SpinWait.SpinUntil(() => _schedulerThread.ThreadState != ThreadState.Stopped);
+            //SpinWait.SpinUntil(() => _schedulerThread.IsAlive);
         }
+
         public void WaitToFinish(TimeSpan timeout)
         {
             _finishEvent.WaitOne(timeout);
-            SpinWait.SpinUntil(() => _schedulerThread.ThreadState != ThreadState.Stopped);
+            //SpinWait.SpinUntil(() => _schedulerThread.IsAlive);
         }
 
         public void WaitToFinish(IJob job)
@@ -262,10 +266,16 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
             public void Start()
             {
-                DispatcherThread = DownloadManager.ThreadFactory.Create(_dispatcher, "Download Dispatcher (TriggerJobAndGetInfo)");
-
                 DownloadManager._setJobAsRunning(this);
                 _downloadJobState = true;
+                
+#if DEBUG
+                DispatcherThread =
+                    DownloadManager.ThreadFactory.Create(_dispatcher, $"Download Dispatcher (TriggerJobAndGetInfo) {Job.GetDebugName()}");
+#else
+                DispatcherThread =
+                    DownloadManager.ThreadFactory.Create(_dispatcher, "Download Dispatcher (TriggerJobAndGetInfo)");
+#endif
 
                 DispatcherThread.Start();
             }
@@ -313,8 +323,8 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
                     var thread = DownloadManager.ThreadFactory.Create(_processPart, guide);
 
-                    Trace.WriteLine(
-                        $"Partial download thread created with id of: '{thread.ManagedThreadId}' - '{guide}'");
+//                    Trace.WriteLine(
+//                        $"Partial download thread created with id of: '{thread.ManagedThreadId}' - '{guide}'");
 #else
                     var thread = DownloadManager.ThreadFactory.Create(_processPart);
 #endif
@@ -336,9 +346,9 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     if (jobInfo.SupportsConcurrency)
                     {
                         var loop = new LoopCountLimiter(5);
-                        while (_downloadJobState &&
+                        while ((_downloadJobState) &&
                                (Threads.Count == 0 || Threads.Any(x => x.ThreadState != ThreadState.Stopped)) &&
-                               (!jobInfo.SegmentationContext.CheckIfAllFilled()))
+                               (!jobInfo.SegmentationContext.CheckIfAllFilledWithLock()))
                         {
                             if (Threads.Count <= _maxSimultaneousConnections)
                             {
@@ -371,8 +381,8 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
                                         var thread = DownloadManager.ThreadFactory.Create(_processPart, guide);
 
-                                        Trace.WriteLine(
-                                            $"Partial download thread created with id of: '{thread.ManagedThreadId}' - '{guide}'");
+//                                        Trace.WriteLine(
+//                                            $"Partial download thread created with id of: '{thread.ManagedThreadId}' - '{guide}'");
 #else
                                         var thread = DownloadManager.ThreadFactory.Create(_processPart);
 #endif
@@ -409,7 +419,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     try
                     {
 #if DEBUG
-                        Trace.WriteLine($"Cycling the job part: {part.GetDebugName()}");
+//                        Trace.WriteLine($"Cycling the job part: {part.GetDebugName()}");
 #endif
                         result = part.Cycle();
                         retry.Done();
@@ -417,7 +427,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     catch (Exception ex)
                     {
 #if DEBUG
-                        Trace.WriteLine(part.GetDebugName() + ex.ToString());
+//                        Trace.WriteLine(part.GetDebugName() + ex.ToString());
 #endif
 
                         retry.Catch(ex);

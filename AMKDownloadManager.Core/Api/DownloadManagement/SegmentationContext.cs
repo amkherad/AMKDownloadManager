@@ -25,8 +25,9 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         public Segment(long min, long max)
         {
             if (max <= min)
-                throw new InvalidOperationException(); //this line used to remove some extra checks in SegmentationContext codes.
-            
+                throw
+                    new InvalidOperationException(); //this line used to remove some extra checks in SegmentationContext codes.
+
             Min = min;
             Max = max;
         }
@@ -95,7 +96,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
                 {
                     return 1;
                 }
-                
+
                 var xMax = x.Max;
                 var yMax = y.Max;
 
@@ -132,7 +133,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
 
             var max = -1L;
             var continuousSegments = new List<Segment>();
-            
+
             foreach (var segment in FilledRanges)
             {
                 var segmentMin = segment.Min;
@@ -165,17 +166,18 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
                     {
                         mergePairs.Add(continuousSegments.ToArray());
                     }
+
                     continuousSegments.Clear();
                 }
 
                 continuousSegments.Add(segment);
             }
-            
+
             if (continuousSegments.Count > 1)
             {
                 mergePairs.Add(continuousSegments.ToArray());
             }
-            
+
             foreach (var merge in mergePairs)
             {
                 FilledRanges.RemoveAll(merge);
@@ -251,6 +253,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
                 return GetSegmentGrowthRightLimit(prevSegmentMax, maxSegmentLength);
             }
         }
+
         /// <summary>
         /// Tracks the maximum growth limit of a segment (i.e. start of another segment)
         /// </summary>
@@ -261,27 +264,14 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         {
             var totalSize = TotalSize;
             var closestValue = totalSize;
-            
-            foreach (var range in ReservedRanges) //order guaranteed
-            {
-                var rangeMin = range.Min;
-                if (rangeMin <= prevSegmentMax && range.Max > prevSegmentMax)
-                {
-                    //SortedSet so there is no continuous segment!
-                    break;
-                }
 
-                if (rangeMin > prevSegmentMax && rangeMin < closestValue)
-                {
-                    closestValue = rangeMin;
-                }
-            }
-            foreach (var range in FilledRanges) //order guaranteed
+            foreach (var range in ReservedRanges.Where(x => x.Max > prevSegmentMax)) //order guaranteed
             {
                 var rangeMin = range.Min;
                 if (rangeMin <= prevSegmentMax && range.Max > prevSegmentMax)
                 {
                     //SortedSet so there is no continuous segment!
+                    closestValue = -1;
                     break;
                 }
 
@@ -291,7 +281,23 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
                 }
             }
 
-            if (closestValue == totalSize || closestValue - prevSegmentMax <= 1)
+            foreach (var range in FilledRanges.Where(x => x.Max > prevSegmentMax)) //order guaranteed
+            {
+                var rangeMin = range.Min;
+                if (rangeMin <= prevSegmentMax && range.Max > prevSegmentMax)
+                {
+                    //SortedSet so there is no continuous segment!
+                    closestValue = -1;
+                    break;
+                }
+
+                if (rangeMin > prevSegmentMax && rangeMin < closestValue)
+                {
+                    closestValue = rangeMin;
+                }
+            }
+
+            if (closestValue == -1 || closestValue - prevSegmentMax <= 1)
             {
                 return null;
             }
@@ -304,8 +310,16 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             {
                 closestValue = maxSegmentLength;
             }
-            
+
             return new Segment(prevSegmentMax, closestValue);
+        }
+
+        public bool CheckIfAllFilledWithLock()
+        {
+            lock (SynchronizationLock)
+            {
+                return CheckIfAllFilled();
+            }
         }
 
         /// <summary>
@@ -316,7 +330,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         {
             var totalSize = TotalSize;
             var max = -1L;
-            
+
             foreach (var segment in FilledRanges) //order guaranteed
             {
                 var segmentMin = segment.Min;
@@ -343,10 +357,26 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             return false;
         }
 
+        public void MarkReservedAsFilledWithLock(Segment segment)
+        {
+            lock (SynchronizationLock)
+            {
+                MarkReservedAsFilled(segment);
+            }
+        }
+
         public void MarkReservedAsFilled(Segment segment)
         {
             ReservedRanges.Remove(segment);
             FilledRanges.Add(segment);
+        }
+
+        public void ResetWithLock()
+        {
+            lock (SynchronizationLock)
+            {
+                Reset();
+            }
         }
 
         public void Reset()
