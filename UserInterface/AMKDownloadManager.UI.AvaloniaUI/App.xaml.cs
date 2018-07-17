@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.Markup.Xaml;
 
-namespace AMKDownloadManager.AvaloniaUI
+namespace AMKDownloadManager.UI.AvaloniaUI
 {
     public class App : Application
     {

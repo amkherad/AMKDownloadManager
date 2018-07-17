@@ -1,10 +1,11 @@
-using AMKDownloadManager.AvaloniaUI.ViewModels;
-using AMKDownloadManager.AvaloniaUI.Views;
+using AMKDownloadManager.UI.AvaloniaUI.Views.Main;
+using AMKDownloadManager.UI.Business.ViewModels.Main;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
+using AMKsGear.Core.Automation.IoC.Builder;
 using AMKsGear.Core.Automation.IoC.TypeBindings;
 
-namespace AMKDownloadManager.AvaloniaUI
+namespace AMKDownloadManager.UI.AvaloniaUI
 {
     public static class DependencyGraph
     {

@@ -2,12 +2,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>AMKDownloadManager.UI.AvaloniaUI</AssemblyName>
+    <RootNamespace>AMKDownloadManager.UI.AvaloniaUI</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../.output/Debug</OutputPath>
+    <OutputPath>../../.output/Debug/netcoreapp2.1/</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../.output/Release</OutputPath>
+    <OutputPath>../../.output/Release/netcoreapp2.1/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
@@ -25,5 +27,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AMKDownloadManager.UI.Business\AMKDownloadManager.UI.Business.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Styles" />
+    <Folder Include="Views\Dialogs\DownloadPropertiesDialog\Layout" />
+    <Folder Include="Views\Main\SideBar" />
+    <Folder Include="Views\Main\Styles" />
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@ function addReference {
 }
 
 #!param $1 path
-function updateReferences {
+function updateReferencesToAMKsGearFx {
     dotnet remove "$1" package AMKsGear.AppLayer.Core
     dotnet remove "$1" package AMKsGear.Web.Core
     dotnet remove "$1" package AMKsGear.Core.TraceTools
@@ -27,12 +27,14 @@ function updateReferences {
     addReference "$1" "AMKsGear.Architecture"
 }
 
-updateReferences "./AMKDownloadManager.Core/AMKDownloadManager.Core.csproj"
-updateReferences "./AMKDownloadManager.Defaults/AMKDownloadManager.Defaults.csproj"
+updateReferencesToAMKsGearFx "./AMKDownloadManager.Core/AMKDownloadManager.Core.csproj"
+updateReferencesToAMKsGearFx "./AMKDownloadManager.Defaults/AMKDownloadManager.Defaults.csproj"
 
-updateReferences "./AMKDownloadManager.Net/AMKDownloadManager.Net.csproj"
-updateReferences "./AMKDownloadManager.MSTest/AMKDownloadManager.MSTest.csproj"
+updateReferencesToAMKsGearFx "./AMKDownloadManager.Net/AMKDownloadManager.Net.csproj"
+updateReferencesToAMKsGearFx "./AMKDownloadManager.MSTest/AMKDownloadManager.MSTest.csproj"
 
-#updateReferences "./Plugins/Misc/AMKDownloadManager.BatchDownloadFileSupport/AMKDownloadManager.BatchDownloadFileSupport.csproj"
-#updateReferences "./Plugins/Misc/AMKDownloadManager.DebugMode/AMKDownloadManager.DebugMode.csproj"
-updateReferences "./Plugins/Protocols/AMKDownloadManager.HttpDownloader/AMKDownloadManager.HttpDownloader.csproj"
+#updateReferencesToAMKsGearFx "./UserInterface/Misc/AMKDownloadManager.DebugMode/AMKDownloadManager.DebugMode.csproj"
+
+#updateReferencesToAMKsGearFx "./Plugins/Misc/AMKDownloadManager.BatchDownloadFileSupport/AMKDownloadManager.BatchDownloadFileSupport.csproj"
+#updateReferencesToAMKsGearFx "./Plugins/Misc/AMKDownloadManager.DebugMode/AMKDownloadManager.DebugMode.csproj"
+updateReferencesToAMKsGearFx "./Plugins/Protocols/AMKDownloadManager.HttpDownloader/AMKDownloadManager.HttpDownloader.csproj"

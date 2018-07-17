@@ -2,15 +2,15 @@
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
 using System;
-using Avalonia.Controls;
-using Avalonia.Controls.Templates;
-using AMKDownloadManager.AvaloniaUI.ViewModels;
+using AMKDownloadManager.UI.Business.ViewModels;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
 using AMKsGear.Core.Patterns.AppModel;
+using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 using AppContext = AMKDownloadManager.Core.AppContext;
 
-namespace AMKDownloadManager.AvaloniaUI
+namespace AMKDownloadManager.UI.AvaloniaUI
 {
     public class ViewLocator : IDataTemplate
     {

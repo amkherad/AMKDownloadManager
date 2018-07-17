@@ -1,14 +1,14 @@
-﻿using AMKDownloadManager.AvaloniaUI.ViewModels;
-using Avalonia;
-using Avalonia.Logging.Serilog;
-using AMKDownloadManager.AvaloniaUI.Views;
-using AMKDownloadManager.Core;
+﻿using AMKDownloadManager.Core;
+using AMKDownloadManager.UI.AvaloniaUI.Views.Main;
 using AMKDownloadManager.UI.Business;
+using AMKDownloadManager.UI.Business.ViewModels.Main;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
 using AMKsGear.Core.Patterns.AppModel;
+using Avalonia;
+using Avalonia.Logging.Serilog;
 
-namespace AMKDownloadManager.AvaloniaUI
+namespace AMKDownloadManager.UI.AvaloniaUI
 {
     class Program
     {

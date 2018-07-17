@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace AMKDownloadManager.AvaloniaUI.Views
+namespace AMKDownloadManager.UI.AvaloniaUI.Views.Main
 {
     public class MainWindow : Window
     {

@@ -1,5 +1,6 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.Core", "AMKDownloadManager.Core\AMKDownloadManager.Core.csproj", "{23F0EE30-6FCC-4183-924D-B7C57E409F73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.Defaults", "AMKDownloadManager.Defaults\AMKDownloadManager.Defaults.csproj", "{D1A4D5D2-8354-489C-948C-59FBFC97E3E1}"
@@ -19,19 +20,19 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.HttpDownloader", "Plugins\Protocols\AMKDownloadManager.HttpDownloader\AMKDownloadManager.HttpDownloader.csproj", "{E6AF8D4F-2CB7-4468-98E7-8F25A9424D22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{62DDF2C1-9293-464F-969A-5B17025E1996}"
-ProjectSection(SolutionItems) = preProject
-	update-packages = update-packages
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		update-packages = update-packages
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.MSTest", "AMKDownloadManager.MSTest\AMKDownloadManager.MSTest.csproj", "{9DA0C3BF-0F1E-4528-AEFC-3B3EB1DA2834}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.AvaloniaUI", "UserInterface\AMKDownloadManager.AvaloniaUI\AMKDownloadManager.AvaloniaUI.csproj", "{13E5F85B-D47E-4814-831D-F2064A584C48}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.DebugMode", "Plugins\Misc\AMKDownloadManager.DebugMode\AMKDownloadManager.DebugMode.csproj", "{443FF5B8-5406-4B28-9E86-EAF94DD461F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.UI.Business", "UserInterface\AMKDownloadManager.UI.Business\AMKDownloadManager.UI.Business.csproj", "{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.UI.AvaloniaUI", "UserInterface\AMKDownloadManager.UI.AvaloniaUI\AMKDownloadManager.UI.AvaloniaUI.csproj", "{506EAB82-00C3-4C44-B068-645D3034DD78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +64,6 @@ Global
 		{9DA0C3BF-0F1E-4528-AEFC-3B3EB1DA2834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DA0C3BF-0F1E-4528-AEFC-3B3EB1DA2834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DA0C3BF-0F1E-4528-AEFC-3B3EB1DA2834}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13E5F85B-D47E-4814-831D-F2064A584C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13E5F85B-D47E-4814-831D-F2064A584C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13E5F85B-D47E-4814-831D-F2064A584C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13E5F85B-D47E-4814-831D-F2064A584C48}.Release|Any CPU.Build.0 = Release|Any CPU
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,15 +72,22 @@ Global
 		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506EAB82-00C3-4C44-B068-645D3034DD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506EAB82-00C3-4C44-B068-645D3034DD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506EAB82-00C3-4C44-B068-645D3034DD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506EAB82-00C3-4C44-B068-645D3034DD78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
 		{7FD60AB0-DD83-4415-AB3D-1F2E54D41319} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
 		{BACED7E5-3F18-4934-BFED-A65BA1255CAF} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
 		{DBB60947-5897-4A68-BD76-1758EB75BE82} = {7FD60AB0-DD83-4415-AB3D-1F2E54D41319}
-		{E6AF8D4F-2CB7-4468-98E7-8F25A9424D22} = {6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D}
 		{443FF5B8-5406-4B28-9E86-EAF94DD461F2} = {7FD60AB0-DD83-4415-AB3D-1F2E54D41319}
+		{E6AF8D4F-2CB7-4468-98E7-8F25A9424D22} = {6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D}
 		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
-		{13E5F85B-D47E-4814-831D-F2064A584C48} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
+		{506EAB82-00C3-4C44-B068-645D3034DD78} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
+	EndGlobalSection
+	GlobalSection(AvalonStudioProperties) = preSolution
+		StartupItem = {506EAB82-00C3-4C44-B068-645D3034DD78}
 	EndGlobalSection
 EndGlobal
