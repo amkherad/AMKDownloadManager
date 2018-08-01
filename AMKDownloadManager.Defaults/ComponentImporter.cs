@@ -76,7 +76,7 @@ namespace AMKDownloadManager.Defaults
             {
                 foreach (var com in Components)
                 {
-                    Logger.Write(com.Description);
+                    Logger.Default.Log(com.Description);
                     com.Initialize(appContext);
                 }
             }

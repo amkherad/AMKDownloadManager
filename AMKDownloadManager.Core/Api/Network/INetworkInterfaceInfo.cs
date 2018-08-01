@@ -2,7 +2,7 @@
 
 namespace AMKDownloadManager.Core.Api.Network
 {
-    public interface INetworkInterfaceInfo : IWrapper
+    public interface INetworkInterfaceInfo : IAdapter
     {
         string Id { get; }
         string Name { get; }

@@ -40,12 +40,12 @@ namespace AMKDownloadManager.Core.Api
             }
             catch (Exception exception)
             {
-                Logger.Write(exception);
+                Logger.Default.Log(exception);
             }
             return features;
         }
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
-        public static IEnumerable<T> SignalFeaturesIgnoreExceptions<T>(this IAppContext app, Action<T> signalHandler, ILoggerEngine logger) where T : IFeature
+        public static IEnumerable<T> SignalFeaturesIgnoreExceptions<T>(this IAppContext app, Action<T> signalHandler, ILogChannel logger) where T : IFeature
         {
             var features = app.GetFeatures<T>();
             try
@@ -54,7 +54,7 @@ namespace AMKDownloadManager.Core.Api
             }
             catch (Exception exception)
             {
-                logger.Write(exception);
+                logger.Log(exception);
             }
             return features;
         }

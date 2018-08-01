@@ -6,7 +6,7 @@ namespace AMKDownloadManager.Core.Api.Threading
     /// <summary>
     /// Abstraction layer for thread.
     /// </summary>
-    public interface IThread : IWrapper
+    public interface IThread : IAdapter
     {
         void Start();
         void Start(object state);

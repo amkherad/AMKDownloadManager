@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.Threading;
 
 namespace AMKDownloadManager.Defaults.Threading

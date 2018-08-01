@@ -1,6 +1,5 @@
 using System.Windows.Input;
 using AMKsGear.Core.Automation.Support;
-using AMKsGear.Core.LocalizationFramework;
 
 namespace AMKDownloadManager.UI.Business.ViewModels
 {

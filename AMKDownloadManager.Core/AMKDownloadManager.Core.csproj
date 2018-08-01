@@ -13,11 +13,11 @@
     <OutputPath>../.output/Release/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180708" />
-    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180708" />
-    <PackageReference Include="AMKsGear.Core" Version="1.1.180708" />
-    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180708" />
-    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180708" />
-    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180708" />
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180801" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180801" />
+    <PackageReference Include="AMKsGear.Core" Version="1.1.180801" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180801" />
+    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180801" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180801" />
   </ItemGroup>
 </Project>

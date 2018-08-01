@@ -1,6 +1,6 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
+#
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.Core", "AMKDownloadManager.Core\AMKDownloadManager.Core.csproj", "{23F0EE30-6FCC-4183-924D-B7C57E409F73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.Defaults", "AMKDownloadManager.Defaults\AMKDownloadManager.Defaults.csproj", "{D1A4D5D2-8354-489C-948C-59FBFC97E3E1}"
@@ -33,6 +33,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.UI.Business", "UserInterface\AMKDownloadManager.UI.Business\AMKDownloadManager.UI.Business.csproj", "{7595C4D8-4008-45D0-90E3-9AF0C3C3237F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.UI.AvaloniaUI", "UserInterface\AMKDownloadManager.UI.AvaloniaUI\AMKDownloadManager.UI.AvaloniaUI.csproj", "{506EAB82-00C3-4C44-B068-645D3034DD78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.ConfigProvider.Json", "Plugins\Core\AMKDownloadManager.ConfigProvider.Json\AMKDownloadManager.ConfigProvider.Json.csproj", "{3AA0B29F-254F-4063-8075-3F5549935F47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8825F6EE-83F4-4381-A8F1-350094BDA535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +80,10 @@ Global
 		{506EAB82-00C3-4C44-B068-645D3034DD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{506EAB82-00C3-4C44-B068-645D3034DD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{506EAB82-00C3-4C44-B068-645D3034DD78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AA0B29F-254F-4063-8075-3F5549935F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AA0B29F-254F-4063-8075-3F5549935F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AA0B29F-254F-4063-8075-3F5549935F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AA0B29F-254F-4063-8075-3F5549935F47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
@@ -86,6 +94,8 @@ Global
 		{E6AF8D4F-2CB7-4468-98E7-8F25A9424D22} = {6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D}
 		{7595C4D8-4008-45D0-90E3-9AF0C3C3237F} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
 		{506EAB82-00C3-4C44-B068-645D3034DD78} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
+		{8825F6EE-83F4-4381-A8F1-350094BDA535} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
+		{3AA0B29F-254F-4063-8075-3F5549935F47} = {8825F6EE-83F4-4381-A8F1-350094BDA535}
 	EndGlobalSection
 	GlobalSection(AvalonStudioProperties) = preSolution
 		StartupItem = {506EAB82-00C3-4C44-B068-645D3034DD78}

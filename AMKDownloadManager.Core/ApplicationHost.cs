@@ -51,7 +51,7 @@ namespace AMKDownloadManager.Core
 	        
             var pool = new AppContext();
             Pool = pool;
-            AppContext.Context = pool;
+            AppContext.Instance = pool;
 
 			var container = new TypeResolverContainer ();
 			//MainWindow win = new MainWindow ();

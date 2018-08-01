@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
@@ -215,8 +216,11 @@ namespace AMKDownloadManager.Defaults.Transport
                                 HttpHelpers.FillResponseFromHttpResponse(response, webResponse, stream);
 
                                 response.Disposer.Enqueue(
-                                    stream,
-                                    webResponse
+                                    new IDisposable[]
+                                    {
+                                        stream,
+                                        webResponse
+                                    }
                                 );
 
                                 //appContext.SignalFeatures<ITransportListenerFeature>(
@@ -250,7 +254,7 @@ namespace AMKDownloadManager.Defaults.Transport
             }
             catch (WebException wex)
             {
-                Logger.Write(wex);
+                Logger.Default.Log(wex);
                 if (wex.Response != null)
                 {
                     using (var errorResponse = (HttpWebResponse) wex.Response)

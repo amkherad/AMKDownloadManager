@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 
 namespace AMKDownloadManager.Defaults.JobScheduler

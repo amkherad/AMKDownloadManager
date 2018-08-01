@@ -4,6 +4,7 @@ using System.Composition;
 using AMKDownloadManager.Core.Api;
 using System.Reflection;
 using AMKDownloadManager.Core.Api.Binders;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.HttpDownloader.ProtocolProvider;
 using AMKsGear.Core.Trace;
 

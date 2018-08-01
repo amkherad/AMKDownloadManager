@@ -3,6 +3,7 @@ using System.Composition;
 using System.Reflection;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Cli;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Extensions;
 using AMKDownloadManager.DebugMode.Interface;
 

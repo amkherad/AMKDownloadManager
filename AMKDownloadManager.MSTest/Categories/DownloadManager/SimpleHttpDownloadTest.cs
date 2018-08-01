@@ -1,5 +1,5 @@
 ﻿using System;
-using System.DiDataTestMethodagnostics;
+using System.Diagnostics;
 using System.Threading;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;

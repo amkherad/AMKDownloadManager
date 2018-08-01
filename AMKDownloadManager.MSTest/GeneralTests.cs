@@ -31,11 +31,11 @@ namespace AMKDownloadManager.MSTest
             };
             req.Proxy = proxy;
             var isBypassed = proxy.IsBypassed(new Uri(Uri));
-            Logger.Write(isBypassed);
+            //Logger.Default.Log(isBypassed);
             
             using (var response = req.GetResponse())
             {
-                Logger.Write(response.ContentLength);
+                //Logger.Default.Log(response.ContentLength);
             }
 
             Debugger.Break();

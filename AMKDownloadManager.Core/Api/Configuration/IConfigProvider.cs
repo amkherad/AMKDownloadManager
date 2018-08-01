@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AMKDownloadManager.Core.Api
+﻿namespace AMKDownloadManager.Core.Api.Configuration
 {
     public enum ConfigExistenceStrategy
     {

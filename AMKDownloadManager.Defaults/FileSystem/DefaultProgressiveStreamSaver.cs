@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.FileSystem;
 

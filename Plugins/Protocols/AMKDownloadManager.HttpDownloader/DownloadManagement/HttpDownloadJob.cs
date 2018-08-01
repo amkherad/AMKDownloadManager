@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Transport;

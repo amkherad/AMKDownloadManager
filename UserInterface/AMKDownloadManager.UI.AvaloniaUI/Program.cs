@@ -16,7 +16,7 @@ namespace AMKDownloadManager.UI.AvaloniaUI
         {
             if (AppInitializer.InitializeApplication(args))
             {
-                var typeResolver = AppContext.Context.GetTypeResolver() as ITypeResolverContainer;
+                var typeResolver = AppContext.Instance.GetTypeResolver() as ITypeResolverContainer;
                 DependencyGraph.BuildContainer(typeResolver);
 
                 var app = BuildAvaloniaApp(typeResolver);

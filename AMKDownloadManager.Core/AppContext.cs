@@ -3,7 +3,7 @@ using AMKsGear.Core.Patterns.AppModel;
 
 namespace AMKDownloadManager.Core
 {
-    public class AppContext : AppCrossCuttingContext, IAppContext
+    public class AppContext : AppModelContext, IAppContext
     {
         public const string ApplicationProfileDirectoryName = "AMKDownloadManager";
         public const string PluginRepositoryEnvironmentVariableName = "AMKDM_PLUGIN_REPOSITORY";

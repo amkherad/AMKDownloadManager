@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.FileSystem;
 
 namespace AMKDownloadManager.Defaults.FileSystem

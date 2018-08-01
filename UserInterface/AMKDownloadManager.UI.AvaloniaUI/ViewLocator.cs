@@ -20,7 +20,7 @@ namespace AMKDownloadManager.UI.AvaloniaUI
 
         public ViewLocator()
         {
-            TypeResolver = AppContext.Context.GetTypeResolver();
+            TypeResolver = AppContext.Instance.GetTypeResolver();
         }
         public ViewLocator(ITypeResolver typeResolver)
         {

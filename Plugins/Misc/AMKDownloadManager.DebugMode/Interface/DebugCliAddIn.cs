@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Cli;
+using AMKDownloadManager.Core.Api.Configuration;
 
 namespace AMKDownloadManager.DebugMode.Interface
 {

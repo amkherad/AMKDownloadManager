@@ -1,6 +1,8 @@
 ﻿using System;
 using AMKDownloadManager.Core.Api.Transport;
+using AMKsGear.Architecture.Automation.LifetimeManagers;
 using AMKsGear.Core.Automation;
+using AMKsGear.Core.Automation.LifetimeManagers;
 
 namespace AMKDownloadManager.Core.Api.DownloadManagement
 {
@@ -34,7 +36,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
         /// </summary>
         public IResponse Response { get; }
 
-        public IDisposer Disposer { get; }
+        public IDisposableContainer Disposer { get; }
         
         /// <summary>
         /// Gets a value indicating whether this job is finished. typically becomes true when job does not support concurrency. (resume capability)
@@ -60,7 +62,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
             IJobPart mainJobPart,
             SegmentationContext segmentationContext)
         {
-            Disposer = new Disposer();
+            Disposer = new DisposableContainer();
             
             DownloadSize = downloadSize;
             FirstHttpPacketSize = firstHttpPacketSize;

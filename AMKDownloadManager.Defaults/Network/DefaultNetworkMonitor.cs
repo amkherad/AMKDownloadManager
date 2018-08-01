@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.Network;
 
 namespace AMKDownloadManager.Defaults.Network

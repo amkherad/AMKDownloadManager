@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+using AMKDownloadManager.Core.Api.Configuration;
+using AMKsGear.Architecture.Automation.LifetimeManagers;
 using AMKsGear.Core.Automation;
+using AMKsGear.Core.Automation.LifetimeManagers;
 using AMKsGear.Core.Collections;
 using AMKsGear.Web.Core.Http;
 
@@ -14,7 +17,7 @@ namespace AMKDownloadManager.Core.Api.Transport
 
         protected HttpRequest(DownloadItem downloadItem)
         {
-            Disposer = new Disposer();
+            Disposer = new DisposableContainer();
             
             DownloadItem = downloadItem;
             
@@ -33,7 +36,7 @@ namespace AMKDownloadManager.Core.Api.Transport
         public byte[] RequestBody { get; set; }
         public Action<Stream> RequestBodyWriter { get; set; }
         public string Method { get; set; }
-        public IDisposer Disposer { get; }
+        public IDisposableContainer Disposer { get; }
 
 
         public static HttpRequest FromDownloadItem(

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 
 namespace AMKDownloadManager.Defaults.ConfigProvider
 {
@@ -149,6 +150,7 @@ namespace AMKDownloadManager.Defaults.ConfigProvider
 
         public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
+            //configProvider is this same class.
             //DONT WRITE ANYTHING HERE.
         }
 

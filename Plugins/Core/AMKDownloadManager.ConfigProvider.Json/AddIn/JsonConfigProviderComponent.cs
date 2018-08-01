@@ -2,15 +2,14 @@
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Extensions;
 
-namespace AMKDownloadManager.BatchDownloadFileSupport.AddIn
+namespace AMKDownloadManager.ConfigProvider.Json.AddIn
 {
-    public class BatchDownloadFileSupportComponent : IComponent
+    public class JsonConfigProviderComponent : IComponent
     {
-        public string Name { get; }
+        public string Name => "JsonConfigProvider";
         public string Description { get; }
         public string Author { get; }
         public Version Version { get; }
-        
         
         public void Install(IAppContext app)
         {

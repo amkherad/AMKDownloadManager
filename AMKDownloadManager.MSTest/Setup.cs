@@ -22,10 +22,7 @@ namespace AMKDownloadManager.MSTest
             _inited = true;
             
             Trace.Listeners.Add(new ConsoleTraceListener());
-            Logger.RegisterLogger(new MethodLogger(System.Console.Write, f =>
-            {
-                for (var i = 0; i < f; i++) System.Console.WriteLine();
-            }));
+            Logger.RegisterDefaultLogChannel(new MethodLogger(Console.Write));
 
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
             AppHelpers.InjectTopLayerFeatures(pool);

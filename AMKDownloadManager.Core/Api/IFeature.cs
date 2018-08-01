@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AMKDownloadManager.Core.Api.Configuration;
 
 namespace AMKDownloadManager.Core.Api
 {

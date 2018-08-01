@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using AMKsGear.Architecture.Automation.LifetimeManagers;
 using AMKsGear.Core.Automation;
 using AMKsGear.Web.Core.Http;
 
@@ -15,6 +16,6 @@ namespace AMKDownloadManager.Core.Api.Transport
         
         Stream ResponseStream { get; }
         
-        IDisposer Disposer { get; }
+        IDisposableContainer Disposer { get; }
     }
 }

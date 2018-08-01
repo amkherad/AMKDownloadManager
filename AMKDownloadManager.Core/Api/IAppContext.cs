@@ -1,13 +1,11 @@
-﻿using System;
-using AMKsGear.Architecture.Patterns;
-using AMKsGear.Core.Patterns.AppModel;
+﻿using AMKsGear.Core.Patterns.AppModel;
 
 namespace AMKDownloadManager.Core.Api
 {
     /// <summary>
     /// Application service pool.
     /// </summary>
-    public interface IAppContext : ICrossCuttingContext, IStorageCrossCuttingContext
+    public interface IAppContext : IStorageAppContext, ITypeResolverAppContext
     {
         
     }
