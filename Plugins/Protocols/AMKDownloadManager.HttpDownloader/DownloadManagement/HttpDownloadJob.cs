@@ -18,7 +18,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 {
     public class HttpDownloadJob : IJob
     {
-        public IAppContext AppContext { get; }
+        public IApplicationContext ApplicationContext { get; }
 
         public HttpProtocolProvider HttpProtocolProvider { get; }
 
@@ -42,13 +42,13 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         private long _maxSegmentSize;
 
         public HttpDownloadJob(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IFileManager fileManager,
             HttpProtocolProvider httpProtocolProvider,
             DownloadItem downloadItem,
             JobParameters jobParameters)
         {
-            AppContext = appContext;
+            ApplicationContext = applicationContext;
             HttpProtocolProvider = httpProtocolProvider;
 
             FileManager = fileManager;
@@ -56,10 +56,10 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             DownloadItem = downloadItem;
             JobParameters = jobParameters;
 
-            Transport = appContext.GetFeature<IHttpTransport>();
-            SegmentProvider = appContext.GetFeature<ISegmentDivider>();
+            Transport = applicationContext.GetFeature<IHttpTransport>();
+            SegmentProvider = applicationContext.GetFeature<ISegmentDivider>();
 
-            LoadConfig(appContext, appContext.GetFeature<IConfigProvider>(), null);
+            LoadConfig(applicationContext, applicationContext.GetFeature<IConfigProvider>(), null);
         }
 
         #region IJob implementation
@@ -70,7 +70,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         {
             if (Transport == null)
             {
-                Transport = AppContext.GetFeature<IHttpTransport>();
+                Transport = ApplicationContext.GetFeature<IHttpTransport>();
             }
             bool supportsConcurrency = false;
             long? downloadSize;
@@ -78,7 +78,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
             IResponse response;
             using (var request = HttpProtocolProvider.CreateRequest(
-                AppContext,
+                ApplicationContext,
                 DownloadItem,
                 null,
                 null,
@@ -86,7 +86,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             ))
             {
                 response = Transport.SendRequest(
-                    AppContext,
+                    ApplicationContext,
                     DownloadItem,
                     request,
                     false
@@ -118,7 +118,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             if ((downloadSize ?? 0) > 0)
             {
                 mainJobPart = new MainJobPartImpl(
-                    AppContext,
+                    ApplicationContext,
                     this,
                     FileManager,
                     Segmentation,
@@ -148,7 +148,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         private class MainJobPartImpl : IJobPart
         {
-            public IAppContext AppContext { get; }
+            public IApplicationContext ApplicationContext { get; }
             public HttpDownloadJob Job { get; }
             public IFileManager FileManager { get; }
             public IResponse Response { get; }
@@ -162,14 +162,14 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             IJob IJobPart.Job => Job; 
             
             public MainJobPartImpl(
-                IAppContext appContext,
+                IApplicationContext applicationContext,
                 HttpDownloadJob job,
                 IFileManager fileManager,
                 SegmentationContext segmentationContext,
                 Segment segment,
                 IResponse response)
             {
-                AppContext = appContext;
+                ApplicationContext = applicationContext;
                 Job = job;
                 FileManager = fileManager;
                 SegmentationContext = segmentationContext;
@@ -185,7 +185,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             {
                 var stream = Response.ResponseStream;
                 
-                var fileSaver = AppContext.GetFeature<IStreamSaver>();
+                var fileSaver = ApplicationContext.GetFeature<IStreamSaver>();
 
                 try
                 {
@@ -239,7 +239,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             }
             
             var partDescriptor = SegmentProvider.GetPart(
-                AppContext,
+                ApplicationContext,
                 this,
                 Segmentation
             );
@@ -250,7 +250,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             }
 
             return new HttpDownloadJobPart(
-                AppContext,
+                ApplicationContext,
                 DownloadItem,
                 HttpProtocolProvider,
                 this,
@@ -289,7 +289,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
         //public int Order => 0;
 
-        private void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        private void LoadConfig(IApplicationContext appContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Download.DefaultReceiveBufferSize))
             {

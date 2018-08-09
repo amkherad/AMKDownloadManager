@@ -1,4 +1,6 @@
-﻿using AMKDownloadManager.Core;
+﻿using System;
+using System.Runtime.InteropServices;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.UI.AvaloniaUI.Views.Main;
 using AMKDownloadManager.UI.Business;
 using AMKDownloadManager.UI.Business.ViewModels.Main;
@@ -14,10 +16,14 @@ namespace AMKDownloadManager.UI.AvaloniaUI
     {
         static void Main(string[] args)
         {
-            if (AppInitializer.InitializeApplication(args))
+            if (AppInitializer.InitializeApplication(args, out var appContext))
             {
-                var typeResolver = AppContext.Instance.GetTypeResolver() as ITypeResolverContainer;
-                DependencyGraph.BuildContainer(typeResolver);
+                if (!(appContext.TypeResolver is ITypeResolverContainer typeResolver))
+                {
+                    throw new InvalidOperationException();
+                }
+
+                DependencyBuilder.BuildContainer(appContext, typeResolver);
 
                 var app = BuildAvaloniaApp(typeResolver);
                 app.Start<MainWindow>(() => typeResolver.Resolve<MainWindowViewModel>());
@@ -25,7 +31,7 @@ namespace AMKDownloadManager.UI.AvaloniaUI
         }
 
         public static AppBuilder BuildAvaloniaApp(ITypeResolver typeResolver)
-            => AppBuilder.Configure<App>()//(typeResolver.Resolve<App>())
+            => AppBuilder.Configure<App>() //(typeResolver.Resolve<App>())
                 .UsePlatformDetect()
                 .UseReactiveUI()
                 .LogToDebug();

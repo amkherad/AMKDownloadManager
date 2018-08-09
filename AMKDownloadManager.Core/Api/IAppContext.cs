@@ -5,7 +5,7 @@ namespace AMKDownloadManager.Core.Api
     /// <summary>
     /// Application service pool.
     /// </summary>
-    public interface IAppContext : IStorageAppContext, ITypeResolverAppContext
+    public interface IApplicationContext : IStorageAppContext, ITypeResolverAppContext
     {
         
     }

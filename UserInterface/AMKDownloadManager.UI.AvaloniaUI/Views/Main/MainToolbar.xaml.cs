@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace AMKDownloadManager.UI.AvaloniaUI.Views.Main
 {
-    public class MainMenu : Menu
+    public class MainToolbar : UserControl
     {
-        public MainMenu()
+        public MainToolbar()
         {
             InitializeComponent();
         }

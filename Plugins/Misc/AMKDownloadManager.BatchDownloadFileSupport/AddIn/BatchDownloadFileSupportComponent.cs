@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Composition;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Extensions;
 
 namespace AMKDownloadManager.BatchDownloadFileSupport.AddIn
 {
+    [Export(typeof(IComponent))]
     public class BatchDownloadFileSupportComponent : IComponent
     {
         public string Name { get; }
@@ -12,24 +14,30 @@ namespace AMKDownloadManager.BatchDownloadFileSupport.AddIn
         public Version Version { get; }
         
         
-        public void Install(IAppContext app)
+        
+        public void Install(IApplicationContext application)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void Uninstall(IAppContext app)
+        public void Uninstall(IApplicationContext application)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void Initialize(IAppContext app)
+        public void Initialize(IApplicationContext application)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void Unload(IAppContext app)
+        public void AfterInitialize(IApplicationContext application)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void Unload(IApplicationContext application)
+        {
+            
         }
     }
 }

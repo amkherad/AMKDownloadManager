@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AMKDownloadManager.Core.Api.Configuration;
+using AMKsGear.Architecture.Automation.IoC;
 
 namespace AMKDownloadManager.Core.Api
 {
@@ -11,13 +12,21 @@ namespace AMKDownloadManager.Core.Api
 		int Order { get; }
 
 		/// <summary>
+		/// Signals the features to load dependencies when they are ready.
+		/// </summary>
+		void ResolveDependencies(
+			IApplicationContext appContext,
+			ITypeResolver typeResolver
+			);
+		
+		/// <summary>
 		/// Loads feature configurations from config provider. also get called when a config is changing.
 		/// </summary>
-		/// <param name="appContext">The app context</param>
+		/// <param name="applicationContext">The application context</param>
 		/// <param name="configProvider">Application config provider module</param>
 		/// <param name="changes">A list of changed configs, this can be null if no change happened or config reload requested</param>
 		void LoadConfig(
-			IAppContext appContext,
+			IApplicationContext applicationContext,
 			IConfigProvider configProvider,
 			HashSet<string> changes
 		);

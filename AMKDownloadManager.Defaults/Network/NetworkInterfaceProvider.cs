@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.Network;
+using AMKsGear.Architecture.Automation.IoC;
 
 namespace AMKDownloadManager.Defaults.Network
 {
@@ -26,7 +27,13 @@ namespace AMKDownloadManager.Defaults.Network
         }
         
         public int Order => 0;
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             
         }

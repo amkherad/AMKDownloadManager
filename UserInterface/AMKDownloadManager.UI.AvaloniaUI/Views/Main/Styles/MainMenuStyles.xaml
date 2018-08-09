@@ -1,0 +1,6 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    <Style Selector="MenuItem">
+        <Setter Property="Header" Value="{Binding Title}" />
+        <Setter Property="Items" Value="{Binding Children}" />
+    </Style>
+</Styles>

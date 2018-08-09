@@ -40,10 +40,10 @@ namespace AMKDownloadManager.Core.Api.Transport
 
 
         public static HttpRequest FromDownloadItem(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem)
         {
-            var configProvider = appContext.GetFeature<IConfigProvider>();
+            var configProvider = applicationContext.GetFeature<IConfigProvider>();
             
             var req = new HttpRequest(downloadItem)
             {

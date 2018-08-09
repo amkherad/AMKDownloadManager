@@ -3,7 +3,7 @@
     public interface IDownloadPathProvider : IFeature
     {
         PathInfo GetPathForMedia(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             string mediaType,
             string fileName
         );

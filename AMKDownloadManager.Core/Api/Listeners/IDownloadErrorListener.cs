@@ -5,20 +5,20 @@ namespace AMKDownloadManager.Core.Api.Listeners
     public interface IDownloadErrorListener : IListenerFeature
     {
         void OnDeadError(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJob job,
             IDownloadManager downloadManager
         );
         
         void OnGetInfoError(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJob job,
             IDownloadManager downloadManager,
             bool retrying
         );
 
         void OnPartError(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJob job,
             IJobPart jobPart,
             IDownloadManager downloadManager,

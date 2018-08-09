@@ -4,36 +4,32 @@ using System.IO;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.FileSystem;
+using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Utils;
 
 namespace AMKDownloadManager.Defaults.FileSystem
 {
     public class DefaultFileProvider : IFileProvider
     {
-        public int DuplicityResolvationStart { get; set; }
-
-        public DefaultFileProvider()
-        {
-            DuplicityResolvationStart = 1;
-        }
+        public IApplicationContext AppContext { get; set; }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="duplicityResolvationStart">Duplicity resolvation appendix number start. (default = 1)</param>
-        public DefaultFileProvider(int duplicityResolvationStart)
+        public int DuplicityResolutionStart { get; set; }
+
+        
+        public DefaultFileProvider(IApplicationContext appContext)
         {
-            DuplicityResolvationStart = duplicityResolvationStart;
+            AppContext = appContext;
+            DuplicityResolutionStart = 1;
         }
 
         public IFileManager CreateFile(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             string name,
             string mimeType,
             long? size,
             int? parts)
         {
-            var pathProvider = appContext.GetFeature<IDownloadPathProvider>();
+            var pathProvider = applicationContext.GetFeature<IDownloadPathProvider>();
 
             if (name == null)
             {
@@ -43,16 +39,11 @@ namespace AMKDownloadManager.Defaults.FileSystem
             string media = null;
             if (mimeType != null)
             {
-                try
-                {
-                    media = Helper.GetMimeTypeFromString(mimeType).Media;
-                }
-                catch
-                {
-                }
+                //MimeType.TryParse(mimeType, out media);
+                #warning UNCOMMENT THIS!
             }
 
-            var pathInfo = pathProvider.GetPathForMedia(appContext, media, name);
+            var pathInfo = pathProvider.GetPathForMedia(applicationContext, media, name);
 
             var path = TryReserveFileName(
                 Path.Combine(pathInfo.UseTemp ? pathInfo.TempPath : pathInfo.Path, name)
@@ -66,7 +57,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
         }
         
         public IFileManager ResumeFile(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             string filePath,
             string mimeType,
             long? size,
@@ -86,7 +77,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
             var path = Path.GetDirectoryName(name);
             var fileExtension = Path.GetExtension(name);
 
-            var counter = DuplicityResolvationStart;
+            var counter = DuplicityResolutionStart;
             while (Directory.Exists(name) || File.Exists(name))
             {
                 name = Path.Combine(path, $"{fileName}_{counter++}{fileExtension}");
@@ -97,7 +88,12 @@ namespace AMKDownloadManager.Defaults.FileSystem
 
         public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
         {
         }
     }

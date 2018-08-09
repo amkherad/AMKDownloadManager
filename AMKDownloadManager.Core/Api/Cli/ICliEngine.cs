@@ -5,14 +5,14 @@ namespace AMKDownloadManager.Core.Api.Cli
         /// <summary>
         /// Tries to execute a given command if fails or unknown command given it must return null as a result indicating execution must fall to next CliEngine.
         /// </summary>
-        /// <param name="appContext"></param>
+        /// <param name="applicationContext"></param>
         /// <param name="parser"></param>
         /// <param name="interface"></param>
         /// <param name="commandName"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
         ICommandResult Execute(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             CommandParser parser,
             ICliInterface @interface,
             string commandName,

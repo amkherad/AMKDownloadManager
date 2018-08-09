@@ -1,24 +1,25 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewMain="clr-namespace:AMKDownloadManager.UI.AvaloniaUI.Views.Main"
-        xmlns:markup="clr-namespace:Portable.Xaml.Markup;assembly=Avalonia.Markup.Xaml"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         Title="{Binding Title}"
-        Icon="resm:AMKDownloadManager.UI.AvaloniaUI.Assets.test_icon.ico?assembly=AMKDownloadManager.UI.AvaloniaUI">
+        Icon="resm:AMKDownloadManager.UI.AvaloniaUI.Assets.test_icon.ico?assembly=AMKDownloadManager.UI.AvaloniaUI"
+        >
+    <!-- ClientSize="{Binding Path=LayoutSettings.Size, Converter={StaticResource sizeConverter}}" -->
+    <!-- Position="{Binding Path=LayoutSettings.Position, Converter={StaticResource pointConverter}}" -->
 
-    <StackPanel Orientation="Vertical" Gap="4">
-        <viewMain:MainMenu />
-        <TextBlock Classes="h1">Button</TextBlock>
-        <TextBlock Classes="h2">A button control</TextBlock>
-        <StackPanel Orientation="Horizontal"
-                    Margin="0,16,0,0"
-                    HorizontalAlignment="Center"
-                    Gap="16">
-            <StackPanel Orientation="Vertical" Gap="8" Width="150">
-                <Button Content="Re-themed" Height="40" Width="300" Foreground="Red" />
-                <Button Foreground="White">Foreground</Button>
-                <Button IsEnabled="False">Disabled</Button>
-                <Button Content="Re-themed" />
-            </StackPanel>
-        </StackPanel>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Items="{Binding MainMenuItems}" />
+
+        <viewMain:MainToolbar Grid.Row="1" />
+
+        <viewMain:MainBody Grid.Row="2" />
+
+    </Grid>
 </Window>

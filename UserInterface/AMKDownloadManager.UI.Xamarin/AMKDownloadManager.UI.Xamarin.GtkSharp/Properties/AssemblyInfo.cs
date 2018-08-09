@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AMKDownloadManager.UI.Xamarin.GtkSharp")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright © 2018 Ali Mousavi Kherad")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("C806B14D-4EB8-4C0B-BD63-117B6B1DFCFA")]
+[assembly: Guid("62AEE5E7-5865-4B44-B23C-3F84E12FEA4D")]
 
 // Version information for an assembly consists of the following four values:
 //

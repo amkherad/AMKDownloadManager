@@ -7,7 +7,7 @@ namespace AMKDownloadManager.Core.Api.Network
         /// <summary>
         /// Selects the desired network interface depending on <see cref="DownloadItem"/> properties.
         /// </summary>
-        /// <param name="appContext"></param>
+        /// <param name="applicationContext"></param>
         /// <param name="transport"></param>
         /// <param name="downloadItem"></param>
         /// <returns>
@@ -15,7 +15,7 @@ namespace AMKDownloadManager.Core.Api.Network
         /// with a interface lookup overhead.
         /// </returns>
         object SelectInterface(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IRequestTransport transport,
             DownloadItem downloadItem);
     }

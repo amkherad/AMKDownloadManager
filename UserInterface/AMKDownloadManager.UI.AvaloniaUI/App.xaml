@@ -1,12 +1,21 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:AMKDownloadManager.UI.AvaloniaUI">
+             xmlns:local="clr-namespace:AMKDownloadManager.UI.AvaloniaUI"
+             xmlns:converters="clr-namespace:AMKDownloadManager.UI.AvaloniaUI.Converters">
   <Application.DataTemplates>
     <local:ViewLocator/>
   </Application.DataTemplates>
   
+  <Application.Resources>
+    <converters:DrawingPointToAvalonPoint x:Key="pointConverter"/>
+    <converters:DrawingSizeToAvalonSize x:Key="sizeConverter"/>
+  </Application.Resources>
+  
   <Application.Styles>
     <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
     <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+    
+    
+    <StyleInclude Source="resm:AMKDownloadManager.UI.AvaloniaUI.Views.Main.Styles.MainMenuStyles.xaml"/>
   </Application.Styles>
 </Application>

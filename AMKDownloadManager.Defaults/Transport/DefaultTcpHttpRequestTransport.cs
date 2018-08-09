@@ -17,14 +17,14 @@
 //        
 //        [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
 //        public IResponse SendRequest(
-//            IAppContext appContext,
+//            IApplicationContext applicationContext,
 //            DownloadItem downloadItem,
 //            IRequest request,
 //            IDownloadProgressListener downloadProgressListener,
 //            bool unpackStream)
 //        {
-//            appContext.SignalFeatures<ITransportListenerFeature>(
-//                l => l.BeforeSendRequest(appContext, this, request));
+//            applicationContext.SignalFeatures<ITransportListenerFeature>(
+//                l => l.BeforeSendRequest(applicationContext, this, request));
 //
 //            var webRequest = HttpHelpers.CreateHttpWebRequestFromRequest(
 //                request,
@@ -33,8 +33,8 @@
 //                    "Referer",
 //                    "User-Agent"
 //                });
-//            appContext.SignalFeatures<ITransportListenerFeature>(
-//                l => l.WebRequestCreated(appContext, this, request, webRequest));
+//            applicationContext.SignalFeatures<ITransportListenerFeature>(
+//                l => l.WebRequestCreated(applicationContext, this, request, webRequest));
 //
 //            var referer = request.Headers.Referer;
 //            if (referer != null) webRequest.Referer = referer;
@@ -65,8 +65,8 @@
 //            //webRequest.all
 //            //webRequest.AllowReadStreamBuffering = false;
 //            
-//            appContext.SignalFeatures<ITransportListenerFeature>(
-//                l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));
+//            applicationContext.SignalFeatures<ITransportListenerFeature>(
+//                l => l.WebBeforeRequestSubmission(applicationContext, this, request, webRequest));
 //            try
 //            {
 //                var webResponse = webRequest.GetResponse() as HttpWebResponse;
@@ -94,8 +94,8 @@
 //                                    webResponse
 //                                );
 //                                
-//                                //appContext.SignalFeatures<ITransportListenerFeature>(
-//                                //    l => l.WebResponseAvailable(appContext, this, request, webRequest,
+//                                //applicationContext.SignalFeatures<ITransportListenerFeature>(
+//                                //    l => l.WebResponseAvailable(applicationContext, this, request, webRequest,
 //                                //        response, webResponse, stream));
 //
 //                                //return response;
@@ -107,8 +107,8 @@
 //                            var response = new HttpResponse();
 //                            HttpHelpers.FillResponseFromHttpResponse(response, webResponse);
 //                            
-//                            appContext.SignalFeatures<ITransportListenerFeature>(
-//                                l => l.WebResponseAvailable(appContext, this, request, webRequest,
+//                            applicationContext.SignalFeatures<ITransportListenerFeature>(
+//                                l => l.WebResponseAvailable(applicationContext, this, request, webRequest,
 //                                    response, webResponse, null));
 //                            
 //                            return response;
@@ -131,7 +131,7 @@
 //                            using (var reader = new StreamReader(responseStream))
 //                            {
 //                                string error = reader.ReadToEnd();
-//                                //TODO: use JSON.net to parse this string and look at the error message
+//                                //TODO: use JSON parser to parse this string and look at the error message
 //                            }
 //                        }
 //                    }
@@ -141,7 +141,7 @@
 //        }
 //
 //        public async Task<IResponse> SendRequestAsync(
-//            IAppContext appContext,
+//            IApplicationContext applicationContext,
 //            DownloadItem downloadItem,
 //            IRequest request,
 //            IDownloadProgressListener downloadProgressListener,
@@ -163,7 +163,7 @@
 ////        }
 //        public int Order => 0;
 //
-//        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+//        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
 //        {
 //            if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Download.MaximumRedirects))
 //            {

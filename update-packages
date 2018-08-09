@@ -12,19 +12,17 @@ function addReference {
 
 #!param $1 path
 function updateReferencesToAMKsGearFx {
-    dotnet remove "$1" package AMKsGear.AppLayer.Core
-    dotnet remove "$1" package AMKsGear.Web.Core
-    dotnet remove "$1" package AMKsGear.Core.TraceTools
-    dotnet remove "$1" package AMKsGear.Core.Data
-    dotnet remove "$1" package AMKsGear.Core
-    dotnet remove "$1" package AMKsGear.Architecture
+#    dotnet remove "$1" package AMKsGear.AppLayer.Core
+#    dotnet remove "$1" package AMKsGear.Web.Core
+#    dotnet remove "$1" package AMKsGear.Core.Data
+#    dotnet remove "$1" package AMKsGear.Core
+#    dotnet remove "$1" package AMKsGear.Architecture
     
-    addReference "$1" "AMKsGear.AppLayer.Core"
-    addReference "$1" "AMKsGear.Web.Core"
-    addReference "$1" "AMKsGear.Core.TraceTools"
-    addReference "$1" "AMKsGear.Core.Data"
-    addReference "$1" "AMKsGear.Core"
     addReference "$1" "AMKsGear.Architecture"
+    addReference "$1" "AMKsGear.Core"
+    addReference "$1" "AMKsGear.Core.Data"
+    addReference "$1" "AMKsGear.Web.Core"
+    addReference "$1" "AMKsGear.AppLayer.Core"
 }
 
 updateReferencesToAMKsGearFx "./AMKDownloadManager.Core/AMKDownloadManager.Core.csproj"

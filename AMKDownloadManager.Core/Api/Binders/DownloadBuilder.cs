@@ -44,18 +44,18 @@ namespace AMKDownloadManager.Core.Api.Binders
         /// Binds the specified application services to DownloadItem and find the best protocol.
         /// </summary>
         /// <param name="downloadItem">Download item.</param>
-        /// <param name="app">App.</param>
-        public static IProtocolProvider Bind(DownloadItem downloadItem, IAppContext app)
+        /// <param name="application">App.</param>
+        public static IProtocolProvider Bind(DownloadItem downloadItem, IApplicationContext application)
         {
             if (downloadItem == null) throw new ArgumentNullException(nameof(downloadItem));
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            if (application == null) throw new ArgumentNullException(nameof(application));
 
-            var protocolProvider = app.GetFeatures<IProtocolProvider>()?
-                .FirstOrDefault(p => p.CanHandle(app, downloadItem));
+            var protocolProvider = application.GetFeatures<IProtocolProvider>()?
+                .FirstOrDefault(p => p.CanHandle(application, downloadItem));
 
             if (protocolProvider != null)
             {
-                var bindListeners = app.GetFeatures<IDownloadBindListener>();
+                var bindListeners = application.GetFeatures<IDownloadBindListener>();
                 bindListeners?.ForEach(x => x.NotifyBind(downloadItem, protocolProvider));
             }
 
@@ -66,12 +66,12 @@ namespace AMKDownloadManager.Core.Api.Binders
         /// Unbinds the specified application services fom DownloadItem and releases any used resources.
         /// </summary>
         /// <param name="downloadItem">Download item.</param>
-        /// <param name="app">App.</param>
-        public static void UnBind(DownloadItem downloadItem, IAppContext app)
+        /// <param name="application">App.</param>
+        public static void UnBind(DownloadItem downloadItem, IApplicationContext application)
         {
 
 
-            var bindListeners = app.GetFeatures<IDownloadBindListener>();
+            var bindListeners = application.GetFeatures<IDownloadBindListener>();
             bindListeners.ForEach(x => x.NotifyUnBind(downloadItem));
         }
     }

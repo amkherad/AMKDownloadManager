@@ -32,14 +32,14 @@ namespace AMKDownloadManager.Core
         /// Gets the application service pool.
         /// </summary>
         /// <value>The pool.</value>
-        public IAppContext Pool { get; private set; }
+        public IApplicationContext Pool { get; private set; }
 
         private bool _initialized;
 
         /// <summary>
         /// Initialize this instance of ApplicationHost. only first call has effects.
         /// </summary>
-        public IAppContext Initialize (IThreadFactory threadFactory)
+        public IApplicationContext Initialize (IThreadFactory threadFactory)
         {
             if (threadFactory == null) throw new ArgumentNullException(nameof(threadFactory));
 
@@ -49,9 +49,9 @@ namespace AMKDownloadManager.Core
             }
             _initialized = true;
 	        
-            var pool = new AppContext();
+            var pool = new ApplicationContext();
             Pool = pool;
-            AppContext.Instance = pool;
+            ApplicationContext.Instance = pool;
 
 			var container = new TypeResolverContainer ();
 			//MainWindow win = new MainWindow ();

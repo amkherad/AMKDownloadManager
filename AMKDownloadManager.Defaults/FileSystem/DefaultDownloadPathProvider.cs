@@ -4,17 +4,18 @@ using System.IO;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.FileSystem;
+using AMKsGear.Architecture.Automation.IoC;
 
 namespace AMKDownloadManager.Defaults.FileSystem
 {
     public class DefaultDownloadPathProvider : IDownloadPathProvider
     {
         public PathInfo GetPathForMedia(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             string mediaType,
             string fileName)
         {
-            var config = appContext.GetFeature<IConfigProvider>();
+            var config = applicationContext.GetFeature<IConfigProvider>();
 
             var defaultDownloadLocation = config.GetString(this,
                 KnownConfigs.FileSystem.DownloadLocation,
@@ -92,7 +93,13 @@ namespace AMKDownloadManager.Defaults.FileSystem
         }
 
         public int Order => 0;
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             
         }

@@ -15,6 +15,7 @@ using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Network;
 using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.Defaults.Network;
+using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Trace;
 
 namespace AMKDownloadManager.Defaults.Transport
@@ -25,20 +26,20 @@ namespace AMKDownloadManager.Defaults.Transport
 
         // ReSharper disable once InconsistentNaming
         protected virtual IPEndPoint BindIPEndPoint(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             ServicePoint servicePoint,
             IPEndPoint remoteEndPoint,
             int retryCount)
         {
-            var selector = appContext.GetFeature<INetworkInterfaceSelector>();
+            var selector = applicationContext.GetFeature<INetworkInterfaceSelector>();
 
 #if DEBUG
             Trace.WriteLine(
                 $"IPEndPoint BindIPEndPoint(): servicePoint: {servicePoint}, remoteEndPoint: {remoteEndPoint}, retryCount: {retryCount}");
 #endif
 
-            var endPoint = selector.SelectInterface(appContext, this, downloadItem);
+            var endPoint = selector.SelectInterface(applicationContext, this, downloadItem);
             if (endPoint == null)
             {
                 throw new NetworkInterfaceException();
@@ -84,13 +85,13 @@ namespace AMKDownloadManager.Defaults.Transport
 
         //[SuppressMessage("ReSharper", "AccessToDisposedClosure")]
         public IResponse SendRequest(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             IRequest request,
             bool unpackStream)
         {
-            appContext.SignalFeatures<ITransportListenerFeature>(
-                l => l.BeforeSendRequest(appContext, this, request));
+            applicationContext.SignalFeatures<ITransportListenerFeature>(
+                l => l.BeforeSendRequest(applicationContext, this, request));
 
 #if DEBUG
             Trace.WriteLine($"Request to {request.Uri} is creating");
@@ -103,8 +104,8 @@ namespace AMKDownloadManager.Defaults.Transport
                     "Referer",
                     "User-Agent"
                 });
-            appContext.SignalFeatures<ITransportListenerFeature>(
-                l => l.WebRequestCreated(appContext, this, request, webRequest));
+            applicationContext.SignalFeatures<ITransportListenerFeature>(
+                l => l.WebRequestCreated(applicationContext, this, request, webRequest));
 
             var referer = request.Headers.Referer;
             if (referer != null) webRequest.Referer = referer;
@@ -133,7 +134,7 @@ namespace AMKDownloadManager.Defaults.Transport
             {
                 webRequest.ServicePoint.BindIPEndPointDelegate = (servicePoint, remoteEndPoint, retryCount)
                     => BindIPEndPoint(
-                        appContext,
+                        applicationContext,
                         downloadItem,
                         servicePoint,
                         remoteEndPoint,
@@ -179,8 +180,8 @@ namespace AMKDownloadManager.Defaults.Transport
 
             //var receiveBufferSize = webRequest.ServicePoint.ReceiveBufferSize;
 
-            appContext.SignalFeatures<ITransportListenerFeature>(
-                l => l.WebBeforeRequestSubmission(appContext, this, request, webRequest));
+            applicationContext.SignalFeatures<ITransportListenerFeature>(
+                l => l.WebBeforeRequestSubmission(applicationContext, this, request, webRequest));
             try
             {
                 var webResponse = webRequest.GetResponse() as HttpWebResponse;
@@ -223,8 +224,8 @@ namespace AMKDownloadManager.Defaults.Transport
                                     }
                                 );
 
-                                //appContext.SignalFeatures<ITransportListenerFeature>(
-                                //    l => l.WebResponseAvailable(appContext, this, request, webRequest,
+                                //applicationContext.SignalFeatures<ITransportListenerFeature>(
+                                //    l => l.WebResponseAvailable(applicationContext, this, request, webRequest,
                                 //        response, webResponse, stream));
 
                                 //return response;
@@ -241,8 +242,8 @@ namespace AMKDownloadManager.Defaults.Transport
                                 $"DefaultHttpRequestTransport.SendRequest(): {response.StatusCode} !webRequest.HaveResponse");
 #endif
 
-                            appContext.SignalFeatures<ITransportListenerFeature>(
-                                l => l.WebResponseAvailable(appContext, this, request, webRequest,
+                            applicationContext.SignalFeatures<ITransportListenerFeature>(
+                                l => l.WebResponseAvailable(applicationContext, this, request, webRequest,
                                     response, webResponse, null));
 
                             return response;
@@ -276,7 +277,7 @@ namespace AMKDownloadManager.Defaults.Transport
         }
 
         public async Task<IResponse> SendRequestAsync(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             IRequest request,
             bool unpackStream)
@@ -297,7 +298,12 @@ namespace AMKDownloadManager.Defaults.Transport
 //        }
         public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Download.MaximumRedirects))
             {

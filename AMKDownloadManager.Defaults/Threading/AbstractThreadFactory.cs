@@ -4,6 +4,7 @@ using System.Threading;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.Threading;
+using AMKsGear.Architecture.Automation.IoC;
 
 namespace AMKDownloadManager.Defaults.Threading
 {
@@ -67,7 +68,13 @@ namespace AMKDownloadManager.Defaults.Threading
         }
 
         public int Order => 0;
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             
         }

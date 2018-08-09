@@ -1,20 +1,5 @@
 <UserControl xmlns="https://github.com/avaloniaui">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        
-        <TreeView Grid.Column="0">
-            
-        </TreeView>
-        
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-        
-        
-        
-    </Grid>
+    
 
 </UserControl>

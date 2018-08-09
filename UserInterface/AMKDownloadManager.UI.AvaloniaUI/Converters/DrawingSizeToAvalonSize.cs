@@ -1,37 +1,37 @@
 using System;
 using System.Globalization;
 using Avalonia.Markup;
-using DrawingPoint = System.Drawing.Point;
-using AvalonPoint = Avalonia.Point;
+using DrawingSize = System.Drawing.Size;
+using AvalonSize = Avalonia.Size;
 
 namespace AMKDownloadManager.UI.AvaloniaUI.Converters
 {
-    public class DrawingPointToAvalonPoint : IValueConverter
+    public class DrawingSizeToAvalonSize : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return null;
-            if (!(value is DrawingPoint drawingPoint))
+            if (!(value is DrawingSize drawingSize))
             {
-                if (value is AvalonPoint)
+                if (value is AvalonSize)
                     return value;
                 return null;
             }
 
-            return new AvalonPoint(drawingPoint.X, drawingPoint.Y);
+            return new AvalonSize(drawingSize.Width, drawingSize.Height);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return null;
-            if (!(value is AvalonPoint avalonPoint))
+            if (!(value is AvalonSize avalonSize))
             {
-                if (value is DrawingPoint)
+                if (value is DrawingSize)
                     return value;
                 return null;
             }
 
-            return new DrawingPoint((int)avalonPoint.X, (int)avalonPoint.Y);
+            return new DrawingSize((int)avalonSize.Width, (int)avalonSize.Height);
         }
     }
 }

@@ -7,14 +7,14 @@ namespace AMKDownloadManager.Core.Api.Listeners
     public interface IProtocolProviderListener : IListenerFeature
     {
         void JobCreated(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             IJob job,
             JobParameters jobParameters,
             IProtocolProvider protocolProvider);
         
         void RequestCreated(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             IRequest request,
             IProtocolProvider protocolProvider);

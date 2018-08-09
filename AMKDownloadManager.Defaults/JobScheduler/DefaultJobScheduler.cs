@@ -4,17 +4,18 @@ using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.DownloadManagement;
+using AMKsGear.Architecture.Automation.IoC;
 
 namespace AMKDownloadManager.Defaults.JobScheduler
 {
     //TODO: Implement priority later.
     public class DefaultJobScheduler : IScheduler
     {
-        public IAppContext AppContext { get; }
+        public IApplicationContext ApplicationContext { get; }
 
-        public DefaultJobScheduler(IAppContext appContext)
+        public DefaultJobScheduler(IApplicationContext applicationContext)
         {
-            AppContext = appContext;
+            ApplicationContext = applicationContext;
         }
 
 
@@ -26,7 +27,13 @@ namespace AMKDownloadManager.Defaults.JobScheduler
         }
 
         public int Order => 0;
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             
         }

@@ -6,7 +6,7 @@ namespace AMKDownloadManager.Core.Api.Listeners
     public interface IDownloadProgressListener : IListenerFeature
     {
         void OnProgress(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJobPart job,
             DownloadItem downloadItem,
             IHttpTransport transport,
@@ -14,7 +14,7 @@ namespace AMKDownloadManager.Core.Api.Listeners
             Segment segment);
         
         void OnFinished(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJob job, DownloadItem downloadItem,
             IHttpTransport transport);
     }

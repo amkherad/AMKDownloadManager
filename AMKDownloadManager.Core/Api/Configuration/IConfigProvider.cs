@@ -1,4 +1,6 @@
-﻿namespace AMKDownloadManager.Core.Api.Configuration
+﻿using AMKsGear.Architecture.Patterns;
+
+namespace AMKDownloadManager.Core.Api.Configuration
 {
     public enum ConfigExistenceStrategy
     {
@@ -23,6 +25,17 @@
     /// </summary>
     public interface IConfigProvider : IFeature
     {
+        /// <summary>
+        /// Begins edit transaction.
+        /// </summary>
+        /// <returns></returns>
+        ITransaction BeginTransaction();
+        
+        /// <summary>
+        /// Reloads configuration from the file. (this will get called when another instance updates the configuration file)
+        /// </summary>
+        void SyncConfig();
+        
         bool GetBool(object context, string fqn, bool? defaultValue = null);
         int GetInt(object context, string fqn, int? defaultValue = null);
         long GetLong(object context, string fqn, long? defaultValue = null);

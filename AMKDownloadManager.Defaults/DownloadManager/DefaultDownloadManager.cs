@@ -8,6 +8,7 @@ using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.Listeners;
 using AMKDownloadManager.Core.Api.Threading;
+using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Utils;
 using ThreadState = System.Threading.ThreadState;
 
@@ -18,9 +19,13 @@ namespace AMKDownloadManager.Defaults.DownloadManager
     /// </summary>
     public class DefaultDownloadManager : IDownloadManager
     {
-        public IAppContext AppContext { get; }
-        public IConfigProvider Configuration { get; }
-        public IThreadFactory ThreadFactory { get; }
+        public IApplicationContext ApplicationContext { get; }
+
+        private IConfigProvider _configuration;
+        public IConfigProvider Configuration => _configuration ?? throw new InvalidOperationException();
+
+        private IThreadFactory _threadFactory;
+        public IThreadFactory ThreadFactory => _threadFactory ?? throw new InvalidOperationException();
 
         private volatile bool _downloadManagerState = false;
 
@@ -35,21 +40,32 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
         private readonly ManualResetEvent _finishEvent;
 
-        public DefaultDownloadManager(
-            IAppContext appContext, IScheduler scheduler)
+        public DefaultDownloadManager(IApplicationContext applicationContext)
         {
-            AppContext = appContext ?? throw new ArgumentNullException(nameof(appContext));
-            _scheduler = scheduler ?? throw new ArgumentNullException(nameof(scheduler));
-
-            Configuration = appContext.GetFeature<IConfigProvider>();
-            ThreadFactory = appContext.GetFeature<IThreadFactory>();
-
+            ApplicationContext = applicationContext ?? throw new ArgumentNullException(nameof(applicationContext));
 
             _jobs = new List<DefaultDownloadManagerJobContext>();
             _pendingJobs = new List<DefaultDownloadManagerJobContext>();
             _runningJobs = new List<DefaultDownloadManagerJobContext>();
 
             _finishEvent = new ManualResetEvent(false);
+        }
+        
+        public int Order => 0;
+
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            _scheduler = appContext.GetFeature<IScheduler>();
+            _configuration = appContext.GetFeature<IConfigProvider>();
+            _threadFactory = appContext.GetFeature<IThreadFactory>();
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
+        {
+            _maxSimultaneousJobs = configProvider.GetInt(this,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
+            );
         }
 
         #region IDownloadManager implementation
@@ -62,7 +78,7 @@ namespace AMKDownloadManager.Defaults.DownloadManager
         {
             var context = new DefaultDownloadManagerJobContext(
                 this,
-                AppContext,
+                ApplicationContext,
                 Configuration,
                 job)
             {
@@ -217,25 +233,11 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
         #endregion
 
-        #region IFeature implementation
-
-        public int Order => 0;
-
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
-        {
-            _maxSimultaneousJobs = configProvider.GetInt(this,
-                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
-                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
-            );
-        }
-
-        #endregion
-
         public class DefaultDownloadManagerJobContext : IDownloadManagerHandle
         {
             public DefaultDownloadManager DownloadManager { get; }
 
-            public IAppContext AppContext { get; }
+            public IApplicationContext ApplicationContext { get; }
             public IConfigProvider Configuration { get; }
 
             public IJob Job { get; }
@@ -251,13 +253,13 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
             public DefaultDownloadManagerJobContext(
                 DefaultDownloadManager downloadManager,
-                IAppContext appContext,
+                IApplicationContext applicationContext,
                 IConfigProvider configProvider,
                 IJob job)
             {
                 DownloadManager = downloadManager;
 
-                AppContext = appContext;
+                ApplicationContext = applicationContext;
                 Configuration = configProvider;
                 Job = job;
                 Threads = new List<IThread>();
@@ -296,8 +298,8 @@ namespace AMKDownloadManager.Defaults.DownloadManager
                     catch (Exception ex)
                     {
                         retry.Catch(ex);
-                        AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnGetInfoError(
-                            AppContext,
+                        ApplicationContext.SignalFeatures<IDownloadErrorListener>(x => x.OnGetInfoError(
+                            ApplicationContext,
                             Job,
                             DownloadManager,
                             !retry.IsDone()
@@ -307,8 +309,8 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
                 if (jobInfo == null)
                 {
-                    AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnDeadError(
-                        AppContext,
+                    ApplicationContext.SignalFeatures<IDownloadErrorListener>(x => x.OnDeadError(
+                        ApplicationContext,
                         Job,
                         DownloadManager
                     ));
@@ -433,8 +435,8 @@ namespace AMKDownloadManager.Defaults.DownloadManager
 
                         retry.Catch(ex);
                         result = JobPartState.ErrorCanRetry;
-                        AppContext.SignalFeatures<IDownloadErrorListener>(x => x.OnPartError(
-                            AppContext,
+                        ApplicationContext.SignalFeatures<IDownloadErrorListener>(x => x.OnPartError(
+                            ApplicationContext,
                             Job,
                             part,
                             DownloadManager,

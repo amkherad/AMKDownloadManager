@@ -7,30 +7,30 @@ namespace AMKDownloadManager.Core.Api.Listeners
     public interface ITransportListenerFeature : IListenerFeature
     {
         void BeforeSendRequest(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IRequestTransport transport,
             IRequest request);
         
         void WebRequestCreated(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IRequestTransport transport,
             IRequest request,
             [CanBeNull] object webRequest);
         
 //        void HttpWebRequestCreated(
-//            IAppContext appContext,
+//            IApplicationContext applicationContext,
 //            IRequestTransport transport,
 //            IRequest request,
 //            HttpWebRequest httpWebRequest);
         
         void WebBeforeRequestSubmission(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IRequestTransport transport,
             IRequest request,
             [CanBeNull] object webRequest);
         
         void WebResponseAvailable(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IRequestTransport transport,
             IRequest request,
             [CanBeNull] object webRequest,

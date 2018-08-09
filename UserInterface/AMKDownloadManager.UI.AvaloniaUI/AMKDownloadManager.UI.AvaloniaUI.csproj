@@ -4,12 +4,13 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>AMKDownloadManager.UI.AvaloniaUI</AssemblyName>
     <RootNamespace>AMKDownloadManager.UI.AvaloniaUI</RootNamespace>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../../.output/Debug/netcoreapp2.1/</OutputPath>
+    <OutputPath>../../.output/Debug/</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../.output/Release/netcoreapp2.1/</OutputPath>
+    <OutputPath>../../.output/Release/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
@@ -19,6 +20,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\*" />
+    <Compile Update="Views\Main\MainBody.xaml.cs">
+      <DependentUpon>MainBody.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.6.1" />
@@ -32,6 +36,12 @@
     <Folder Include="Styles" />
     <Folder Include="Views\Dialogs\DownloadPropertiesDialog\Layout" />
     <Folder Include="Views\Main\SideBar" />
-    <Folder Include="Views\Main\Styles" />
   </ItemGroup>
+  <Target Name="ChangeAliasesOfStrongNameAssemblies" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+    <ItemGroup>
+      <ReferencePath Condition="'%(FileName)' == 'Splat'">
+        <Aliases>SplatAlias</Aliases>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
 </Project>

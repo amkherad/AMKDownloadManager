@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using AMKsGear.Core.Trace;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AMKDownloadManager.MSTest
@@ -14,12 +13,13 @@ namespace AMKDownloadManager.MSTest
     {
         //public const string Uri = "http://localhost.:8083/com.playstation.U4.apk";
         public const string Uri = "http://localhost.:8084/com.playstation.U4.apk";
-        
+
         [TestMethod]
         public void Exec()
         {
             
         }
+        
         [TestMethod]
         public void InspectHttpBehaviorOnHttpWebRequest()
         {

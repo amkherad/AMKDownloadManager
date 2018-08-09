@@ -3,12 +3,12 @@
     public interface ISegmentDivider : IFeature
     {
         PartialBlockDescriptor GetPart(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJob job,
             SegmentationContext segmentationContext);
         
         PartialBlockDescriptor GetPart(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJob job,
             SegmentationContext segmentationContext,
             long contiguousLeftOffset);

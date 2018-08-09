@@ -5,6 +5,7 @@ using System.Linq;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.DownloadManagement;
+using AMKsGear.Architecture.Automation.IoC;
 
 namespace AMKDownloadManager.Defaults.Segmentation
 {
@@ -17,15 +18,15 @@ namespace AMKDownloadManager.Defaults.Segmentation
         private long _maxSegmentSize = KnownConfigs.DownloadManager.Segmentation.MinSegmentSizeDefaultValue;
 
         public PartialBlockDescriptor GetPart(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             IJob job,
             SegmentationContext segmentationContext)
         {
-            if (appContext == null) throw new ArgumentNullException(nameof(appContext));
+            if (applicationContext == null) throw new ArgumentNullException(nameof(applicationContext));
             //if (job == null) throw new ArgumentNullException(nameof(job));
             if (segmentationContext == null) throw new ArgumentNullException(nameof(segmentationContext));
 
-            //var config = appContext.GetFeature<IConfigProvider>();
+            //var config = applicationContext.GetFeature<IConfigProvider>();
 
             //var maxSimultaneousConnections = config.GetInt(this,
             //    KnownConfigs.DownloadManager.Download.MaxSimultaneousConnections,
@@ -79,15 +80,20 @@ namespace AMKDownloadManager.Defaults.Segmentation
             }
         }
 
-        public PartialBlockDescriptor GetPart(IAppContext appContext, IJob job, SegmentationContext segmentationContext,
+        public PartialBlockDescriptor GetPart(IApplicationContext applicationContext, IJob job, SegmentationContext segmentationContext,
             long contiguousLeftOffset)
         {
-            return GetPart(appContext, job, segmentationContext);
+            return GetPart(applicationContext, job, segmentationContext);
         }
 
         public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
         {
             if (changes == null || changes.Contains(KnownConfigs.DownloadManager.Segmentation.MinSegmentSize))
             {

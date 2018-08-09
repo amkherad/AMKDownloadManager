@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Composition;
 using System.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Extensions;
 using AMKsGear.Core.Trace;
@@ -16,7 +18,7 @@ namespace AMKDownloadManager.Defaults
     public class ComponentImporter
     {
         public string ProbingPattern { get; set; } = "*.plugin.dll";
-        
+
         /// <summary>
         /// All loaded components.
         /// </summary>
@@ -24,32 +26,45 @@ namespace AMKDownloadManager.Defaults
         public IEnumerable<IComponent> Components { get; set; }
 
         /// <summary>
-        /// Load plugins from './Plugins' and given directory.
+        /// Load plugins from given directories.
         /// </summary>
         public void Compose(string[] paths)
         {
-            var files = new List<string>();
-
-            var cwdPluginsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins");
-            if (Directory.Exists(cwdPluginsPath))
-            {
-                files.AddRange(Directory.GetFiles(cwdPluginsPath, ProbingPattern, SearchOption.AllDirectories));
-            }
+            var files = new Dictionary<string, string>();
 
             foreach (var path in paths)
             {
-                try
+                //try
                 {
                     if (Directory.Exists(path))
                     {
-                        files.AddRange(Directory.GetFiles(path, ProbingPattern, SearchOption.AllDirectories));
+                        foreach (var file in Directory.GetFiles(path, ProbingPattern, SearchOption.AllDirectories))
+                        {
+                            var key = Path.GetFileName(file);
+                            if (!files.ContainsKey(key))
+                            {
+                                files.Add(key, file);
+                            }
+                        }
                     }
                 }
-                catch { }
+                //catch { }
             }
-            
-            var assemblies = files
-                .Select(Assembly.LoadFile)
+
+            var assemblies = files.Values
+                .Select(assembly =>
+                {
+                    try
+                    {
+                        return Assembly.LoadFile(assembly);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Default.Log(ex);
+                        return null;
+                    }
+                })
+                .Where(assembly => assembly != null)
                 .ToList();
 
             var configuration = new ContainerConfiguration()
@@ -69,15 +84,19 @@ namespace AMKDownloadManager.Defaults
         /// <summary>
         /// Calls <see cref="IComponent.Initialize"/> on all loaded components.
         /// </summary>
-        /// <param name="appContext"></param>
-        public void InitializeAll(IAppContext appContext)
+        /// <param name="applicationContext"></param>
+        public void InitializeAll(IApplicationContext applicationContext)
         {
             if (Components != null)
             {
                 foreach (var com in Components)
                 {
-                    Logger.Default.Log(com.Description);
-                    com.Initialize(appContext);
+                    com.Initialize(applicationContext);
+                }
+
+                foreach (var com in Components)
+                {
+                    com.AfterInitialize(applicationContext);
                 }
             }
         }

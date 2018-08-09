@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netstandard2.0</TargetFrameworks>
     <LangVersion>7.2</LangVersion>
+    <AssemblyName>AMKDownloadManager.DebugMode.plugin</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>../../../.output/Plugins/Debug/</OutputPath>

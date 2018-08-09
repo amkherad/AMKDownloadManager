@@ -4,12 +4,11 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Core" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180801" />
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Core" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.18.809.68" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.1" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
@@ -18,6 +17,7 @@
     <ProjectReference Include="..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj" />
     <ProjectReference Include="..\AMKDownloadManager.Defaults\AMKDownloadManager.Defaults.csproj" />
     <ProjectReference Include="..\AMKDownloadManager.Net\AMKDownloadManager.Net.csproj" />
+    <ProjectReference Include="..\Plugins\Core\AMKDownloadManager.ConfigProvider.Json\AMKDownloadManager.ConfigProvider.Json.csproj" />
     <ProjectReference Include="..\Plugins\Protocols\AMKDownloadManager.HttpDownloader\AMKDownloadManager.HttpDownloader.csproj" />
   </ItemGroup>
 </Project>

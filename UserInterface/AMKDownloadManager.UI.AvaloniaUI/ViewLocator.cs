@@ -2,13 +2,13 @@
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
 using System;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.UI.Business.ViewModels;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
 using AMKsGear.Core.Patterns.AppModel;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using AppContext = AMKDownloadManager.Core.AppContext;
 
 namespace AMKDownloadManager.UI.AvaloniaUI
 {
@@ -20,7 +20,7 @@ namespace AMKDownloadManager.UI.AvaloniaUI
 
         public ViewLocator()
         {
-            TypeResolver = AppContext.Instance.GetTypeResolver();
+            TypeResolver = ApplicationContext.Instance.GetTypeResolver();
         }
         public ViewLocator(ITypeResolver typeResolver)
         {

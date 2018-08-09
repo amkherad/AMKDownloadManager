@@ -4,23 +4,23 @@ namespace AMKDownloadManager.Core.Api.Cli
 {
     public class CommandParser
     {
-        public IAppContext AppContext { get; }
+        public IApplicationContext ApplicationContext { get; }
         
-        public CommandParser(IAppContext appContext)
+        public CommandParser(IApplicationContext applicationContext)
         {
-            AppContext = appContext;
+            ApplicationContext = applicationContext;
         }
 
         public string Execute(ICliInterface @interface)
         {
-            var allCliEngines = AppContext
+            var allCliEngines = ApplicationContext
                 .GetFeatures<ICliEngine>()
                 .OrderByDescending(x => x.Order);
 
             foreach (var cli in allCliEngines)
             {
                 var result = cli.Execute(
-                    AppContext,
+                    ApplicationContext,
                     this,
                     @interface,
                     "",

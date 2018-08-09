@@ -2,7 +2,7 @@
   <PropertyGroup>
     <AssemblyName>AMKDownloadManager.Core</AssemblyName>
     <RootNamespace>AMKDownloadManager.Core</RootNamespace>
-    <TargetFrameworks>netcoreapp2.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -13,11 +13,13 @@
     <OutputPath>../.output/Release/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Architecture" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Core" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Core.Data" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Core.TraceTools" Version="1.1.180801" />
-    <PackageReference Include="AMKsGear.Web.Core" Version="1.1.180801" />
+    <Folder Include="Api\Messaging" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AMKsGear.AppLayer.Core" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Architecture" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Core" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Core.Data" Version="1.18.809.68" />
+    <PackageReference Include="AMKsGear.Web.Core" Version="1.18.809.68" />
   </ItemGroup>
 </Project>

@@ -36,9 +36,9 @@ namespace AMKDownloadManager.DebugMode.AddIn
 
         #region IComponent implementation
 
-        public void Install(IAppContext app)
+        public void Install(IApplicationContext application)
         {
-            var config = app.GetFeature<IConfigProvider>();
+            var config = application.GetFeature<IConfigProvider>();
 
 //            config.InstallInt(this,
 //                ComponentGuid,
@@ -52,9 +52,9 @@ namespace AMKDownloadManager.DebugMode.AddIn
 //            );
         }
 
-        public void Uninstall(IAppContext app)
+        public void Uninstall(IApplicationContext application)
         {
-            var config = app.GetFeature<IConfigProvider>();
+            var config = application.GetFeature<IConfigProvider>();
 
 //            config.UnInstallInt(this,
 //                ComponentGuid,
@@ -66,19 +66,24 @@ namespace AMKDownloadManager.DebugMode.AddIn
 //            );
         }
 
-        public void Initialize(IAppContext app)
+        public void Initialize(IApplicationContext application)
         {
             if (_isLoaded)
             {
                 return;
             }
 
-            app.AddFeature<ICliEngine>(new DebugCliAddIn());
+            application.AddFeature<ICliEngine>(new DebugCliAddIn());
         }
 
-        public void Unload(IAppContext app)
+        public void AfterInitialize(IApplicationContext application)
         {
-            app.RemoveFeature(new DebugCliAddIn());
+            
+        }
+
+        public void Unload(IApplicationContext application)
+        {
+            application.RemoveFeature(new DebugCliAddIn());
         }
         
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Defaults;
 using AMKDownloadManager.Defaults.Threading;
@@ -26,7 +27,15 @@ namespace AMKDownloadManager.MSTest
 
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
             AppHelpers.InjectTopLayerFeatures(pool);
-            //AppHelpers.LoadComponents(app);
+            AppHelpers.LoadComponents(pool,
+                Path.Combine(ApplicationContext.ApplicationProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                Path.Combine(ApplicationContext.ApplicationSharedProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                new []
+                {
+                    Path.Combine(ApplicationContext.ApplicationDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                    ApplicationContext.ApplicationPluginRepository
+                }
+            );
             var component = new HttpDownloaderComponent();
             component.Initialize(pool);
             AppHelpers.ConfigureFeatures(pool);

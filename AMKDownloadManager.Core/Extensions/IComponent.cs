@@ -33,25 +33,31 @@ namespace AMKDownloadManager.Core.Extensions
         /// <summary>
         /// Installs the component for the first time.
         /// </summary>
-        /// <param name="app">App.</param>
-        void Install(IAppContext app);
+        /// <param name="application">App.</param>
+        void Install(IApplicationContext application);
 
         /// <summary>
         /// Uninstalls the component.
         /// </summary>
-        /// <param name="app">App.</param>
-        void Uninstall(IAppContext app);
+        /// <param name="application">App.</param>
+        void Uninstall(IApplicationContext application);
 
         /// <summary>
         /// Initialize the component with specified application service pool.
         /// </summary>
-        /// <param name="app">App.</param>
-        void Initialize(IAppContext app);
+        /// <param name="application">App.</param>
+        void Initialize(IApplicationContext application);
+
+		/// <summary>
+		/// Gets called after all components have been initialized.
+		/// </summary>
+		/// <param name="application"></param>
+		void AfterInitialize(IApplicationContext application);
 
         /// <summary>
         /// Unload the the component with specified application service pool.
         /// </summary>
-        /// <param name="app">App.</param>
-        void Unload(IAppContext app);
+        /// <param name="application">App.</param>
+        void Unload(IApplicationContext application);
 	}
 }

@@ -1,34 +1,96 @@
 ﻿using System;
+using System.Composition;
+using System.Reflection;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Binders;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Extensions;
 
 namespace AMKDownloadManager.ConfigProvider.Json.AddIn
 {
+    [Export(typeof(IComponent))]
     public class JsonConfigProviderComponent : IComponent
     {
-        public string Name => "JsonConfigProvider";
-        public string Description { get; }
-        public string Author { get; }
-        public Version Version { get; }
+        public const string ComponentGuid = "fa553c67-0faa-4544-8347-53758fd5993f";
+
+        private static JsonConfigProvider JsonConfigProviderInstance;
         
-        public void Install(IAppContext app)
+        private static bool _isLoaded = false;
+        
+        public string Name => "JsonConfigProvider";
+
+        public string Description => "Loads and saves json configuration files.";
+
+        public string Author => "Ali Mousavi Kherad";
+
+        public Version Version
         {
-            throw new NotImplementedException();
+            get
+            {
+                var assembly = typeof(JsonConfigProviderComponent).GetTypeInfo().Assembly;
+                var assemblyName = new AssemblyName(assembly.FullName);
+                return assemblyName.Version;
+            }
         }
 
-        public void Uninstall(IAppContext app)
+
+        #region IComponent implementation
+
+        public void Install(IApplicationContext application)
         {
-            throw new NotImplementedException();
+            var config = application.GetFeature<IConfigProvider>();
+
+            config.InstallInt(this,
+                ComponentGuid,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnections,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousConnectionsDefaultValue
+            );
+            config.InstallInt(this,
+                ComponentGuid,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobs,
+                KnownConfigs.DownloadManager.Download.MaxSimultaneousJobsDefaultValue
+            );
         }
 
-        public void Initialize(IAppContext app)
+        public void Uninstall(IApplicationContext application)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void Unload(IAppContext app)
+        public void Initialize(IApplicationContext application)
         {
-            throw new NotImplementedException();
+            if (_isLoaded)
+            {
+                return;
+            }
+
+            _isLoaded = true;
+            
+            var jsonConfigProvider = new JsonConfigProvider(application, new []
+            {
+                ApplicationContext.ApplicationConfigurationFilePath,
+                ApplicationContext.ApplicationSharedConfigurationFilePath,
+            });
+
+            JsonConfigProviderInstance = jsonConfigProvider;
+            
+            jsonConfigProvider.Load();
+            
+            application.AddFeature<IConfigProvider>(jsonConfigProvider);
         }
+
+        public void AfterInitialize(IApplicationContext application)
+        {
+            
+        }
+
+        public void Unload(IApplicationContext application)
+        {
+            application.RemoveFeature<JsonConfigProvider>();
+        }
+
+
+        #endregion
     }
 }

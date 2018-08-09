@@ -37,9 +37,9 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
 
         #region IComponent implementation
 
-        public void Install(IAppContext app)
+        public void Install(IApplicationContext application)
         {
-            var config = app.GetFeature<IConfigProvider>();
+            var config = application.GetFeature<IConfigProvider>();
 
             config.InstallInt(this,
                 ComponentGuid,
@@ -53,24 +53,29 @@ namespace AMKDownloadManager.HttpDownloader.AddIn
             );
         }
 
-        public void Uninstall(IAppContext app)
+        public void Uninstall(IApplicationContext application)
         {
             
         }
 
-        public void Initialize(IAppContext app)
+        public void Initialize(IApplicationContext application)
         {
             if (_isLoaded)
             {
                 return;
             }
             
-            app.AddFeature<IProtocolProvider>(new HttpProtocolProvider());
+            application.AddFeature<IProtocolProvider>(new HttpProtocolProvider());
         }
 
-        public void Unload(IAppContext app)
+        public void AfterInitialize(IApplicationContext application)
         {
-            app.RemoveFeature(new HttpProtocolProvider());
+            
+        }
+
+        public void Unload(IApplicationContext application)
+        {
+            application.RemoveFeature(new HttpProtocolProvider());
         }
 
 

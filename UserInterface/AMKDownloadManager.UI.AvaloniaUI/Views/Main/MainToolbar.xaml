@@ -1,6 +1,6 @@
-<Menu xmlns="https://github.com/avaloniaui"
-      DataContext="{Binding MainMenuItems}">
+<UserControl xmlns="https://github.com/avaloniaui"
+      >
       
       
       
-</Menu>
+</UserControl>

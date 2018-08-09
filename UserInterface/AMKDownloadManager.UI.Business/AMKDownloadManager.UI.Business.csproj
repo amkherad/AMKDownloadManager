@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+        <LangVersion>7.2</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>../../.output/Debug/netcoreapp2.1/</OutputPath>
+      <OutputPath>../../.output/Debug/</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <OutputPath>../../.output/Release/netcoreapp2.1/</OutputPath>
+      <OutputPath>../../.output/Release/</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>

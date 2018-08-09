@@ -51,8 +51,8 @@ namespace AMKDownloadManager.Core.Api
             public const string UseTempLocation = "FileSystem.UseTempLocation";
             public const bool UseTempLocationDefaultValue = false;
                 
-            public const string DuplicityResolvationStart = "FileSystem.DuplicityResolvationStart";
-            public const int DuplicityResolvationStartDefaultValue = 2;
+            public const string DuplicityResolutionStart = "FileSystem.DuplicityResolutionStart";
+            public const int DuplicityResolutionStartDefaultValue = 2;
         }
     }
 }

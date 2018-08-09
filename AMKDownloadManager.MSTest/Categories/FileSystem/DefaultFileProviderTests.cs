@@ -1,4 +1,6 @@
-﻿using AMKDownloadManager.Defaults.FileSystem;
+﻿using AMKDownloadManager.Core;
+using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Defaults.FileSystem;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AMKDownloadManager.MSTest.Categories.FileSystem
@@ -9,7 +11,7 @@ namespace AMKDownloadManager.MSTest.Categories.FileSystem
         [TestMethod]
         public void TryReserveFileNameTest()
         {
-            var fileProvider = new DefaultFileProvider(2);
+            var fileProvider = new DefaultFileProvider(ApplicationContext.Instance as IApplicationContext);
 
             Assert.AreEqual(
                 "/etc/host_2",

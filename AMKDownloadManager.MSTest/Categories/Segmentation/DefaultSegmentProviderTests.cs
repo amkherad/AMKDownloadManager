@@ -16,7 +16,7 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
             IEnumerable<Segment> expectedSegments,
             bool finished = true)
         {
-            var pool = AppContext.Instance as IAppContext;
+            var pool = ApplicationContext.Instance as IApplicationContext;
             var divider = pool.GetFeature<ISegmentDivider>();
 
             foreach (var seg in expectedSegments)
@@ -39,7 +39,7 @@ namespace AMKDownloadManager.MSTest.Categories.Segmentation
         
         private void _divideAndShow(SegmentationContext context)
         {
-            var pool = AppContext.Instance as IAppContext;
+            var pool = ApplicationContext.Instance as IApplicationContext;
             var divider = pool.GetFeature<ISegmentDivider>();
 
             PartialBlockDescriptor cd = divider.GetPart(pool, null, context);

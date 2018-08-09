@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AMKDownloadManager.MSTest
@@ -8,6 +10,7 @@ namespace AMKDownloadManager.MSTest
         [TestMethod]
         public void TestMethod1()
         {
+            Console.Write(RuntimeInformation.FrameworkDescription);
         }
     }
 }

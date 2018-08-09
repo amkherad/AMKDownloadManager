@@ -6,13 +6,13 @@ namespace AMKDownloadManager.Core.Api.Transport
     public interface IRequestTransport : IFeature
     {
         IResponse SendRequest(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             IRequest request,
             bool unpackStream);
         
         Task<IResponse> SendRequestAsync(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             IRequest request,
             bool unpackStream);

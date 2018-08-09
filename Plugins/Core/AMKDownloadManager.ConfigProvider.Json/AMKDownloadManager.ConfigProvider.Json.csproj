@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.1</TargetFramework>
         <LangVersion>7.2</LangVersion>
+        <AssemblyName>AMKDownloadManager.ConfigProvider.Json.plugin</AssemblyName>
+        <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -19,6 +20,7 @@
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+      <PackageReference Include="System.Composition" Version="1.2.0" />
     </ItemGroup>
 
 </Project>

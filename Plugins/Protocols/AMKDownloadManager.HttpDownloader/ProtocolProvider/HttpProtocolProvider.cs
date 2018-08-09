@@ -12,6 +12,7 @@ using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.Core.Api.Types;
 using AMKDownloadManager.HttpDownloader.DownloadManagement;
 using AMKsGear.Architecture.Annotations;
+using AMKsGear.Architecture.Automation.IoC;
 
 namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 {
@@ -31,7 +32,7 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 
         #region IProtocolProvider implementation
 
-        public bool CanHandle(IAppContext appContext, DownloadItem downloadItem)
+        public bool CanHandle(IApplicationContext applicationContext, DownloadItem downloadItem)
         {
             if (downloadItem == null)
                 throw new ArgumentNullException(nameof(downloadItem));
@@ -52,14 +53,14 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
         }
 
         public IRequest CreateRequest(
-            [NotNull] IAppContext appContext,
+            [NotNull] IApplicationContext applicationContext,
             [NotNull] DownloadItem downloadItem,
             [CanBeNull] SegmentationContext segmentationContext,
             [CanBeNull] Segment segment,
             [CanBeNull] RequestParameters parameters)
         {
             var request = HttpRequest.FromDownloadItem(
-                appContext,
+                applicationContext,
                 downloadItem);
 
             var isRangedRequest = false;
@@ -107,8 +108,8 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
                 }
             }
 
-            appContext.SignalFeatures<IProtocolProviderListener>(x => x.RequestCreated(
-                appContext,
+            applicationContext.SignalFeatures<IProtocolProviderListener>(x => x.RequestCreated(
+                applicationContext,
                 downloadItem,
                 request,
                 this
@@ -120,13 +121,13 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
         }
 
         public IJob CreateJob(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             IFileProvider fileProvider,
             JobParameters jobParameters)
         {
             var fileManager = fileProvider.CreateFile(
-                appContext,
+                applicationContext,
                 downloadItem.LocalFileName ??
                 (downloadItem.Uri == null ? null : Path.GetFileName(downloadItem.Uri.AbsolutePath)),
                 null,
@@ -135,15 +136,15 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
             );
             
             var httpDownload = new HttpDownloadJob(
-                appContext,
+                applicationContext,
                 fileManager,
                 this,
                 downloadItem,
                 jobParameters
             );
 
-            appContext.SignalFeatures<IProtocolProviderListener>(x => x.JobCreated(
-                appContext,
+            applicationContext.SignalFeatures<IProtocolProviderListener>(x => x.JobCreated(
+                applicationContext,
                 downloadItem,
                 httpDownload,
                 jobParameters,
@@ -155,8 +156,14 @@ namespace AMKDownloadManager.HttpDownloader.ProtocolProvider
 
         public int Order => 0;
 
-        public void LoadConfig(IAppContext appContext, IConfigProvider configProvider, HashSet<string> changes)
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
         {
+            
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
+        {
+            
         }
 
         #endregion

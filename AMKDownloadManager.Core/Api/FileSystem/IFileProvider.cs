@@ -5,14 +5,14 @@
 		/// <summary>
 		/// Creates a file to save download resource.
 		/// </summary>
-		/// <param name="appContext">ApplicationContext</param>
+		/// <param name="applicationContext">ApplicationContext</param>
 		/// <param name="name">Optional file name</param>
 		/// <param name="mimeType">Optional file mime type</param>
 		/// <param name="size">Download resource size, this may change</param>
 		/// <param name="parts">Number of probable parts, (value may change after creation)</param>
 		/// <returns></returns>
 		IFileManager CreateFile(
-			IAppContext appContext,
+			IApplicationContext applicationContext,
 			string name,
 			string mimeType,
 			long? size,
@@ -22,14 +22,14 @@
 		/// <summary>
 		/// Resumes a file to save download resource.
 		/// </summary>
-		/// <param name="appContext">ApplicationContext</param>
+		/// <param name="applicationContext">ApplicationContext</param>
 		/// <param name="filePath">Target file path</param>
 		/// <param name="mimeType">Optional file mime type</param>
 		/// <param name="size">Download resource size, this may change</param>
 		/// <param name="parts">Number of probable chunks, (value may change after creation)</param>
 		/// <returns></returns>
 		IFileManager ResumeFile(
-			IAppContext appContext,
+			IApplicationContext applicationContext,
 			string filePath,
 			string mimeType,
 			long? size,

@@ -14,7 +14,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 {
     public class HttpDownloadJobPart : IJobPart
     {
-        public IAppContext AppContext { get; }
+        public IApplicationContext ApplicationContext { get; }
 
         public IJob Job { get; }
         public IHttpTransport Transport { get; protected set; }
@@ -34,7 +34,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         private long? _limit;
 
         public HttpDownloadJobPart(
-            IAppContext appContext,
+            IApplicationContext applicationContext,
             DownloadItem downloadItem,
             HttpProtocolProvider protocolProvider,
             IJob job,
@@ -44,7 +44,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             long defaultBufferSize
         )
         {
-            AppContext = appContext;
+            ApplicationContext = applicationContext;
 
             FileManager = fileManager;
             ProtocolProvider = protocolProvider;
@@ -55,7 +55,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
             _segmentation = segmentationContext;
             _segment = segment;
 
-            //_networkMonitor = appContext.GetFeature<INetworkMonitor>();
+            //_networkMonitor = applicationContext.GetFeature<INetworkMonitor>();
 
             _defaultBufferSize = defaultBufferSize;
         }
@@ -66,20 +66,20 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
         {
             if (Transport == null)
             {
-                Transport = AppContext.GetFeature<IHttpTransport>();
+                Transport = ApplicationContext.GetFeature<IHttpTransport>();
                 //#error rename all IHttpRequestTransport to IHttpTransport
             }
 
             var parameters = new RequestParameters();
 
             using (var request = ProtocolProvider.CreateRequest(
-                AppContext,
+                ApplicationContext,
                 DownloadItem,
                 _segmentation,
                 _segment,
                 parameters
             ))
-            using (var response = Transport.SendRequest(AppContext, DownloadItem, request, false))
+            using (var response = Transport.SendRequest(ApplicationContext, DownloadItem, request, false))
             {
                 //#error error handling for prev. line
 
@@ -111,7 +111,7 @@ namespace AMKDownloadManager.HttpDownloader.DownloadManagement
 
                             var stream = response.ResponseStream;
 
-                            var fileSaver = AppContext.GetFeature<IStreamSaver>();
+                            var fileSaver = ApplicationContext.GetFeature<IStreamSaver>();
 
 //                        FileManager.SaveStream(
 //                            response.ResponseStream,
