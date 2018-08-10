@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,7 +19,13 @@ namespace AMKDownloadManager.MSTest
         [TestMethod]
         public void Exec()
         {
+            var assembly = typeof(System.Runtime.GCSettings).Assembly;
+            var assemblyPath = assembly.CodeBase.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            int netCoreAppIndex = Array.IndexOf(assemblyPath, "Microsoft.NETCore.App");
+            if (netCoreAppIndex > 0 && netCoreAppIndex < assemblyPath.Length - 2)
+                Console.WriteLine(assemblyPath[netCoreAppIndex + 1]);
             
+            Console.WriteLine();
         }
         
         [TestMethod]
