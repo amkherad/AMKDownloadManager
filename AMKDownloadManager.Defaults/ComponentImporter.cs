@@ -53,7 +53,8 @@ namespace AMKDownloadManager.Defaults
                     case "core":
                     {
                         validLeftMatches = new[] {"netcoreapp*.", "netstandard*.", arch};
-                        invalidLeftMatches = new[] {"net#*"};
+                        invalidLeftMatches = new[] {"net#*", "x64", "x86", "arm", "arm64"}
+                            .Where(x => x != arch);
                         break;
                     }
                     case "framework":

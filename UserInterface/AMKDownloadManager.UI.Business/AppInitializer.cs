@@ -25,12 +25,12 @@ namespace AMKDownloadManager.UI.Business
             Logger.RegisterDefaultLogChannel(logger);
             
             AppHelpers.LoadComponents(appContext,
-                Path.Combine(ApplicationContext.ApplicationProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
-                Path.Combine(ApplicationContext.ApplicationSharedProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                Path.Combine(appContext.ApplicationProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                Path.Combine(appContext.ApplicationSharedProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
                 new []
                 {
-                    Path.Combine(ApplicationContext.ApplicationDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
-                    ApplicationContext.ApplicationPluginRepository
+                    Path.Combine(appContext.ApplicationDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                    appContext.ApplicationPluginRepository
                 }
                 );
             

@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Composition;
 using System.Reflection;
-using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
-using AMKDownloadManager.Core.Api.Binders;
 using AMKDownloadManager.Core.Api.Configuration;
+using AMKDownloadManager.Core.Api.Messaging;
 using AMKDownloadManager.Core.Extensions;
+using AMKDownloadManager.Platform.Messaging.DBus.Messaging;
 
-namespace AMKDownloadManager.ConfigProvider.Json.AddIn
+namespace AMKDownloadManager.Platform.Messaging.DBus.AddIn
 {
     [Export(typeof(IComponent))]
-    public class JsonConfigProviderComponent : IComponent
+    public class DBusComponent : IComponent
     {
-        public const string ComponentGuid = "fa553c67-0faa-4544-8347-53758fd5993f";
+        public const string ComponentGuid = "fa443c67-0faa-4555-8347-55068ae5993f";
 
-        private static JsonConfigProvider JsonConfigProviderInstance;
-        
         private static bool _isLoaded = false;
         
-        public string Name => "JsonConfigProvider";
+        public string Name => "HttpDownloader";
 
-        public string Description => "Loads and saves json configuration files.";
+        public string Description => "Download files over http(s)";
 
         public string Author => "Ali Mousavi Kherad";
 
@@ -28,11 +26,12 @@ namespace AMKDownloadManager.ConfigProvider.Json.AddIn
         {
             get
             {
-                var assembly = typeof(JsonConfigProviderComponent).GetTypeInfo().Assembly;
+                var assembly = typeof(DBusComponent).GetTypeInfo().Assembly;
                 var assemblyName = new AssemblyName(assembly.FullName);
                 return assemblyName.Version;
             }
         }
+
 
 
         #region IComponent implementation
@@ -64,20 +63,8 @@ namespace AMKDownloadManager.ConfigProvider.Json.AddIn
             {
                 return;
             }
-
-            _isLoaded = true;
             
-            var jsonConfigProvider = new JsonConfigProvider(application, new []
-            {
-                application.ApplicationConfigurationFilePath,
-                application.ApplicationSharedConfigurationFilePath,
-            });
-
-            JsonConfigProviderInstance = jsonConfigProvider;
-            
-            jsonConfigProvider.Load();
-            
-            application.AddFeature<IConfigProvider>(jsonConfigProvider);
+            application.AddFeature<IMessagingHost>(new DBusMessagingHost());
         }
 
         public void AfterInitialize(IApplicationContext application)
@@ -87,7 +74,7 @@ namespace AMKDownloadManager.ConfigProvider.Json.AddIn
 
         public void Unload(IApplicationContext application)
         {
-            application.RemoveFeature<JsonConfigProvider>();
+            application.RemoveFeature<DBusMessagingHost>();
         }
 
 

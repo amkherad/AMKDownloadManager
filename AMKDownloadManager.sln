@@ -52,6 +52,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Luncher", "Luncher", "{ACFD
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AMKDownloadManager.UI.Luncher", "UserInterface\AMKDownloadManager.UI.Luncher\AMKDownloadManager.UI.Luncher.shproj", "{FE5782E9-E64A-417E-8234-127D5A67C2A5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlatformSpecific", "PlatformSpecific", "{D393FE3D-A2AC-48D2-9C26-EDDA06801D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.Platform.Messaging.DBus", "Plugins\PlatformSpecific\AMKDownloadManager.Platform.Messaging.DBus\AMKDownloadManager.Platform.Messaging.DBus.csproj", "{21D80A82-CE0F-48D4-9524-EE2D4DF1BCE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +110,10 @@ Global
 		{62AEE5E7-5865-4B44-B23C-3F84E12FEA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62AEE5E7-5865-4B44-B23C-3F84E12FEA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62AEE5E7-5865-4B44-B23C-3F84E12FEA4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D80A82-CE0F-48D4-9524-EE2D4DF1BCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D80A82-CE0F-48D4-9524-EE2D4DF1BCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D80A82-CE0F-48D4-9524-EE2D4DF1BCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D80A82-CE0F-48D4-9524-EE2D4DF1BCE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6F9FF9F1-B729-4FEA-9AFF-0FE46CD8B81D} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
@@ -125,6 +133,8 @@ Global
 		{62AEE5E7-5865-4B44-B23C-3F84E12FEA4D} = {DEFB1B36-85CE-49BA-B9CF-120F596984DE}
 		{ACFD535F-797B-4F96-BD19-FECF53C16080} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
 		{FE5782E9-E64A-417E-8234-127D5A67C2A5} = {ACFD535F-797B-4F96-BD19-FECF53C16080}
+		{D393FE3D-A2AC-48D2-9C26-EDDA06801D43} = {97F2EF59-0E20-49FB-805D-C545FB633E76}
+		{21D80A82-CE0F-48D4-9524-EE2D4DF1BCE2} = {D393FE3D-A2AC-48D2-9C26-EDDA06801D43}
 	EndGlobalSection
 	GlobalSection(AvalonStudioProperties) = preSolution
 		StartupItem = {506EAB82-00C3-4C44-B068-645D3034DD78}

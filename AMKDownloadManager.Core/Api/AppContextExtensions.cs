@@ -120,7 +120,7 @@ namespace AMKDownloadManager.Core.Api
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RemoveFeature<T>(this IApplicationContext application) where T : IFeature
         {
-            application.RemoveValues<T>(application.GetFeatures<T>());
+            application.RemoveValues<T>(application.GetAllValues().OfType<T>());
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

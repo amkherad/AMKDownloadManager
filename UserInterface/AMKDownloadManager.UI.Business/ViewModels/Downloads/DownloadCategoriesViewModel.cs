@@ -8,7 +8,7 @@ namespace AMKDownloadManager.UI.Business.ViewModels.Downloads
     {
         public ObservableCollection<DownloadCategoryItem> Categories { get; }
 
-        public DownloadCategoriesViewModel(IDownloadStateService )
+        public DownloadCategoriesViewModel(IDownloadStateService stateService)
         {
             
         }

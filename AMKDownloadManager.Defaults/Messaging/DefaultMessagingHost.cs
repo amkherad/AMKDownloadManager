@@ -32,9 +32,12 @@ namespace AMKDownloadManager.Defaults.Messaging
         public int Order => 0;
         public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
         {
-            appContext.ScheduleBackgroundTask(
-                nameof(DefaultMessagingHost) + '.' + nameof(IPCController),
-                IPCController.Listen);
+            if (!IPCController.IsHubJoinCalled)
+            {
+                appContext.ScheduleBackgroundTask(
+                    nameof(DefaultMessagingHost) + '.' + nameof(IPCController),
+                    IPCController.JoinHub);
+            }
         }
 
         public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)

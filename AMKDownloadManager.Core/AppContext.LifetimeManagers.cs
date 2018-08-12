@@ -23,7 +23,12 @@ namespace AMKDownloadManager.Core
             {
                 if (_threadFactory != null) return _threadFactory;
 
-                _threadFactory = this.GetFeature<IThreadFactory>();
+                var threadFactory = _threadFactory = this.GetFeature<IThreadFactory>();
+                
+                if (threadFactory == null)
+                    throw new InvalidOperationException();
+
+                return threadFactory;
             }
         }
 

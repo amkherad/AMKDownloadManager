@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO.Pipes;
+using AMKDownloadManager.Core.Api.Threading;
 using AMKsGear.Core.Utils;
 
 namespace AMKDownloadManager.Defaults.Messaging
@@ -9,10 +10,16 @@ namespace AMKDownloadManager.Defaults.Messaging
         protected class IPCController
         {
             private const string InterProcessPipeName = "AMKDownloadManager.DefaultMessagingHost";
+            private const string InterProcessPipeLockName = "AMKDownloadManagerDefaultMessagingHostPipeLock";
+            
+            public static bool IsHubJoinCalled { get; private set; }
             
             private static IList<DefaultMessagingHost> _hosts = new List<DefaultMessagingHost>(1);
 
-            private static NamedPipeClientStream ReaderPipe;
+            private static IInterProcessLockService LockService;
+            
+            private static NamedPipeServerStream ServerPipe;
+            private static NamedPipeClientStream ClientPipe;
 
             public static void AddHost(DefaultMessagingHost host)
             {
@@ -21,9 +28,20 @@ namespace AMKDownloadManager.Defaults.Messaging
                     _hosts.Add(host);
                 }
             }
-            
-            public static void Listen()
+
+            public static void Initialize(IInterProcessLockService lockService)
             {
+                LockService = lockService;
+            }
+
+            public static void SignalExit()
+            {
+                
+            }
+            
+            public static void JoinHub()
+            {
+                IsHubJoinCalled = true;
                 var loop = new LoopCountLimiter(5);
                 for (;;)
                 {

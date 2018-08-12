@@ -28,12 +28,12 @@ namespace AMKDownloadManager.MSTest
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
             AppHelpers.InjectTopLayerFeatures(pool);
             AppHelpers.LoadComponents(pool,
-                Path.Combine(ApplicationContext.ApplicationProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
-                Path.Combine(ApplicationContext.ApplicationSharedProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                Path.Combine(pool.ApplicationProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                Path.Combine(pool.ApplicationSharedProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
                 new []
                 {
-                    Path.Combine(ApplicationContext.ApplicationDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
-                    ApplicationContext.ApplicationPluginRepository
+                    Path.Combine(pool.ApplicationDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),
+                    pool.ApplicationPluginRepository
                 }
             );
             var component = new HttpDownloaderComponent();
