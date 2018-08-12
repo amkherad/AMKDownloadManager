@@ -100,33 +100,33 @@ namespace AMKDownloadManager.Core.Api
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEnumerable<T> AddFeature<T>(this IApplicationContext application, T feature) where T : IFeature
+        public static void AddFeature<T>(this IApplicationContext application, T feature) where T : IFeature
         {
-            return application.AddValues<T>(new[] {feature});
+            application.AddValues<T>(new[] {feature});
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEnumerable<T> AddFeatures<T>(this IApplicationContext application, IEnumerable<T> features) where T : IFeature
+        public static void AddFeatures<T>(this IApplicationContext application, IEnumerable<T> features) where T : IFeature
         {
-            return application.AddValues<T>(features);
+            application.AddValues<T>(features);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEnumerable<T> RemoveFeature<T>(this IApplicationContext application, T feature) where T : IFeature
+        public static void RemoveFeature<T>(this IApplicationContext application, T feature) where T : IFeature
         {
-            return application.RemoveValues<T>(new[] {feature});
+            application.RemoveValues<T>(new[] {feature});
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEnumerable<T> RemoveFeature<T>(this IApplicationContext application) where T : IFeature
+        public static void RemoveFeature<T>(this IApplicationContext application) where T : IFeature
         {
-            return application.RemoveValues<T>(application.GetFeatures<T>());
+            application.RemoveValues<T>(application.GetFeatures<T>());
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEnumerable<T> RemoveFeatures<T>(this IApplicationContext application, IEnumerable<T> features) where T : IFeature
+        public static void RemoveFeatures<T>(this IApplicationContext application, IEnumerable<T> features) where T : IFeature
         {
-            return application.RemoveValues<T>(features);
+            application.RemoveValues<T>(features);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace AMKDownloadManager.UI.Xamarin.GtkSharp
 
             try
             {
-                if (PlatformHelper.GetGTKPlatform() == GTKPlatform.Windows)
+               //if (PlatformHelper.GetGTKPlatform() == GTKPlatform.Windows)
                     GtkThemes.LoadCustomTheme("Themes/gtkrc-dark");
             }
             catch (Exception ex)

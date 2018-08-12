@@ -1,6 +1,6 @@
 ﻿namespace AMKDownloadManager.UI.Business.ViewModels
 {
-    public class ViewModelBase : AMKsGear.Core.Patterns.Mvvm.ViewModelBase
+    public abstract class ViewModelBase : AMKsGear.Core.Patterns.Mvvm.ViewModelBase
     {
         
     }

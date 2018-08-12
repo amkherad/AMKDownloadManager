@@ -48,6 +48,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.UI.Xamar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMKDownloadManager.UI.Xamarin.GtkSharp", "UserInterface\AMKDownloadManager.UI.Xamarin\AMKDownloadManager.UI.Xamarin.GtkSharp\AMKDownloadManager.UI.Xamarin.GtkSharp.csproj", "{62AEE5E7-5865-4B44-B23C-3F84E12FEA4D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Luncher", "Luncher", "{ACFD535F-797B-4F96-BD19-FECF53C16080}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AMKDownloadManager.UI.Luncher", "UserInterface\AMKDownloadManager.UI.Luncher\AMKDownloadManager.UI.Luncher.shproj", "{FE5782E9-E64A-417E-8234-127D5A67C2A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +123,8 @@ Global
 		{506EAB82-00C3-4C44-B068-645D3034DD78} = {38518875-7B5C-4358-B181-150E359E0B82}
 		{DA4D4C98-70E6-42CE-A07B-4778F479DA27} = {DEFB1B36-85CE-49BA-B9CF-120F596984DE}
 		{62AEE5E7-5865-4B44-B23C-3F84E12FEA4D} = {DEFB1B36-85CE-49BA-B9CF-120F596984DE}
+		{ACFD535F-797B-4F96-BD19-FECF53C16080} = {F5AFD33D-C317-44EC-A3EE-7255D9D57D1C}
+		{FE5782E9-E64A-417E-8234-127D5A67C2A5} = {ACFD535F-797B-4F96-BD19-FECF53C16080}
 	EndGlobalSection
 	GlobalSection(AvalonStudioProperties) = preSolution
 		StartupItem = {506EAB82-00C3-4C44-B068-645D3034DD78}

@@ -17,6 +17,7 @@ namespace AMKDownloadManager.UI.Xamarin
                     throw new InvalidOperationException();
                 }
 
+                AppInitializer.BuildDependencies(appContext, typeResolver);
                 DependencyBuilder.BuildContainer(appContext, typeResolver);
 
                 var app = typeResolver.Resolve<App>();

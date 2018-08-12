@@ -20,15 +20,19 @@ namespace AMKDownloadManager.UI.Xamarin
             switch (Device.Idiom)
             {
                 case TargetIdiom.Unsupported:
+                    throw new NotSupportedException();
                     break;
                 case TargetIdiom.Phone:
+                    throw new NotSupportedException();
                     break;
                 case TargetIdiom.Tablet:
+                    throw new NotSupportedException();
                     break;
                 case TargetIdiom.Desktop:
                     BuildContainerDesktop(appContext, container);
                     break;
                 case TargetIdiom.TV:
+                    throw new NotSupportedException();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -40,14 +44,13 @@ namespace AMKDownloadManager.UI.Xamarin
             IApplicationContext appContext,
             ITypeResolverContainer container)
         {
-            container.RegisterSingleton<IApplicationContext>(appContext);
-            container.RegisterSingleton<ITypeResolver>(container);
+            container.RegisterType<Page, MainPage>(); //temporary to fix the ioc container. 
             
             //container.RegisterType<App>();
             //container.BindProperty<App, ViewLocator>(x => x.DataTemplates);
             
-            container.RegisterType<MainBody>(MainPageKey);
-            container.BindProperty<MainBody, MainWindowViewModel>(x => x.BindingContext);
+            container.RegisterType<Sidebar>(MainPageKey);
+            container.BindProperty<Sidebar, MainWindowViewModel>(x => x.BindingContext);
         }
     }
 }

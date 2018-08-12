@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.UI.Business.Models;
 using AMKDownloadManager.UI.Business.ViewModels.Main.Layout;
 using AMKDownloadManager.UI.Business.ViewModels.Main.MainMenu;
 
@@ -11,7 +12,7 @@ namespace AMKDownloadManager.UI.Business.ViewModels.Main
         public IApplicationContext AppContext { get; }
 
 
-        public IList<MenuItemViewModel> MainMenuItems { get; set; }
+        public IList<MenuItemModel> MainMenuItems { get; set; }
         public MainWindowLayoutSettings LayoutSettings { get; }
 
         

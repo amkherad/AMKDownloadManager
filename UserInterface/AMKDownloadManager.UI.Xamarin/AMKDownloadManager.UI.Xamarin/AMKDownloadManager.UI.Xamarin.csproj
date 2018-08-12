@@ -30,7 +30,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Page Include="Views\Main\Desktop\MainBody.xaml" />
+      <Page Include="Views\Main\Desktop\MainList.xaml" />
+      <Page Include="Views\Main\Desktop\MainPage.xaml" />
+      <Page Include="Views\Main\Desktop\Sidebar.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Assets\icon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

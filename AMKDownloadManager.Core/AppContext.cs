@@ -6,7 +6,7 @@ using AMKsGear.Core.Patterns.AppModel;
 
 namespace AMKDownloadManager.Core
 {
-    public class ApplicationContext : AppModelContext, IApplicationContext
+    public partial class ApplicationContext : AppModelContext, IApplicationContext
     {
         public const string ApplicationProfileDirectoryName = "amkdownloadmanager";
         public const string PluginRepositoryEnvironmentVariableName = "AMKDM_PLUGIN_REPOSITORY";

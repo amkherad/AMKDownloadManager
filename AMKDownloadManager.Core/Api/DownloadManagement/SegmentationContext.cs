@@ -180,7 +180,7 @@ namespace AMKDownloadManager.Core.Api.DownloadManagement
 
             foreach (var merge in mergePairs)
             {
-                FilledRanges.RemoveAll(merge);
+                FilledRanges.RemoveWhere(p => merge.Any(m => ReferenceEquals(p, m)));
                 FilledRanges.Add(new Segment
                 {
                     Min = merge.Min(i => i.Min),

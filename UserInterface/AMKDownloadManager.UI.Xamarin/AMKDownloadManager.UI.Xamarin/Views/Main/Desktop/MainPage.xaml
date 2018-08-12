@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MasterDetailPage
+    x:Class="AMKDownloadManager.UI.Xamarin.Views.Main.Desktop.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:desktop="clr-namespace:AMKDownloadManager.UI.Xamarin.Views.Main.Desktop;assembly=AMKDownloadManager.UI.Xamarin"
+    Title="AMKDownloadManager"
+    MasterBehavior="SplitOnLandscape"
+    >
+    
+    <MasterDetailPage.ToolbarItems>
+        <ToolbarItem Text="Test" Icon="Assets/icon.png" Priority="-1" Order="Primary" >Test</ToolbarItem>
+    </MasterDetailPage.ToolbarItems>
+
+    <MasterDetailPage.Master>
+        <desktop:Sidebar Title="Sidebar" />
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <desktop:MainList Title="MainList" />
+    </MasterDetailPage.Detail>
+
+</MasterDetailPage>
