@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
@@ -15,8 +16,29 @@ namespace AMKDownloadManager.Defaults.Threading
         {
             public string LockDirectoryPath { get; }
 
+            private bool _useVarLock = false;
+
             public FsLock(string path)
             {
+//                if (ApplicationContext.IsLinux)
+//                {
+//                    try
+//                    {
+//                        if (Directory.Exists("/var/lock"))
+//                        {
+//                            LockDirectoryPath = "/var/lock";
+//                        }
+//                    }
+//                    catch (IOException)
+//                    {
+//                        LockDirectoryPath = path;
+//                    }
+//                }
+//                else
+//                {
+//                    LockDirectoryPath = path;
+//                }
+
                 LockDirectoryPath = path;
             }
 
@@ -35,11 +57,13 @@ namespace AMKDownloadManager.Defaults.Threading
             private string _getFilePathEnsuredDirectory(string name)
             {
                 var dir = LockDirectoryPath;
+
+
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
-                
+
                 //ToLower is used to achieve same behavior on case-sensitive and case-insensitive file systems.
                 return Path.Combine(dir, $"_{name.ToLower()}.lock");
             }
@@ -52,6 +76,7 @@ namespace AMKDownloadManager.Defaults.Threading
                 {
                     var filePath = _getFilePathEnsuredDirectory(name);
                     var file = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
+                    file.Lock(0, 0);
                     lockHandle = file;
                     return true;
                 }
@@ -68,7 +93,8 @@ namespace AMKDownloadManager.Defaults.Threading
                 var result = false;
                 object state = null;
 
-                //try to acquire the lock until it's successful or timeout reached.
+                //busy wait to acquire the lock.
+                //tries to acquire the lock until it's successful or timeout reached.
                 SpinWait.SpinUntil(() => result = TryAcquireLock(name, out state), waitTimeout);
 
                 lockHandle = state;
@@ -78,7 +104,7 @@ namespace AMKDownloadManager.Defaults.Threading
             /// <inheritdoc />
             public object AcquireLock(string name)
             {
-                if (!TryAcquireLock(name, TimeSpan.MaxValue, out var lockHandle))
+                if (!TryAcquireLock(name, TimeSpan.FromMilliseconds(int.MaxValue), out var lockHandle))
                 {
                     throw new InvalidOperationException();
                 }
@@ -103,7 +129,8 @@ namespace AMKDownloadManager.Defaults.Threading
                 if (lockHandle == null) throw new ArgumentNullException(nameof(lockHandle));
                 var file = lockHandle as FileStream;
                 if (file == null) throw new ArgumentException(nameof(lockHandle));
-                
+
+                file.Unlock(0, 0);
                 file.Close();
                 file.Dispose();
 
@@ -124,7 +151,7 @@ namespace AMKDownloadManager.Defaults.Threading
                 var files = Directory.GetFiles(LockDirectoryPath);
 
                 //Close all abandoned files.
-                
+
                 foreach (var file in files)
                 {
                     try

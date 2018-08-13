@@ -1,4 +1,5 @@
 using System;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.UI.Business;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
@@ -8,7 +9,7 @@ namespace AMKDownloadManager.UI.Xamarin
     // ReSharper disable once InconsistentNaming
     public static class UIInitializer
     {
-        public static App CreateApp(string[] args)
+        public static App CreateApp(string[] args, out IPlatformInterface platformInterface)
         {
             if (AppInitializer.InitializeApplication(args, out var appContext))
             {
@@ -21,10 +22,12 @@ namespace AMKDownloadManager.UI.Xamarin
                 DependencyBuilder.BuildContainer(appContext, typeResolver);
 
                 var app = typeResolver.Resolve<App>();
+                platformInterface = appContext;
                 
                 return app;
             }
 
+            platformInterface = null;
             return null;
         }
     }

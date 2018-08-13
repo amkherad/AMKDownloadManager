@@ -6,6 +6,7 @@ using System.Threading;
 using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
+using AMKDownloadManager.Core.Api.Threading;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Architecture.Data;
 using AMKsGear.Architecture.Patterns;
@@ -43,7 +44,7 @@ namespace AMKDownloadManager.ConfigProvider.Json
 
 
         private ReaderWriterLockSlim _lock;
-        private EventWaitHandle _interLock;
+        private IInterProcessLockService _interLock;
         private TimeSpan _interLockTimeout = TimeSpan.FromSeconds(5);
 
         /// <summary>
@@ -58,39 +59,56 @@ namespace AMKDownloadManager.ConfigProvider.Json
 
             _sourceValues = new CacheContext<string, string>();
             _currentValues = _sourceValues;
-            
+
             _lock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
-            
             //not supported in *nix.
             //Named synchronization primitives are not supported on this platform
             //_interLock = new EventWaitHandle(false, EventResetMode.AutoReset, InterSynchronizationName);
         }
 
 
+        public int Order => 0;
+
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+            _interLock = appContext.GetFeature<IInterProcessLockService>();
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider,
+            HashSet<string> changes)
+        {
+            //configProvider is this same class.
+            //DONT WRITE ANYTHING HERE.
+        }
+
+
         public void Load()
         {
-            //_interLock.WaitOne(_interLockTimeout);
+            var lockTaken = _interLock.AcquireLock(InterSynchronizationName);
 
             try
             {
                 if (ApplicationContext.ReadOnlyConfiguration)
                 {
                     //TODO: load all config files.
-                    OverrideConfiguration(new FileStream(ConfigurationFilePaths.First(), FileMode.Open, FileAccess.Read, FileShare.Read));
+                    OverrideConfiguration(new FileStream(ConfigurationFilePaths.First(), FileMode.Open, FileAccess.Read,
+                        FileShare.Read));
                 }
                 else
                 {
                     //TODO: load all config files.
-                    OverrideConfiguration(new FileStream(ConfigurationFilePaths.First(), FileMode.Open, FileAccess.ReadWrite, FileShare.Read));
+                    OverrideConfiguration(new FileStream(ConfigurationFilePaths.First(), FileMode.Open,
+                        FileAccess.ReadWrite, FileShare.Read));
                 }
             }
             catch (IOException exception)
             {
-                //LogChannel.Log(exception);
+                Logger.Default.LogException(exception);
             }
-            //finally
+            finally
             {
-                //_interLock.Set();
+                if (lockTaken != null)
+                    _interLock.ReleaseLock(lockTaken);
             }
         }
 
@@ -133,7 +151,6 @@ namespace AMKDownloadManager.ConfigProvider.Json
             }
             //finally
             {
-                
                 //_interLock.Set();
             }
         }
@@ -379,23 +396,6 @@ namespace AMKDownloadManager.ConfigProvider.Json
 
         public void UnInstallString(object context, string componentGuid, string fqn)
             => UnInstallValue(context, componentGuid, fqn);
-
-        #endregion
-
-        #region IFeature implementation
-
-        public int Order => 0;
-
-        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
-        {
-            
-        }
-
-        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
-        {
-            //configProvider is this same class.
-            //DONT WRITE ANYTHING HERE.
-        }
 
         #endregion
     }

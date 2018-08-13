@@ -2,7 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using AMKDownloadManager.Core;
+using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Defaults;
+using AMKDownloadManager.Defaults.ConfigProvider;
 using AMKDownloadManager.Defaults.Threading;
 using AMKDownloadManager.HttpDownloader.AddIn;
 using AMKsGear.Core.Trace;
@@ -26,6 +29,7 @@ namespace AMKDownloadManager.MSTest
             Logger.RegisterDefaultLogChannel(new MethodLogger(Console.Write));
 
             var pool = ApplicationHost.Instance.Initialize(new AbstractThreadFactory());
+            pool.AddFeature<IConfigProvider>(new DefaultConfigProvider());
             AppHelpers.InjectTopLayerFeatures(pool);
             AppHelpers.LoadComponents(pool,
                 Path.Combine(pool.ApplicationProfileDirectory, ApplicationContext.ApplicationPluginsSubDirectoryName),

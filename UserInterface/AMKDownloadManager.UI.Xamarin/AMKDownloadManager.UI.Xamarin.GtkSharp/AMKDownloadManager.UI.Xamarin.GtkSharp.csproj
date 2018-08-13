@@ -52,6 +52,10 @@
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <HintPath>Dependencies\gtk-sharp\2.12.0.0__35e10195dab3c99f\gtk-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Posix, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <HintPath>..\..\..\packages\Mono.Posix.4.0.0.0\lib\net40\Mono.Posix.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenTK, Version=3.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
       <HintPath>..\..\..\packages\Xamarin.Forms.Platform.GTK.3.0.0.446417\lib\net45\OpenTK.dll</HintPath>
       <Private>True</Private>
@@ -120,6 +124,10 @@
     <None Include="webkit-sharp.dll.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj">
+      <Project>{23f0ee30-6fcc-4183-924d-b7c57e409f73}</Project>
+      <Name>AMKDownloadManager.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AMKDownloadManager.UI.Xamarin\AMKDownloadManager.UI.Xamarin.csproj">
       <Project>{da4d4c98-70e6-42ce-a07b-4778f479da27}</Project>
       <Name>AMKDownloadManager.UI.Xamarin</Name>

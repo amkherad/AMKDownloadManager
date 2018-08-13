@@ -4,6 +4,7 @@ using System.IO;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.FileSystem;
+using AMKDownloadManager.Defaults.Messaging;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Utils;
 
@@ -21,7 +22,7 @@ namespace AMKDownloadManager.Defaults.FileSystem
             AppContext = appContext;
             DuplicityResolutionStart = 1;
         }
-
+        
         public IFileManager CreateFile(
             IApplicationContext applicationContext,
             string name,

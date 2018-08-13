@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using AMKDownloadManager.Core.Api;
 using AMKsGear.Core.Patterns.AppModel;
 
@@ -15,6 +16,9 @@ namespace AMKDownloadManager.Core
         public const string ApplicationLocksSubDirectoryName = "_locks";
 
         public const string ApplicationConfigurationFileName = "config.json";
+
+
+        public event EventHandler Closing;
 
 
         public static bool ReadOnlyConfiguration { get; set; }
@@ -40,11 +44,40 @@ namespace AMKDownloadManager.Core
 
         public string ApplicationSharedConfigurationFilePath =>
             Path.Combine(ApplicationSharedProfileDirectory, ApplicationConfigurationFileName);
-
+        
 
         public ApplicationContext()
         {
             ApplicationLockDirectory = Path.Combine(ApplicationProfileDirectory, ApplicationLocksSubDirectoryName);
         }
+
+        public void SignalReceived(ApplicationSignals signal)
+        {
+            switch (signal)
+            {
+                case ApplicationSignals.Quit:
+                case ApplicationSignals.Terminate:
+                {
+                    Closing?.Invoke(this, EventArgs.Empty);
+                    DisposableContainer.Dispose();
+                    
+                    AbortBackgroundThreads();
+
+                    if (signal != ApplicationSignals.Terminate)
+                    {
+                        JoinForegroundThreads();
+                    }
+
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(signal), signal, null);
+            }
+        }
+
+
+        public static bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+        public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        public static bool IsOSX => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
     }
 }

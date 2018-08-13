@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.Threading;
@@ -11,32 +12,35 @@ namespace AMKDownloadManager.Defaults.Threading
     public partial class InterProcessLockService : IInterProcessLockService
     {
         public IApplicationContext AppContext { get; private set; }
-        
+
         private readonly IInterProcessLockService _lock;
-        
-        public int Order => 0;
 
-        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
-        {
-            AppContext = appContext;
-        }
 
-        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider,
-            HashSet<string> changes)
+        public InterProcessLockService(IApplicationContext appContext)
         {
-        }
-
-        public InterProcessLockService()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            AppContext = appContext ?? throw new ArgumentNullException(nameof(appContext));
+            
+            if (ApplicationContext.IsWindows)
             {
                 //named mutex is faster so we prefer it but it's only supported in windows (for true inter-process lock).
                 _lock = new NamedMutex();
             }
             else
             {
-                _lock = new FsLock(AppContext.ApplicationLockDirectory);
+                _lock = new FsLock(appContext.ApplicationLockDirectory);
             }
+        }
+        
+        
+        public int Order => 0;
+
+        public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
+        {
+        }
+
+        public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider,
+            HashSet<string> changes)
+        {
         }
 
 

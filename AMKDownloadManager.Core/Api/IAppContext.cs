@@ -8,8 +8,10 @@ namespace AMKDownloadManager.Core.Api
     /// <summary>
     /// Application service pool.
     /// </summary>
-    public interface IApplicationContext : IStorageAppContext, ITypeResolverAppContext
+    public interface IApplicationContext : IStorageAppContext, ITypeResolverAppContext, IPlatformInterface
     {
+        event EventHandler Closing;
+        
         string ApplicationDirectory { get; }
         string ApplicationLockDirectory { get; }
         string ApplicationProfileDirectory { get; }

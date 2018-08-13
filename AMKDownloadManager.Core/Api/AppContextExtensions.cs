@@ -73,7 +73,7 @@ namespace AMKDownloadManager.Core.Api
             if (result == null)
             {
                 var type = typeof(T);
-                Debug.WriteLine($"Feature of type '{type.FullName}' does not found.");
+                Trace.WriteLine($"Feature of type '{type.FullName}' does not found.");
                 throw new InvalidOperationException();
             }
             return result;
