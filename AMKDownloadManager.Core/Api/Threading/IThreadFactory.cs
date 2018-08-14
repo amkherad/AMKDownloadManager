@@ -45,6 +45,22 @@ namespace AMKDownloadManager.Core.Api.Threading
         /// <param name="name">Debug name of the thread.</param>
         IThread CreateBackground(Action<object> action, string name);
 
+        /// <summary>
+        /// Joins all threads.
+        /// </summary>
+        /// <param name="threads"></param>
         void JoinAll(IEnumerable<IThread> threads);
+
+        /// <summary>
+        /// Same as Thread.Sleep()
+        /// </summary>
+        /// <param name="milliseconds"></param>
+        void Sleep(int milliseconds);
+        
+        /// <summary>
+        /// Same as Thread.Sleep()
+        /// </summary>
+        /// <param name="timeout"></param>
+        void Sleep(TimeSpan timeout);
     }
 }

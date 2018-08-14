@@ -20,7 +20,7 @@ namespace AMKDownloadManager.ConfigProvider.Json
 {
     public class JsonConfigProvider : IConfigProvider
     {
-        public const string InterSynchronizationName = "AMKDownloadManager.InterSynchronizationName";
+        public const string InterSynchronizationName = ApplicationContext.ApplicationInterProcessLockNamePrefix + nameof(JsonConfigProvider);
 
         public IApplicationContext AppContext { get; }
 
@@ -72,6 +72,8 @@ namespace AMKDownloadManager.ConfigProvider.Json
         public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
         {
             _interLock = appContext.GetFeature<IInterProcessLockService>();
+
+            Load();
         }
 
         public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider,

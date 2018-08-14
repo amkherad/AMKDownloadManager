@@ -50,7 +50,10 @@ namespace AMKDownloadManager.UI.Xamarin.GtkSharp
 
         public static void HandleSignals(IPlatformInterface platformServices)
         {
-            var signalHandler = new Thread(new ParameterizedThreadStart(ListenToSignal));
+            var signalHandler = new Thread(new ParameterizedThreadStart(ListenToSignal))
+            {
+                IsBackground = true
+            };
             signalHandler.Start(platformServices);
         }
         

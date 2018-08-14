@@ -9,6 +9,7 @@ namespace AMKDownloadManager.Core
 {
     public partial class ApplicationContext : AppModelContext, IApplicationContext
     {
+        public const string ApplicationInterProcessLockNamePrefix = "amkdm";
         public const string ApplicationProfileDirectoryName = "amkdownloadmanager";
         public const string PluginRepositoryEnvironmentVariableName = "AMKDM_PLUGIN_REPOSITORY";
 
@@ -18,6 +19,7 @@ namespace AMKDownloadManager.Core
         public const string ApplicationConfigurationFileName = "config.json";
 
 
+        public event EventHandler Terminating;
         public event EventHandler Closing;
 
 
@@ -44,7 +46,21 @@ namespace AMKDownloadManager.Core
 
         public string ApplicationSharedConfigurationFilePath =>
             Path.Combine(ApplicationSharedProfileDirectory, ApplicationConfigurationFileName);
-        
+
+
+        /// <summary>
+        /// Simple check for another instance of the application. it's not guaranteed. (on unix it's not that easy)
+        /// </summary>
+        /// <param name="processId"></param>
+        /// <param name="processName"></param>
+        /// <returns></returns>
+        public static bool TryToFindAnotherInstanceOfApplication(out int processId, out string processName)
+        {
+            processId = 0;
+            processName = "";
+            return false;
+        }
+
 
         public ApplicationContext()
         {
@@ -55,15 +71,19 @@ namespace AMKDownloadManager.Core
         {
             switch (signal)
             {
-                case ApplicationSignals.Quit:
-                case ApplicationSignals.Terminate:
+                case ApplicationSignals.Quit: //Ctrl+C
+                case ApplicationSignals.Terminate: //kill SIGTERM
                 {
                     Closing?.Invoke(this, EventArgs.Empty);
                     DisposableContainer.Dispose();
-                    
+
                     AbortBackgroundThreads();
 
-                    if (signal != ApplicationSignals.Terminate)
+                    if (signal == ApplicationSignals.Terminate)
+                    {
+                        Terminating?.Invoke(this, EventArgs.Empty);
+                    }
+                    else
                     {
                         JoinForegroundThreads();
                     }

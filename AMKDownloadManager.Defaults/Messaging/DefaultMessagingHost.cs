@@ -14,8 +14,7 @@ namespace AMKDownloadManager.Defaults.Messaging
 {
     public partial class DefaultMessagingHost : IMessagingHost
     {
-        private const string InterProcessPipeName = "AMKDownloadManager.DefaultMessagingHost";
-        private const string InterProcessPipeLockName = "AMKDownloadManagerDefaultMessagingHostPipeLock";
+        private const string InterProcessPipeName = "DefaultMessagingHost";
 
         private static readonly NameValuesCollection<IMessageListener> _listeners;
         
@@ -25,7 +24,7 @@ namespace AMKDownloadManager.Defaults.Messaging
         }
         
         public IApplicationContext AppContext { get; }
-        //public IThreadFactory ThreadFactory { get; private set; }
+        public IThreadFactory ThreadFactory { get; private set; }
         
         protected IHub Hub { get; private set; }
 
@@ -40,6 +39,7 @@ namespace AMKDownloadManager.Defaults.Messaging
         public int Order => 0;
         public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)
         {
+            ThreadFactory = appContext.GetFeature<IThreadFactory>();
         }
 
         public void LoadConfig(IApplicationContext applicationContext, IConfigProvider configProvider, HashSet<string> changes)
@@ -55,7 +55,7 @@ namespace AMKDownloadManager.Defaults.Messaging
 
             var interLock = new InterProcessLockService(AppContext);
             
-            Hub = new HubController(this, interLock);
+            Hub = new HubController(InterProcessPipeName, this, interLock, ThreadFactory);
             AppContext.ScheduleBackgroundTask(
                 nameof(DefaultMessagingHost) + '.' + nameof(HubController),
                 Hub.JoinHub);
@@ -123,7 +123,7 @@ namespace AMKDownloadManager.Defaults.Messaging
             }
         }
 
-        private void _interProcessMessageReceived(string name, object state)
+        internal void InterProcessMessageReceived(string name, object state)
         {
             lock (_listeners)
             {

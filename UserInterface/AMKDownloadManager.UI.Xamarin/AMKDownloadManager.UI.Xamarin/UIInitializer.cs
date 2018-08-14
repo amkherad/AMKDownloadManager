@@ -1,5 +1,7 @@
 using System;
 using AMKDownloadManager.Core;
+using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Threading;
 using AMKDownloadManager.UI.Business;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
@@ -21,6 +23,12 @@ namespace AMKDownloadManager.UI.Xamarin
                 AppInitializer.BuildDependencies(appContext, typeResolver);
                 DependencyBuilder.BuildContainer(appContext, typeResolver);
 
+                var interProcessLock = appContext.GetFeature<IInterProcessLockService>();
+                if (interProcessLock != null)
+                {
+                    interProcessLock.Clean();
+                }
+                
                 var app = typeResolver.Resolve<App>();
                 platformInterface = appContext;
                 

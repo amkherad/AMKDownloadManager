@@ -38,7 +38,10 @@ namespace AMKDownloadManager.Defaults.Threading
                     var mutex = _mutexes[name];
                     if (mutex.WaitOne(TimeSpan.Zero, true))
                     {
-                        lockHandle = name;
+                        lockHandle = new LockContext
+                        {
+                            Name = name
+                        };
                         return true;
                     }
 
@@ -51,7 +54,10 @@ namespace AMKDownloadManager.Defaults.Threading
                     if (createdNew)
                     {
                         _mutexes.Add(name, mutex);
-                        lockHandle = name;
+                        lockHandle = new LockContext
+                        {
+                            Name = name
+                        };
                         return true;
                     }
 
@@ -68,7 +74,10 @@ namespace AMKDownloadManager.Defaults.Threading
                     var mutex = _mutexes[name];
                     if (mutex.WaitOne(waitTimeout, true))
                     {
-                        lockHandle = name;
+                        lockHandle = new LockContext
+                        {
+                            Name = name
+                        };
                         return true;
                     }
 
@@ -81,7 +90,10 @@ namespace AMKDownloadManager.Defaults.Threading
                     if (createdNew)
                     {
                         _mutexes.Add(name, mutex);
-                        lockHandle = name;
+                        lockHandle = new LockContext
+                        {
+                            Name = name
+                        };
                         return true;
                     }
 
@@ -116,10 +128,10 @@ namespace AMKDownloadManager.Defaults.Threading
             public void ReleaseLock(object lockHandle)
             {
                 if (lockHandle == null) throw new ArgumentNullException(nameof(lockHandle));
-                var name = lockHandle as string;
-                if (name == null) throw new ArgumentException(nameof(lockHandle));
+                var context = lockHandle as LockContext;
+                if (context == null) throw new ArgumentException(nameof(lockHandle));
 
-                if (!_mutexes.TryGetValue(name, out var mutex))
+                if (!_mutexes.TryGetValue(context.Name, out var mutex))
                 {
                     throw new InvalidOperationException();
                 }
@@ -131,6 +143,16 @@ namespace AMKDownloadManager.Defaults.Threading
             public void Clean()
             {
                 //NOTHING!
+            }
+
+            public bool IsCorruptionPossible(string name)
+            {
+                return false;
+            }
+
+            public void ForceRemoveCorruptedLock(string name)
+            {
+                
             }
         }
     }

@@ -5,12 +5,14 @@ using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.DownloadManagement;
 using AMKDownloadManager.Core.Api.FileSystem;
 using AMKDownloadManager.Core.Api.Network;
+using AMKDownloadManager.Core.Api.Threading;
 using AMKDownloadManager.Core.Api.Transport;
 using AMKDownloadManager.Defaults.DownloadManager;
 using AMKDownloadManager.Defaults.FileSystem;
 using AMKDownloadManager.Defaults.JobScheduler;
 using AMKDownloadManager.Defaults.Network;
 using AMKDownloadManager.Defaults.Segmentation;
+using AMKDownloadManager.Defaults.Threading;
 using AMKDownloadManager.Defaults.Transport;
 using AMKsGear.Core.Collections;
 
@@ -66,6 +68,8 @@ namespace AMKDownloadManager.Defaults
             application.AddFeature<IStreamSaver>(new DefaultProgressiveStreamSaver());
             
             application.AddFeature<ILogger>(new DefaultLoggerChannel());
+            
+            application.AddFeature<IInterProcessLockService>(new InterProcessLockService(application));
         }
 
         /// <summary>

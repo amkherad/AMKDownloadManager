@@ -51,5 +51,19 @@ namespace AMKDownloadManager.Core.Api.Threading
         /// Cleans all resources used by this service except open mutexes (i.e. files)
         /// </summary>
         void Clean();
+
+
+        /// <summary>
+        /// Determines whether corruption is possible on this type of lock.
+        /// </summary>
+        bool IsCorruptionPossible(string name);
+
+
+        /// <summary>
+        /// Handles a broken resource such as abandoned mutex or a lock file that is not removed properly.
+        /// NOTE: If lock is being open in current process this will throw an exception.
+        /// </summary>
+        /// <param name="name"></param>
+        void ForceRemoveCorruptedLock(string name);
     }
 }

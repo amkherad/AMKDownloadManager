@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Security.AccessControl;
 using System.Threading;
+using AMKDownloadManager.Core;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.Core.Api.Configuration;
 using AMKDownloadManager.Core.Api.Threading;
@@ -14,30 +15,47 @@ namespace AMKDownloadManager.Defaults.Threading
     {
         public class FsLock : IInterProcessLockService
         {
+            public const string UnixLockDir = "/run/lock";
+            public const string UnixShmDir = "/dev/shm";
+            public const string UnixTmpDir = "/tmp";
+            public const string UnixRunUserDir = "/run/user/$uid";
+
+            public static readonly string[] UnixLockDirectories = new[]
+            {
+                UnixLockDir,
+                UnixShmDir,
+                UnixTmpDir,
+                UnixRunUserDir
+            };
+            
+            
             public string LockDirectoryPath { get; }
 
             private bool _useVarLock = false;
 
             public FsLock(string path)
             {
-//                if (ApplicationContext.IsLinux)
-//                {
-//                    try
-//                    {
-//                        if (Directory.Exists("/var/lock"))
-//                        {
-//                            LockDirectoryPath = "/var/lock";
-//                        }
-//                    }
-//                    catch (IOException)
-//                    {
-//                        LockDirectoryPath = path;
-//                    }
-//                }
-//                else
-//                {
-//                    LockDirectoryPath = path;
-//                }
+                if (ApplicationContext.IsLinux)
+                {
+                    //var dirSec = new DirectorySecurity(UnixTmpDir, AccessControlSections.Access);
+                    //dirSec.GetAccessRules()
+                    
+                    try
+                    {
+                        if (Directory.Exists("/var/lock"))
+                        {
+                            LockDirectoryPath = "/var/lock";
+                        }
+                    }
+                    catch (IOException)
+                    {
+                        LockDirectoryPath = path;
+                    }
+                }
+                else
+                {
+                    LockDirectoryPath = path;
+                }
 
                 LockDirectoryPath = path;
             }
@@ -77,7 +95,11 @@ namespace AMKDownloadManager.Defaults.Threading
                     var filePath = _getFilePathEnsuredDirectory(name);
                     var file = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
                     file.Lock(0, 0);
-                    lockHandle = file;
+                    lockHandle = new LockContext
+                    {
+                        Name = name,
+                        State = file
+                    };
                     return true;
                 }
                 catch (IOException)
@@ -127,7 +149,10 @@ namespace AMKDownloadManager.Defaults.Threading
             public void ReleaseLock(object lockHandle)
             {
                 if (lockHandle == null) throw new ArgumentNullException(nameof(lockHandle));
-                var file = lockHandle as FileStream;
+                var context = lockHandle as LockContext;
+                if (context == null) throw new ArgumentException(nameof(lockHandle));
+
+                var file = context.State as FileStream;
                 if (file == null) throw new ArgumentException(nameof(lockHandle));
 
                 file.Unlock(0, 0);
@@ -156,12 +181,31 @@ namespace AMKDownloadManager.Defaults.Threading
                 {
                     try
                     {
-                        File.Delete(file);
+                        //File.Delete(file);
                     }
                     catch (IOException)
                     {
                         //continue;
                     }
+                }
+            }
+
+            public bool IsCorruptionPossible(string name)
+            {
+                return true;
+            }
+
+            public void ForceRemoveCorruptedLock(string name)
+            {
+                var filePath = _getFilePathEnsuredDirectory(name);
+
+                try
+                {
+                    File.Delete(filePath);
+                }
+                catch (IOException)
+                {
+                    //continue;
                 }
             }
         }

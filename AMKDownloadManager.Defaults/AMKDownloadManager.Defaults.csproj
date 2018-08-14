@@ -18,7 +18,9 @@
     <PackageReference Include="AMKsGear.Core" Version="1.18.813.74" />
     <PackageReference Include="AMKsGear.Core.Data" Version="1.18.813.74" />
     <PackageReference Include="AMKsGear.Web.Core" Version="1.18.813.74" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Composition" Version="1.2.0" />
+    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj" />

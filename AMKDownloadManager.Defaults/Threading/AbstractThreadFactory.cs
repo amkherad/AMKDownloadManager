@@ -67,6 +67,16 @@ namespace AMKDownloadManager.Defaults.Threading
             }
         }
 
+        public void Sleep(int milliseconds)
+        {
+            Thread.Sleep(milliseconds);
+        }
+
+        public void Sleep(TimeSpan timeout)
+        {
+            Thread.Sleep(timeout);
+        }
+
         public int Order => 0;
         
         public void ResolveDependencies(IApplicationContext appContext, ITypeResolver typeResolver)

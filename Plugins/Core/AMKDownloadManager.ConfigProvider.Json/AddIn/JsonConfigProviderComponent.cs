@@ -75,7 +75,7 @@ namespace AMKDownloadManager.ConfigProvider.Json.AddIn
 
             JsonConfigProviderInstance = jsonConfigProvider;
             
-            jsonConfigProvider.Load();
+            //jsonConfigProvider.Load();
             
             application.AddFeature<IConfigProvider>(jsonConfigProvider);
         }
