@@ -93,7 +93,7 @@ namespace AMKDownloadManager.Defaults.Threading
                 try
                 {
                     var filePath = _getFilePathEnsuredDirectory(name);
-                    var file = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
+                    var file = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
                     file.Lock(0, 0);
                     lockHandle = new LockContext
                     {
@@ -181,7 +181,35 @@ namespace AMKDownloadManager.Defaults.Threading
                 {
                     try
                     {
-                        //File.Delete(file);
+                        var fs = new FileStream(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                        var deleted = false;
+                        
+                        //trying to delete the file while it's open to prevent another process to open the file.
+                        //it's acceptable in *nix
+                        try
+                        {
+                            File.Delete(file);
+                            deleted = true;
+                        }
+                        catch (IOException)
+                        {
+                            
+                        }
+
+                        fs.Close();
+
+                        //if deleting the file while it's open is not successful, trying to delete the file here.
+                        if (!deleted)
+                        {
+                            try
+                            {
+                                File.Delete(file);
+                                deleted = true;
+                            }
+                            catch (IOException)
+                            {
+                            }
+                        }
                     }
                     catch (IOException)
                     {

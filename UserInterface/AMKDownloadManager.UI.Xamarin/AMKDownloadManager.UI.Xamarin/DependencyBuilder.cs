@@ -49,8 +49,8 @@ namespace AMKDownloadManager.UI.Xamarin
             //container.RegisterType<App>();
             //container.BindProperty<App, ViewLocator>(x => x.DataTemplates);
             
-            container.RegisterType<Sidebar>(MainPageKey);
-            container.BindProperty<Sidebar, MainWindowViewModel>(x => x.BindingContext);
+            //container.RegisterType<MainPage>(MainPageKey);
+            container.BindProperty<MainPage, MainWindowViewModel>(x => x.BindingContext);
         }
     }
 }

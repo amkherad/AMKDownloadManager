@@ -1,4 +1,7 @@
-$HEADER$namespace $NAMESPACE$
+namespace AMKDownloadManager.UI.Xamarin.Services.Translate
 {
-  public class $CLASS$ {$END$}
+    public class TranslateResources
+    {
+        public static string SearchPlaceholder { get; set; } = "Search...";
+    }
 }

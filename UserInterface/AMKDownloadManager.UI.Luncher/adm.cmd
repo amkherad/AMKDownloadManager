@@ -10,4 +10,4 @@
 #
 ###############################
 
-call AMKDownloadManager.exe
+call AMKDownloadManager.UI.Xamarin.GtkSharp.exe

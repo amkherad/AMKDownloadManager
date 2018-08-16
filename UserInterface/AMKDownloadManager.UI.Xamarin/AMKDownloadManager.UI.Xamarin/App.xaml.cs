@@ -1,6 +1,6 @@
 ﻿using AMKDownloadManager.Core.Api;
-using AMKDownloadManager.UI.Xamarin.Views.Main.Desktop;
 using AMKsGear.Architecture.Automation.IoC;
+using AMKsGear.Core.Automation.IoC;
 using Xamarin.Forms;
 
 namespace AMKDownloadManager.UI.Xamarin
@@ -14,10 +14,10 @@ namespace AMKDownloadManager.UI.Xamarin
         {
             InitializeComponent();
 
-            //var mainPage = typeResolver.Resolve<Page>(DependencyBuilder.MainPageKey);
-            //MainPage = mainPage;
+            var mainPage = typeResolver.Resolve<Page>(DependencyBuilder.MainPageKey);
+            MainPage = mainPage;
 
-            MainPage = new NavigationPage(new MainPage());
+            //MainPage = new NavigationPage();
         }
 
         protected override void OnStart()

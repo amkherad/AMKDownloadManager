@@ -41,7 +41,7 @@ namespace AMKDownloadManager.UI.Xamarin.GtkSharp
 
                 var window = new FormsWindow();
                 window.LoadApplication(app);
-                window.SetApplicationTitle("AMKDownloadManager");
+                window.SetApplicationTitle("Toolbar Example");
                 window.SetApplicationIcon("icon.png");
                 window.Show();
                 Gtk.Application.Run();

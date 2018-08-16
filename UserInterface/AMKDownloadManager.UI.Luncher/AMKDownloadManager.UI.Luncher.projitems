@@ -9,7 +9,14 @@
     <Import_RootNamespace>AMKDownloadManager.UI.Luncher</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)adm.cmd" />
-    <Content Include="$(MSBuildThisFileDirectory)adm.sh" />
+    <Content Include="$(MSBuildThisFileDirectory)adm.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)adm.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)adm.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

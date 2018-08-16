@@ -12,4 +12,8 @@
 #
 ###############################
 
-mono ./AMKDownloadManager.UI.Xamarin.GtkSharp.exe
+if hash mono 2>/dev/null; then
+    mono "./AMKDownloadManager.UI.Xamarin.GtkSharp.exe"
+else
+    wine "./AMKDownloadManager.UI.Xamarin.GtkSharp.exe"
+fi

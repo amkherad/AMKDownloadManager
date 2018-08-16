@@ -22,12 +22,6 @@ namespace AMKDownloadManager.UI.Xamarin
 
                 AppInitializer.BuildDependencies(appContext, typeResolver);
                 DependencyBuilder.BuildContainer(appContext, typeResolver);
-
-                var interProcessLock = appContext.GetFeature<IInterProcessLockService>();
-                if (interProcessLock != null)
-                {
-                    interProcessLock.Clean();
-                }
                 
                 var app = typeResolver.Resolve<App>();
                 platformInterface = appContext;

@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:desktop="clr-namespace:AMKDownloadManager.UI.Xamarin.Views.Main.Desktop;assembly=AMKDownloadManager.UI.Xamarin"
-    Title="AMKDownloadManager"
+    Title="Toolbar Test"
     MasterBehavior="SplitOnLandscape"
     >
     
