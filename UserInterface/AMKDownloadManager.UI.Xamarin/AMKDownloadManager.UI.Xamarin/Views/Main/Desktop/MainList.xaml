@@ -8,25 +8,8 @@
     <StackLayout>
         <Entry Placeholder="{x:Static translate:TranslateResources.SearchPlaceholder}" />
         
-        <
+        
         
     </StackLayout>
     
 </ContentPage>
-
-git add AMKDownloadManager.Defaults/Threading/InterProcessLockService.FsLock.cs
-git add AMKDownloadManager.sln
-git add UserInterface/AMKDownloadManager.UI.Luncher/AMKDownloadManager.UI.Luncher.projitems
-git add UserInterface/AMKDownloadManager.UI.Luncher/adm.bat
-git add UserInterface/AMKDownloadManager.UI.Luncher/adm.cmd
-git add UserInterface/AMKDownloadManager.UI.Luncher/adm.sh
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin.GtkSharp/AMKDownloadManager.UI.Xamarin.GtkSharp.csproj
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin.GtkSharp/Program.cs
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin.GtkSharp/Renderers/MasterDetailPageRendererGtkCompatible.cs
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin/App.xaml.cs
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin/DependencyBuilder.cs
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin/Services/Translate/TranslateBinding.cs
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin/Services/Translate/TranslateResources.cs
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin/UIInitializer.cs
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin/Views/Main/Desktop/MainList.xaml
-git add UserInterface/AMKDownloadManager.UI.Xamarin/AMKDownloadManager.UI.Xamarin/Views/Main/Desktop/MainPage.xaml

@@ -1,0 +1,3 @@
+[submodule "Contrib/FormsGtkToolkit"]
+	path = Contrib/FormsGtkToolkit
+	url = git@github.com:amkherad/FormsGtkToolkit.git
