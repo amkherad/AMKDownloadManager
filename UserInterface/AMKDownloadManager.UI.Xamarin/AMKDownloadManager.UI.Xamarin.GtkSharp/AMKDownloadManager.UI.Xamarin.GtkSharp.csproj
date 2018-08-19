@@ -136,6 +136,14 @@
       <Project>{23f0ee30-6fcc-4183-924d-b7c57e409f73}</Project>
       <Name>AMKDownloadManager.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Contrib\FormsGtkToolkit\src\Controls\Controls.GTK\Controls.GTK.csproj">
+      <Project>{c7c5bccb-9cf6-44cb-bfdf-4c72a8305b13}</Project>
+      <Name>Controls.GTK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Contrib\FormsGtkToolkit\src\Controls\Controls\Controls.csproj">
+      <Project>{db264bd3-a890-4491-afab-4886eb4cced5}</Project>
+      <Name>Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AMKDownloadManager.UI.Xamarin\AMKDownloadManager.UI.Xamarin.csproj">
       <Project>{da4d4c98-70e6-42ce-a07b-4778f479da27}</Project>
       <Name>AMKDownloadManager.UI.Xamarin</Name>
@@ -1104,6 +1112,7 @@
   </Target>
   <Import Project="..\..\..\packages\Xamarin.Forms.3.0.0.446417\build\netstandard2.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.3.0.0.446417\build\netstandard2.0\Xamarin.Forms.targets')" />
   <Import Project="..\..\AMKDownloadManager.UI.Luncher\AMKDownloadManager.UI.Luncher.projitems" Label="Shared" />
+  <Import Project="..\..\AMKDownloadManager.UI.Branding\AMKDownloadManager.UI.Branding.projitems" Label="Shared" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">

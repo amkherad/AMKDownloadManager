@@ -62,6 +62,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls", "Contrib\FormsGt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls.GTK", "Contrib\FormsGtkToolkit\src\Controls\Controls.GTK\Controls.GTK.csproj", "{C7C5BCCB-9CF6-44CB-BFDF-4C72A8305B13}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AMKDownloadManager.UI.Branding", "UserInterface\AMKDownloadManager.UI.Branding\AMKDownloadManager.UI.Branding.shproj", "{F636EE52-EE49-4D0D-BD6C-694B05A45C29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +154,7 @@ Global
 		{35EB72C9-2701-4137-B991-8DE61E8B715E} = {DEFB1B36-85CE-49BA-B9CF-120F596984DE}
 		{DB264BD3-A890-4491-AFAB-4886EB4CCED5} = {35EB72C9-2701-4137-B991-8DE61E8B715E}
 		{C7C5BCCB-9CF6-44CB-BFDF-4C72A8305B13} = {35EB72C9-2701-4137-B991-8DE61E8B715E}
+		{F636EE52-EE49-4D0D-BD6C-694B05A45C29} = {ACFD535F-797B-4F96-BD19-FECF53C16080}
 	EndGlobalSection
 	GlobalSection(AvalonStudioProperties) = preSolution
 		StartupItem = {506EAB82-00C3-4C44-B068-645D3034DD78}

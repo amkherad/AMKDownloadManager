@@ -1,11 +1,28 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.Core.Api.Messaging;
 using AMKDownloadManager.UI.Business.Models;
+using AMKDownloadManager.UI.Business.Services;
 
 namespace AMKDownloadManager.UI.Business.ViewModels.Main.MainMenu
 {
-    public static class MainMenuInitializer
+    public class MainMenuLoader : IDataLoader<MenuItemModel>
     {
-        public static IList<MenuItemModel> CreateMainMenu()
+        public IApplicationContext AppContext { get; }
+        public IMessagingHost MessagingHost { get; }
+
+        public MainMenuLoader(
+            IApplicationContext appContext,
+            IMessagingHost messagingHost
+            )
+        {
+            AppContext = appContext;
+            MessagingHost = messagingHost;
+        }
+
+        
+        public IEnumerable<MenuItemModel> Load()
         {
             var items = new List<MenuItemModel>();
 
@@ -27,6 +44,11 @@ namespace AMKDownloadManager.UI.Business.ViewModels.Main.MainMenu
             });
 
             return items; //new List<MenuItemModel>(items);
+        }
+
+        public ObservableCollection<MenuItemModel> LoadAndTrack()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -4,13 +4,14 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:desktop="clr-namespace:AMKDownloadManager.UI.Xamarin.Views.Main.Desktop;assembly=AMKDownloadManager.UI.Xamarin"
-    Title="Toolbar Test"
+
+    Title="{Binding Title}"
     MasterBehavior="SplitOnLandscape"
     >
     
-    <MasterDetailPage.ToolbarItems>
-        <ToolbarItem Text="Test" Icon="Assets/icon.png" Priority="-1" Order="Primary" >Test</ToolbarItem>
-    </MasterDetailPage.ToolbarItems>
+    <!-- <MasterDetailPage.ToolbarItems> -->
+    <!--     <ToolbarItem Text="Test" Icon="icon.png" Priority="-1" Order="Primary" >Test</ToolbarItem> -->
+    <!-- </MasterDetailPage.ToolbarItems> -->
 
     <MasterDetailPage.Master>
         <desktop:Sidebar Title="Sidebar" />

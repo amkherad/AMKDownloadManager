@@ -1,6 +1,12 @@
 using System;
 using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.UI.Business.Models;
+using AMKDownloadManager.UI.Business.Models.Downloads;
+using AMKDownloadManager.UI.Business.Services;
+using AMKDownloadManager.UI.Business.ViewModels.Downloads;
 using AMKDownloadManager.UI.Business.ViewModels.Main;
+using AMKDownloadManager.UI.Business.ViewModels.Main.Layout;
+using AMKDownloadManager.UI.Business.ViewModels.Main.MainMenu;
 using AMKDownloadManager.UI.Xamarin.Views.Main.Desktop;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
@@ -17,6 +23,8 @@ namespace AMKDownloadManager.UI.Xamarin
             IApplicationContext appContext,
             ITypeResolverContainer container)
         {
+            BuildContainerDefaults(appContext, container);
+            
             switch (Device.Idiom)
             {
                 case TargetIdiom.Unsupported:
@@ -37,6 +45,20 @@ namespace AMKDownloadManager.UI.Xamarin
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private static void BuildContainerDefaults(
+            IApplicationContext appContext,
+            ITypeResolverContainer container)
+        {
+            //container.RegisterType<MainWindowViewModel>();
+            container.RegisterType<MainWindowLayoutSettings>();
+            
+            container.RegisterType<DownloadManagerContentViewModel>();
+            
+            container.RegisterType<IDataLoader<MenuItemModel>, MainMenuLoader>();
+            
+            container.RegisterType<IConfigDataEntryService<DownloadCategoryItem>, CategoryConfigService>();
         }
         
         

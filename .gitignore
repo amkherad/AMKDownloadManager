@@ -7,6 +7,13 @@ packages/
 output/Debug/
 output/Release/
 
+.output/
+.output/Debug/
+.output/Release/
+
+.idea/
+
+
 # User-specific files
 *.suo
 *.user

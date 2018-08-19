@@ -1,4 +1,5 @@
 ﻿using AMKDownloadManager.Core.Api;
+using AMKDownloadManager.UI.Business.ViewModels.Main;
 using AMKsGear.Architecture.Automation.IoC;
 using AMKsGear.Core.Automation.IoC;
 using Xamarin.Forms;
@@ -10,11 +11,13 @@ namespace AMKDownloadManager.UI.Xamarin
         public App(
             IApplicationContext applicationContext,
             ITypeResolver typeResolver
-            )
+        )
         {
             InitializeComponent();
 
             var mainPage = typeResolver.Resolve<Page>(DependencyBuilder.MainPageKey);
+            var viewModel = typeResolver.Resolve<MainWindowViewModel>();
+            mainPage.BindingContext = viewModel;
             MainPage = mainPage;
 
             //MainPage = new NavigationPage();

@@ -26,6 +26,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\AMKDownloadManager.Core\AMKDownloadManager.Core.csproj" />
       <ProjectReference Include="..\..\..\AMKDownloadManager.Defaults\AMKDownloadManager.Defaults.csproj" />
+      <ProjectReference Include="..\..\..\Contrib\FormsGtkToolkit\src\Controls\Controls\Controls.csproj" />
       <ProjectReference Include="..\..\AMKDownloadManager.UI.Business\AMKDownloadManager.UI.Business.csproj" />
     </ItemGroup>
 

@@ -1,15 +1,35 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage
     x:Class="AMKDownloadManager.UI.Xamarin.Views.Main.Desktop.MainList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:translate="clr-namespace:AMKDownloadManager.UI.Xamarin.Services.Translate;assembly=AMKDownloadManager.UI.Xamarin">
+    xmlns:translate="clr-namespace:AMKDownloadManager.UI.Xamarin.Services.Translate;assembly=AMKDownloadManager.UI.Xamarin"
+    xmlns:controls="clr-namespace:FormsGtkToolkit.Controls;assembly=FormsGtkToolkit.Controls">
 
-    <StackLayout>
-        <Entry Placeholder="{x:Static translate:TranslateResources.SearchPlaceholder}" />
-        
-        
-        
-    </StackLayout>
-    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <Entry
+            Grid.Row="0"
+            Placeholder="{x:Static translate:TranslateResources.SearchPlaceholder}"
+            Text="{Binding Content.FilterText, Mode=TwoWay}"  BindingContext="{Binding}" />
+        <Entry
+            Grid.Row="1"
+            Placeholder="{x:Static translate:TranslateResources.SearchPlaceholder}"
+            Text="{Binding Content.FilterText, Mode=OneWay}" />
+
+        <controls:DataGrid
+            Grid.Row="2"
+            Columns="{Binding Content.DataGridData.Columns}"
+            ItemsSource="{Binding Content.DataGridData.Rows}"
+            SelectionMode="Single"
+            CellBackgroundColor="White"
+            CellTextColor="Black" />
+    </Grid>
+
 </ContentPage>

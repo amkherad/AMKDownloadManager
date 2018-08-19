@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using AMKDownloadManager.Core.Api;
 using AMKDownloadManager.UI.Business.Models;
+using AMKDownloadManager.UI.Business.Models.Downloads;
+using AMKDownloadManager.UI.Business.Services;
+using AMKDownloadManager.UI.Business.ViewModels.Downloads;
 using AMKDownloadManager.UI.Business.ViewModels.Main.Layout;
-using AMKDownloadManager.UI.Business.ViewModels.Main.MainMenu;
 
 namespace AMKDownloadManager.UI.Business.ViewModels.Main
 {
@@ -12,18 +14,28 @@ namespace AMKDownloadManager.UI.Business.ViewModels.Main
         public IApplicationContext AppContext { get; }
 
 
-        public IList<MenuItemModel> MainMenuItems { get; set; }
+        public ObservableCollection<MenuItemModel> MainMenuItems { get; set; }
         public MainWindowLayoutSettings LayoutSettings { get; }
-
         
-        public MainWindowViewModel(IApplicationContext appContext)
+        public DownloadManagerContentViewModel Content { get; }
+
+        public MainWindowViewModel(
+            IApplicationContext appContext,
+            IDataLoader<MenuItemModel> menuItemsLoader,
+            MainWindowLayoutSettings layoutSettings,
+            
+            IConfigDataEntryService<DownloadCategoryItem> categoryService,
+            DownloadManagerContentViewModel content
+            )
         {
             AppContext = appContext ?? throw new ArgumentNullException(nameof(appContext));
 
             Title = "AMKDownloadManager";
-
-            MainMenuItems = MainMenuInitializer.CreateMainMenu();
-            LayoutSettings = new MainWindowLayoutSettings(appContext);
+            
+            MainMenuItems = new ObservableCollection<MenuItemModel>(menuItemsLoader.Load());
+            LayoutSettings = layoutSettings;
+            
+            Content = content;
         }
     }
 }
